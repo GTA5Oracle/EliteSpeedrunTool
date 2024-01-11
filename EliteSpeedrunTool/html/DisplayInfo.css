@@ -1,0 +1,16 @@
+#headshotCount, #timerMinute, #timerSecond, #timerSpliter1 {
+	font-size:4rem;
+}
+
+#timerMs, #timerSpliter2 {
+	font-size:3rem;
+}
+
+div {
+	margin:0 auto;
+	width:fit-content;
+}
+
+p {
+	margin:1rem;
+}

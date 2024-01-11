@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/ic_alipay.jpg</file>
+        <file>image/ic_icon.png</file>
+        <file>image/ic_clock.ico</file>
+        <file>image/ic_setting.ico</file>
+        <file>image/ic_lighton.ico</file>
+        <file>image/ic_network.ico</file>
+        <file>image/ic_language.ico</file>
+        <file>image/ic_spy.ico</file>
+        <file>image/ic_browser.ico</file>
+        <file>image/ic_cancel.ico</file>
+        <file>image/ic_note_2.ico</file>
+        <file>image/ic_open_folder.ico</file>
+        <file>image/ic_info.ico</file>
+        <file>image/ic_link.ico</file>
+        <file>image/ic_computer.ico</file>
+        <file>image/ic_drum.gif</file>
+        <file>image/ic_sound.ico</file>
+        <file>image/ic_help.ico</file>
+        <file>image/ic_users.ico</file>
+        <file>image/ic_question.ico</file>
+        <file>image/ic_plug.ico</file>
+    </qresource>
+</RCC>

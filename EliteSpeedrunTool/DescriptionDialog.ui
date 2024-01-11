@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DescriptionDialog</class>
+ <widget class="QDialog" name="DescriptionDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>446</width>
+    <height>373</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>工具说明</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resource.qrc">
+    <normaloff>:/image/ic_help.ico</normaloff>:/image/ic_help.ico</iconset>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="tabFirewall">
+      <attribute name="title">
+       <string>断网</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="_2">
+       <item>
+        <widget class="QToolBox" name="toolBox">
+         <widget class="QWidget" name="page">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>406</width>
+            <height>248</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>基本原理</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>通过 Windows 防火墙阻止进程联网。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>122</width>
+            <height>400</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>常见问题</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>1. 启动/停止热键能否相同？
+答：可以相同。
+
+2. 使用加速器的情况下如何设置防火墙断网范围？
+答：请见“设置-断网”页面下方说明。
+
+3. 防火墙启动后，发生了电脑死机/工具闪退/工具被强制杀死等情况，发现无法联网怎么办？
+答：手动打开 Windows 防火墙页面，删除所有名称为“AutoFirewall”的规则。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabHeadshot">
+      <attribute name="title">
+       <string>爆头数</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="_3">
+       <item>
+        <widget class="QToolBox" name="toolBox_2">
+         <widget class="QWidget" name="page_3">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>406</width>
+            <height>218</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>基本原理</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>GTA5 进程内使用整数来存储爆头数，因此只需读取 GTA5 进程的内存即可得到爆头数据。
+
+由于不同任务中记录爆头数的内存地址可能不同，或者根本没有专门记录爆头数，因此该功能只能在“末日将至：三号行动”中使用。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_4">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>98</width>
+            <height>208</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>注意事项</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>由于每次大更新后，GTA5 进程的内存布局可能会发生变化，因此在大更新后，此功能可能会失效，请及时更新最新版本。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_5">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>392</width>
+            <height>240</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>常见问题</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_10">
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>1. 每次结束任务后是否需要重启计数器？
+答：不需要。计数器每隔一个“刷新间隔”便会去读取内存的数据，当重新开始任务后，内存中的数据还是爆头数，因此会自动显示最新数据。
+
+2. 为什么在任务外爆头数会出现奇怪的数字？
+答：在任务外，原来存放爆头数的那部分内存空间会被存放其他数据，因此在任务外，爆头数显示的数据没有意义。
+
+3. 能否统计“名钻赌场豪劫-气势汹汹”任务的爆头数？
+答：可以，不过在出赌场建筑后会有一段时间显示爆头数为 0，在踩点后会爆头数值恢复正常。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabTimer">
+      <attribute name="title">
+       <string>计时器</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="_4">
+       <item>
+        <widget class="QToolBox" name="toolBox_3">
+         <widget class="QWidget" name="page_6">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>406</width>
+            <height>218</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>计时基本原理</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <item>
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>启动时记录当前时间，每隔一个“刷新间隔”便会计算当前时间与开始时间的差值，差值即为计时时间。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_9">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_7">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>98</width>
+            <height>208</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>停止归零策略基本原理</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_12">
+           <item>
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>使用状态机实现，状态机维护了当前计时器的状态。指定不同的停止归零策略代表连通/断开状态机的部分有向边。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_8">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>98</width>
+            <height>304</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>常见问题</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_13">
+           <item>
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>1. 启动/停止计时的热键能否相同？
+答：可以。
+
+2. 为什么启动/停止计时的热键可以相同，而暂停/恢复的热键不能与前两者相同？
+答：若相同，则不能表示想要完成的动作。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabServer">
+      <attribute name="title">
+       <string>多端显示</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="_5">
+       <item>
+        <widget class="QToolBox" name="toolBox_4">
+         <widget class="QWidget" name="page_9">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>406</width>
+            <height>248</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>基本原理</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>在本机启动了一个 HTTP 服务器，通过 WebSocket 实时向其他终端传输最新数据。您可以通过浏览器或其他方式来显示数据。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_10">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_10">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>98</width>
+            <height>773</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>常见问题</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>1. 队友能否不开启本软件，通过网络直接访问本机（本工具）数据？
+答：理论上可以，但不推荐。若您的计算机处于内网环境，您可以在路由器上配置端口映射，让队友使用公网 IP 和设定的端口访问本机。但不建议这样做，因为网络传输有一定的延迟，本地最新的数据传输到队友端可能需要一段时间，队友体验不佳。此外，这样做还可能会带来安全风险。
+
+2. 不喜欢默认的网页显示布局，能否自行编写浏览器前端页面/客户端来显示数据？
+答：可以。您可以开启自己的 WebSocket 客户端，用来接收实时数据，然后通过自己喜欢的方式显示数据。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>61</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
