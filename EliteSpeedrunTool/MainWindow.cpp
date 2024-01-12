@@ -508,7 +508,7 @@ void MainWindow::initAutoTimer()
         autoTimerUtil->stopAndReset(true);
     });
     connect(autoTimerUtil, &AutoTimerUtil::updateTime, this, [=](unsigned long long data) {
-        updateTimerString(ui.labAutoTimer, true, data);
+        updateAutoTimerString(data);
     });
     connect(autoTimerUtil, &AutoTimerUtil::stopped, this, [=]() {
         if (ui.btnStartAutoTimer->isChecked()) {
@@ -619,7 +619,7 @@ void MainWindow::startTimer(bool isContinue)
         timer = new QTimer(this);
     }
     connect(timer, &QTimer::timeout, this, [this]() {
-        updateTimerString(ui.labTimer);
+        updateTimerString(QDateTime::currentDateTime().toMSecsSinceEpoch());
     });
     timer->setTimerType(Qt::PreciseTimer);
     timer->start(globalData->timerUpdateInterval());
@@ -631,7 +631,7 @@ void MainWindow::pauseTimer()
     if (timer) {
         timer->stop();
         pausedTime = QDateTime::currentDateTime().toMSecsSinceEpoch();
-        updateTimerString(ui.labTimer, pausedTime);
+        updateTimerString(pausedTime);
         HttpServerController::instance()->pauseTimer(pausedTime);
     }
 }
@@ -643,7 +643,7 @@ void MainWindow::stopTimer()
             timer->stop();
         }
         qint64 stoppedTime = QDateTime::currentDateTime().toMSecsSinceEpoch();
-        updateTimerString(ui.labTimer, stoppedTime);
+        updateTimerString(stoppedTime);
         HttpServerController::instance()->stopTimer(stoppedTime);
         timerTime = 0L;
         pausedTime = 0L;
@@ -660,25 +660,38 @@ void MainWindow::zeroTimer()
     discordUtil->setSpeedrunTime(0, 0);
 }
 
-void MainWindow::updateTimerString(QLabel* label, bool isAutoTimer, qint64 currentDateTime)
+QString MainWindow::getFormattedTime(unsigned long long deltaTime, int* m, int* s, int* ms)
+{
+    *m = deltaTime / 1000 / 60;
+    *s = (deltaTime / 1000) % 60;
+    *ms = (deltaTime % 1000) / 10;
+    return DisplayInfoDialog::timePattern
+        .arg("26")
+        .arg(*m, 2, 10, QLatin1Char('0'))
+        .arg(*s, 2, 10, QLatin1Char('0'))
+        .arg("16")
+        .arg(*ms, 2, 10, QLatin1Char('0'));
+}
+
+void MainWindow::updateTimerString(qint64 currentDateTime)
 {
     qint64 deltaTime = currentDateTime - timerTime;
-    int m = deltaTime / 1000 / 60;
-    int s = (deltaTime / 1000) % 60;
-    int ms = (deltaTime % 1000) / 10;
-    QString t = DisplayInfoDialog::timePattern
-                    .arg("26")
-                    .arg(m, 2, 10, QLatin1Char('0'))
-                    .arg(s, 2, 10, QLatin1Char('0'))
-                    .arg("16")
-                    .arg(ms, 2, 10, QLatin1Char('0'));
-    label->setText(t);
+    int m, s, ms;
+    QString t = getFormattedTime(deltaTime, &m, &s, &ms);
+    ui.labTimer->setText(t);
     if (displayInfoDialogIsShowing && displayInfoDialog) {
-        if (isAutoTimer) {
-            displayInfoDialog->setAutoTime(m, s, ms);
-        } else {
-            displayInfoDialog->setTime(m, s, ms);
-        }
+        displayInfoDialog->setTime(m, s, ms);
+    }
+    discordUtil->setSpeedrunTime(m, s);
+}
+
+void MainWindow::updateAutoTimerString(unsigned long long deltaTime)
+{
+    int m, s, ms;
+    QString t = getFormattedTime(deltaTime, &m, &s, &ms);
+    ui.labAutoTimer->setText(t);
+    if (displayInfoDialogIsShowing && displayInfoDialog) {
+        displayInfoDialog->setAutoTime(m, s, ms);
     }
     discordUtil->setSpeedrunTime(m, s);
 }

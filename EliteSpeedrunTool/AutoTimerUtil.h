@@ -48,8 +48,8 @@ private:
 
     int startTimerFlag = 0;
     unsigned int timeSummary = 0;
-    int currentStateTime = 0;
-    long long currentStateStartTime = 0;
+    unsigned int currentStateTime = 0;
+    unsigned long long currentStateStartTime = 0;
     unsigned int missionHash = 0;
 
     bool startDisplayedTimer = false;
@@ -57,8 +57,8 @@ private:
 
     int lastStartTimerFlag = 0;
     unsigned int lastTimeSummary = 0;
-    int lastCurrentStateTime = 0;
-    long long lastCurrentStateStartTime = 0;
+    unsigned int lastCurrentStateTime = 0;
+    unsigned long long lastCurrentStateStartTime = 0;
     unsigned int lastMissionHash = 0;
 
     bool flagTimeChangedTo1 = false;

@@ -58,7 +58,11 @@ protected:
 
     void zeroTimer();
 
-    void updateTimerString(QLabel* label, bool isAutoTimer = false, qint64 currentDateTime = QDateTime::currentDateTime().toMSecsSinceEpoch());
+    QString getFormattedTime(unsigned long long deltaTime, int* m, int* s, int* ms);
+
+    void updateTimerString(qint64 currentDateTime = QDateTime::currentDateTime().toMSecsSinceEpoch());
+
+    void updateAutoTimerString(unsigned long long deltaTime);
 
     void initTimerStateMachine();
 

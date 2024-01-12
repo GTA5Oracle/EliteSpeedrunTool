@@ -50,12 +50,12 @@ void AutoTimerUtil::timeOut()
 {
     gtaHandle = MemoryUtil::getProcessHandle(&pid);
 
-    startTimerFlag = MemoryUtil::getLocalInt(MemoryUtil::local_Flag_initTimer);
+    startTimerFlag = MemoryUtil::getLocalInt(MemoryUtil::localFlagInitTimer);
     timeSummary = MemoryUtil::getGlobalUInt(2685249 + 6465);
     currentStateStartTime = MemoryUtil::getLocalLongLong(19728 + 985); // 开始时间ptr
-    currentStateTime = MemoryUtil::getLocalInt(MemoryUtil::local_Time); // 时间ptr
+    currentStateTime = MemoryUtil::getLocalInt(MemoryUtil::localTime); // 时间ptr
     missionHash = MemoryUtil::getGlobalUInt(4718592 + 126144); // hash
-    // qDebug() << missionHash << lastMissionHash;
+    qDebug() << missionHash << lastMissionHash;
     // 智障门有一瞬间hash变成0，解决方法是延时判断
     static long long hashReallyValueTime = 0;
     if (missionHash == 0 && lastMissionHash != 0) {
@@ -76,12 +76,17 @@ void AutoTimerUtil::timeOut()
 
     CloseHandle(gtaHandle);
 
-    // qDebug() << MemoryUtil::globalPtr << state << missionHash << startTimerFlag << timeSummary << currentStateTime << currentStateStartTime;
+    qDebug() << MemoryUtil::globalPtr << state << missionHash << startTimerFlag << timeSummary << currentStateTime << currentStateStartTime;
 
     if (state == MissionState::Running && lastDoneState == MissionState::End) {
         flagTimeChangedTo1 = false;
         localTimeChangedToUnzero = false;
         missionHashChangedToZero = false;
+
+        deltaLocalServerTime = 0;
+
+        lastStartTimerFlag = lastTimeSummary = lastCurrentStateTime
+            = lastCurrentStateStartTime = lastMissionHash = 0;
     }
 
     if (startTimerFlag == 1 && lastStartTimerFlag == 0 && missionHash) {
@@ -100,8 +105,11 @@ void AutoTimerUtil::timeOut()
         if (lastDoneState != state) {
             deltaLocalServerTime = getCurrentTimeStamp() - MemoryUtil::getLocalLongLong(19728 + 985); // 开始时间ptr
         }
-        auto deltaTime = getCurrentTimeStamp() - currentStateStartTime - deltaLocalServerTime;
-        // qDebug() << deltaTime << getCurrentTimeStamp() << currentStateStartTime << deltaLocalServerTime;
+        unsigned long long deltaTime = getCurrentTimeStamp() - currentStateStartTime - deltaLocalServerTime;
+        qDebug() << deltaTime
+                 << getCurrentTimeStamp()
+                 << currentStateStartTime
+                 << deltaLocalServerTime;
         deltaTime += timeSummary;
         time = deltaTime;
         sendUpdateTimeSignal(time);
