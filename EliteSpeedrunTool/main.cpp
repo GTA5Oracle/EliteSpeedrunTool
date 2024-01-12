@@ -34,8 +34,8 @@ int main(int argc, char* argv[])
         QMessageBox::warning(nullptr, QString(), QObject::tr("*** 应用版本变更，请认真检查各项配置（热键、外观、提示音等）是否需要重新设置！***"));
     }
 
-    qDebug() << MemoryUtil::rip37(
-        MemoryUtil::findPattern("4C 8D 05 ?? ?? ?? ?? 4D 8B 08 4D 85 C9 74 11"));
+    MemoryUtil::initGlobalPtr();
+    MemoryUtil::initMissionPtr();
 
     MainWindow w;
     w.show();

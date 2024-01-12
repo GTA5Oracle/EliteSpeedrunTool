@@ -47,10 +47,10 @@ private:
     MissionState lastDoneState = MissionState::None;
 
     int startTimerFlag = 0;
-    unsigned int timeSummary = 0;
+    unsigned int summaryTime = 0;
     unsigned int currentStateTime = 0;
     unsigned long long currentStateStartTime = 0;
-    unsigned int missionHash = 0;
+    unsigned long long missionHash = 0;
 
     bool startDisplayedTimer = false;
     DWORD64 deltaLocalServerTime = 0;
@@ -59,7 +59,7 @@ private:
     unsigned int lastTimeSummary = 0;
     unsigned int lastCurrentStateTime = 0;
     unsigned long long lastCurrentStateStartTime = 0;
-    unsigned int lastMissionHash = 0;
+    unsigned long long lastMissionHash = 0;
 
     bool flagTimeChangedTo1 = false;
     bool localTimeChangedToUnzero = false;

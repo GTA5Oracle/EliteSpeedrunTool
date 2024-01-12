@@ -5,11 +5,6 @@
 #include <Tlhelp32.h>
 #include <tchar.h>
 
-long long MemoryUtil::missionHash[] = {
-    1175383697,
-    3883215059,
-    3118746651,
-};
 DWORD64 MemoryUtil::globalPtr = 0;
 DWORD64 MemoryUtil::missionPtr = 0;
 MemoryUtil::MemoryUtil()
@@ -173,6 +168,15 @@ long long MemoryUtil::getGlobalLongLong(int index)
     return data;
 }
 
+unsigned long long MemoryUtil::getGlobalULongLong(int index)
+{
+    long long buffer;
+    read(globalPtr + (8 * (index >> 0x12 & 0x3F)), &buffer, 8);
+    unsigned long long data;
+    read(buffer + (8 * (index & 0x3FFFF)), &data, 8);
+    return data;
+}
+
 float MemoryUtil::getGlobalFloat(int index)
 {
     DWORD64 buffer;
@@ -192,6 +196,13 @@ int MemoryUtil::getLocalInt(int index)
 long long MemoryUtil::getLocalLongLong(int index)
 {
     long long buffer;
+    read(missionPtr + (0x8 * index), &buffer, 8);
+    return buffer;
+}
+
+unsigned long long MemoryUtil::getLocalULongLong(int index)
+{
+    unsigned long long buffer;
     read(missionPtr + (0x8 * index), &buffer, 8);
     return buffer;
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DisplayInfoDialog.h"
+#include "dataobserver/AutoTimerUtil.h"
 #include "ui_MainWindow.h"
 #include <QDateTime>
 #include <QHotkey>
@@ -41,6 +42,8 @@ protected:
     void initCloseGameImmediately();
 
     void initAutoTimer();
+
+    void initMissionData();
 
     void showDisplayInfo();
 

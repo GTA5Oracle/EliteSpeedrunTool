@@ -1,7 +1,6 @@
-#include "AutoTimerUtil.h"
+#include "dataobserver/AutoTimerUtil.h"
 #include "GlobalData.h"
 #include "MemoryUtil.h"
-#include "TimeUtil.h"
 #include <QDateTime>
 #include <chrono>
 
@@ -26,8 +25,6 @@ void AutoTimerUtil::start()
         return;
     }
     timerRunning = true;
-    MemoryUtil::initGlobalPtr();
-    MemoryUtil::initMissionPtr();
 
     connect(globalData, &GlobalData::autoTimerUpdateIntervalChanged, this, [this]() {
         if (timer) {
@@ -51,10 +48,10 @@ void AutoTimerUtil::timeOut()
     gtaHandle = MemoryUtil::getProcessHandle(&pid);
 
     startTimerFlag = MemoryUtil::getLocalInt(MemoryUtil::localFlagInitTimer);
-    timeSummary = MemoryUtil::getGlobalUInt(2685249 + 6465);
-    currentStateStartTime = MemoryUtil::getLocalLongLong(19728 + 985); // 开始时间ptr
+    summaryTime = MemoryUtil::getGlobalUInt(MemoryUtil::globalSummaryTime);
+    currentStateStartTime = MemoryUtil::getLocalLongLong(MemoryUtil::localInitTimestamp); // 开始时间ptr
     currentStateTime = MemoryUtil::getLocalInt(MemoryUtil::localTime); // 时间ptr
-    missionHash = MemoryUtil::getGlobalUInt(4718592 + 126144); // hash
+    missionHash = MemoryUtil::getGlobalULongLong(MemoryUtil::globalMissionHash); // hash
     qDebug() << missionHash << lastMissionHash;
     // 智障门有一瞬间hash变成0，解决方法是延时判断
     static long long hashReallyValueTime = 0;
@@ -76,7 +73,7 @@ void AutoTimerUtil::timeOut()
 
     CloseHandle(gtaHandle);
 
-    qDebug() << MemoryUtil::globalPtr << state << missionHash << startTimerFlag << timeSummary << currentStateTime << currentStateStartTime;
+    qDebug() << MemoryUtil::globalPtr << state << missionHash << startTimerFlag << summaryTime << currentStateTime << currentStateStartTime;
 
     if (state == MissionState::Running && lastDoneState == MissionState::End) {
         flagTimeChangedTo1 = false;
@@ -110,14 +107,14 @@ void AutoTimerUtil::timeOut()
                  << getCurrentTimeStamp()
                  << currentStateStartTime
                  << deltaLocalServerTime;
-        deltaTime += timeSummary;
+        deltaTime += summaryTime;
         time = deltaTime;
         sendUpdateTimeSignal(time);
         lastDoneState = state;
     } else if (lastDoneState != state && lastDoneState != MissionState::None) {
         // 下面的动作每次访问时相同的只能做一次
         if (state == MissionState::Pause) {
-            time = timeSummary + currentStateTime;
+            time = summaryTime + currentStateTime;
             sendUpdateTimeSignal(time);
         }
         lastDoneState = state;
@@ -151,7 +148,7 @@ void AutoTimerUtil::stopAndReset(bool resetTime)
 
     state = lastDoneState = MissionState::None;
 
-    startTimerFlag = timeSummary = currentStateTime
+    startTimerFlag = summaryTime = currentStateTime
         = currentStateStartTime = missionHash = 0;
 
     startDisplayedTimer = false;

@@ -1,5 +1,4 @@
 #include "MainWindow.h"
-#include "AutoTimerUtil.h"
 #include "DescriptionDialog.h"
 #include "DiscordUtil.h"
 #include "FirewallUtil.h"
@@ -8,8 +7,8 @@
 #include "LogUtil.h"
 #include "MemoryUtil.h"
 #include "SettingDialog.h"
-#include "TimeUtil.h"
 #include "UpdateDialog.h"
+#include "dataobserver/DataObserver.h"
 #include <MMSystem.h>
 #include <QBoxLayout>
 #include <QClipboard>
@@ -80,6 +79,8 @@ MainWindow::MainWindow(QWidget* parent)
     initCloseGameImmediately();
 
     initAutoTimer();
+
+    initMissionData();
 
     initGlobalDataConnects();
 }
@@ -513,6 +514,45 @@ void MainWindow::initAutoTimer()
     connect(autoTimerUtil, &AutoTimerUtil::stopped, this, [=]() {
         if (ui.btnStartAutoTimer->isChecked()) {
             ui.btnStartAutoTimer->setChecked(false);
+        }
+    });
+}
+
+void MainWindow::initMissionData()
+{
+    connect(ui.btnStartMissionData, &QAbstractButton::toggled, this, [this](bool checked) {
+        if (checked) {
+            dataObserver->startObserve();
+        } else {
+            dataObserver->stopObserve();
+        }
+    });
+    connect(dataObserver, &DataObserver::onStartObserve, this, [this]() {
+        if (!ui.btnStartMissionData->isChecked()) {
+            ui.btnStartMissionData->setChecked(true);
+        }
+    });
+    connect(dataObserver, &DataObserver::onStopObserve, this, [this]() {
+        if (ui.btnStartMissionData->isChecked()) {
+            ui.btnStartMissionData->setChecked(false);
+        }
+    });
+    connect(dataObserver, &DataObserver::onDisplayLabelsAdded, this, [this](QList<QLabel*> labels) {
+
+    });
+    connect(dataObserver, &DataObserver::onDisplayLabelsRemoved, this, [this](QList<QLabel*> labels) {
+
+    });
+    connect(dataObserver, &DataObserver::onLabelsAdded, this, [this](QList<QLabel*> labels) {
+        auto layout = ui.scrollAreaMissionDataContents->layout();
+        for (auto label : labels) {
+            layout->addWidget(label);
+        }
+    });
+    connect(dataObserver, &DataObserver::onLabelsRemoved, this, [this](QList<QLabel*> labels) {
+        auto layout = ui.scrollAreaMissionDataContents->layout();
+        for (auto label : labels) {
+            layout->removeWidget(label);
         }
     });
 }
