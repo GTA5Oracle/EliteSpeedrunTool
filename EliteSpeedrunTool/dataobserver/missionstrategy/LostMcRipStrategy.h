@@ -1,16 +1,14 @@
-#pragma once
+#ifndef LOSTMCRIPSTRATEGY_H
+#define LOSTMCRIPSTRATEGY_H
 
 #include "BaseMissionStrategy.h"
 #include "dataobserver/datafetcher/HeadshotFetcher.h"
-#define doomsdayAct3Strategy (DoomsdayAct3Strategy::instance())
+#include "dataobserver/datafetcher/Kill4PFetcher.h"
 
-class DoomsdayAct3Strategy : public BaseMissionStrategy {
+class LostMcRipStrategy : public BaseMissionStrategy {
     Q_OBJECT
 public:
-    explicit DoomsdayAct3Strategy(QObject* parent = nullptr);
-    ~DoomsdayAct3Strategy();
-
-    static DoomsdayAct3Strategy* instance();
+    explicit LostMcRipStrategy(QObject* parent = nullptr);
 
     QList<QLabel*> getDisplayLabels() override;
     QList<QLabel*> getLabels() override;
@@ -19,9 +17,14 @@ public:
 
 private:
     HeadshotFetcher headshotFetcher = HeadshotFetcher();
+    Kill4PFetcher kill4PFetcher = Kill4PFetcher();
 
     QLabel labMissionName = QLabel(getDisplayName());
 
     QLabel labDisplayHeadshot = QLabel();
     QLabel labHeadshot = QLabel();
+    QLabel labDisplayKill4P = QLabel();
+    QLabel labKill4P = QLabel();
 };
+
+#endif // LOSTMCRIPSTRATEGY_H

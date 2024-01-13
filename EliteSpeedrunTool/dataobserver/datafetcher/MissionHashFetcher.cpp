@@ -5,7 +5,7 @@ MissionHashFetcher::MissionHashFetcher(QObject* parent)
 {
 }
 
-unsigned long long MissionHashFetcher::fetchData()
+unsigned int MissionHashFetcher::fetchData()
 {
     return getGlobalData(MemoryUtil::globalMissionHash);
 }

@@ -4,12 +4,8 @@ Q_GLOBAL_STATIC(DoomsdayAct3Strategy, doomsdayAct3StrategyInstance)
 DoomsdayAct3Strategy::DoomsdayAct3Strategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-}
-
-DoomsdayAct3Strategy::~DoomsdayAct3Strategy()
-{
-    delete labDisplayHeadshot;
-    delete labHeadshot;
+    labMissionName.setFont(missionNameFont);
+    labHeadshot.setFont(font);
 }
 
 DoomsdayAct3Strategy* DoomsdayAct3Strategy::instance()
@@ -19,17 +15,22 @@ DoomsdayAct3Strategy* DoomsdayAct3Strategy::instance()
 
 QList<QLabel*> DoomsdayAct3Strategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << labDisplayHeadshot;
+    return QList<QLabel*>() << &labDisplayHeadshot;
 }
 
 QList<QLabel*> DoomsdayAct3Strategy::getLabels()
 {
-    return QList<QLabel*>() << labHeadshot;
+    return QList<QLabel*>() << &labMissionName << &labHeadshot;
 }
 
 void DoomsdayAct3Strategy::updateInfo()
 {
     auto data = headshotFetcher.fetchData();
-    labDisplayHeadshot->setText(QString::number(data));
-    labHeadshot->setText(QString::number(data));
+    labDisplayHeadshot.setText(headshotPattern.arg(QString::number(data)));
+    labHeadshot.setText(headshotPattern.arg(QString::number(data)));
+}
+
+const QString DoomsdayAct3Strategy::getDisplayName()
+{
+    return tr("末日将至");
 }

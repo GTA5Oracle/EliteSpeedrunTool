@@ -36,10 +36,17 @@ set(PROJECT_SOURCES
         dataobserver/AutoTimerUtil.h dataobserver/AutoTimerUtil.cpp
         dataobserver/DataObserver.h dataobserver/DataObserver.cpp
         dataobserver/missionstrategy/BaseMissionStrategy.h dataobserver/missionstrategy/BaseMissionStrategy.cpp
+        dataobserver/missionstrategy/DoomsdayAct2Strategy.h dataobserver/missionstrategy/DoomsdayAct2Strategy.cpp
         dataobserver/missionstrategy/DoomsdayAct3Strategy.h dataobserver/missionstrategy/DoomsdayAct3Strategy.cpp
+        dataobserver/missionstrategy/LostMcRipStrategy.h dataobserver/missionstrategy/LostMcRipStrategy.cpp
+        dataobserver/missionstrategy/EmptyStrategy.h dataobserver/missionstrategy/EmptyStrategy.cpp
+        dataobserver/missionstrategy/FleecaJobStrategy.h dataobserver/missionstrategy/FleecaJobStrategy.cpp
         dataobserver/datafetcher/BaseDataFetcher.h
         dataobserver/datafetcher/MissionHashFetcher.h dataobserver/datafetcher/MissionHashFetcher.cpp
         dataobserver/datafetcher/HeadshotFetcher.h dataobserver/datafetcher/HeadshotFetcher.cpp
+        dataobserver/datafetcher/Kill4PFetcher.h dataobserver/datafetcher/Kill4PFetcher.cpp
+        dataobserver/datafetcher/VehicleDamageFetcher.h dataobserver/datafetcher/VehicleDamageFetcher.cpp
+        AutoCapture.h AutoCapture.cpp
         resource.qrc
 )
 
@@ -51,8 +58,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(EliteSpeedrunTool
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        AutoCapture.h AutoCapture.cpp
-
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET EliteSpeedrunTool APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

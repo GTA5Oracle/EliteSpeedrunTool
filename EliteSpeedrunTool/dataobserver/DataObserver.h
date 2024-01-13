@@ -1,16 +1,15 @@
 #pragma once
 
+#include "MemoryUtil.h"
 #include "dataobserver/datafetcher/MissionHashFetcher.h"
 #include "dataobserver/missionstrategy/BaseMissionStrategy.h"
 #include "dataobserver/missionstrategy/DoomsdayAct3Strategy.h"
+#include "dataobserver/missionstrategy/EmptyStrategy.h"
+#include "dataobserver/missionstrategy/FleecaJobStrategy.h"
+#include "dataobserver/missionstrategy/LostMcRipStrategy.h"
 #include <QObject>
 #include <QTimer>
 #define dataObserver (DataObserver::instance())
-
-struct MissionInfo {
-    BaseMissionStrategy* missionStrategy;
-    QString displayName;
-};
 
 class DataObserver : public QObject {
     Q_OBJECT
@@ -48,19 +47,22 @@ signals:
     void onStopObserve();
 
 public:
-    const QMap<unsigned long long, MissionInfo> missionStrategyMap = {
-        qMakePair(MemoryUtil::hashDoomsdayAct1, MissionInfo {}),
-        qMakePair(MemoryUtil::hashDoomsdayAct2, MissionInfo {}),
-        qMakePair(MemoryUtil::hashDoomsdayAct3P1, MissionInfo { doomsdayAct3Strategy, tr("末日将至") }),
-        qMakePair(MemoryUtil::hashDoomsdayAct3P2, MissionInfo { doomsdayAct3Strategy, tr("末日将至") }),
-        qMakePair(MemoryUtil::hashFleecaJob, MissionInfo {}),
-        qMakePair(MemoryUtil::hashPrisonBreak, MissionInfo {}),
-        qMakePair(MemoryUtil::hashHumaneLabsRaid, MissionInfo {}),
-        qMakePair(MemoryUtil::hashSeriesAFunding, MissionInfo {}),
-        qMakePair(MemoryUtil::hashPacificStandardP1, MissionInfo {}),
-        qMakePair(MemoryUtil::hashPacificStandardP2, MissionInfo {}),
-        qMakePair(MemoryUtil::hashCasinoHeistAggressive, MissionInfo {}),
-        qMakePair(MemoryUtil::hashCasinoHeistSilentSneaky, MissionInfo {}),
-        qMakePair(MemoryUtil::hashCasinoHeistTheBigCon, MissionInfo {}),
+    BaseMissionStrategy* emptyStrategy = new EmptyStrategy();
+
+    const QMap<const unsigned long long, BaseMissionStrategy*> missionStrategyMap = {
+        qMakePair(MemoryUtil::hashDoomsdayAct1, nullptr),
+        qMakePair(MemoryUtil::hashDoomsdayAct2, nullptr),
+        qMakePair(MemoryUtil::hashDoomsdayAct3P1, doomsdayAct3Strategy),
+        qMakePair(MemoryUtil::hashDoomsdayAct3P2, doomsdayAct3Strategy),
+        qMakePair(MemoryUtil::hashFleecaJob, new FleecaJobStrategy()),
+        qMakePair(MemoryUtil::hashPrisonBreak, nullptr),
+        qMakePair(MemoryUtil::hashHumaneLabsRaid, nullptr),
+        qMakePair(MemoryUtil::hashSeriesAFunding, nullptr),
+        qMakePair(MemoryUtil::hashPacificStandardP1, nullptr),
+        qMakePair(MemoryUtil::hashPacificStandardP2, nullptr),
+        qMakePair(MemoryUtil::hashCasinoHeistAggressive, nullptr),
+        qMakePair(MemoryUtil::hashCasinoHeistSilentSneaky, nullptr),
+        qMakePair(MemoryUtil::hashCasinoHeistTheBigCon, nullptr),
+        qMakePair(MemoryUtil::hashLostMcRip, new LostMcRipStrategy()),
     };
 };

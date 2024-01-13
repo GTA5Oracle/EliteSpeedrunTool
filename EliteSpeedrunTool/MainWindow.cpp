@@ -544,15 +544,16 @@ void MainWindow::initMissionData()
 
     });
     connect(dataObserver, &DataObserver::onLabelsAdded, this, [this](QList<QLabel*> labels) {
-        auto layout = ui.scrollAreaMissionDataContents->layout();
-        for (auto label : labels) {
-            layout->addWidget(label);
+        QBoxLayout* layout = (QBoxLayout*)ui.scrollAreaMissionDataContents->layout();
+        for (int i = labels.count() - 1; i >= 0; --i) {
+            layout->insertWidget(0, labels[i]);
         }
     });
     connect(dataObserver, &DataObserver::onLabelsRemoved, this, [this](QList<QLabel*> labels) {
         auto layout = ui.scrollAreaMissionDataContents->layout();
         for (auto label : labels) {
             layout->removeWidget(label);
+            label->setParent(nullptr);
         }
     });
 }

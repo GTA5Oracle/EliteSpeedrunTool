@@ -45,8 +45,8 @@ void DataObserver::startObserve()
     if (isObserving) {
         return;
     }
-    setMissionStrategy(new DoomsdayAct3Strategy());
     isObserving = true;
+    missionHashTimer->start(50);
     timer->start(50);
     emit onStartObserve();
 }
@@ -57,6 +57,7 @@ void DataObserver::stopObserve()
         return;
     }
     isObserving = false;
+    missionHashTimer->stop();
     timer->stop();
     emit onStopObserve();
 }
@@ -71,12 +72,21 @@ void DataObserver::onTimeout()
 void DataObserver::onMissionHashTimeout()
 {
     auto newMissionHash = missionHashFetcher.fetchData();
-    if (lastMissionHash != newMissionHash) {
-        lastMissionHash = newMissionHash;
-        // 切换不同的任务策略
-        if (missionStrategyMap.contains(newMissionHash)) {
-            auto newMissionStrategy = missionStrategyMap[newMissionHash];
-            setMissionStrategy(newMissionStrategy.missionStrategy);
+    qDebug() << newMissionHash;
+    // if (missionStrategy) {
+    //     qDebug() << missionStrategy->getLabels();
+    // }
+    // 切换不同的任务策略
+    if (missionStrategyMap.contains(newMissionHash)) {
+        auto newMissionStrategy = missionStrategyMap[newMissionHash];
+        if (missionStrategy != newMissionStrategy) {
+            lastMissionHash = newMissionHash;
+            setMissionStrategy(newMissionStrategy);
+        }
+    } else {
+        if (missionStrategy != emptyStrategy) {
+            lastMissionHash = newMissionHash;
+            setMissionStrategy(emptyStrategy);
         }
     }
 }

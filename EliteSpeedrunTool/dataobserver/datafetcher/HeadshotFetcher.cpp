@@ -1,5 +1,4 @@
 #include "HeadshotFetcher.h"
-#include "TimeUtil.h"
 
 template class BaseDataFetcher<int>;
 
@@ -10,5 +9,5 @@ HeadshotFetcher::HeadshotFetcher(QObject* parent)
 
 int HeadshotFetcher::fetchData()
 {
-    return TimeUtil::currentTimestamp(); // getLocalData(MemoryUtil::localHeadshot);
+    return getLocalData(MemoryUtil::localHeadshot);
 }
