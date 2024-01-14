@@ -44,6 +44,7 @@ public:
 
     void insertWidget(int index, QWidget* widget);
     void removeWidget(QWidget* widget);
+    bool containWidget(QWidget* widget);
     int widgetCount();
 
 private:

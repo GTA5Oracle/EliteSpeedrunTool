@@ -4,6 +4,7 @@
 
 #include <QGraphicsDropShadowEffect>
 #include <QMouseEvent>
+#include <QTimer>
 #include <windows.h>
 
 const QString DisplayInfoDialog::timePattern = "<html><head/><body><p><span style=\" font-size:%1pt;\">%2:%3</span><span style=\" font-size:%4pt;\">.%5</span></p></body></html>";
@@ -14,6 +15,7 @@ DisplayInfoDialog::DisplayInfoDialog(QWidget* parent)
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_TranslucentBackground);
+    setAttribute(Qt::WA_DeleteOnClose);
 
     setCursor(Qt::OpenHandCursor);
 
@@ -139,6 +141,11 @@ void DisplayInfoDialog::insertWidget(int index, QWidget* widget)
 void DisplayInfoDialog::removeWidget(QWidget* widget)
 {
     ui->mainLayout->removeWidget(widget);
+}
+
+bool DisplayInfoDialog::containWidget(QWidget* widget)
+{
+    return ui->mainLayout->children().contains(widget);
 }
 
 int DisplayInfoDialog::widgetCount()

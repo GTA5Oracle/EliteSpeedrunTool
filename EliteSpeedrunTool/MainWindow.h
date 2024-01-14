@@ -45,6 +45,8 @@ protected:
 
     void initMissionData();
 
+    void initDisplayInfoDialogData();
+
     void showDisplayInfo();
 
     void hideDisplayInfo();
@@ -85,7 +87,7 @@ private:
     static const QString hotkeyStatePattern;
 
     bool displayInfoDialogIsShowing = false;
-    DisplayInfoDialog* displayInfoDialog = new DisplayInfoDialog(this);
+    DisplayInfoDialog* displayInfoDialog = nullptr;
 
     QHotkey* startFirewallHotkey = nullptr;
     QHotkey* stopFirewallHotkey = nullptr;

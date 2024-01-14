@@ -91,6 +91,11 @@ void DataObserver::destruct()
     }
 }
 
+QList<QLabel*> DataObserver::getDisplayLabels()
+{
+    return missionStrategy ? missionStrategy->getDisplayLabels() : QList<QLabel*>();
+}
+
 void DataObserver::onTimeout()
 {
     if (missionStrategy) {

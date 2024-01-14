@@ -88,7 +88,6 @@ void MainWindow::closeEvent(QCloseEvent* event)
         return;
     } else {
         if (displayInfoDialog) {
-            displayInfoDialog->disconnect();
             displayInfoDialog->done(-1);
         }
     }
@@ -281,11 +280,14 @@ void MainWindow::initMenu()
         }
         globalData->setDisplayInfoShow(checked);
         if (checked) {
+            displayInfoDialog = new DisplayInfoDialog();
+            initDisplayInfoDialogData();
             auto closeLambda = [this](int result) {
                 disconnect(this, nullptr, displayInfoDialog, nullptr);
                 displayInfoDialogIsShowing = false;
                 // Qt::WA_DeleteOnClose
                 // delete displayInfoDialog;
+                displayInfoDialog = nullptr;
                 // -1表示不需要设置globalData->displayInfo = false也不需要setChecked(false)的情况
                 if (result != -1) {
                     ui.actionDisplayInfo->setChecked(false);
@@ -523,11 +525,17 @@ void MainWindow::initMissionData()
         }
     });
     connect(dataObserver, &DataObserver::onDisplayLabelsAdded, this, [this](QList<QLabel*> labels) {
+        if (!displayInfoDialog) {
+            return;
+        }
         for (auto label : labels) {
             displayInfoDialog->insertWidget(displayInfoDialog->widgetCount() - 1, label);
         }
     });
     connect(dataObserver, &DataObserver::onDisplayLabelsRemoved, this, [this](QList<QLabel*> labels) {
+        if (!displayInfoDialog) {
+            return;
+        }
         for (auto label : labels) {
             displayInfoDialog->removeWidget(label);
             label->setParent(nullptr);
@@ -546,6 +554,17 @@ void MainWindow::initMissionData()
             label->setParent(nullptr);
         }
     });
+}
+
+void MainWindow::initDisplayInfoDialogData()
+{
+    if (displayInfoDialog) {
+        for (auto label : dataObserver->getDisplayLabels()) {
+            if (!displayInfoDialog->containWidget(label)) {
+                displayInfoDialog->insertWidget(displayInfoDialog->widgetCount() - 1, label);
+            }
+        }
+    }
 }
 
 void MainWindow::showDisplayInfo()

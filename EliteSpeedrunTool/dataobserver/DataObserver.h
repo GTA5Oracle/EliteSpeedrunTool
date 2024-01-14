@@ -37,6 +37,8 @@ public:
     void stopObserve();
     void destruct(); // 析构整个DataObserver，这时会发出onXxxRemoved信号，让其他持有QLabel的控件取消持有
 
+    QList<QLabel*> getDisplayLabels();
+
 protected:
     void onTimeout();
     void onMissionHashTimeout();
