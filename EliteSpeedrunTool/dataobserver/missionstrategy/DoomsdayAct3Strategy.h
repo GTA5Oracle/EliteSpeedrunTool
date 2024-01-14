@@ -8,7 +8,6 @@ class DoomsdayAct3Strategy : public BaseMissionStrategy {
     Q_OBJECT
 public:
     explicit DoomsdayAct3Strategy(QObject* parent = nullptr);
-    ~DoomsdayAct3Strategy();
 
     static DoomsdayAct3Strategy* instance();
 

@@ -14,10 +14,8 @@ public:
     const static int localTime = 19728 + 987; // 任务每一段的时间
     const static int localPrisonBreakTime = 19728 + 990; // 越狱的逃离时间
     const static int localHeadshot = 19728 + 1740 + 1; // 总的爆头数
-    const static int localKillHost = 19728 + 1725 + 1; // 房主击杀数
-    const static int localKillClient1 = 19728 + 1725 + 2; // 队友1击杀数
-    const static int localKillClient2 = 19728 + 1725 + 3; // 队友2击杀数
-    const static int localKillClient3 = 19728 + 1725 + 4; // 队友3击杀数
+    const static int localKillHost = 19728 + 1725 + 1; // 房主击杀数/首轮北边击杀总和/M1击杀总和
+    const static int localKillClient1 = 19728 + 1725 + 2; // 队友1击杀数/首轮南边击杀总和
     const static int localVehicleDamage = 24562 + 1231; // 车辆受损程度
     const static int localRashkovskyDamage = 24562 + 1230; // 拉什科夫斯基受伤程度
     const static int localHeadshotHost = 31603 + 1 + (0 * 292) + 85; // 房主爆头数
@@ -50,6 +48,7 @@ public:
     inline const static unsigned long long hashCasinoHeistSilentSneaky = 2971240475; // 赌场：隐迹潜踪
     inline const static unsigned long long hashCasinoHeistTheBigCon = 3189252359; // 赌场：兵不厌诈
     inline const static unsigned long long hashLostMcRip = 2389264995; // 安息吧！失落摩托帮
+    inline const static unsigned long long hashBakerBadBeat = 2805392149; // 贝克女士：出奇制胜
 
     static HWND getWindowHwnd();
     static HANDLE getProcessHandle(DWORD* pid, DWORD dwDesiredAccess = PROCESS_ALL_ACCESS);

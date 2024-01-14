@@ -49,10 +49,6 @@ protected:
 
     void hideDisplayInfo();
 
-    bool startReadHeadShot();
-
-    void stopReadHeadShot();
-
     void startTimer(bool isContinue = false);
 
     void pauseTimer();
@@ -89,7 +85,7 @@ private:
     static const QString hotkeyStatePattern;
 
     bool displayInfoDialogIsShowing = false;
-    DisplayInfoDialog* displayInfoDialog = nullptr;
+    DisplayInfoDialog* displayInfoDialog = new DisplayInfoDialog(this);
 
     QHotkey* startFirewallHotkey = nullptr;
     QHotkey* stopFirewallHotkey = nullptr;
@@ -104,8 +100,6 @@ private:
 
     QLabel* labState;
 
-    short headshotCount = 0;
-    QTimer* headShotTimer = nullptr;
     QTimer* topMostTimer = nullptr;
 
     QTimer* timer = nullptr;
@@ -123,9 +117,9 @@ private:
 
     QString license = "<h3>" + QApplication::applicationDisplayName()
         + " v" + QApplication::applicationVersion() + "</h3>"
-        + tr("<p>一个 GTAOL 末日降至：三号行动任务速通工具，支持快速启动防火墙、自动统计爆头数、计时。本工具仅读取内存，不会修改任何内存。</p>")
+        + tr("<p>一个 GTAOL 精英、速通工具，支持快速启动防火墙、自动统计任务数据、计时等。本工具仅读取内存，不会修改任何内存。</p>")
         + "<p>"
-        + tr("程序开发：%1").arg(QApplication::organizationName()) + "<br>"
+        + tr("程序开发：SkyD666") + "<br>"
         + tr("游戏逆向：Zerkalo2147")
         + "</p>"
         + "<p>"

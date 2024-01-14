@@ -1,7 +1,7 @@
-#include "FleecaJobStrategy.h"
+#include "HumaneLabsRaidStrategy.h"
 #include "GlobalData.h"
 
-FleecaJobStrategy::FleecaJobStrategy(QObject* parent)
+HumaneLabsRaidStrategy::HumaneLabsRaidStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
     labMissionName.setFont(missionNameFont);
@@ -11,17 +11,17 @@ FleecaJobStrategy::FleecaJobStrategy(QObject* parent)
     initGlobalDataConnects(&labDisplayVehicleDamage, displayInfoSubFunctions[DisplayInfoSubFunction::VehicleDamage]);
 }
 
-QList<QLabel*> FleecaJobStrategy::getDisplayLabels()
+QList<QLabel*> HumaneLabsRaidStrategy::getDisplayLabels()
 {
     return QList<QLabel*>() << &labDisplayVehicleDamage;
 }
 
-QList<QLabel*> FleecaJobStrategy::getLabels()
+QList<QLabel*> HumaneLabsRaidStrategy::getLabels()
 {
     return QList<QLabel*>() << &labMissionName << &labVehicleDamage;
 }
 
-void FleecaJobStrategy::updateInfo()
+void HumaneLabsRaidStrategy::updateInfo()
 {
     auto data = vehicleDamageFetcher.fetchData();
     auto text = vehicleDamagePattern.arg(QString::number(data, 'f', 2));
@@ -29,7 +29,7 @@ void FleecaJobStrategy::updateInfo()
     labVehicleDamage.setText(text);
 }
 
-const QString FleecaJobStrategy::getDisplayName()
+const QString HumaneLabsRaidStrategy::getDisplayName()
 {
-    return tr("全福银行差事");
+    return tr("突袭人道研究实验室");
 }

@@ -88,7 +88,7 @@ void UpdateDialog::sendCheckRequest(
         manager->deleteLater();
     });
 
-    manager->get(QNetworkRequest(QUrl("https://api.github.com/repos/SkyD666/Act3SpeedrunTool/releases/latest")));
+    manager->get(QNetworkRequest(QUrl("https://api.github.com/repos/GTA5Oracle/EliteSpeedrunTool/releases/latest")));
 }
 
 bool UpdateDialog::isNewVersion(QString remoteVersion)

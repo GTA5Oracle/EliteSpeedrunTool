@@ -1,10 +1,14 @@
 #include "DoomsdayAct2Strategy.h"
+#include "GlobalData.h"
 
 DoomsdayAct2Strategy::DoomsdayAct2Strategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
     labMissionName.setFont(missionNameFont);
     labVehicleDamage.setFont(font);
+
+    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
+    initGlobalDataConnects(&labDisplayVehicleDamage, displayInfoSubFunctions[DisplayInfoSubFunction::VehicleDamage]);
 }
 
 QList<QLabel*> DoomsdayAct2Strategy::getDisplayLabels()
@@ -14,7 +18,7 @@ QList<QLabel*> DoomsdayAct2Strategy::getDisplayLabels()
 
 QList<QLabel*> DoomsdayAct2Strategy::getLabels()
 {
-    return QList<QLabel*>() << &labVehicleDamage;
+    return QList<QLabel*>() << &labMissionName << &labVehicleDamage;
 }
 
 void DoomsdayAct2Strategy::updateInfo()

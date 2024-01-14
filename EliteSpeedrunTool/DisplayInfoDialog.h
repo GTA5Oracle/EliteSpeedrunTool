@@ -24,11 +24,6 @@ public:
     void setFont();
 
     void setTextStyle();
-    void setHeadShotTextStyle(
-        const QColor& textColor,
-        const QColor& textShadowColor,
-        qreal textShadowBlurRadius,
-        const QPointF& textShadowOffset);
     void setTimerTextStyle(
         const QColor& textColor,
         const QColor& textShadowColor,
@@ -40,14 +35,16 @@ public:
         qreal textShadowBlurRadius,
         const QPointF& textShadowOffset);
 
-    void setHeadShotCount(short count);
-
     void setTime(int m, int s, int ms);
     void setAutoTime(int m, int s, int ms);
 
     static const QString timePattern;
 
     static const QString textQssPattern;
+
+    void insertWidget(int index, QWidget* widget);
+    void removeWidget(QWidget* widget);
+    int widgetCount();
 
 private:
     void initGlobalDataConnects();

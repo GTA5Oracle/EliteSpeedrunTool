@@ -31,7 +31,7 @@ SettingDialog::SettingDialog(QWidget* parent)
 
     initGeneralSettings();
     initFirewallSettings();
-    initHeadshotSettings();
+    initMissionDataSettings();
     initTimerSettings();
     initCloseGameImmediatelySettings();
     initSocialSettings();
@@ -209,13 +209,13 @@ void SettingDialog::initFirewallSettings()
     }
 }
 
-// 爆头设置
-void SettingDialog::initHeadshotSettings()
+// 任务信息设置
+void SettingDialog::initMissionDataSettings()
 {
     // 刷新间隔
-    ui.sbHeadshotUpdateInterval->setValue(globalData->headshotUpdateInterval());
-    connect(ui.sbHeadshotUpdateInterval, &QSpinBox::valueChanged, this, [=](int value) {
-        globalData->setHeadshotUpdateInterval(value);
+    ui.sbMissionDataUpdateInterval->setValue(globalData->missionDataUpdateInterval());
+    connect(ui.sbMissionDataUpdateInterval, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setMissionDataUpdateInterval(value);
     });
 }
 

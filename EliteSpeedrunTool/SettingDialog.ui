@@ -46,7 +46,7 @@
       <enum>QFrame::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -72,8 +72,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>469</width>
-            <height>488</height>
+            <width>151</width>
+            <height>210</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -178,8 +178,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>451</width>
-                <height>486</height>
+                <width>270</width>
+                <height>478</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -519,8 +519,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>465</width>
-                <height>459</height>
+                <width>98</width>
+                <height>226</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -701,8 +701,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>455</width>
-            <height>598</height>
+            <width>204</width>
+            <height>723</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -960,7 +960,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="pageHeadshot">
+     <widget class="QWidget" name="pageMissionData">
       <layout class="QVBoxLayout" name="verticalLayout_15">
        <property name="leftMargin">
         <number>0</number>
@@ -998,7 +998,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
               <item>
                <layout class="QHBoxLayout" name="_19">
                 <item>
-                 <widget class="QSpinBox" name="sbHeadshotUpdateInterval">
+                 <widget class="QSpinBox" name="sbMissionDataUpdateInterval">
                   <property name="minimum">
                    <number>5</number>
                   </property>
@@ -1079,7 +1079,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
             <x>0</x>
             <y>0</y>
             <width>455</width>
-            <height>556</height>
+            <height>550</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -1331,8 +1331,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>469</width>
-            <height>488</height>
+            <width>125</width>
+            <height>89</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -1406,8 +1406,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>469</width>
-            <height>488</height>
+            <width>207</width>
+            <height>143</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -1495,8 +1495,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>469</width>
-            <height>488</height>
+            <width>98</width>
+            <height>84</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_19">

@@ -1,4 +1,5 @@
 #include "DataObserver.h"
+#include "GlobalData.h"
 
 Q_GLOBAL_STATIC(DataObserver, dataObserverInstance)
 
@@ -11,6 +12,22 @@ DataObserver::DataObserver(QObject* parent)
     connect(missionHashTimer, &QTimer::timeout, this, [this]() {
         onMissionHashTimeout();
     });
+    connect(globalData, &GlobalData::missionDataUpdateIntervalChanged, this, [this]() {
+        if (missionHashTimer) {
+            missionHashTimer->setInterval(globalData->missionDataUpdateInterval());
+        }
+    });
+    connect(globalData, &GlobalData::missionDataUpdateIntervalChanged, this, [this]() {
+        if (timer) {
+            timer->setInterval(globalData->missionDataUpdateInterval());
+        }
+    });
+}
+
+DataObserver::~DataObserver()
+{
+    stopObserve();
+    destruct();
 }
 
 DataObserver* DataObserver::instance()
@@ -46,8 +63,8 @@ void DataObserver::startObserve()
         return;
     }
     isObserving = true;
-    missionHashTimer->start(50);
-    timer->start(50);
+    missionHashTimer->start(globalData->missionDataUpdateInterval());
+    timer->start(globalData->missionDataUpdateInterval());
     emit onStartObserve();
 }
 
@@ -60,6 +77,18 @@ void DataObserver::stopObserve()
     missionHashTimer->stop();
     timer->stop();
     emit onStopObserve();
+}
+
+// 析构整个DataObserver，这时会发出onXxxRemoved信号，让其他持有QLabel的控件取消持有
+void DataObserver::destruct()
+{
+    stopObserve();
+    if (missionStrategy) {
+        emit onLabelsRemoved(missionStrategy->getLabels());
+        emit onDisplayLabelsRemoved(missionStrategy->getDisplayLabels());
+        missionStrategy->remove();
+        missionStrategy = nullptr;
+    }
 }
 
 void DataObserver::onTimeout()

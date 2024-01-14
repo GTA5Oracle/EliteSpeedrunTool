@@ -122,8 +122,8 @@ void GlobalData::readSettings()
     setFirewallDirection(settings.value("FirewallDirection", mFirewallDirection).toInt());
     settings.endGroup();
 
-    settings.beginGroup("Headshot");
-    setHeadshotUpdateInterval(settings.value("HeadshotUpdateInterval", mHeadshotUpdateInterval).toInt());
+    settings.beginGroup("MissionData");
+    setMissionDataUpdateInterval(settings.value("MissionDataUpdateInterval", mMissionDataUpdateInterval).toInt());
     settings.endGroup();
 
     settings.beginGroup("Timer");
@@ -184,8 +184,8 @@ void GlobalData::writeSettings()
     settings.setValue("FirewallDirection", mFirewallDirection);
     settings.endGroup();
 
-    settings.beginGroup("Headshot");
-    settings.setValue("HeadshotUpdateInterval", mHeadshotUpdateInterval);
+    settings.beginGroup("MissionData");
+    settings.setValue("MissionDataInterval", mMissionDataUpdateInterval);
     settings.endGroup();
 
     settings.beginGroup("Timer");
@@ -523,17 +523,17 @@ void GlobalData::setFirewallDirection(int newFirewallDirection)
     emit firewallDirectionChanged();
 }
 
-int GlobalData::headshotUpdateInterval() const
+int GlobalData::missionDataUpdateInterval() const
 {
-    return mHeadshotUpdateInterval;
+    return mMissionDataUpdateInterval;
 }
 
-void GlobalData::setHeadshotUpdateInterval(int newHeadshotUpdateInterval)
+void GlobalData::setMissionDataUpdateInterval(int newMissionDataUpdateInterval)
 {
-    if (mHeadshotUpdateInterval == newHeadshotUpdateInterval)
+    if (mMissionDataUpdateInterval == newMissionDataUpdateInterval)
         return;
-    mHeadshotUpdateInterval = newHeadshotUpdateInterval;
-    emit headshotUpdateIntervalChanged();
+    mMissionDataUpdateInterval = newMissionDataUpdateInterval;
+    emit missionDataUpdateIntervalChanged();
 }
 
 const QString& GlobalData::timerStartHotkey() const

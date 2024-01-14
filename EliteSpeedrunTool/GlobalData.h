@@ -110,8 +110,8 @@ public:
     int firewallDirection() const;
     void setFirewallDirection(int newFirewallDirection);
 
-    int headshotUpdateInterval() const;
-    void setHeadshotUpdateInterval(int newHeadshotUpdateInterval);
+    int missionDataUpdateInterval() const;
+    void setMissionDataUpdateInterval(int newMissionDataUpdateInterval);
 
     const QString& timerStartHotkey() const;
     void setTimerStartHotkey(const QString& newTimerStartHotkey);
@@ -172,7 +172,7 @@ signals:
     void firewallAppPathChanged();
     void firewallDirectionChanged();
 
-    void headshotUpdateIntervalChanged();
+    void missionDataUpdateIntervalChanged();
 
     void timerStartHotkeyChanged();
     void timerPauseHotkeyChanged();
@@ -201,7 +201,8 @@ private:
     // 信息展示
     QList<DisplayInfoSubFunction> mFuncs = { DisplayInfoSubFunction::Firewall,
         DisplayInfoSubFunction::Headshot, DisplayInfoSubFunction::Timer,
-        DisplayInfoSubFunction::AutoTimer };
+        DisplayInfoSubFunction::AutoTimer, DisplayInfoSubFunction::VehicleDamage,
+        DisplayInfoSubFunction::RashkovskyDamage, DisplayInfoSubFunction::Kill };
     QDisplayInfoSubFuncsMap mDisplayInfoSubFunctions;
     bool mDisplayInfoShow = true;
     bool mDisplayInfoTouchable = true;
@@ -220,8 +221,8 @@ private:
     QString mFirewallAppPath = "";
     int mFirewallDirection = NET_FW_RULE_DIR_OUT;
 
-    // 爆头
-    int mHeadshotUpdateInterval = 100;
+    // 任务数据
+    int mMissionDataUpdateInterval = 100;
 
     // 计时器
     QString mTimerStartHotkey = "F7";
@@ -267,7 +268,7 @@ private:
     Q_PROPERTY(bool firewallPlaySound READ firewallPlaySound WRITE setFirewallPlaySound NOTIFY firewallPlaySoundChanged)
     Q_PROPERTY(QString firewallAppPath READ firewallAppPath WRITE setFirewallAppPath NOTIFY firewallAppPathChanged)
     Q_PROPERTY(int firewallDirection READ firewallDirection WRITE setFirewallDirection NOTIFY firewallDirectionChanged)
-    Q_PROPERTY(int headshotUpdateInterval READ headshotUpdateInterval WRITE setHeadshotUpdateInterval NOTIFY headshotUpdateIntervalChanged)
+    Q_PROPERTY(int missionDataUpdateInterval READ missionDataUpdateInterval WRITE setMissionDataUpdateInterval NOTIFY missionDataUpdateIntervalChanged)
     Q_PROPERTY(QString timerStartHotkey READ timerStartHotkey WRITE setTimerStartHotkey NOTIFY timerStartHotkeyChanged)
     Q_PROPERTY(QString timerPauseHotkey READ timerPauseHotkey WRITE setTimerPauseHotkey NOTIFY timerPauseHotkeyChanged)
     Q_PROPERTY(QString timerStopHotkey READ timerStopHotkey WRITE setTimerStopHotkey NOTIFY timerStopHotkeyChanged)

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "DisplayInfoSubFunction.h"
 #include <QLabel>
 #include <QList>
 
@@ -19,11 +20,21 @@ public:
     void remove();
 
 protected:
+    void setLabelTextStyle(
+        QLabel* label,
+        const QColor& textColor,
+        const QColor& textShadowColor,
+        qreal textShadowBlurRadius,
+        const QPointF& textShadowOffset);
+
+    void initGlobalDataConnects(QLabel* label, DisplayInfoSubFunctionItem* item);
+
+protected:
     QFont missionNameFont = QFont();
     QFont font = QFont();
 
-    QString kill4PPattern = tr("4人总击杀：%1");
-    QString headshotPattern = tr("爆头：%1");
-    QString vehicleDamagePattern = tr("载具损坏：%1");
+    QString killPattern = tr("总击杀：%1");
+    QString headshotPattern = tr("总爆头：%1");
+    QString vehicleDamagePattern = tr("车损：%1");
     QString rashkovskyDamagePattern = tr("拉什科夫斯基受伤：%1");
 };

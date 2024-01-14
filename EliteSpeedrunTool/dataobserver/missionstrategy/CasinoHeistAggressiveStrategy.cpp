@@ -1,9 +1,7 @@
-#include "DoomsdayAct3Strategy.h"
+#include "CasinoHeistAggressiveStrategy.h"
 #include "GlobalData.h"
 
-Q_GLOBAL_STATIC(DoomsdayAct3Strategy, doomsdayAct3StrategyInstance)
-
-DoomsdayAct3Strategy::DoomsdayAct3Strategy(QObject* parent)
+CasinoHeistAggressiveStrategy::CasinoHeistAggressiveStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
     labMissionName.setFont(missionNameFont);
@@ -13,29 +11,24 @@ DoomsdayAct3Strategy::DoomsdayAct3Strategy(QObject* parent)
     initGlobalDataConnects(&labDisplayHeadshot, displayInfoSubFunctions[DisplayInfoSubFunction::Headshot]);
 }
 
-DoomsdayAct3Strategy* DoomsdayAct3Strategy::instance()
-{
-    return doomsdayAct3StrategyInstance;
-}
-
-QList<QLabel*> DoomsdayAct3Strategy::getDisplayLabels()
+QList<QLabel*> CasinoHeistAggressiveStrategy::getDisplayLabels()
 {
     return QList<QLabel*>() << &labDisplayHeadshot;
 }
 
-QList<QLabel*> DoomsdayAct3Strategy::getLabels()
+QList<QLabel*> CasinoHeistAggressiveStrategy::getLabels()
 {
     return QList<QLabel*>() << &labMissionName << &labHeadshot;
 }
 
-void DoomsdayAct3Strategy::updateInfo()
+void CasinoHeistAggressiveStrategy::updateInfo()
 {
     auto data = headshotFetcher.fetchData();
     labDisplayHeadshot.setText(headshotPattern.arg(QString::number(data)));
     labHeadshot.setText(headshotPattern.arg(QString::number(data)));
 }
 
-const QString DoomsdayAct3Strategy::getDisplayName()
+const QString CasinoHeistAggressiveStrategy::getDisplayName()
 {
-    return tr("末日将至");
+    return tr("名钻赌场豪劫：气势汹汹");
 }

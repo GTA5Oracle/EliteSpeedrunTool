@@ -35,17 +35,30 @@ set(PROJECT_SOURCES
         TimeUtil.h TimeUtil.cpp
         dataobserver/AutoTimerUtil.h dataobserver/AutoTimerUtil.cpp
         dataobserver/DataObserver.h dataobserver/DataObserver.cpp
+        #=================
         dataobserver/missionstrategy/BaseMissionStrategy.h dataobserver/missionstrategy/BaseMissionStrategy.cpp
+        dataobserver/missionstrategy/DoomsdayAct1Strategy.h dataobserver/missionstrategy/DoomsdayAct1Strategy.cpp
         dataobserver/missionstrategy/DoomsdayAct2Strategy.h dataobserver/missionstrategy/DoomsdayAct2Strategy.cpp
         dataobserver/missionstrategy/DoomsdayAct3Strategy.h dataobserver/missionstrategy/DoomsdayAct3Strategy.cpp
         dataobserver/missionstrategy/LostMcRipStrategy.h dataobserver/missionstrategy/LostMcRipStrategy.cpp
         dataobserver/missionstrategy/EmptyStrategy.h dataobserver/missionstrategy/EmptyStrategy.cpp
         dataobserver/missionstrategy/FleecaJobStrategy.h dataobserver/missionstrategy/FleecaJobStrategy.cpp
+        dataobserver/missionstrategy/PrisonBreakStrategy.h dataobserver/missionstrategy/PrisonBreakStrategy.cpp
+        dataobserver/missionstrategy/SeriesAFundingStrategy.h dataobserver/missionstrategy/SeriesAFundingStrategy.cpp
+        dataobserver/missionstrategy/HumaneLabsRaidStrategy.h dataobserver/missionstrategy/HumaneLabsRaidStrategy.cpp
+        dataobserver/missionstrategy/PacificStandardStrategy.h dataobserver/missionstrategy/PacificStandardStrategy.cpp
+        dataobserver/missionstrategy/CasinoHeistTheBigConStrategy.h dataobserver/missionstrategy/CasinoHeistTheBigConStrategy.cpp
+        dataobserver/missionstrategy/CasinoHeistSilentSneakyStrategy.h dataobserver/missionstrategy/CasinoHeistSilentSneakyStrategy.cpp
+        dataobserver/missionstrategy/CasinoHeistAggressiveStrategy.h dataobserver/missionstrategy/CasinoHeistAggressiveStrategy.cpp
+        dataobserver/missionstrategy/BakerBadBeatStrategy.h dataobserver/missionstrategy/BakerBadBeatStrategy.cpp
+        #=================
         dataobserver/datafetcher/BaseDataFetcher.h
         dataobserver/datafetcher/MissionHashFetcher.h dataobserver/datafetcher/MissionHashFetcher.cpp
         dataobserver/datafetcher/HeadshotFetcher.h dataobserver/datafetcher/HeadshotFetcher.cpp
-        dataobserver/datafetcher/Kill4PFetcher.h dataobserver/datafetcher/Kill4PFetcher.cpp
+        dataobserver/datafetcher/KillHostFetcher.h dataobserver/datafetcher/KillHostFetcher.cpp
+        dataobserver/datafetcher/KillHostClient1Fetcher.h dataobserver/datafetcher/KillHostClient1Fetcher.cpp
         dataobserver/datafetcher/VehicleDamageFetcher.h dataobserver/datafetcher/VehicleDamageFetcher.cpp
+        dataobserver/datafetcher/RashkovskyDamageFetcher.h dataobserver/datafetcher/RashkovskyDamageFetcher.cpp
         AutoCapture.h AutoCapture.cpp
         resource.qrc
 )

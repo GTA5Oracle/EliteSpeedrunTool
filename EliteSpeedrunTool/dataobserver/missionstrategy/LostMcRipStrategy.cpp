@@ -1,34 +1,37 @@
 #include "LostMcRipStrategy.h"
+#include "GlobalData.h"
 
 LostMcRipStrategy::LostMcRipStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
     labMissionName.setFont(missionNameFont);
     labHeadshot.setFont(font);
-    labKill4P.setFont(font);
+    labKill.setFont(font);
+
+    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
+    initGlobalDataConnects(&labDisplayHeadshot, displayInfoSubFunctions[DisplayInfoSubFunction::Headshot]);
+    initGlobalDataConnects(&labDisplayKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]);
 }
 
 QList<QLabel*> LostMcRipStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << &labDisplayHeadshot << &labDisplayKill4P;
+    return QList<QLabel*>() << &labDisplayHeadshot << &labDisplayKill;
 }
 
 QList<QLabel*> LostMcRipStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName << &labHeadshot << &labKill4P;
+    return QList<QLabel*>() << &labMissionName << &labHeadshot << &labKill;
 }
 
 void LostMcRipStrategy::updateInfo()
 {
     auto headshot = headshotFetcher.fetchData();
-    qDebug() << headshot;
     labDisplayHeadshot.setText(headshotPattern.arg(QString::number(headshot)));
     labHeadshot.setText(headshotPattern.arg(QString::number(headshot)));
 
-    auto killHost = kill4PFetcher.fetchData();
-    qDebug() << killHost;
-    labDisplayKill4P.setText(kill4PPattern.arg(QString::number(killHost)));
-    labKill4P.setText(kill4PPattern.arg(QString::number(killHost)));
+    auto killHost = killHostFetcher.fetchData();
+    labDisplayKill.setText(killPattern.arg(QString::number(killHost)));
+    labKill.setText(killPattern.arg(QString::number(killHost)));
 }
 
 const QString LostMcRipStrategy::getDisplayName()

@@ -2,19 +2,31 @@
 
 #include "MemoryUtil.h"
 #include "dataobserver/datafetcher/MissionHashFetcher.h"
+#include "dataobserver/missionstrategy/BakerBadBeatStrategy.h"
 #include "dataobserver/missionstrategy/BaseMissionStrategy.h"
+#include "dataobserver/missionstrategy/CasinoHeistAggressiveStrategy.h"
+#include "dataobserver/missionstrategy/CasinoHeistSilentSneakyStrategy.h"
+#include "dataobserver/missionstrategy/CasinoHeistTheBigConStrategy.h"
+#include "dataobserver/missionstrategy/DoomsdayAct1Strategy.h"
+#include "dataobserver/missionstrategy/DoomsdayAct2Strategy.h"
 #include "dataobserver/missionstrategy/DoomsdayAct3Strategy.h"
 #include "dataobserver/missionstrategy/EmptyStrategy.h"
 #include "dataobserver/missionstrategy/FleecaJobStrategy.h"
+#include "dataobserver/missionstrategy/HumaneLabsRaidStrategy.h"
 #include "dataobserver/missionstrategy/LostMcRipStrategy.h"
+#include "dataobserver/missionstrategy/PacificStandardStrategy.h"
+#include "dataobserver/missionstrategy/PrisonBreakStrategy.h"
+#include "dataobserver/missionstrategy/SeriesAFundingStrategy.h"
 #include <QObject>
 #include <QTimer>
+
 #define dataObserver (DataObserver::instance())
 
 class DataObserver : public QObject {
     Q_OBJECT
 public:
     explicit DataObserver(QObject* parent = nullptr);
+    ~DataObserver();
 
     static DataObserver* instance();
 
@@ -23,6 +35,7 @@ public:
 
     void startObserve();
     void stopObserve();
+    void destruct(); // 析构整个DataObserver，这时会发出onXxxRemoved信号，让其他持有QLabel的控件取消持有
 
 protected:
     void onTimeout();
@@ -47,22 +60,23 @@ signals:
     void onStopObserve();
 
 public:
-    BaseMissionStrategy* emptyStrategy = new EmptyStrategy();
+    BaseMissionStrategy* emptyStrategy = new EmptyStrategy(this);
 
     const QMap<const unsigned long long, BaseMissionStrategy*> missionStrategyMap = {
-        qMakePair(MemoryUtil::hashDoomsdayAct1, nullptr),
-        qMakePair(MemoryUtil::hashDoomsdayAct2, nullptr),
+        qMakePair(MemoryUtil::hashDoomsdayAct1, new DoomsdayAct1Strategy(this)),
+        qMakePair(MemoryUtil::hashDoomsdayAct2, new DoomsdayAct2Strategy(this)),
         qMakePair(MemoryUtil::hashDoomsdayAct3P1, doomsdayAct3Strategy),
         qMakePair(MemoryUtil::hashDoomsdayAct3P2, doomsdayAct3Strategy),
-        qMakePair(MemoryUtil::hashFleecaJob, new FleecaJobStrategy()),
-        qMakePair(MemoryUtil::hashPrisonBreak, nullptr),
-        qMakePair(MemoryUtil::hashHumaneLabsRaid, nullptr),
-        qMakePair(MemoryUtil::hashSeriesAFunding, nullptr),
-        qMakePair(MemoryUtil::hashPacificStandardP1, nullptr),
-        qMakePair(MemoryUtil::hashPacificStandardP2, nullptr),
-        qMakePair(MemoryUtil::hashCasinoHeistAggressive, nullptr),
-        qMakePair(MemoryUtil::hashCasinoHeistSilentSneaky, nullptr),
-        qMakePair(MemoryUtil::hashCasinoHeistTheBigCon, nullptr),
-        qMakePair(MemoryUtil::hashLostMcRip, new LostMcRipStrategy()),
+        qMakePair(MemoryUtil::hashFleecaJob, new FleecaJobStrategy(this)),
+        qMakePair(MemoryUtil::hashPrisonBreak, new PrisonBreakStrategy(this)),
+        qMakePair(MemoryUtil::hashHumaneLabsRaid, new HumaneLabsRaidStrategy(this)),
+        qMakePair(MemoryUtil::hashSeriesAFunding, new SeriesAFundingStrategy(this)),
+        qMakePair(MemoryUtil::hashPacificStandardP1, new PacificStandardStrategy(this)),
+        qMakePair(MemoryUtil::hashPacificStandardP2, new PacificStandardStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistAggressive, new CasinoHeistAggressiveStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistSilentSneaky, new CasinoHeistSilentSneakyStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistTheBigCon, new CasinoHeistTheBigConStrategy(this)),
+        qMakePair(MemoryUtil::hashLostMcRip, new LostMcRipStrategy(this)),
+        qMakePair(MemoryUtil::hashBakerBadBeat, new BakerBadBeatStrategy(this)),
     };
 };

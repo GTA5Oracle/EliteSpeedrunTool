@@ -61,19 +61,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     initFirewall();
 
-    connect(ui.btnStartHeadShot, &QAbstractButton::toggled, this, [this](bool checked) {
-        if (checked) {
-            if (startReadHeadShot()) {
-                ui.btnStartHeadShot->setText(tr("点击关闭"));
-            } else {
-                ui.btnStartHeadShot->setChecked(false);
-            }
-        } else {
-            stopReadHeadShot();
-            ui.btnStartHeadShot->setText(tr("点击启动"));
-        }
-    });
-
     initTimerStateMachine();
 
     initCloseGameImmediately();
@@ -88,6 +75,8 @@ MainWindow::MainWindow(QWidget* parent)
 MainWindow::~MainWindow()
 {
     FirewallUtil::release();
+
+    autoTimerUtil->stop();
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)
@@ -99,11 +88,14 @@ void MainWindow::closeEvent(QCloseEvent* event)
         return;
     } else {
         if (displayInfoDialog) {
+            displayInfoDialog->disconnect();
             displayInfoDialog->done(-1);
         }
     }
 
     if (event->isAccepted()) {
+        dataObserver->stopObserve();
+        dataObserver->destruct();
         qApp->exit();
     }
 }
@@ -115,11 +107,6 @@ void MainWindow::initGlobalDataConnects()
             initSystemTray();
         } else {
             closeSystemTray();
-        }
-    });
-    connect(globalData, &GlobalData::headshotUpdateIntervalChanged, this, [this]() {
-        if (headShotTimer) {
-            headShotTimer->setInterval(globalData->headshotUpdateInterval());
         }
     });
     connect(globalData, &GlobalData::timerUpdateIntervalChanged, this, [this]() {
@@ -294,13 +281,11 @@ void MainWindow::initMenu()
         }
         globalData->setDisplayInfoShow(checked);
         if (checked) {
-            displayInfoDialog = new DisplayInfoDialog();
             auto closeLambda = [this](int result) {
                 disconnect(this, nullptr, displayInfoDialog, nullptr);
                 displayInfoDialogIsShowing = false;
                 // Qt::WA_DeleteOnClose
                 // delete displayInfoDialog;
-                displayInfoDialog = nullptr;
                 // -1表示不需要设置globalData->displayInfo = false也不需要setChecked(false)的情况
                 if (result != -1) {
                     ui.actionDisplayInfo->setChecked(false);
@@ -390,7 +375,7 @@ void MainWindow::initMenu()
     });
 
     connect(ui.actionGitHub, &QAction::triggered, this, []() {
-        QDesktopServices::openUrl(QUrl("https://github.com/SkyD666/Act3SpeedrunTool"));
+        QDesktopServices::openUrl(QUrl("https://github.com/GTA5Oracle/EliteSpeedrunTool"));
     });
 
     connect(ui.actionAiFaDian, &QAction::triggered, this, []() {
@@ -407,7 +392,7 @@ void MainWindow::initMenu()
         layout->addWidget(imageLabel);
         layout->setSizeConstraint(QLayout::SetFixedSize);
         dialog.setLayout(layout);
-        dialog.setWindowTitle(tr("支付宝收款二维码"));
+        dialog.setWindowTitle(tr("支付宝收款二维码 谢谢喵！"));
         dialog.exec();
     });
 
@@ -538,10 +523,15 @@ void MainWindow::initMissionData()
         }
     });
     connect(dataObserver, &DataObserver::onDisplayLabelsAdded, this, [this](QList<QLabel*> labels) {
-
+        for (auto label : labels) {
+            displayInfoDialog->insertWidget(displayInfoDialog->widgetCount() - 1, label);
+        }
     });
     connect(dataObserver, &DataObserver::onDisplayLabelsRemoved, this, [this](QList<QLabel*> labels) {
-
+        for (auto label : labels) {
+            displayInfoDialog->removeWidget(label);
+            label->setParent(nullptr);
+        }
     });
     connect(dataObserver, &DataObserver::onLabelsAdded, this, [this](QList<QLabel*> labels) {
         QBoxLayout* layout = (QBoxLayout*)ui.scrollAreaMissionDataContents->layout();
@@ -585,66 +575,6 @@ void MainWindow::hideDisplayInfo()
         topMostTimer->stop();
         delete topMostTimer;
         topMostTimer = nullptr;
-    }
-}
-
-bool MainWindow::startReadHeadShot()
-{
-    if (!headShotTimer) {
-        headShotTimer = new QTimer(this);
-        gtaHandle = MemoryUtil::getProcessHandle(&pid);
-        if (!gtaHandle) {
-            QMessageBox::critical(nullptr, QString(), tr("获取窗口句柄失败，未检测到 GTA5，请启动或重启游戏后再进行尝试！"));
-            return false;
-        }
-    }
-    int offsets[10] = { 0x30, 0x8, 0x10, 0x10, 0x10, 0x10, 0x10, 0x10, 0x108, 0x3668 };
-    static bool firstTime = true;
-    connect(headShotTimer, &QTimer::timeout, this, [=]() {
-        if (gtaHandle) {
-            // 关闭上次的 OpenProcess
-            CloseHandle(gtaHandle);
-        }
-        gtaHandle = MemoryUtil::getProcessHandle(&pid); // 必须每次获取数据时都刷新，否则re后获取不到爆头数
-        static DWORD64 ptr;
-        static short count = 0;
-        ReadProcessMemory(gtaHandle,
-            (LPCVOID)((DWORD64)MemoryUtil::getProcessModuleHandle(pid, L"GTA5.exe") + 0x2FDF678),
-            &ptr, sizeof(DWORD64), 0);
-        for (int i = 0; i < sizeof(offsets) / sizeof(offsets[0]) - 1; i++) {
-            ReadProcessMemory(gtaHandle, (LPCVOID)(ptr + offsets[i]), &ptr, sizeof(DWORD64), 0);
-        }
-        ReadProcessMemory(gtaHandle, (LPCVOID)(ptr + offsets[9]), &count, 2, 0);
-        if (firstTime || count != headshotCount) {
-            headshotCount = count;
-            HttpServerController::instance()->sendNewData(headshotCount);
-            ui.labHeadShotCount->setText(QString::number(headshotCount));
-            if (displayInfoDialogIsShowing && displayInfoDialog) {
-                displayInfoDialog->setHeadShotCount(headshotCount);
-            }
-            discordUtil->setHeadshotCount(headshotCount);
-        }
-        firstTime = false;
-    });
-    firstTime = true;
-    headShotTimer->start(globalData->headshotUpdateInterval());
-
-    return true;
-}
-
-void MainWindow::stopReadHeadShot()
-{
-    if (headShotTimer) {
-        headShotTimer->stop();
-        delete headShotTimer;
-        headShotTimer = nullptr;
-    }
-    if (gtaHandle) {
-        gtaHandle = NULL;
-    }
-    ui.labHeadShotCount->setText(tr("已停止记录"));
-    if (displayInfoDialogIsShowing) {
-        displayInfoDialog->setHeadShotCount(0);
     }
 }
 

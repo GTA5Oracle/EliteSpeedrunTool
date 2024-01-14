@@ -25,10 +25,10 @@ VS_VERSION_INFO VERSIONINFO
             BLOCK "080404b0"
             BEGIN
                 VALUE "CompanyName", "SkyD666\0"
-                VALUE "FileDescription", "Act3 Speedrun Tool\0"
+                VALUE "FileDescription", "Elite Speedrun Tool\0"
                 VALUE "FileVersion", "8.0.1.68\0"
                 VALUE "ProductVersion", "8.0.1.68\0"
-                VALUE "ProductName", "Act3 Speedrun Tool\0"
+                VALUE "ProductName", "Elite Speedrun Tool\0"
            END
         END
 
