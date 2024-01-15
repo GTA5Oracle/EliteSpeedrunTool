@@ -11,6 +11,11 @@ QList<QLabel*> EmptyStrategy::getDisplayLabels()
     return QList<QLabel*>();
 }
 
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> EmptyStrategy::getDisplayLabelsAndItems()
+{
+    return {};
+}
+
 QList<QLabel*> EmptyStrategy::getLabels()
 {
     return QList<QLabel*>() << &labMissionName;

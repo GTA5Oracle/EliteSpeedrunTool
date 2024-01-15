@@ -44,8 +44,11 @@ public:
 
     void insertWidget(int index, QWidget* widget);
     void removeWidget(QWidget* widget);
+    void removeAllInsertedWidget();
     bool containWidget(QWidget* widget);
     int widgetCount();
+
+    QList<QWidget*> insertedWidget = {};
 
 private:
     void initGlobalDataConnects();
@@ -62,6 +65,7 @@ protected:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
+    void closeEvent(QCloseEvent* event) override;
 };
 
 #endif // SCREENSHOTDISPLAYDIALOG_H

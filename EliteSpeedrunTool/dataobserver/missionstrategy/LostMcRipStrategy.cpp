@@ -7,15 +7,20 @@ LostMcRipStrategy::LostMcRipStrategy(QObject* parent)
     labMissionName.setFont(missionNameFont);
     labHeadshot.setFont(font);
     labKill.setFont(font);
-
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    initGlobalDataConnects(&labDisplayHeadshot, displayInfoSubFunctions[DisplayInfoSubFunction::Headshot]);
-    initGlobalDataConnects(&labDisplayKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]);
 }
 
 QList<QLabel*> LostMcRipStrategy::getDisplayLabels()
 {
     return QList<QLabel*>() << &labDisplayHeadshot << &labDisplayKill;
+}
+
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> LostMcRipStrategy::getDisplayLabelsAndItems()
+{
+    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
+    return {
+        qMakePair(&labDisplayHeadshot, displayInfoSubFunctions[DisplayInfoSubFunction::Headshot]),
+        qMakePair(&labDisplayKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill])
+    };
 }
 
 QList<QLabel*> LostMcRipStrategy::getLabels()

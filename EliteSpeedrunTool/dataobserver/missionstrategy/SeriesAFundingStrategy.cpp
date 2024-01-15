@@ -6,14 +6,17 @@ SeriesAFundingStrategy::SeriesAFundingStrategy(QObject* parent)
 {
     labMissionName.setFont(missionNameFont);
     labTotalKill.setFont(font);
-
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    initGlobalDataConnects(&labDisplayTotalKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]);
 }
 
 QList<QLabel*> SeriesAFundingStrategy::getDisplayLabels()
 {
     return QList<QLabel*>() << &labDisplayTotalKill;
+}
+
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> SeriesAFundingStrategy::getDisplayLabelsAndItems()
+{
+    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
+    return { qMakePair(&labDisplayTotalKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]) };
 }
 
 QList<QLabel*> SeriesAFundingStrategy::getLabels()

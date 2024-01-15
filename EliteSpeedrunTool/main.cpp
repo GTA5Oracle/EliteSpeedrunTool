@@ -2,7 +2,6 @@
 #include "LanguageUtil.h"
 #include "LogUtil.h"
 #include "MainWindow.h"
-#include "MemoryUtil.h"
 
 #include <QApplication>
 #include <QIcon>
@@ -26,16 +25,13 @@ int main(int argc, char* argv[])
     QApplication::setWindowIcon(QIcon("://image/ic_icon.png"));
     QApplication::setOrganizationName("SkyD666");
     QApplication::setApplicationName(QObject::tr("精英速通工具"));
-    QApplication::setApplicationVersion("8.0.1.68-Canary03");
+    QApplication::setApplicationVersion("8.0.1.68-alpha01");
 
     qApp->setStyle(globalData->styleName());
 
     if (QApplication::applicationVersion() != globalData->version()) {
         QMessageBox::warning(nullptr, QString(), QObject::tr("*** 应用版本变更，请认真检查各项配置（热键、外观、提示音等）是否需要重新设置！***"));
     }
-
-    MemoryUtil::initGlobalPtr();
-    MemoryUtil::initMissionPtr();
 
     MainWindow w;
     w.show();

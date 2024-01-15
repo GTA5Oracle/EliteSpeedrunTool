@@ -6,14 +6,17 @@ DoomsdayAct2Strategy::DoomsdayAct2Strategy(QObject* parent)
 {
     labMissionName.setFont(missionNameFont);
     labVehicleDamage.setFont(font);
-
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    initGlobalDataConnects(&labDisplayVehicleDamage, displayInfoSubFunctions[DisplayInfoSubFunction::VehicleDamage]);
 }
 
 QList<QLabel*> DoomsdayAct2Strategy::getDisplayLabels()
 {
     return QList<QLabel*>() << &labDisplayVehicleDamage;
+}
+
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> DoomsdayAct2Strategy::getDisplayLabelsAndItems()
+{
+    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
+    return { qMakePair(&labDisplayVehicleDamage, displayInfoSubFunctions[DisplayInfoSubFunction::VehicleDamage]) };
 }
 
 QList<QLabel*> DoomsdayAct2Strategy::getLabels()

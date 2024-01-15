@@ -26,7 +26,6 @@ DataObserver::DataObserver(QObject* parent)
 
 DataObserver::~DataObserver()
 {
-    stopObserve();
     destruct();
 }
 
@@ -45,7 +44,7 @@ void DataObserver::setMissionStrategy(BaseMissionStrategy* newMissionStrategy)
     if (missionStrategy) {
         emit onLabelsRemoved(missionStrategy->getLabels());
         emit onDisplayLabelsRemoved(missionStrategy->getDisplayLabels());
-        missionStrategy->remove();
+        missionStrategy->setCurrentStrategy(false);
     }
     if (!newMissionStrategy) {
         stopObserve();
@@ -53,6 +52,7 @@ void DataObserver::setMissionStrategy(BaseMissionStrategy* newMissionStrategy)
         return;
     }
     missionStrategy = newMissionStrategy;
+    newMissionStrategy->setCurrentStrategy(true);
     emit onLabelsAdded(newMissionStrategy->getLabels());
     emit onDisplayLabelsAdded(newMissionStrategy->getDisplayLabels());
 }
@@ -83,10 +83,14 @@ void DataObserver::stopObserve()
 void DataObserver::destruct()
 {
     stopObserve();
+    if (destructed) {
+        return;
+    }
+    destructed = true;
     if (missionStrategy) {
         emit onLabelsRemoved(missionStrategy->getLabels());
         emit onDisplayLabelsRemoved(missionStrategy->getDisplayLabels());
-        missionStrategy->remove();
+        missionStrategy->setCurrentStrategy(false);
         missionStrategy = nullptr;
     }
 }

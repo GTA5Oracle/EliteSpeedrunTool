@@ -6,14 +6,17 @@ PrisonBreakStrategy::PrisonBreakStrategy(QObject* parent)
 {
     labMissionName.setFont(missionNameFont);
     labRashkovskyDamage.setFont(font);
-
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    initGlobalDataConnects(&labDisplayRashkovskyDamage, displayInfoSubFunctions[DisplayInfoSubFunction::RashkovskyDamage]);
 }
 
 QList<QLabel*> PrisonBreakStrategy::getDisplayLabels()
 {
     return QList<QLabel*>() << &labDisplayRashkovskyDamage;
+}
+
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> PrisonBreakStrategy::getDisplayLabelsAndItems()
+{
+    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
+    return { qMakePair(&labDisplayRashkovskyDamage, displayInfoSubFunctions[DisplayInfoSubFunction::RashkovskyDamage]) };
 }
 
 QList<QLabel*> PrisonBreakStrategy::getLabels()

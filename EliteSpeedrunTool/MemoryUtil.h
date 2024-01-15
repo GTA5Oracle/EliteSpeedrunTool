@@ -1,12 +1,20 @@
 #pragma once
+#include <QObject>
 #include <QString>
+#include <QTimer>
 #include <windows.h>
 
-class MemoryUtil {
+#define memoryUtil (MemoryUtil::instance())
+
+class MemoryUtil : public QObject {
+    Q_OBJECT
 public:
-    MemoryUtil();
-    static DWORD64 globalPtr;
-    static DWORD64 missionPtr;
+    explicit MemoryUtil();
+
+    static MemoryUtil* instance();
+
+    DWORD64 globalPtr = 0;
+    DWORD64 missionPtr = 0;
 
     const static int globalMissionHash = 4718592 + 126144; // 任务HASH
     const static int globalSummaryTime = 2685249 + 6465; // 之前所有阶段耗费的时间总和
@@ -50,26 +58,31 @@ public:
     inline const static unsigned long long hashLostMcRip = 2389264995; // 安息吧！失落摩托帮
     inline const static unsigned long long hashBakerBadBeat = 2805392149; // 贝克女士：出奇制胜
 
-    static HWND getWindowHwnd();
-    static HANDLE getProcessHandle(DWORD* pid, DWORD dwDesiredAccess = PROCESS_ALL_ACCESS);
-    static HMODULE getProcessModuleHandle(DWORD pid, CONST TCHAR* moduleName);
+    HWND getWindowHwnd();
+    HANDLE getProcessHandle(DWORD* pid, DWORD dwDesiredAccess = PROCESS_ALL_ACCESS);
+    HMODULE getProcessModuleHandle(DWORD pid, CONST TCHAR* moduleName);
 
-    static WINBOOL read(unsigned long long address, LPVOID buffer, SIZE_T size);
-    static unsigned long long findPattern(QString pattern);
-    static unsigned long long rip37(unsigned long long address);
+    WINBOOL read(unsigned long long address, LPVOID buffer, SIZE_T size);
+    unsigned long long findPattern(QString pattern);
+    unsigned long long rip37(unsigned long long address);
 
-    static bool initGlobalPtr();
-    static void initMissionPtr();
+    bool initGlobalPtr();
+    void initMissionPtr();
 
-    static int getGlobalInt(int index);
-    static int getGlobalUInt(int index);
-    static long long getGlobalLongLong(int index);
-    static unsigned long long getGlobalULongLong(int index);
-    static float getGlobalFloat(int index);
+    int getGlobalInt(int index);
+    int getGlobalUInt(int index);
+    long long getGlobalLongLong(int index);
+    unsigned long long getGlobalULongLong(int index);
+    float getGlobalFloat(int index);
 
-    static int getLocalInt(int index);
-    static float getLocalFloat(int index);
-    static long long getLocalLongLong(int index);
-    static unsigned long long getLocalULongLong(int index);
-    static bool getLocalBool(int index);
+    int getLocalInt(int index);
+    float getLocalFloat(int index);
+    long long getLocalLongLong(int index);
+    unsigned long long getLocalULongLong(int index);
+    bool getLocalBool(int index);
+
+private:
+    QTimer* gtaProcessTimer = new QTimer(this);
+signals:
+    void onMissionPtrChanged();
 };

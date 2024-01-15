@@ -1,4 +1,5 @@
 #include "BaseMissionStrategy.h"
+#include "GlobalData.h"
 #include <QGraphicsDropShadowEffect>
 
 BaseMissionStrategy::BaseMissionStrategy(QObject* parent)
@@ -10,97 +11,118 @@ BaseMissionStrategy::BaseMissionStrategy(QObject* parent)
 
 BaseMissionStrategy::~BaseMissionStrategy()
 {
-    remove();
+    setCurrentStrategy(false);
 }
 
-void BaseMissionStrategy::remove()
+void BaseMissionStrategy::setCurrentStrategy(bool isCurrent)
 {
+    this->isCurrent = isCurrent;
+    if (isCurrent) {
+        initSettings();
+        if (!isGlobalDataConnectsInited) {
+            isGlobalDataConnectsInited = true;
+            initGlobalDataConnects();
+        }
+    }
 }
 
-void BaseMissionStrategy::setLabelTextStyle(
-    QLabel* label,
-    const QColor& textColor,
-    const QColor& textShadowColor,
-    qreal textShadowBlurRadius,
-    const QPointF& textShadowOffset)
+bool BaseMissionStrategy::isCurrentStrategy()
 {
-    label->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+    return isCurrent;
+}
+
+bool BaseMissionStrategy::labelIsVisible(QLabel* label)
+{
+    return labelVisibleMap[label];
+}
+
+void BaseMissionStrategy::initSettings()
+{
+    auto labelsAndItems = getDisplayLabelsAndItems();
+    for (auto labelsAndItem : labelsAndItems) {
+        setLabelDisplay(labelsAndItem.first, labelsAndItem.second);
+        setLabelTextAlignment(labelsAndItem.first, labelsAndItem.second);
+        setLabelFont(labelsAndItem.first, labelsAndItem.second);
+        setLabelTextStyle(labelsAndItem.first, labelsAndItem.second);
+    }
+}
+
+void BaseMissionStrategy::setLabelTextStyle(QLabel* label, DisplayInfoSubFunctionItem* item)
+{
+    label->setStyleSheet(QString("color: %1;").arg(item->textColor().name()));
 
     QGraphicsDropShadowEffect* timerEffect = new QGraphicsDropShadowEffect(this);
-    timerEffect->setColor(textShadowColor);
-    timerEffect->setBlurRadius(textShadowBlurRadius);
-    timerEffect->setOffset(textShadowOffset);
+    timerEffect->setColor(item->textShadowColor());
+    timerEffect->setBlurRadius(item->textShadowBlurRadius());
+    timerEffect->setOffset(item->textShadowOffset());
     label->setGraphicsEffect(timerEffect);
+}
+
+void BaseMissionStrategy::initGlobalDataConnects()
+{
+    auto labelsAndItems = getDisplayLabelsAndItems();
+    for (auto labelsAndItem : labelsAndItems) {
+        initGlobalDataConnects(labelsAndItem.first, labelsAndItem.second);
+    }
+}
+
+void BaseMissionStrategy::setLabelDisplay(QLabel* label, DisplayInfoSubFunctionItem* item)
+{
+    labelVisibleMap[label] = item->display();
+    if (isCurrentStrategy() && globalData->displayInfoShow()) {
+        label->setVisible(item->display());
+    }
+}
+
+void BaseMissionStrategy::setLabelTextAlignment(QLabel* label, DisplayInfoSubFunctionItem* item)
+{
+    label->setAlignment(item->textAlignment());
+}
+
+void BaseMissionStrategy::setLabelFont(QLabel* label, DisplayInfoSubFunctionItem* item)
+{
+    label->setFont(QFont(item->fontFamily(), item->textSize()));
 }
 
 void BaseMissionStrategy::initGlobalDataConnects(QLabel* label, DisplayInfoSubFunctionItem* item)
 {
-    setLabelTextStyle(
-        label,
-        item->textColor(),
-        item->textShadowColor(),
-        item->textShadowBlurRadius(),
-        item->textShadowOffset());
-    label->setFont(QFont(item->fontFamily(), item->textSize()));
-    label->setAlignment(item->textAlignment());
-
     connect(item, &DisplayInfoSubFunctionItem::displayChanged, this,
-        [label](bool newDisplay) {
-            label->setVisible(newDisplay);
+        [this, label, item](bool newDisplay) {
+            setLabelDisplay(label, item);
         });
 
     connect(item, &DisplayInfoSubFunctionItem::textAlignmentChanged, this,
-        [label](const Qt::Alignment& newTextAlignment) {
-            label->setAlignment(newTextAlignment);
+        [this, label, item](const Qt::Alignment& newTextAlignment) {
+            setLabelTextAlignment(label, item);
         });
 
     connect(item, &DisplayInfoSubFunctionItem::textSizeChanged, this,
-        [label, item](int newTextSize) {
-            label->setFont(QFont(item->fontFamily(), newTextSize));
+        [this, label, item](int newTextSize) {
+            setLabelFont(label, item);
         });
 
     connect(item, &DisplayInfoSubFunctionItem::textColorChanged, this,
         [this, label, item](const QColor& newTextColor) {
-            setLabelTextStyle(
-                label,
-                newTextColor,
-                item->textShadowColor(),
-                item->textShadowBlurRadius(),
-                item->textShadowOffset());
+            setLabelTextStyle(label, item);
         });
 
     connect(item, &DisplayInfoSubFunctionItem::textShadowColorChanged, this,
         [this, label, item](const QColor& newTextShadowColor) {
-            setLabelTextStyle(
-                label,
-                item->textColor(),
-                newTextShadowColor,
-                item->textShadowBlurRadius(),
-                item->textShadowOffset());
+            setLabelTextStyle(label, item);
         });
 
     connect(item, &DisplayInfoSubFunctionItem::textShadowBlurRadiusChanged, this,
         [this, label, item](int newTextShadowBlurRadius) {
-            setLabelTextStyle(
-                label,
-                item->textColor(),
-                item->textShadowColor(),
-                newTextShadowBlurRadius,
-                item->textShadowOffset());
+            setLabelTextStyle(label, item);
         });
 
     connect(item, &DisplayInfoSubFunctionItem::textShadowOffsetChanged, this,
         [this, label, item](QPointF newTextShadowOffset) {
-            setLabelTextStyle(
-                label,
-                item->textColor(),
-                item->textShadowColor(),
-                item->textShadowBlurRadius(),
-                newTextShadowOffset);
+            setLabelTextStyle(label, item);
         });
 
     connect(item, &DisplayInfoSubFunctionItem::fontFamilyChanged, this,
-        [label, item](const QString& newFontFamily) {
-            label->setFont(QFont(newFontFamily, item->textSize()));
+        [this, label, item](const QString& newFontFamily) {
+            setLabelFont(label, item);
         });
 }

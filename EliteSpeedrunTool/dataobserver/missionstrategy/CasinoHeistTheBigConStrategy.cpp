@@ -8,7 +8,12 @@ CasinoHeistTheBigConStrategy::CasinoHeistTheBigConStrategy(QObject* parent)
 
 QList<QLabel*> CasinoHeistTheBigConStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>();
+    return {};
+}
+
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> CasinoHeistTheBigConStrategy::getDisplayLabelsAndItems()
+{
+    return {};
 }
 
 QList<QLabel*> CasinoHeistTheBigConStrategy::getLabels()

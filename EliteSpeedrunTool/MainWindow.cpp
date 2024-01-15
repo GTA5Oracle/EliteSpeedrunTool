@@ -8,6 +8,7 @@
 #include "MemoryUtil.h"
 #include "SettingDialog.h"
 #include "UpdateDialog.h"
+#include "dataobserver/AutoTimerUtil.h"
 #include "dataobserver/DataObserver.h"
 #include <MMSystem.h>
 #include <QBoxLayout>
@@ -34,6 +35,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     connect(qApp, &QCoreApplication::aboutToQuit, this, [=]() {
         HttpServerController::instance()->stop();
+        autoTimerUtil->stop();
+        dataObserver->destruct();
         qInfo("Exiting...");
         globalData->destory();
     });
@@ -75,8 +78,6 @@ MainWindow::MainWindow(QWidget* parent)
 MainWindow::~MainWindow()
 {
     FirewallUtil::release();
-
-    autoTimerUtil->stop();
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)
@@ -88,13 +89,12 @@ void MainWindow::closeEvent(QCloseEvent* event)
         return;
     } else {
         if (displayInfoDialog) {
+            displayInfoDialog->disconnect();
             displayInfoDialog->done(-1);
         }
     }
 
     if (event->isAccepted()) {
-        dataObserver->stopObserve();
-        dataObserver->destruct();
         qApp->exit();
     }
 }
@@ -287,7 +287,7 @@ void MainWindow::initMenu()
                 displayInfoDialogIsShowing = false;
                 // Qt::WA_DeleteOnClose
                 // delete displayInfoDialog;
-                displayInfoDialog = nullptr;
+                displayInfoDialog = nullptr; // 这个一定要在ui.actionDisplayInfo->setChecked(false);前面
                 // -1表示不需要设置globalData->displayInfo = false也不需要setChecked(false)的情况
                 if (result != -1) {
                     ui.actionDisplayInfo->setChecked(false);
@@ -538,7 +538,6 @@ void MainWindow::initMissionData()
         }
         for (auto label : labels) {
             displayInfoDialog->removeWidget(label);
-            label->setParent(nullptr);
         }
     });
     connect(dataObserver, &DataObserver::onLabelsAdded, this, [this](QList<QLabel*> labels) {
@@ -562,6 +561,7 @@ void MainWindow::initDisplayInfoDialogData()
         for (auto label : dataObserver->getDisplayLabels()) {
             if (!displayInfoDialog->containWidget(label)) {
                 displayInfoDialog->insertWidget(displayInfoDialog->widgetCount() - 1, label);
+                label->setVisible(dataObserver->getMissionStrategy()->labelIsVisible(label));
             }
         }
     }
@@ -585,7 +585,7 @@ void MainWindow::showDisplayInfo()
             //            HttpServerController::instance()->sendNewData(QTime::currentTime().second());
         }
     });
-    topMostTimer->start(3000);
+    topMostTimer->start(5000);
 }
 
 void MainWindow::hideDisplayInfo()
@@ -788,7 +788,7 @@ void MainWindow::initTimerStateMachine()
 void MainWindow::closeGameImmediately()
 {
     DWORD p;
-    const auto game = MemoryUtil::getProcessHandle(&p, PROCESS_TERMINATE);
+    const auto game = memoryUtil->getProcessHandle(&p, PROCESS_TERMINATE);
     TerminateProcess(game, 1);
     CloseHandle(game);
     //    QThread* workerThread = new QThread(this);

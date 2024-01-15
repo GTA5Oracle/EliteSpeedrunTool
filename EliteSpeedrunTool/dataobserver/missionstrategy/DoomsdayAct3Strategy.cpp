@@ -1,26 +1,22 @@
 #include "DoomsdayAct3Strategy.h"
 #include "GlobalData.h"
 
-Q_GLOBAL_STATIC(DoomsdayAct3Strategy, doomsdayAct3StrategyInstance)
-
 DoomsdayAct3Strategy::DoomsdayAct3Strategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
     labMissionName.setFont(missionNameFont);
     labHeadshot.setFont(font);
-
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    initGlobalDataConnects(&labDisplayHeadshot, displayInfoSubFunctions[DisplayInfoSubFunction::Headshot]);
-}
-
-DoomsdayAct3Strategy* DoomsdayAct3Strategy::instance()
-{
-    return doomsdayAct3StrategyInstance;
 }
 
 QList<QLabel*> DoomsdayAct3Strategy::getDisplayLabels()
 {
     return QList<QLabel*>() << &labDisplayHeadshot;
+}
+
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> DoomsdayAct3Strategy::getDisplayLabelsAndItems()
+{
+    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
+    return { qMakePair(&labDisplayHeadshot, displayInfoSubFunctions[DisplayInfoSubFunction::Headshot]) };
 }
 
 QList<QLabel*> DoomsdayAct3Strategy::getLabels()

@@ -6,14 +6,17 @@ CasinoHeistAggressiveStrategy::CasinoHeistAggressiveStrategy(QObject* parent)
 {
     labMissionName.setFont(missionNameFont);
     labHeadshot.setFont(font);
-
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    initGlobalDataConnects(&labDisplayHeadshot, displayInfoSubFunctions[DisplayInfoSubFunction::Headshot]);
 }
 
 QList<QLabel*> CasinoHeistAggressiveStrategy::getDisplayLabels()
 {
     return QList<QLabel*>() << &labDisplayHeadshot;
+}
+
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> CasinoHeistAggressiveStrategy::getDisplayLabelsAndItems()
+{
+    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
+    return { qMakePair(&labDisplayHeadshot, displayInfoSubFunctions[DisplayInfoSubFunction::Headshot]) };
 }
 
 QList<QLabel*> CasinoHeistAggressiveStrategy::getLabels()

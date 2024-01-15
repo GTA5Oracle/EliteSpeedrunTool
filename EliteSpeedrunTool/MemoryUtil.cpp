@@ -5,10 +5,23 @@
 #include <Tlhelp32.h>
 #include <tchar.h>
 
-DWORD64 MemoryUtil::globalPtr = 0;
-DWORD64 MemoryUtil::missionPtr = 0;
+Q_GLOBAL_STATIC(MemoryUtil, memoryUtilInstance)
+
 MemoryUtil::MemoryUtil()
 {
+    // 不断刷新GTA进程的信息，防止先启动工具后启动游戏导致地址不正确
+    initGlobalPtr();
+    initMissionPtr();
+    connect(gtaProcessTimer, &QTimer::timeout, this, [=]() {
+        initGlobalPtr();
+        initMissionPtr();
+    });
+    gtaProcessTimer->start(15000);
+}
+
+MemoryUtil* MemoryUtil::instance()
+{
+    return memoryUtilInstance;
 }
 
 WINBOOL MemoryUtil::read(unsigned long long address, LPVOID buffer, SIZE_T size)
@@ -62,7 +75,7 @@ unsigned long long MemoryUtil::findPattern(QString pattern)
     unsigned long long failedAddress = -1;
 
     auto tempArray = QList<byte>();
-    for (auto each : pattern.split(' ')) {
+    for (auto&& each : pattern.split(' ')) {
         if (each == "??") {
             tempArray.append(0);
         } else {
@@ -137,8 +150,13 @@ bool MemoryUtil::initGlobalPtr()
 
 void MemoryUtil::initMissionPtr()
 {
-    read(globalPtr - 0x120, &missionPtr, 8);
-    read(missionPtr + 0x1180, &missionPtr, 8);
+    DWORD64 newMissionPtr = 0;
+    read(globalPtr - 0x120, &newMissionPtr, 8);
+    read(newMissionPtr + 0x1180, &newMissionPtr, 8);
+    if (newMissionPtr != missionPtr && newMissionPtr) {
+        missionPtr = newMissionPtr;
+        emit onMissionPtrChanged();
+    }
 }
 
 int MemoryUtil::getGlobalInt(int index)

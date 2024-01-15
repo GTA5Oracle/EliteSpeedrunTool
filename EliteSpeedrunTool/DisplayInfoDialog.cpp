@@ -136,11 +136,24 @@ void DisplayInfoDialog::setChildrenTransparentForMouseEvents(bool transparent)
 void DisplayInfoDialog::insertWidget(int index, QWidget* widget)
 {
     ui->mainLayout->insertWidget(index, widget);
+    insertedWidget << widget;
 }
 
 void DisplayInfoDialog::removeWidget(QWidget* widget)
 {
     ui->mainLayout->removeWidget(widget);
+    // qDebug() << widget->parent() << widget->parentWidget() << ui->mainLayout << this;
+    if (widget->parent() == ui->widget) { // 这里就是== ui->widget没错Layout不能作为单独的parent
+        widget->setParent(nullptr);
+    }
+    insertedWidget.removeOne(widget);
+}
+
+void DisplayInfoDialog::removeAllInsertedWidget()
+{
+    for (auto w : insertedWidget) {
+        DisplayInfoDialog::removeWidget(w);
+    }
 }
 
 bool DisplayInfoDialog::containWidget(QWidget* widget)
@@ -320,4 +333,10 @@ void DisplayInfoDialog::mouseMoveEvent(QMouseEvent* event)
 {
     move((event->globalPosition() - mousePressedPos).toPoint());
     QDialog::mouseMoveEvent(event);
+}
+
+void DisplayInfoDialog::closeEvent(QCloseEvent* event)
+{
+    removeAllInsertedWidget();
+    QDialog::closeEvent(event);
 }

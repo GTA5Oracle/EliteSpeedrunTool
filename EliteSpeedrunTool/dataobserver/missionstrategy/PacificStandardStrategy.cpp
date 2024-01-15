@@ -11,6 +11,11 @@ QList<QLabel*> PacificStandardStrategy::getDisplayLabels()
     return QList<QLabel*>();
 }
 
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> PacificStandardStrategy::getDisplayLabelsAndItems()
+{
+    return {};
+}
+
 QList<QLabel*> PacificStandardStrategy::getLabels()
 {
     return QList<QLabel*>() << &labMissionName;

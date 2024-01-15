@@ -10,26 +10,35 @@ public:
     explicit BaseMissionStrategy(QObject* parent = nullptr);
     ~BaseMissionStrategy();
 
+    void setCurrentStrategy(bool isCurrent);
+    bool isCurrentStrategy();
+    bool labelIsVisible(QLabel* label);
+
     virtual QList<QLabel*> getDisplayLabels() = 0;
+    virtual QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> getDisplayLabelsAndItems() = 0;
     virtual QList<QLabel*> getLabels() = 0;
 
     virtual void updateInfo() = 0;
 
     virtual const QString getDisplayName() = 0;
 
-    void remove();
-
 protected:
-    void setLabelTextStyle(
-        QLabel* label,
-        const QColor& textColor,
-        const QColor& textShadowColor,
-        qreal textShadowBlurRadius,
-        const QPointF& textShadowOffset);
+    void initSettings();
+    void setLabelDisplay(QLabel* label, DisplayInfoSubFunctionItem* item);
+    void setLabelTextAlignment(QLabel* label, DisplayInfoSubFunctionItem* item);
+    void setLabelFont(QLabel* label, DisplayInfoSubFunctionItem* item);
+    void setLabelTextStyle(QLabel* label, DisplayInfoSubFunctionItem* item);
 
+private:
+    void initGlobalDataConnects();
     void initGlobalDataConnects(QLabel* label, DisplayInfoSubFunctionItem* item);
 
 protected:
+    bool isCurrent = false;
+    bool isGlobalDataConnectsInited = false;
+
+    QMap<QLabel*, bool> labelVisibleMap = {};
+
     QFont missionNameFont = QFont();
     QFont font = QFont();
 

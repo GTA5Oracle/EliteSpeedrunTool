@@ -8,7 +8,12 @@ CasinoHeistSilentSneakyStrategy::CasinoHeistSilentSneakyStrategy(QObject* parent
 
 QList<QLabel*> CasinoHeistSilentSneakyStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>();
+    return {};
+}
+
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> CasinoHeistSilentSneakyStrategy::getDisplayLabelsAndItems()
+{
+    return {};
 }
 
 QList<QLabel*> CasinoHeistSilentSneakyStrategy::getLabels()

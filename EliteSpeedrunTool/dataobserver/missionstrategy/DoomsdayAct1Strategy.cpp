@@ -6,14 +6,17 @@ DoomsdayAct1Strategy::DoomsdayAct1Strategy(QObject* parent)
 {
     labMissionName.setFont(missionNameFont);
     labTotalKill.setFont(font);
-
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    initGlobalDataConnects(&labDisplayTotalKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]);
 }
 
 QList<QLabel*> DoomsdayAct1Strategy::getDisplayLabels()
 {
     return QList<QLabel*>() << &labDisplayTotalKill;
+}
+
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> DoomsdayAct1Strategy::getDisplayLabelsAndItems()
+{
+    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
+    return { qMakePair(&labDisplayTotalKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]) };
 }
 
 QList<QLabel*> DoomsdayAct1Strategy::getLabels()

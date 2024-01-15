@@ -2,7 +2,6 @@
 #include "GlobalData.h"
 #include "MemoryUtil.h"
 #include <QDateTime>
-#include <chrono>
 
 Q_GLOBAL_STATIC(AutoTimerUtil, autoTimerUtilInstance)
 
@@ -12,6 +11,11 @@ AutoTimerUtil::AutoTimerUtil()
         timeOut();
     });
     timer->setTimerType(Qt::PreciseTimer);
+
+    connect(memoryUtil, &MemoryUtil::onMissionPtrChanged, this, [this]() {
+        stopAndReset(true);
+        start();
+    });
 }
 
 AutoTimerUtil* AutoTimerUtil::instance()
@@ -45,13 +49,13 @@ void AutoTimerUtil::stop()
 
 void AutoTimerUtil::timeOut()
 {
-    gtaHandle = MemoryUtil::getProcessHandle(&pid);
+    gtaHandle = memoryUtil->getProcessHandle(&pid);
 
-    startTimerFlag = MemoryUtil::getLocalInt(MemoryUtil::localFlagInitTimer);
-    summaryTime = MemoryUtil::getGlobalUInt(MemoryUtil::globalSummaryTime);
-    currentStateStartTime = MemoryUtil::getLocalLongLong(MemoryUtil::localInitTimestamp); // 开始时间ptr
-    currentStateTime = MemoryUtil::getLocalInt(MemoryUtil::localTime); // 时间ptr
-    missionHash = MemoryUtil::getGlobalULongLong(MemoryUtil::globalMissionHash); // hash
+    startTimerFlag = memoryUtil->getLocalInt(MemoryUtil::localFlagInitTimer);
+    summaryTime = memoryUtil->getGlobalUInt(MemoryUtil::globalSummaryTime);
+    currentStateStartTime = memoryUtil->getLocalLongLong(MemoryUtil::localInitTimestamp); // 开始时间ptr
+    currentStateTime = memoryUtil->getLocalInt(MemoryUtil::localTime); // 时间ptr
+    missionHash = memoryUtil->getGlobalULongLong(MemoryUtil::globalMissionHash); // hash
     qDebug() << missionHash << lastMissionHash;
     // 智障门有一瞬间hash变成0，解决方法是延时判断
     static long long hashReallyValueTime = 0;
@@ -73,7 +77,7 @@ void AutoTimerUtil::timeOut()
 
     CloseHandle(gtaHandle);
 
-    qDebug() << MemoryUtil::globalPtr << state << missionHash << startTimerFlag << summaryTime << currentStateTime << currentStateStartTime;
+    qDebug() << memoryUtil->globalPtr << state << missionHash << startTimerFlag << summaryTime << currentStateTime << currentStateStartTime;
 
     if (state == MissionState::Running && lastDoneState == MissionState::End) {
         flagTimeChangedTo1 = false;
@@ -100,7 +104,7 @@ void AutoTimerUtil::timeOut()
 
     if (state == MissionState::Running) {
         if (lastDoneState != state) {
-            deltaLocalServerTime = getCurrentTimeStamp() - MemoryUtil::getLocalLongLong(19728 + 985); // 开始时间ptr
+            deltaLocalServerTime = getCurrentTimeStamp() - memoryUtil->getLocalLongLong(19728 + 985); // 开始时间ptr
         }
         unsigned long long deltaTime = getCurrentTimeStamp() - currentStateStartTime - deltaLocalServerTime;
         qDebug() << deltaTime

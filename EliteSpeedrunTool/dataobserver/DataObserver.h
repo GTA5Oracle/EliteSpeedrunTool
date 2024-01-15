@@ -52,6 +52,7 @@ private:
     BaseMissionStrategy* missionStrategy;
 
     bool isObserving = false;
+    bool destructed = false;
 
 signals:
     void onLabelsAdded(QList<QLabel*>);
@@ -67,8 +68,8 @@ public:
     const QMap<const unsigned long long, BaseMissionStrategy*> missionStrategyMap = {
         qMakePair(MemoryUtil::hashDoomsdayAct1, new DoomsdayAct1Strategy(this)),
         qMakePair(MemoryUtil::hashDoomsdayAct2, new DoomsdayAct2Strategy(this)),
-        qMakePair(MemoryUtil::hashDoomsdayAct3P1, doomsdayAct3Strategy),
-        qMakePair(MemoryUtil::hashDoomsdayAct3P2, doomsdayAct3Strategy),
+        qMakePair(MemoryUtil::hashDoomsdayAct3P1, new DoomsdayAct3Strategy(this)),
+        qMakePair(MemoryUtil::hashDoomsdayAct3P2, new DoomsdayAct3Strategy(this)),
         qMakePair(MemoryUtil::hashFleecaJob, new FleecaJobStrategy(this)),
         qMakePair(MemoryUtil::hashPrisonBreak, new PrisonBreakStrategy(this)),
         qMakePair(MemoryUtil::hashHumaneLabsRaid, new HumaneLabsRaidStrategy(this)),

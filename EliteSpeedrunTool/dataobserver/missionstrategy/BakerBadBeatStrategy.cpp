@@ -6,14 +6,17 @@ BakerBadBeatStrategy::BakerBadBeatStrategy(QObject* parent)
 {
     labMissionName.setFont(missionNameFont);
     labTotalKill.setFont(font);
-
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    initGlobalDataConnects(&labDisplayTotalKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]);
 }
 
 QList<QLabel*> BakerBadBeatStrategy::getDisplayLabels()
 {
     return QList<QLabel*>() << &labDisplayTotalKill;
+}
+
+QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> BakerBadBeatStrategy::getDisplayLabelsAndItems()
+{
+    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
+    return { qMakePair(&labDisplayTotalKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]) };
 }
 
 QList<QLabel*> BakerBadBeatStrategy::getLabels()
