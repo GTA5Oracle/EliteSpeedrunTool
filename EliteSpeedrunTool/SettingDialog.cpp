@@ -70,7 +70,7 @@ void SettingDialog::initGeneralSettings()
     });
 
     // 样式
-    for (auto k : QStyleFactory::keys()) {
+    for (auto&& k : QStyleFactory::keys()) {
         ui.cbStyle->addItem(k, k);
         if (k == globalData->styleName()) {
             ui.cbStyle->setCurrentText(k);
@@ -217,6 +217,25 @@ void SettingDialog::initMissionDataSettings()
     connect(ui.sbMissionDataUpdateInterval, &QSpinBox::valueChanged, this, [=](int value) {
         globalData->setMissionDataUpdateInterval(value);
     });
+
+    // 数据名称显示方式
+    {
+        int i = 0;
+        int currentMissionDataNameIndex = 0;
+        for (auto s : globalData->missionDataNames()) {
+            ui.cbMissionDataName->addItem(MissionDataNameUtil::toDisplayString(s), s);
+            if (s == globalData->missionDataName()) {
+                currentMissionDataNameIndex = i;
+            }
+            i++;
+        }
+        connect(ui.cbMissionDataName, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, [=](int index) {
+                globalData->setMissionDataName(
+                    ui.cbMissionDataName->itemData(index).value<MissionDataNameUtil::MissionDataName>());
+            });
+        ui.cbMissionDataName->setCurrentIndex(currentMissionDataNameIndex);
+    }
 }
 
 // 计时器设置

@@ -27,7 +27,7 @@ QList<QLabel*> SeriesAFundingStrategy::getLabels()
 void SeriesAFundingStrategy::updateInfo()
 {
     auto data = killHostClient1Fetcher.fetchData();
-    auto text = killPattern.arg(QString::number(data));
+    auto text = getKillPattern().arg(QString::number(data));
     labDisplayTotalKill.setText(text);
     labTotalKill.setText(text);
 }

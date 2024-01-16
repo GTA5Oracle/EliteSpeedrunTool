@@ -72,6 +72,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     initMissionData();
 
+    initBadSport();
+
     initGlobalDataConnects();
 }
 
@@ -551,6 +553,21 @@ void MainWindow::initMissionData()
         for (auto label : labels) {
             layout->removeWidget(label);
             label->setParent(nullptr);
+        }
+    });
+}
+
+void MainWindow::initBadSport()
+{
+    connect(ui.btnRefreshBadSport, &QAbstractButton::clicked, this, [this]() {
+        auto badSport = memoryUtil->getBadSport();
+        ui.labBadSport->setText(QString::number(badSport));
+        if (badSport < 30) {
+            ui.labBadSport->setStyleSheet("color: green");
+        } else if (badSport < 50) {
+            ui.labBadSport->setStyleSheet("color: yellow");
+        } else if (badSport >= 50) {
+            ui.labBadSport->setStyleSheet("color: red");
         }
     });
 }

@@ -58,6 +58,66 @@ void BaseMissionStrategy::setLabelTextStyle(QLabel* label, DisplayInfoSubFunctio
     label->setGraphicsEffect(timerEffect);
 }
 
+QString BaseMissionStrategy::getKillPattern()
+{
+    switch (globalData->missionDataName()) {
+    case MissionDataNameUtil::MissionDataName::Emoji:
+        return "💀%1";
+    case MissionDataNameUtil::MissionDataName::None:
+        return "%1";
+    default:
+        return tr("总击杀：%1");
+    }
+}
+
+QString BaseMissionStrategy::getHeadshotPattern()
+{
+    switch (globalData->missionDataName()) {
+    case MissionDataNameUtil::MissionDataName::Emoji:
+        return "☠️%1";
+    case MissionDataNameUtil::MissionDataName::None:
+        return "%1";
+    default:
+        return tr("总爆头：%1");
+    }
+}
+
+QString BaseMissionStrategy::getVehicleDamagePattern()
+{
+    switch (globalData->missionDataName()) {
+    case MissionDataNameUtil::MissionDataName::Emoji:
+        return "🚗%1";
+    case MissionDataNameUtil::MissionDataName::None:
+        return "%1";
+    default:
+        return tr("车损：%1");
+    }
+}
+
+QString BaseMissionStrategy::getPlaneDamagePattern()
+{
+    switch (globalData->missionDataName()) {
+    case MissionDataNameUtil::MissionDataName::Emoji:
+        return "🚁%1";
+    case MissionDataNameUtil::MissionDataName::None:
+        return "%1";
+    default:
+        return tr("机损：%1");
+    }
+}
+
+QString BaseMissionStrategy::getRashkovskyHurtPattern()
+{
+    switch (globalData->missionDataName()) {
+    case MissionDataNameUtil::MissionDataName::Emoji:
+        return "👨🏻‍🦲%1";
+    case MissionDataNameUtil::MissionDataName::None:
+        return "%1";
+    default:
+        return tr("拉什科夫斯基受伤：%1");
+    }
+}
+
 void BaseMissionStrategy::initGlobalDataConnects()
 {
     auto labelsAndItems = getDisplayLabelsAndItems();

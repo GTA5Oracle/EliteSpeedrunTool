@@ -27,7 +27,7 @@ QList<QLabel*> DoomsdayAct1Strategy::getLabels()
 void DoomsdayAct1Strategy::updateInfo()
 {
     auto data = killHostFetcher.fetchData();
-    auto text = killPattern.arg(QString::number(data));
+    auto text = getKillPattern().arg(QString::number(data));
     labDisplayTotalKill.setText(text);
     labTotalKill.setText(text);
 }

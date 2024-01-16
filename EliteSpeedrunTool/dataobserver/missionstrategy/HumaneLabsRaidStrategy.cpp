@@ -27,7 +27,7 @@ QList<QLabel*> HumaneLabsRaidStrategy::getLabels()
 void HumaneLabsRaidStrategy::updateInfo()
 {
     auto data = vehicleDamageFetcher.fetchData();
-    auto text = vehicleDamagePattern.arg(QString::number(data, 'f', 2));
+    auto text = getPlaneDamagePattern().arg(QString::number(data, 'f', 2));
     labDisplayVehicleDamage.setText(text);
     labVehicleDamage.setText(text);
 }

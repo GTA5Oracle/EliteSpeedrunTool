@@ -51,12 +51,19 @@ void AutoTimerUtil::timeOut()
 {
     gtaHandle = memoryUtil->getProcessHandle(&pid);
 
-    startTimerFlag = memoryUtil->getLocalInt(MemoryUtil::localFlagInitTimer);
-    summaryTime = memoryUtil->getGlobalUInt(MemoryUtil::globalSummaryTime);
-    currentStateStartTime = memoryUtil->getLocalLongLong(MemoryUtil::localInitTimestamp); // 开始时间ptr
-    currentStateTime = memoryUtil->getLocalInt(MemoryUtil::localTime); // 时间ptr
-    missionHash = memoryUtil->getGlobalULongLong(MemoryUtil::globalMissionHash); // hash
+    missionHash = memoryUtil->getGlobalUInt(MemoryUtil::globalMissionHash); // hash
     qDebug() << missionHash << lastMissionHash;
+    if (missionHash == MemoryUtil::hashPrisonBreak) {
+        startTimerFlag = memoryUtil->getLocalInt(MemoryUtil::localFlagInitPrisonBreakTimer);
+        summaryTime = memoryUtil->getGlobalUInt(MemoryUtil::globalPrisonBreakSummaryTime);
+        currentStateStartTime = memoryUtil->getLocalLongLong(MemoryUtil::localInitPrisonBreakTimestamp); // 开始时间ptr
+        currentStateTime = memoryUtil->getLocalInt(MemoryUtil::localPrisonBreakTime); // 时间ptr
+    } else {
+        startTimerFlag = memoryUtil->getLocalInt(MemoryUtil::localFlagInitTimer);
+        summaryTime = memoryUtil->getGlobalUInt(MemoryUtil::globalSummaryTime);
+        currentStateStartTime = memoryUtil->getLocalLongLong(MemoryUtil::localInitTimestamp); // 开始时间ptr
+        currentStateTime = memoryUtil->getLocalInt(MemoryUtil::localTime); // 时间ptr
+    }
     // 智障门有一瞬间hash变成0，解决方法是延时判断
     static long long hashReallyValueTime = 0;
     if (missionHash == 0 && lastMissionHash != 0) {
@@ -104,7 +111,11 @@ void AutoTimerUtil::timeOut()
 
     if (state == MissionState::Running) {
         if (lastDoneState != state) {
-            deltaLocalServerTime = getCurrentTimeStamp() - memoryUtil->getLocalLongLong(19728 + 985); // 开始时间ptr
+            deltaLocalServerTime = getCurrentTimeStamp()
+                - memoryUtil->getLocalLongLong(
+                    missionHash == MemoryUtil::hashPrisonBreak
+                        ? MemoryUtil::localInitPrisonBreakTimestamp
+                        : MemoryUtil::localInitTimestamp); // 开始时间ptr
         }
         unsigned long long deltaTime = getCurrentTimeStamp() - currentStateStartTime - deltaLocalServerTime;
         qDebug() << deltaTime
@@ -193,7 +204,7 @@ void AutoTimerUtil::onTimerCallback()
 
 void AutoTimerUtil::sendUpdateTimeSignal(unsigned long long data)
 {
-    if (missionHash != 979654579) {
+    if (missionHash != MemoryUtil::hashPrisonBreak) {
         // 除了越狱之外的任务默认+10s
         emit updateTime(data + 10000);
     } else {

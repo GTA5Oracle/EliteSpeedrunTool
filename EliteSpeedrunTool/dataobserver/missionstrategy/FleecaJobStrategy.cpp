@@ -27,7 +27,7 @@ QList<QLabel*> FleecaJobStrategy::getLabels()
 void FleecaJobStrategy::updateInfo()
 {
     auto data = vehicleDamageFetcher.fetchData();
-    auto text = vehicleDamagePattern.arg(QString::number(data, 'f', 2));
+    auto text = getVehicleDamagePattern().arg(QString::number(data, 'f', 2));
     labDisplayVehicleDamage.setText(text);
     labVehicleDamage.setText(text);
 }

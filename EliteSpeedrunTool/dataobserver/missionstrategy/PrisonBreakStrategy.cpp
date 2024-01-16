@@ -27,7 +27,7 @@ QList<QLabel*> PrisonBreakStrategy::getLabels()
 void PrisonBreakStrategy::updateInfo()
 {
     auto data = rashkovskyDamageFetcher.fetchData();
-    auto text = rashkovskyDamagePattern.arg(QString::number(data, 'f', 2));
+    auto text = getRashkovskyHurtPattern().arg(QString::number(data, 'f', 2));
     labDisplayRashkovskyDamage.setText(text);
     labRashkovskyDamage.setText(text);
 }

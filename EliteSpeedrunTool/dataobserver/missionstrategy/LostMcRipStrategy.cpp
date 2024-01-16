@@ -31,12 +31,14 @@ QList<QLabel*> LostMcRipStrategy::getLabels()
 void LostMcRipStrategy::updateInfo()
 {
     auto headshot = headshotFetcher.fetchData();
-    labDisplayHeadshot.setText(headshotPattern.arg(QString::number(headshot)));
-    labHeadshot.setText(headshotPattern.arg(QString::number(headshot)));
+    auto headshotText = getHeadshotPattern().arg(QString::number(headshot));
+    labDisplayHeadshot.setText(headshotText);
+    labHeadshot.setText(headshotText);
 
     auto killHost = killHostFetcher.fetchData();
-    labDisplayKill.setText(killPattern.arg(QString::number(killHost)));
-    labKill.setText(killPattern.arg(QString::number(killHost)));
+    auto killText = getKillPattern().arg(QString::number(killHost));
+    labDisplayKill.setText(killText);
+    labKill.setText(killText);
 }
 
 const QString LostMcRipStrategy::getDisplayName()

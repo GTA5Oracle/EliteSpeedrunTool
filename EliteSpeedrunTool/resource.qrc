@@ -21,5 +21,6 @@
         <file>image/ic_users.ico</file>
         <file>image/ic_question.ico</file>
         <file>image/ic_plug.ico</file>
+        <file>image/ic_dunce_hat.ico</file>
     </qresource>
 </RCC>

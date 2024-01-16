@@ -56,6 +56,55 @@ QString toString(TimerStopStrategy strategy)
 }
 }
 
+namespace MissionDataNameUtil {
+MissionDataName fromString(QString name)
+{
+    if (name == "FullName") {
+        return MissionDataName::FullName;
+    } else if (name == "Emoji") {
+        return MissionDataName::Emoji;
+    } else if (name == "None") {
+        return MissionDataName::None;
+    } else {
+        return MissionDataName::FullName;
+    }
+}
+QString toDisplayString(MissionDataName name)
+{
+    switch (name) {
+    case MissionDataName::FullName:
+        return QObject::tr("显示数据全名");
+        break;
+    case MissionDataName::Emoji:
+        return QObject::tr("显示 Emoji");
+        break;
+    case MissionDataName::None:
+        return QObject::tr("不显示数据名称");
+        break;
+    default:
+        break;
+    }
+    return "";
+}
+QString toString(MissionDataName name)
+{
+    switch (name) {
+    case MissionDataName::FullName:
+        return "FullName";
+        break;
+    case MissionDataName::Emoji:
+        return "Emoji";
+        break;
+    case MissionDataName::None:
+        return "None";
+        break;
+    default:
+        break;
+    }
+    return "FullName";
+}
+}
+
 GlobalData::GlobalData()
 {
 }
@@ -124,6 +173,8 @@ void GlobalData::readSettings()
 
     settings.beginGroup("MissionData");
     setMissionDataUpdateInterval(settings.value("MissionDataUpdateInterval", mMissionDataUpdateInterval).toInt());
+    setMissionDataName(MissionDataNameUtil::fromString(
+        settings.value("MissionDataName", MissionDataNameUtil::toString(mMissionDataName)).toString()));
     settings.endGroup();
 
     settings.beginGroup("Timer");
@@ -186,6 +237,7 @@ void GlobalData::writeSettings()
 
     settings.beginGroup("MissionData");
     settings.setValue("MissionDataInterval", mMissionDataUpdateInterval);
+    settings.setValue("MissionDataName", MissionDataNameUtil::toString(mMissionDataName));
     settings.endGroup();
 
     settings.beginGroup("Timer");
@@ -682,4 +734,22 @@ void GlobalData::setAutoTimerUpdateInterval(int newAutoTimerUpdateInterval)
         return;
     mAutoTimerUpdateInterval = newAutoTimerUpdateInterval;
     emit autoTimerUpdateIntervalChanged();
+}
+
+QList<MissionDataNameUtil::MissionDataName> GlobalData::missionDataNames() const
+{
+    return mMissionDataNames;
+}
+
+MissionDataNameUtil::MissionDataName GlobalData::missionDataName() const
+{
+    return mMissionDataName;
+}
+
+void GlobalData::setMissionDataName(MissionDataNameUtil::MissionDataName newMissionDataName)
+{
+    if (mMissionDataName == newMissionDataName)
+        return;
+    mMissionDataName = newMissionDataName;
+    emit missionDataNameChanged();
 }

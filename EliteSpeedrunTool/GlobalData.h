@@ -25,6 +25,17 @@ QString toDisplayString(TimerStopStrategy strategy);
 QString toString(TimerStopStrategy strategy);
 }
 
+namespace MissionDataNameUtil {
+enum MissionDataName {
+    FullName,
+    Emoji,
+    None
+};
+MissionDataName fromString(QString name);
+QString toDisplayString(MissionDataName name);
+QString toString(MissionDataName name);
+}
+
 class GlobalData : public QObject {
     Q_OBJECT
 
@@ -148,6 +159,11 @@ public:
     int autoTimerUpdateInterval() const;
     void setAutoTimerUpdateInterval(int newAutoTimerUpdateInterval);
 
+    QList<MissionDataNameUtil::MissionDataName> missionDataNames() const;
+
+    MissionDataNameUtil::MissionDataName missionDataName() const;
+    void setMissionDataName(MissionDataNameUtil::MissionDataName newMissionDataName);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -190,6 +206,8 @@ signals:
 
     void closeGameImmediatelyHotkeyChanged();
 
+    void missionDataNameChanged();
+
 private:
     bool mMinimizeToTray = false;
     QString mStyleName = "windowsvista";
@@ -223,12 +241,22 @@ private:
 
     // 任务数据
     int mMissionDataUpdateInterval = 100;
+    QList<MissionDataNameUtil::MissionDataName> mMissionDataNames = {
+        MissionDataNameUtil::MissionDataName::FullName,
+        MissionDataNameUtil::MissionDataName::Emoji,
+        MissionDataNameUtil::MissionDataName::None
+    };
+    MissionDataNameUtil::MissionDataName mMissionDataName = MissionDataNameUtil::MissionDataName::FullName;
 
     // 计时器
     QString mTimerStartHotkey = "F7";
     QString mTimerPauseHotkey = "F8";
     QString mTimerStopHotkey = "F7";
-    QList<TimerStopStrategy> mTimerStopStrategies = { TimerStopStrategy::OnlyStop, TimerStopStrategy::StopAndZero, TimerStopStrategy::StopSecondZero };
+    QList<TimerStopStrategy> mTimerStopStrategies = {
+        TimerStopStrategy::OnlyStop,
+        TimerStopStrategy::StopAndZero,
+        TimerStopStrategy::StopSecondZero
+    };
     TimerStopStrategy mTimerStopStrategy = TimerStopStrategy::OnlyStop;
     int mTimerUpdateInterval = 50;
     int mAutoTimerUpdateInterval = 50;
@@ -281,4 +309,5 @@ private:
     Q_PROPERTY(bool discordShowRichPresence READ discordShowRichPresence WRITE setDiscordShowRichPresence NOTIFY discordShowRichPresenceChanged)
     Q_PROPERTY(QString closeGameImmediatelyHotkey READ closeGameImmediatelyHotkey WRITE setCloseGameImmediatelyHotkey NOTIFY closeGameImmediatelyHotkeyChanged)
     Q_PROPERTY(int autoTimerUpdateInterval READ autoTimerUpdateInterval WRITE setAutoTimerUpdateInterval NOTIFY autoTimerUpdateIntervalChanged)
+    Q_PROPERTY(MissionDataNameUtil::MissionDataName missionDataName READ missionDataName WRITE setMissionDataName NOTIFY missionDataNameChanged FINAL)
 };

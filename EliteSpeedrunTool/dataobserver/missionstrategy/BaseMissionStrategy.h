@@ -29,6 +29,12 @@ protected:
     void setLabelFont(QLabel* label, DisplayInfoSubFunctionItem* item);
     void setLabelTextStyle(QLabel* label, DisplayInfoSubFunctionItem* item);
 
+    QString getKillPattern();
+    QString getHeadshotPattern();
+    QString getVehicleDamagePattern();
+    QString getPlaneDamagePattern(); // Valkyrie/Avenger机损
+    QString getRashkovskyHurtPattern();
+
 private:
     void initGlobalDataConnects();
     void initGlobalDataConnects(QLabel* label, DisplayInfoSubFunctionItem* item);
@@ -41,9 +47,4 @@ protected:
 
     QFont missionNameFont = QFont();
     QFont font = QFont();
-
-    QString killPattern = tr("总击杀：%1");
-    QString headshotPattern = tr("总爆头：%1");
-    QString vehicleDamagePattern = tr("车损：%1");
-    QString rashkovskyDamagePattern = tr("拉什科夫斯基受伤：%1");
 };

@@ -27,8 +27,9 @@ QList<QLabel*> CasinoHeistAggressiveStrategy::getLabels()
 void CasinoHeistAggressiveStrategy::updateInfo()
 {
     auto data = headshotFetcher.fetchData();
-    labDisplayHeadshot.setText(headshotPattern.arg(QString::number(data)));
-    labHeadshot.setText(headshotPattern.arg(QString::number(data)));
+    auto text = getHeadshotPattern().arg(QString::number(data));
+    labDisplayHeadshot.setText(text);
+    labHeadshot.setText(text);
 }
 
 const QString CasinoHeistAggressiveStrategy::getDisplayName()

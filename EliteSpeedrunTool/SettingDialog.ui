@@ -1036,6 +1036,25 @@ C:\Program Files (x86)\nn\nn.exe</string>
             </widget>
            </item>
            <item>
+            <widget class="QGroupBox" name="groupBox_18">
+             <property name="title">
+              <string>数据名称</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_33">
+              <item>
+               <widget class="QComboBox" name="cbMissionDataName"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_40">
+                <property name="text">
+                 <string>在下次更新任务数据时生效</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
             <spacer name="spacer_3">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -1078,8 +1097,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>455</width>
-            <height>550</height>
+            <width>178</width>
+            <height>685</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_18">

@@ -18,6 +18,7 @@ public:
 
     const static int globalMissionHash = 4718592 + 126144; // 任务HASH
     const static int globalSummaryTime = 2685249 + 6465; // 之前所有阶段耗费的时间总和
+    const static int globalPrisonBreakSummaryTime = 2685249 + 6465; // 之前所有阶段耗费的时间总和
     // 变量的签名
     const static int localTime = 19728 + 987; // 任务每一段的时间
     const static int localPrisonBreakTime = 19728 + 990; // 越狱的逃离时间
@@ -38,6 +39,7 @@ public:
     const static int globalRashkovskyDamage = 2685249 + 3485 + 102; // 拉什科夫斯基受伤程度
 
     const static int localInitTimestamp = 19728 + 985; // 开始计时时的时间戳
+    const static int localInitPrisonBreakTimestamp = 19728 + 988; // 开始计时时的时间戳
     const static int localFlagInitTimer = 19728 + 985 + 1; // 是否开始计时，1开始，0暂停
     const static int localFlagInitPrisonBreakTimer = 19728 + 988 + 1; // 越狱逃离是否开始计时，1开始，0暂停
 
@@ -80,6 +82,9 @@ public:
     long long getLocalLongLong(int index);
     unsigned long long getLocalULongLong(int index);
     bool getLocalBool(int index);
+
+    // 恶意值
+    int getBadSport();
 
 private:
     QTimer* gtaProcessTimer = new QTimer(this);
