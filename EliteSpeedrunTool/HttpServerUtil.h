@@ -9,11 +9,11 @@ class HttpServerUtil : public QObject {
     Q_OBJECT
 
 signals:
-    void send(short headshotCount);
+    void send(QString missionData);
 
 public:
     struct DataPackage {
-        short headshotCount = 0;
+        QString missionData = "";
         bool timerIsRunning = false;
         bool timerReset = false;
     };
@@ -23,6 +23,11 @@ public:
         Zero = 0x01,
         Stopped = Paused | Zero,
         ZeroAndRunning = Running | Zero,
+    };
+    enum AutoTimerState {
+        AutoTimerRunning = 0x02,
+        AutoTimerPaused = 0x03,
+        AutoTimerZero = 0x01,
     };
 
     HttpServerUtil();
@@ -36,11 +41,15 @@ public:
     void pauseTimer(qint64 pausedTimestamp);
     void zeroTimer();
 
+    // 传入计时器的时间，而不是现实的时间戳
+    void startAutoTimer(qint64 initTimestamp);
+    void pauseAutoTimer(qint64 initTimestamp);
+
     void sendNewData();
 
     void sendNewData(QJsonDocument json);
 
-    void sendNewData(short headshotCount);
+    void sendNewData(QString missionData);
 
     void sendNewData(QWebSocket* webSocket);
 
@@ -53,17 +62,28 @@ protected:
 
     void socketDisconnected();
 
-    QJsonDocument getHeadshotJson(DataPackage* data);
+    QJsonDocument getMissionDataJson(DataPackage* data);
 
     QJsonDocument getTimerStateJson(
         TimerState state = HttpServerUtil::timerState,
         qint64 startTimestamp = HttpServerUtil::startTimestamp,
         qint64 pausedTimestamp = HttpServerUtil::pausedTimestamp);
 
+    QJsonDocument getAutoTimerStateJson(
+        AutoTimerState state = HttpServerUtil::autoTimerState,
+        qint64 startTimestamp = HttpServerUtil::startAutoTimestamp,
+        qint64 initAutoTimestamp = HttpServerUtil ::initAutoTimestamp,
+        qint64 pausedTimestamp = HttpServerUtil::pausedAutoTimestamp);
+
 public:
     static TimerState timerState;
     static qint64 startTimestamp;
     static qint64 pausedTimestamp;
+
+    static AutoTimerState autoTimerState;
+    static qint64 initAutoTimestamp;
+    static qint64 startAutoTimestamp;
+    static qint64 pausedAutoTimestamp;
 
 private:
     bool started = false;
@@ -93,21 +113,29 @@ public:
 
     void stop();
 
-    void sendNewData(short headshotCount);
+    void sendNewData(QString missionData);
+
     void startOrContinueTimer(bool isContinue, qint64 startTimestamp);
     void stopTimer(qint64 stoppedTime);
     void pauseTimer(qint64 pausedTimestamp);
     void zeroTimer();
+
+    void startAutoTimer(qint64 startTimestamp);
+    void pauseAutoTimer(qint64 pausedTimestamp);
+
     void stopHttp();
     void initHttpServerUtil();
 
 signals:
-    void sendNewDataSignal(short headshotCount, QPrivateSignal);
+    void sendNewDataSignal(QString missionData, QPrivateSignal);
 
     void startOrContinueTimerSignal(bool isContinue, qint64 startTimestamp, QPrivateSignal);
     void stopTimerSignal(qint64 stoppedTime, QPrivateSignal);
     void pauseTimerSignal(qint64 pausedTimestamp, QPrivateSignal);
     void zeroTimerSignal(QPrivateSignal);
+
+    void startAutoTimerSignal(qint64 startTimestamp, QPrivateSignal);
+    void pauseAutoTimerSignal(qint64 pausedTimestamp, QPrivateSignal);
 
     void stopHttpSignal(QPrivateSignal);
 

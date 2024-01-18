@@ -1,5 +1,6 @@
 #include "DataObserver.h"
 #include "GlobalData.h"
+#include "HttpServerUtil.h"
 
 Q_GLOBAL_STATIC(DataObserver, dataObserverInstance)
 
@@ -104,6 +105,15 @@ void DataObserver::onTimeout()
 {
     if (missionStrategy) {
         missionStrategy->updateInfo();
+
+        // 发送最新信息
+        auto labels = missionStrategy->getLabels();
+        static QList<QString> missionDatas;
+        missionDatas.clear();
+        for (auto lab : labels) {
+            missionDatas += lab->text();
+        }
+        HttpServerController::instance()->sendNewData(missionDatas.join("<br/>"));
     }
 }
 

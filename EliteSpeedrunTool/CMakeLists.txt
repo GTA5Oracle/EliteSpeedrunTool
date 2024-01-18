@@ -43,6 +43,8 @@ set(PROJECT_SOURCES
         dataobserver/missionstrategy/LostMcRipStrategy.h dataobserver/missionstrategy/LostMcRipStrategy.cpp
         dataobserver/missionstrategy/EmptyStrategy.h dataobserver/missionstrategy/EmptyStrategy.cpp
         dataobserver/missionstrategy/FleecaJobStrategy.h dataobserver/missionstrategy/FleecaJobStrategy.cpp
+        dataobserver/missionstrategy/PrisonBreakStationStrategy.h dataobserver/missionstrategy/PrisonBreakStationStrategy.cpp
+        dataobserver/missionstrategy/PrisonBreakWetWorkStrategy.h dataobserver/missionstrategy/PrisonBreakWetWorkStrategy.cpp
         dataobserver/missionstrategy/PrisonBreakStrategy.h dataobserver/missionstrategy/PrisonBreakStrategy.cpp
         dataobserver/missionstrategy/SeriesAFundingStrategy.h dataobserver/missionstrategy/SeriesAFundingStrategy.cpp
         dataobserver/missionstrategy/HumaneLabsRaidStrategy.h dataobserver/missionstrategy/HumaneLabsRaidStrategy.cpp

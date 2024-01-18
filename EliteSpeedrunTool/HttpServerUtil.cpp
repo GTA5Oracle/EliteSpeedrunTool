@@ -16,6 +16,10 @@ quint16 HttpServerUtil::currentWebsocketPort = 0;
 HttpServerUtil::TimerState HttpServerUtil::timerState = TimerState::Stopped;
 qint64 HttpServerUtil::startTimestamp = 0;
 qint64 HttpServerUtil::pausedTimestamp = 0;
+HttpServerUtil::AutoTimerState HttpServerUtil::autoTimerState = AutoTimerState::AutoTimerZero;
+qint64 HttpServerUtil::startAutoTimestamp = 0;
+qint64 HttpServerUtil::initAutoTimestamp = 0;
+qint64 HttpServerUtil::pausedAutoTimestamp = 0;
 
 HttpServerUtil::HttpServerUtil()
 {
@@ -32,7 +36,7 @@ void HttpServerUtil::startHttp()
     }
     started = true;
     httpServer = new QHttpServer(this);
-    webSocketServer = new QWebSocketServer("Act3 Speedrun Tool", QWebSocketServer::NonSecureMode, this);
+    webSocketServer = new QWebSocketServer("Elite Speedrun Tool", QWebSocketServer::NonSecureMode, this);
     httpServer->route("/favicon.ico", [](QHttpServerResponder&& responder) {
         auto favicon = new QFile("./html/favicon.ico");
         responder.write(favicon,
@@ -106,10 +110,29 @@ void HttpServerUtil::zeroTimer()
     sendNewData(getTimerStateJson());
 }
 
+void HttpServerUtil::startAutoTimer(qint64 initTimestamp)
+{
+    auto ts = QDateTime::currentDateTime().toMSecsSinceEpoch();
+    HttpServerUtil::startAutoTimestamp = initTimestamp ? ts - initTimestamp : ts;
+    autoTimerState = AutoTimerState::AutoTimerRunning;
+    HttpServerUtil::initAutoTimestamp = initTimestamp;
+
+    sendNewData(getAutoTimerStateJson());
+}
+
+void HttpServerUtil::pauseAutoTimer(qint64 initTimestamp)
+{
+    HttpServerUtil::initAutoTimestamp = initTimestamp;
+    auto ts = HttpServerUtil::startAutoTimestamp;
+    HttpServerUtil::pausedAutoTimestamp = initTimestamp ? ts + initTimestamp : ts;
+    autoTimerState = initTimestamp ? AutoTimerState::AutoTimerPaused : AutoTimerState::AutoTimerZero;
+    sendNewData(getAutoTimerStateJson());
+}
+
 void HttpServerUtil::sendNewData()
 {
     for (auto c : clients) {
-        c->sendTextMessage(getHeadshotJson(&data).toJson(QJsonDocument::Compact));
+        c->sendTextMessage(getMissionDataJson(&data).toJson(QJsonDocument::Compact));
     }
 }
 
@@ -121,16 +144,19 @@ void HttpServerUtil::sendNewData(QJsonDocument json)
     }
 }
 
-void HttpServerUtil::sendNewData(short headshotCount)
+void HttpServerUtil::sendNewData(QString missionData)
 {
-    data.headshotCount = headshotCount;
-    sendNewData();
+    if (missionData != data.missionData) {
+        data.missionData = missionData;
+        sendNewData();
+    }
 }
 
 void HttpServerUtil::sendNewData(QWebSocket* webSocket)
 {
-    webSocket->sendTextMessage(getHeadshotJson(&data).toJson(QJsonDocument::Compact));
+    webSocket->sendTextMessage(getMissionDataJson(&data).toJson(QJsonDocument::Compact));
     webSocket->sendTextMessage(getTimerStateJson().toJson(QJsonDocument::Compact));
+    webSocket->sendTextMessage(getAutoTimerStateJson().toJson(QJsonDocument::Compact));
 }
 
 QString HttpServerUtil::getHttpServerDomain()
@@ -176,10 +202,10 @@ void HttpServerUtil::socketDisconnected()
     }
 }
 
-QJsonDocument HttpServerUtil::getHeadshotJson(DataPackage* data)
+QJsonDocument HttpServerUtil::getMissionDataJson(DataPackage* data)
 {
     QJsonObject object {
-        { "headshotCount", data->headshotCount },
+        { "missionData", data->missionData },
     };
     return QJsonDocument(object);
 }
@@ -194,6 +220,22 @@ QJsonDocument HttpServerUtil::getTimerStateJson(
         { "starttedTimestamp", startTimestamp },
         { "pausedTimestamp", pausedTimestamp },
         { "serverTimestamp", QDateTime::currentDateTime().toMSecsSinceEpoch() },
+    };
+    return QJsonDocument(object);
+}
+
+QJsonDocument HttpServerUtil::getAutoTimerStateJson(
+    AutoTimerState state,
+    qint64 startTimestamp,
+    qint64 initAutoTimestamp,
+    qint64 pausedTimestamp)
+{
+    QJsonObject object {
+        { "autoTimerState", state },
+        { "starttedAutoTimestamp", startTimestamp },
+        { "initAutoTimestamp", initAutoTimestamp },
+        { "pausedAutoTimestamp", pausedTimestamp },
+        { "serverAutoTimestamp", QDateTime::currentDateTime().toMSecsSinceEpoch() },
     };
     return QJsonDocument(object);
 }
@@ -222,11 +264,13 @@ void HttpServerController::start()
     workerThread = new QThread;
     worker->moveToThread(workerThread);
     connect(workerThread, &QThread::finished, worker, &QObject::deleteLater);
-    connect(this, &HttpServerController::sendNewDataSignal, worker, QOverload<short>::of(&HttpServerUtil::sendNewData));
+    connect(this, &HttpServerController::sendNewDataSignal, worker, QOverload<QString>::of(&HttpServerUtil::sendNewData));
     connect(this, &HttpServerController::startOrContinueTimerSignal, worker, QOverload<bool, qint64>::of(&HttpServerUtil::startTimer));
     connect(this, &HttpServerController::stopTimerSignal, worker, &HttpServerUtil::stopTimer);
     connect(this, &HttpServerController::pauseTimerSignal, worker, &HttpServerUtil::pauseTimer);
     connect(this, &HttpServerController::zeroTimerSignal, worker, &HttpServerUtil::zeroTimer);
+    connect(this, &HttpServerController::startAutoTimerSignal, worker, QOverload<qint64>::of(&HttpServerUtil::startAutoTimer));
+    connect(this, &HttpServerController::pauseAutoTimerSignal, worker, &HttpServerUtil::pauseAutoTimer);
     connect(this, &HttpServerController::stopHttpSignal, worker, &HttpServerUtil::stopHttp);
     connect(this, &HttpServerController::initHttpServerUtilSignal, worker, &HttpServerUtil::startHttp);
     workerThread->start();
@@ -245,9 +289,9 @@ void HttpServerController::stop()
     started = false;
 }
 
-void HttpServerController::sendNewData(short headshotCount)
+void HttpServerController::sendNewData(QString missionData)
 {
-    emit sendNewDataSignal(headshotCount, QPrivateSignal());
+    emit sendNewDataSignal(missionData, QPrivateSignal());
 }
 
 void HttpServerController::startOrContinueTimer(bool isContinue, qint64 startTimestamp)
@@ -283,6 +327,26 @@ void HttpServerController::zeroTimer()
         HttpServerUtil::timerState = HttpServerUtil::TimerState::Zero;
     }
     emit zeroTimerSignal(QPrivateSignal());
+}
+
+void HttpServerController::startAutoTimer(qint64 initTimestamp)
+{
+    if (!started) {
+        HttpServerUtil::autoTimerState = HttpServerUtil::AutoTimerState::AutoTimerRunning;
+        HttpServerUtil::initAutoTimestamp = initTimestamp;
+    }
+    emit startAutoTimerSignal(initTimestamp, QPrivateSignal());
+}
+
+void HttpServerController::pauseAutoTimer(qint64 initTimestamp)
+{
+    if (!started) {
+        HttpServerUtil::autoTimerState = initTimestamp
+            ? HttpServerUtil::AutoTimerState::AutoTimerPaused
+            : HttpServerUtil::AutoTimerState::AutoTimerZero;
+        HttpServerUtil::initAutoTimestamp = initTimestamp;
+    }
+    emit pauseAutoTimerSignal(initTimestamp, QPrivateSignal());
 }
 
 void HttpServerController::stopHttp()

@@ -78,11 +78,11 @@ void DiscordUtil::activateDiscord()
     //    deactivateDiscordRPC();
     setCallbackEnabled(true);
 
-    activity.SetName("ACT3 Speedrun");
+    activity.SetName("Elite Speedrun");
     activity.SetState(speedrunTime.toUtf8().constData());
     activity.GetTimestamps().SetStart(QDateTime::currentSecsSinceEpoch());
     activity.GetAssets().SetLargeImage("icon");
-    activity.GetAssets().SetLargeText("ACT3");
+    activity.GetAssets().SetLargeText("Elite");
     activity.GetAssets().SetSmallImage("gtav");
     activity.GetAssets().SetSmallText("GTAV");
     activity.SetType(discord::ActivityType::Playing);

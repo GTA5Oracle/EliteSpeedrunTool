@@ -5,6 +5,7 @@
 #include "dataobserver/datafetcher/KillHostFetcher.h"
 
 class BakerBadBeatStrategy : public BaseMissionStrategy {
+    Q_OBJECT
 public:
     explicit BakerBadBeatStrategy(QObject* parent = nullptr);
 

@@ -15,7 +15,9 @@
 #include "dataobserver/missionstrategy/HumaneLabsRaidStrategy.h"
 #include "dataobserver/missionstrategy/LostMcRipStrategy.h"
 #include "dataobserver/missionstrategy/PacificStandardStrategy.h"
+#include "dataobserver/missionstrategy/PrisonBreakStationStrategy.h"
 #include "dataobserver/missionstrategy/PrisonBreakStrategy.h"
+#include "dataobserver/missionstrategy/PrisonBreakWetWorkStrategy.h"
 #include "dataobserver/missionstrategy/SeriesAFundingStrategy.h"
 #include <QObject>
 #include <QTimer>
@@ -71,6 +73,8 @@ public:
         qMakePair(MemoryUtil::hashDoomsdayAct3P1, new DoomsdayAct3Strategy(this)),
         qMakePair(MemoryUtil::hashDoomsdayAct3P2, new DoomsdayAct3Strategy(this)),
         qMakePair(MemoryUtil::hashFleecaJob, new FleecaJobStrategy(this)),
+        qMakePair(MemoryUtil::hashPrisonBreakWetWork, new PrisonBreakStationStrategy(this)),
+        qMakePair(MemoryUtil::hashPrisonBreakWetWork, new PrisonBreakWetWorkStrategy(this)),
         qMakePair(MemoryUtil::hashPrisonBreak, new PrisonBreakStrategy(this)),
         qMakePair(MemoryUtil::hashHumaneLabsRaid, new HumaneLabsRaidStrategy(this)),
         qMakePair(MemoryUtil::hashSeriesAFunding, new SeriesAFundingStrategy(this)),

@@ -404,10 +404,6 @@ void MainWindow::initMenu()
         QDesktopServices::openUrl(QUrl("https://discord.gg/pEWEjeJTa3"));
     });
 
-    connect(ui.actionAcknowledgment, &QAction::triggered, this, [this]() {
-        QMessageBox::information(this, tr("致谢"), acknowledgment);
-    });
-
     connect(ui.actionAboutQt, &QAction::triggered, this, []() { qApp->aboutQt(); });
 
     connect(ui.actionAbout, &QAction::triggered, this, [this]() {
@@ -504,6 +500,13 @@ void MainWindow::initAutoTimer()
         if (ui.btnStartAutoTimer->isChecked()) {
             ui.btnStartAutoTimer->setChecked(false);
         }
+    });
+
+    connect(autoTimerUtil, &AutoTimerUtil::timerStarted, this, [=](unsigned long long data) {
+        HttpServerController::instance()->startAutoTimer(static_cast<qint64>(data));
+    });
+    connect(autoTimerUtil, &AutoTimerUtil::timerPaused, this, [=](unsigned long long data) {
+        HttpServerController::instance()->pauseAutoTimer(static_cast<qint64>(data));
     });
 }
 

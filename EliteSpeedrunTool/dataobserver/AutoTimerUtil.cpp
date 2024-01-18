@@ -64,6 +64,7 @@ void AutoTimerUtil::timeOut()
         currentStateStartTime = memoryUtil->getLocalLongLong(MemoryUtil::localInitTimestamp); // 开始时间ptr
         currentStateTime = memoryUtil->getLocalInt(MemoryUtil::localTime); // 时间ptr
     }
+    inMissionCanControl = memoryUtil->getLocalInt(MemoryUtil::localInMissionCanControl); // 是不是在任务中并且能够操控
     // 智障门有一瞬间hash变成0，解决方法是延时判断
     static long long hashReallyValueTime = 0;
     if (missionHash == 0 && lastMissionHash != 0) {
@@ -125,12 +126,15 @@ void AutoTimerUtil::timeOut()
         deltaTime += summaryTime;
         time = deltaTime;
         sendUpdateTimeSignal(time);
+        if (lastDoneState != state) {
+            emit timerStarted(getRealTime(time));
+        }
         lastDoneState = state;
     } else if (lastDoneState != state && lastDoneState != MissionState::None) {
         // 下面的动作每次访问时相同的只能做一次
         if (state == MissionState::Pause) {
             time = summaryTime + currentStateTime;
-            sendUpdateTimeSignal(time);
+            emit timerPaused(sendUpdateTimeSignal(time));
         }
         lastDoneState = state;
     }
@@ -154,11 +158,13 @@ void AutoTimerUtil::stopAndReset(bool resetTime)
     if (timer->isActive()) {
         timer->stop();
         emit stopped();
+        emit timerPaused(getRealTime(time));
     }
     if (resetTime) {
         time = 0;
         // 不要用sendUpdateTimeSignal，因为现在是重置状态，time都是0，不会+10s
         emit updateTime(0);
+        emit timerPaused(0);
     }
 
     state = lastDoneState = MissionState::None;
@@ -179,8 +185,8 @@ void AutoTimerUtil::stopAndReset(bool resetTime)
 
 void AutoTimerUtil::onTimerCallback()
 {
-    // 监控flag_time   0 >>1   如果变1  开始计时
-    if (flagTimeChangedTo1) {
+    // 在任务中，并且 监控flag_time   0 >>1   如果变1  开始计时
+    if (inMissionCanControl && flagTimeChangedTo1) {
         startDisplayedTimer = true;
         state = MissionState::Running;
         flagTimeChangedTo1 = false;
@@ -202,12 +208,19 @@ void AutoTimerUtil::onTimerCallback()
     }
 }
 
-void AutoTimerUtil::sendUpdateTimeSignal(unsigned long long data)
+unsigned long long AutoTimerUtil::getRealTime(unsigned long long data)
 {
     if (missionHash != MemoryUtil::hashPrisonBreak) {
         // 除了越狱之外的任务默认+10s
-        emit updateTime(data + 10000);
+        return data + 10000;
     } else {
-        emit updateTime(data);
+        return data;
     }
+}
+
+unsigned long long AutoTimerUtil::sendUpdateTimeSignal(unsigned long long data)
+{
+    auto realTime = getRealTime(data);
+    emit updateTime(realTime);
+    return realTime;
 }

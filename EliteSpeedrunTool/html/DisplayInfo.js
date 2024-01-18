@@ -1,7 +1,13 @@
+var websocket = null;
+
 var timerStartTime = null;
 var timer = null;
-var websocket = null;
 var serverBrowserTimeDelta = 0;
+
+var autoTimerStartTime = null;
+var autoTimer = null;
+var serverBrowserAutoTimeDelta = 0;
+
 // 判断浏览器是否支持 WebSocket
 if ('WebSocket' in window) {
 	websocket = new ReconnectingWebSocket("ws://" + document.domain + ":9976/", null, {maxReconnectAttempts: 10});
@@ -16,8 +22,8 @@ if ('WebSocket' in window) {
 	}
 	websocket.onmessage=function(msg){
 		var j = JSON.parse(msg.data);
-		if (j.hasOwnProperty('headshotCount')) {
-			document.getElementById("headshotCount").innerHTML = j.headshotCount;
+		if (j.hasOwnProperty('missionData')) {
+			document.getElementById("missionData").innerHTML = j.missionData;
 		}
 		if (j.hasOwnProperty('timerState')) {
 			if (j.timerState == 0x03) { // 归零然后开始
@@ -49,6 +55,26 @@ if ('WebSocket' in window) {
 				document.getElementById("timerMs").innerHTML = "00";
 			}
 		}
+		if (j.hasOwnProperty('autoTimerState')) {
+			if (j.autoTimerState == 0x02) {  // 继续计时
+				updateAutoStarttedAndServerTimestamp(j);
+				clearAutoTimerAndSetNull();		// 清空自动计时器 autoTimer
+				autoTimer = setInterval(function() { autoTimerFunc(autoTimerStartTime) }, 50);
+			} else if (j.autoTimerState == 0x03) {  // 暂停计时
+				updateAutoStarttedAndServerTimestamp(j);
+				clearAutoTimerAndSetNull();		// 清空自动计时器 autoTimer
+				if (j.hasOwnProperty('pausedAutoTimestamp')) {
+					updateAutoStarttedAndServerTimestamp(j);
+					autoTimerFunc(autoTimerStartTime, j.pausedAutoTimestamp, 0);		// 更新暂停时间
+				}
+			} else if (j.autoTimerState == 0x01) {  // 归零
+				clearAutoTimerAndSetNull();		// 清空自动计时器 autoTimer
+				autoTimerStartTime = null;
+				document.getElementById("autoTimerMinute").innerHTML = "00";
+				document.getElementById("autoTimerSecond").innerHTML = "00";
+				document.getElementById("autoTimerMs").innerHTML = "00";
+			}
+		}
 	}
 	// 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
 	window.onbeforeunload = function () {
@@ -71,11 +97,29 @@ function timerFunc(timerStartTime, now = new Date(), sbTimeDelta = serverBrowser
 	document.getElementById("timerMs").innerHTML = ms.toString().padStart(2, '0');
 }
 
+function autoTimerFunc(autoTimerStartTime, now = new Date(), sbAutoTimeDelta = serverBrowserAutoTimeDelta) {
+	var deltaTime = now - autoTimerStartTime + sbAutoTimeDelta;
+	var m = parseInt(deltaTime / 1000 / 60);
+	var s = parseInt(deltaTime / 1000) % 60;
+	var ms = parseInt((deltaTime % 1000) / 10);
+	document.getElementById("autoTimerMinute").innerHTML = m.toString().padStart(2, '0');
+	document.getElementById("autoTimerSecond").innerHTML = s.toString().padStart(2, '0');
+	document.getElementById("autoTimerMs").innerHTML = ms.toString().padStart(2, '0');
+}
+
 // 清空计时器 timer
 function clearTimerAndSetNull() {
 	if (timer != null) {
 		clearInterval(timer);
 		timer = null;
+	}
+}
+
+// 清空自动计时器 autoTimer
+function clearAutoTimerAndSetNull() {
+	if (autoTimer != null) {
+		clearInterval(autoTimer);
+		autoTimer = null;
 	}
 }
 
@@ -87,5 +131,16 @@ function updateStarttedAndServerTimestamp(json) {
 			serverBrowserTimeDelta = json.serverTimestamp - new Date();
 		}
 		timerStartTime = new Date(json.starttedTimestamp);        // 与服务端矫正时间
+	}
+}
+
+// 更新自动计时开始计时时间和服务器时间（与服务器的时间差）
+function updateAutoStarttedAndServerTimestamp(json) {
+	if (json.hasOwnProperty('starttedAutoTimestamp')) {
+		if (json.hasOwnProperty('serverAutoTimestamp')) {
+			// 服务器与浏览器的时差
+			serverBrowserAutoTimeDelta = json.serverAutoTimestamp - new Date();
+		}
+		autoTimerStartTime = new Date(json.starttedAutoTimestamp);        // 与服务端矫正时间
 	}
 }

@@ -20,6 +20,7 @@ public:
     const static int globalSummaryTime = 2685249 + 6465; // 之前所有阶段耗费的时间总和
     const static int globalPrisonBreakSummaryTime = 2685249 + 6465; // 之前所有阶段耗费的时间总和
     // 变量的签名
+    const static int localInMissionCanControl = 31676; // 是不是在任务中并且能够操控
     const static int localTime = 19728 + 987; // 任务每一段的时间
     const static int localPrisonBreakTime = 19728 + 990; // 越狱的逃离时间
     const static int localHeadshot = 19728 + 1740 + 1; // 总的爆头数
@@ -49,6 +50,8 @@ public:
     inline const static unsigned long long hashDoomsdayAct3P1 = 3118746651; // 末日3分红前一段
     inline const static unsigned long long hashDoomsdayAct3P2 = 4263845131; // 末日3分红后一段
     inline const static unsigned long long hashFleecaJob = 3222096535; // 全福分红
+    inline const static unsigned long long hashPrisonBreakStation = 137052480; // 越狱：警察局
+    inline const static unsigned long long hashPrisonBreakWetWork = 137052480; // 越狱：行刺
     inline const static unsigned long long hashPrisonBreak = 979654579; // 越狱分红
     inline const static unsigned long long hashHumaneLabsRaid = 3197980642; // 人道分红
     inline const static unsigned long long hashSeriesAFunding = 164435858; // 首轮分红

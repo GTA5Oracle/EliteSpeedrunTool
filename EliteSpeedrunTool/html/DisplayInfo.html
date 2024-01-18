@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Act3 Speedrun Tool</title>
+	<title>Elite Speedrun Tool</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<script type="text/javascript" src="reconnecting-websocket.min.js"></script>
 	<script type="text/javascript" src="displayInfo.js"></script>
@@ -10,8 +10,12 @@
 </head>
 <body>
 <p>
-	<div>
-		<span id="headshotCount">0</span>
+	<div id="autoTimer">
+		<span id="autoTimerMinute">00</span>
+		<span id="autoTimerSpliter1">:</span>
+		<span id="autoTimerSecond">00</span>
+		<span id="autoTimerSpliter2">.</span>
+		<span id="autoTimerMs">00</span>
 	</div>
 	<div id="timer">
 		<span id="timerMinute">00</span>
@@ -19,6 +23,9 @@
 		<span id="timerSecond">00</span>
 		<span id="timerSpliter2">.</span>
 		<span id="timerMs">00</span>
+	</div>
+	<div>
+		<span id="missionData"></span>
 	</div>
 </p>
 </body>

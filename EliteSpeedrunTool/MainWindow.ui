@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>440</width>
-    <height>298</height>
+    <height>308</height>
    </rect>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -15,7 +15,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <property name="documentMode">
        <bool>true</bool>
@@ -87,8 +87,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>408</width>
-             <height>218</height>
+             <width>422</width>
+             <height>221</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -294,7 +294,7 @@
         <item>
          <widget class="QLabel" name="labAutoTimer">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt;00:00&lt;/span&gt;&lt;span style=&quot; font-size:20pt;&quot;&gt;.&lt;/span&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt;00:00&lt;/span&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -330,6 +330,9 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -386,7 +389,7 @@
              <x>0</x>
              <y>0</y>
              <width>404</width>
-             <height>164</height>
+             <height>174</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -469,6 +472,9 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -572,7 +578,6 @@
     <addaction name="actionGitHub"/>
     <addaction name="actionHelpTranslate"/>
     <addaction name="separator"/>
-    <addaction name="actionAcknowledgment"/>
     <addaction name="actionAboutQt"/>
     <addaction name="actionAbout"/>
    </widget>
@@ -750,14 +755,6 @@
    </property>
    <property name="text">
     <string>工具说明...</string>
-   </property>
-  </action>
-  <action name="actionAcknowledgment">
-   <property name="text">
-    <string>致谢...</string>
-   </property>
-   <property name="visible">
-    <bool>false</bool>
    </property>
   </action>
   <action name="actionAliPay">

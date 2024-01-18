@@ -1,8 +1,8 @@
-#headshotCount, #timerMinute, #timerSecond, #timerSpliter1 {
+#missionData, #timerMinute, #timerSecond, #timerSpliter1, #autoTimerMinute, #autoTimerSecond, #autoTimerSpliter1 {
 	font-size:4rem;
 }
 
-#timerMs, #timerSpliter2 {
+#timerMs, #timerSpliter2, #autoTimerMs, #autoTimerSpliter2 {
 	font-size:3rem;
 }
 
@@ -13,4 +13,10 @@ div {
 
 p {
 	margin:1rem;
+}
+
+#missionData {
+	display: inline-block;
+	text-align: center;
+	width: 100%;
 }

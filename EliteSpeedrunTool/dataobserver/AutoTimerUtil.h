@@ -1,10 +1,9 @@
 #pragma once
 
-#include "AutoCapture.h"
-#include "MemoryUtil.h"
 #include <QDateTime>
 #include <QTimeZone>
 #include <QTimer>
+#include <windows.h>
 #define autoTimerUtil (AutoTimerUtil::instance())
 
 enum MissionState {
@@ -29,11 +28,14 @@ public:
 
 private:
     void onTimerCallback();
-    void sendUpdateTimeSignal(unsigned long long data);
+    unsigned long long getRealTime(unsigned long long data);
+    unsigned long long sendUpdateTimeSignal(unsigned long long data);
 
 signals:
     void stopped();
     void updateTime(unsigned long long data);
+    void timerStarted(unsigned long long data);
+    void timerPaused(unsigned long long data);
 
 private:
     bool timerRunning = false;
@@ -51,6 +53,7 @@ private:
     unsigned int currentStateTime = 0;
     unsigned long long currentStateStartTime = 0;
     unsigned int missionHash = 0;
+    unsigned int inMissionCanControl = 0;
 
     bool startDisplayedTimer = false;
     DWORD64 deltaLocalServerTime = 0;
