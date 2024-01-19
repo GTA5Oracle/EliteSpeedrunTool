@@ -26,9 +26,32 @@
     <p>
         A GTAOL Mission <b>Elite Challenge</b> Tool. This tool only reads the memory and does not write the memory.
     </p>
+    <p>
+        <b><a href="doc/README/README-zh-rCN.md">中文</a></b>
+    </p>
 </div>
 
 
+
+## 🎉 Features
+
+1. Supports real-time monitoring of **mission data** (**vehicle damage, kills**, etc.)
+2. Supports **automatic/manual timing**
+3. Supports quick **disconnection** using **firewall** rules
+4. Supports **querying** the **badsport** value
+5. Supports quick **terminate the game**
+6. Supports **displaying data on a browser** (display on **smartphones**, **tablets**, etc.)
+7. ......
+
+## 🤩 Screenshots
+
+![ic_main_window_firewall](image/en/ic_main_window_firewall.png) ![ic_main_window_timer](image/en/ic_main_window_timer.png)
+![ic_main_window_auto_timer](image/en/ic_main_window_auto_timer.png) ![ic_main_window_mission_data](image/en/ic_main_window_mission_data.png)
+![ic_main_window_badsport](image/en/ic_main_window_badsport.png) ![ic_main_window_terminate_game](image/en/ic_main_window_terminate_game.png)
+![ic_setting_dialog_display_info_content](image/en/ic_setting_dialog_display_info_content.png)
+![ic_setting_dialog_firewall](image/en/ic_setting_dialog_firewall.png)
+![ic_setting_dialog_mission_data](image/en/ic_setting_dialog_mission_data.png)
+![ic_setting_dialog_timer](image/en/ic_setting_dialog_timer.png)
 
 ## ✨ Other works
 

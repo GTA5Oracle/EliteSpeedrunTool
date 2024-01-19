@@ -57,9 +57,20 @@ public:
     inline const static unsigned long long hashSeriesAFunding = 164435858; // 首轮分红
     inline const static unsigned long long hashPacificStandardP1 = 4062993727; // 太平洋分红前一段
     inline const static unsigned long long hashPacificStandardP2 = 1309288309; // 太平洋分红后一段
-    inline const static unsigned long long hashCasinoHeistAggressive = 14334224; // 赌场：气势汹汹
-    inline const static unsigned long long hashCasinoHeistSilentSneaky = 2971240475; // 赌场：隐迹潜踪
-    inline const static unsigned long long hashCasinoHeistTheBigCon = 3189252359; // 赌场：兵不厌诈
+    inline const static unsigned long long hashCasinoHeistAggressive1 = 14334224; // 赌场：气势汹汹
+    inline const static unsigned long long hashCasinoHeistAggressive2 = 1142061386; // 赌场：气势汹汹
+    inline const static unsigned long long hashCasinoHeistAggressive3 = 2648873158; // 赌场：气势汹汹
+    inline const static unsigned long long hashCasinoHeistAggressive4 = 3081071674; // 赌场：气势汹汹
+    inline const static unsigned long long hashCasinoHeistAggressive5 = 3554048209; // 赌场：气势汹汹
+    inline const static unsigned long long hashCasinoHeistSilentSneaky1 = 2971240475; // 赌场：隐迹潜踪
+    inline const static unsigned long long hashCasinoHeistSilentSneaky2 = 784080617; // 赌场：隐迹潜踪
+    inline const static unsigned long long hashCasinoHeistSilentSneaky3 = 2305332202; // 赌场：隐迹潜踪
+    inline const static unsigned long long hashCasinoHeistSilentSneaky4 = 2429084324; // 赌场：隐迹潜踪
+    inline const static unsigned long long hashCasinoHeistTheBigCon1 = 3189252359; // 赌场：兵不厌诈
+    inline const static unsigned long long hashCasinoHeistTheBigCon2 = 2453212730; // 赌场：兵不厌诈
+    inline const static unsigned long long hashCasinoHeistTheBigCon3 = 3077120672; // 赌场：兵不厌诈
+    inline const static unsigned long long hashCasinoHeistTheBigCon4 = 3528605896; // 赌场：兵不厌诈
+    inline const static unsigned long long hashCasinoHeistEndStage = 2981742808; // 赌场。三个方式的最后阶段
     inline const static unsigned long long hashLostMcRip = 2389264995; // 安息吧！失落摩托帮
     inline const static unsigned long long hashBakerBadBeat = 2805392149; // 贝克女士：出奇制胜
 

@@ -5,6 +5,7 @@
 #include "dataobserver/missionstrategy/BakerBadBeatStrategy.h"
 #include "dataobserver/missionstrategy/BaseMissionStrategy.h"
 #include "dataobserver/missionstrategy/CasinoHeistAggressiveStrategy.h"
+#include "dataobserver/missionstrategy/CasinoHeistEndStageStrategy.h"
 #include "dataobserver/missionstrategy/CasinoHeistSilentSneakyStrategy.h"
 #include "dataobserver/missionstrategy/CasinoHeistTheBigConStrategy.h"
 #include "dataobserver/missionstrategy/DoomsdayAct1Strategy.h"
@@ -80,9 +81,20 @@ public:
         qMakePair(MemoryUtil::hashSeriesAFunding, new SeriesAFundingStrategy(this)),
         qMakePair(MemoryUtil::hashPacificStandardP1, new PacificStandardStrategy(this)),
         qMakePair(MemoryUtil::hashPacificStandardP2, new PacificStandardStrategy(this)),
-        qMakePair(MemoryUtil::hashCasinoHeistAggressive, new CasinoHeistAggressiveStrategy(this)),
-        qMakePair(MemoryUtil::hashCasinoHeistSilentSneaky, new CasinoHeistSilentSneakyStrategy(this)),
-        qMakePair(MemoryUtil::hashCasinoHeistTheBigCon, new CasinoHeistTheBigConStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistAggressive1, new CasinoHeistAggressiveStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistAggressive2, new CasinoHeistAggressiveStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistAggressive3, new CasinoHeistAggressiveStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistAggressive4, new CasinoHeistAggressiveStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistAggressive5, new CasinoHeistAggressiveStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistSilentSneaky1, new CasinoHeistSilentSneakyStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistSilentSneaky2, new CasinoHeistSilentSneakyStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistSilentSneaky3, new CasinoHeistSilentSneakyStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistSilentSneaky4, new CasinoHeistSilentSneakyStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistTheBigCon1, new CasinoHeistTheBigConStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistTheBigCon2, new CasinoHeistTheBigConStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistTheBigCon3, new CasinoHeistTheBigConStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistTheBigCon4, new CasinoHeistTheBigConStrategy(this)),
+        qMakePair(MemoryUtil::hashCasinoHeistEndStage, new CasinoHeistEndStageStrategy(this)),
         qMakePair(MemoryUtil::hashLostMcRip, new LostMcRipStrategy(this)),
         qMakePair(MemoryUtil::hashBakerBadBeat, new BakerBadBeatStrategy(this)),
     };

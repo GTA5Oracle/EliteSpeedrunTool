@@ -5,6 +5,7 @@
 #include "GlobalData.h"
 #include "HttpServerUtil.h"
 #include "LogUtil.h"
+#include "LottieUtil.h"
 #include "MemoryUtil.h"
 #include "SettingDialog.h"
 #include "UpdateDialog.h"
@@ -550,6 +551,11 @@ void MainWindow::initMissionData()
         for (int i = labels.count() - 1; i >= 0; --i) {
             layout->insertWidget(0, labels[i]);
         }
+        if (!ui.scrollAreaMissionDataContents->children().isEmpty()) {
+            ui.loMissionData->pause();
+            ui.loMissionDataContainer->setVisible(false);
+            ui.scrollAreaMissionData->setVisible(true);
+        }
     });
     connect(dataObserver, &DataObserver::onLabelsRemoved, this, [this](QList<QLabel*> labels) {
         auto layout = ui.scrollAreaMissionDataContents->layout();
@@ -557,7 +563,18 @@ void MainWindow::initMissionData()
             layout->removeWidget(label);
             label->setParent(nullptr);
         }
+        if (ui.scrollAreaMissionDataContents->children().isEmpty()) {
+            ui.loMissionData->resume();
+            ui.loMissionDataContainer->setVisible(true);
+            ui.scrollAreaMissionData->setVisible(false);
+        }
     });
+    ui.scrollAreaMissionData->setVisible(false);
+    ui.loMissionDataContainer->layout()->setAlignment(Qt::AlignCenter);
+    auto randomLottie = lottieUtil->randomLottie();
+    if (!randomLottie.isEmpty()) {
+        ui.loMissionData->setSource(QUrl(randomLottie));
+    }
 }
 
 void MainWindow::initBadSport()

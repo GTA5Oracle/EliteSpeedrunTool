@@ -33,6 +33,7 @@ set(PROJECT_SOURCES
         DisplayInfoSubFunction.h DisplayInfoSubFunction.cpp
         DiscordUtil.h DiscordUtil.cpp
         TimeUtil.h TimeUtil.cpp
+        LottieUtil.h LottieUtil.cpp
         dataobserver/AutoTimerUtil.h dataobserver/AutoTimerUtil.cpp
         dataobserver/DataObserver.h dataobserver/DataObserver.cpp
         #=================
@@ -52,6 +53,7 @@ set(PROJECT_SOURCES
         dataobserver/missionstrategy/CasinoHeistTheBigConStrategy.h dataobserver/missionstrategy/CasinoHeistTheBigConStrategy.cpp
         dataobserver/missionstrategy/CasinoHeistSilentSneakyStrategy.h dataobserver/missionstrategy/CasinoHeistSilentSneakyStrategy.cpp
         dataobserver/missionstrategy/CasinoHeistAggressiveStrategy.h dataobserver/missionstrategy/CasinoHeistAggressiveStrategy.cpp
+        dataobserver/missionstrategy/CasinoHeistEndStageStrategy.h dataobserver/missionstrategy/CasinoHeistEndStageStrategy.cpp
         dataobserver/missionstrategy/BakerBadBeatStrategy.h dataobserver/missionstrategy/BakerBadBeatStrategy.cpp
         #=================
         dataobserver/datafetcher/BaseDataFetcher.h
@@ -132,3 +134,7 @@ endif()
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../DiscordGameSDK ${CMAKE_CURRENT_BINARY_DIR}/DiscordGameSDK)
 include_directories(../DiscordGameSDK)
 target_link_libraries(EliteSpeedrunTool PRIVATE DiscordGameSDK)
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../QtLottie ${CMAKE_CURRENT_BINARY_DIR}/QtLottie)
+include_directories(../QtLottie)
+target_link_libraries(EliteSpeedrunTool PRIVATE QtLottie)
