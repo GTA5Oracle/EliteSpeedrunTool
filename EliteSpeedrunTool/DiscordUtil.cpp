@@ -79,7 +79,7 @@ void DiscordUtil::activateDiscord()
     setCallbackEnabled(true);
 
     activity.SetName("Elite Speedrun");
-    activity.SetState(speedrunTime.toUtf8().constData());
+    activity.SetState(currentMission.toUtf8().constData());
     activity.GetTimestamps().SetStart(QDateTime::currentSecsSinceEpoch());
     activity.GetAssets().SetLargeImage("icon");
     activity.GetAssets().SetLargeText("Elite");
@@ -116,7 +116,7 @@ void DiscordUtil::updateDiscordRpc()
     if (!state.core) {
         return;
     }
-    activity.SetState((speedrunTime + " - " + headshotCount).toUtf8().constData());
+    activity.SetState(currentMission.toUtf8().constData());
 
     state.core->ActivityManager().UpdateActivity(activity, [this](discord::Result result) {
         if (result != discord::Result::Ok) {
@@ -125,14 +125,7 @@ void DiscordUtil::updateDiscordRpc()
     });
 }
 
-void DiscordUtil::setSpeedrunTime(qint64 m, qint64 s)
+void DiscordUtil::setCurrentMission(QString mission)
 {
-    speedrunTime = QString("Time: %1:%2")
-                       .arg(m, 2, 10, QLatin1Char('0'))
-                       .arg(s, 2, 10, QLatin1Char('0'));
-}
-
-void DiscordUtil::setHeadshotCount(short newHeadshotCount)
-{
-    headshotCount = QString("Head: %1").arg(newHeadshotCount);
+    this->currentMission = mission;
 }

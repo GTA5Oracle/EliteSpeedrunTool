@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>446</width>
+    <width>525</width>
     <height>373</height>
    </rect>
   </property>
@@ -21,7 +21,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabFirewall">
       <attribute name="title">
@@ -35,8 +35,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>406</width>
-            <height>248</height>
+            <width>485</width>
+            <height>250</height>
            </rect>
           </property>
           <attribute name="label">
@@ -73,8 +73,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>122</width>
-            <height>400</height>
+            <width>485</width>
+            <height>250</height>
            </rect>
           </property>
           <attribute name="label">
@@ -117,143 +117,9 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabHeadshot">
-      <attribute name="title">
-       <string>爆头数</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="_3">
-       <item>
-        <widget class="QToolBox" name="toolBox_2">
-         <widget class="QWidget" name="page_3">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>406</width>
-            <height>218</height>
-           </rect>
-          </property>
-          <attribute name="label">
-           <string>基本原理</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_8">
-           <item>
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>GTA5 进程内使用整数来存储爆头数，因此只需读取 GTA5 进程的内存即可得到爆头数据。
-
-由于不同任务中记录爆头数的内存地址可能不同，或者根本没有专门记录爆头数，因此该功能只能在“末日将至：三号行动”中使用。</string>
-             </property>
-             <property name="wordWrap">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_7">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="page_4">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>98</width>
-            <height>208</height>
-           </rect>
-          </property>
-          <attribute name="label">
-           <string>注意事项</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_9">
-           <item>
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>由于每次大更新后，GTA5 进程的内存布局可能会发生变化，因此在大更新后，此功能可能会失效，请及时更新最新版本。</string>
-             </property>
-             <property name="wordWrap">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_6">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="page_5">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>392</width>
-            <height>240</height>
-           </rect>
-          </property>
-          <attribute name="label">
-           <string>常见问题</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_10">
-           <item>
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>1. 每次结束任务后是否需要重启计数器？
-答：不需要。计数器每隔一个“刷新间隔”便会去读取内存的数据，当重新开始任务后，内存中的数据还是爆头数，因此会自动显示最新数据。
-
-2. 为什么在任务外爆头数会出现奇怪的数字？
-答：在任务外，原来存放爆头数的那部分内存空间会被存放其他数据，因此在任务外，爆头数显示的数据没有意义。
-
-3. 能否统计“名钻赌场豪劫-气势汹汹”任务的爆头数？
-答：可以，不过在出赌场建筑后会有一段时间显示爆头数为 0，在踩点后会爆头数值恢复正常。</string>
-             </property>
-             <property name="wordWrap">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="tabTimer">
       <attribute name="title">
-       <string>计时器</string>
+       <string>计时</string>
       </attribute>
       <layout class="QVBoxLayout" name="_4">
        <item>
@@ -263,8 +129,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>406</width>
-            <height>218</height>
+            <width>485</width>
+            <height>221</height>
            </rect>
           </property>
           <attribute name="label">
@@ -302,7 +168,7 @@
             <x>0</x>
             <y>0</y>
             <width>98</width>
-            <height>208</height>
+            <height>199</height>
            </rect>
           </property>
           <attribute name="label">
@@ -340,7 +206,7 @@
             <x>0</x>
             <y>0</y>
             <width>98</width>
-            <height>304</height>
+            <height>289</height>
            </rect>
           </property>
           <attribute name="label">
@@ -380,6 +246,271 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>自动计时</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QToolBox" name="toolBox_5">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="page_11">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>485</width>
+            <height>221</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>基本原理</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>在任务中，游戏只会记录开始时间和结束时间，因此自动计时功能在检测到任务开始后实时显示秒数是工具自行实现的，游戏内并没有实时的时间。
+
+为了减小误差，当游戏中暂停计时时，工具会读取游戏的内存，使用游戏内的时间来校正工具自动计时的时间。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_11">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_16">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>98</width>
+            <height>323</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>注意事项</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_19">
+           <item>
+            <widget class="QLabel" name="label_16">
+             <property name="text">
+              <string>由于每次大更新后，GTA5 进程的内存布局可能会发生变化，因此在大更新后，此功能可能会失效，请及时更新最新版本。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_16">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>164</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_12">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>98</width>
+            <height>544</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>常见问题</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_14">
+           <item>
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>1. 为什么一定要在任务开始前计时呢？
+答：由于游戏是从 R 星服务器获取的当前时间，而经过测试发现，R 星服务器的时间与标准的 UTC+3 时间差了大约一分半，因此工具没有办法获取到带有相同误差的当前时间。此外，由于自动计时实现复杂，实现此功能工作量大，因此只能在任务开始时计时。
+
+2. 是否要在每次任务结束后重启自动计时呢？
+答：不需要。它会自动识别下一个任务的时间。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_12">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabHeadshot">
+      <attribute name="title">
+       <string>任务数据</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="_3">
+       <item>
+        <widget class="QToolBox" name="toolBox_2">
+         <widget class="QWidget" name="page_3">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>485</width>
+            <height>221</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>基本原理</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>GTA5 进程内存储了任务中的部分数据，因此只需读取 GTA5 进程的内存即可得到相关数据。
+
+由于不同任务达成精英的条件不同，因此工具可以根据当前的任务来选择显示的数据。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_4">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>98</width>
+            <height>199</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>注意事项</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>由于每次大更新后，GTA5 进程的内存布局可能会发生变化，因此在大更新后，此功能可能会失效，请及时更新最新版本。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_5">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>98</width>
+            <height>514</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>常见问题</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_10">
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>1. 每次结束任务后是否需要重启数据监视？
+答：不需要。数据监视功能每隔一个“刷新间隔”便会去读取内存的数据，当重新开始任务后，会自动显示最新数据。
+
+2. 为什么在某些情况下数据会出现奇怪的值？
+答：一般这种情况发生在任务还没正式开始前或者是正式结束后，在这时，原来存放数据的那部分内存空间会被存放其他数据，因此，显示的数据没有意义。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tabServer">
       <attribute name="title">
        <string>多端显示</string>
@@ -392,8 +523,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>406</width>
-            <height>248</height>
+            <width>485</width>
+            <height>250</height>
            </rect>
           </property>
           <attribute name="label">
@@ -431,7 +562,7 @@
             <x>0</x>
             <y>0</y>
             <width>98</width>
-            <height>773</height>
+            <height>730</height>
            </rect>
           </property>
           <attribute name="label">
@@ -461,6 +592,219 @@
               <size>
                <width>20</width>
                <height>61</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>恶意值</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_17">
+       <item>
+        <widget class="QToolBox" name="toolBox_6">
+         <widget class="QWidget" name="page_13">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>485</width>
+            <height>221</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>基本原理</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_15">
+           <item>
+            <widget class="QLabel" name="label_13">
+             <property name="text">
+              <string>游戏内有一个存储恶意值的单浮点变量，只需要获取该变量的值，即可得知恶意值。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_13">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_15">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>98</width>
+            <height>199</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>注意事项</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_18">
+           <item>
+            <widget class="QLabel" name="label_15">
+             <property name="text">
+              <string>由于每次大更新后，GTA5 进程的内存布局可能会发生变化，因此在大更新后，此功能可能会失效，请及时更新最新版本。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_15">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_14">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>98</width>
+            <height>229</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>常见问题</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_16">
+           <item>
+            <widget class="QLabel" name="label_14">
+             <property name="text">
+              <string>1. 为什么恶意值不能实时更新？
+答：由于实时更新会浪费计算机性能，并且对于恶意值的需求也不是实时的，因此用户手动刷新恶意值即可。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_14">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>结束游戏</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_22">
+       <item>
+        <widget class="QToolBox" name="toolBox_7">
+         <widget class="QWidget" name="page_17">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>485</width>
+            <height>250</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>基本原理</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_20">
+           <item>
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string>调用系统 API TerminateProcess 或 taskkill 命令来结束 GTA5 进程。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_17">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="page_18">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>98</width>
+            <height>124</height>
+           </rect>
+          </property>
+          <attribute name="label">
+           <string>注意事项</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_21">
+           <item>
+            <widget class="QLabel" name="label_18">
+             <property name="text">
+              <string>请在使用该功能前先测试一下是否能成功结束游戏。</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_18">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
               </size>
              </property>
             </spacer>

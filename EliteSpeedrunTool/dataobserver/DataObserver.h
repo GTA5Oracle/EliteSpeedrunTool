@@ -64,6 +64,7 @@ signals:
     void onDisplayLabelsRemoved(QList<QLabel*>);
     void onStartObserve();
     void onStopObserve();
+    void onMissionChanged();
 
 public:
     BaseMissionStrategy* emptyStrategy = new EmptyStrategy(this);

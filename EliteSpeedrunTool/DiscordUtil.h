@@ -33,9 +33,7 @@ public:
 
     void updateDiscordRpc();
 
-    void setSpeedrunTime(qint64 m, qint64 s);
-
-    void setHeadshotCount(short newHeadshotCount);
+    void setCurrentMission(QString mission);
 
 private:
     bool inited = false;
@@ -50,8 +48,7 @@ private:
 
     QList<QMetaObject::Connection> syncSignalConnections;
 
-    QString speedrunTime = "Time: 00:00";
-    QString headshotCount = "Head: 0";
+    QString currentMission = "";
 
 signals:
     void deactivated(QPrivateSignal);

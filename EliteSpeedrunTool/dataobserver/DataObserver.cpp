@@ -54,6 +54,7 @@ void DataObserver::setMissionStrategy(BaseMissionStrategy* newMissionStrategy)
     }
     missionStrategy = newMissionStrategy;
     newMissionStrategy->setCurrentStrategy(true);
+    emit onMissionChanged();
     emit onLabelsAdded(newMissionStrategy->getLabels());
     emit onDisplayLabelsAdded(newMissionStrategy->getDisplayLabels());
 }

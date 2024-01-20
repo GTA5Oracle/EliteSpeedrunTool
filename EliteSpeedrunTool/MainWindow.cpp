@@ -530,6 +530,9 @@ void MainWindow::initMissionData()
             ui.btnStartMissionData->setChecked(false);
         }
     });
+    connect(dataObserver, &DataObserver::onMissionChanged, this, [this]() {
+        discordUtil->setCurrentMission(dataObserver->getMissionStrategy()->getDisplayName());
+    });
     connect(dataObserver, &DataObserver::onDisplayLabelsAdded, this, [this](QList<QLabel*> labels) {
         if (!displayInfoDialog) {
             return;
@@ -684,7 +687,6 @@ void MainWindow::zeroTimer()
     }
     ui.labTimer->setText(DisplayInfoDialog::timePattern.arg("26", "00", "00", "16", "00"));
     HttpServerController::instance()->zeroTimer();
-    discordUtil->setSpeedrunTime(0, 0);
 }
 
 QString MainWindow::getFormattedTime(unsigned long long deltaTime, int* m, int* s, int* ms)
@@ -709,7 +711,6 @@ void MainWindow::updateTimerString(qint64 currentDateTime)
     if (displayInfoDialogIsShowing && displayInfoDialog) {
         displayInfoDialog->setTime(m, s, ms);
     }
-    discordUtil->setSpeedrunTime(m, s);
 }
 
 void MainWindow::updateAutoTimerString(unsigned long long deltaTime)
@@ -720,7 +721,6 @@ void MainWindow::updateAutoTimerString(unsigned long long deltaTime)
     if (displayInfoDialogIsShowing && displayInfoDialog) {
         displayInfoDialog->setAutoTime(m, s, ms);
     }
-    discordUtil->setSpeedrunTime(m, s);
 }
 
 void MainWindow::initTimerStateMachine()
@@ -826,28 +826,14 @@ void MainWindow::closeGameImmediately()
 {
     DWORD p;
     const auto game = memoryUtil->getProcessHandle(&p, PROCESS_TERMINATE);
-    TerminateProcess(game, 1);
+    if (!TerminateProcess(game, 1)) {
+        // TerminateProcess 返回0，说明执行失败
+        system("taskkill /f /t /im GTA5.exe");
+        qWarning("Execute TerminateProcess fails, using taskkill command to terminate GTA5.exe");
+    } else {
+        qInfo("Execute TerminateProcess API succeeds");
+    }
     CloseHandle(game);
-    //    QThread* workerThread = new QThread(this);
-    //    connect(workerThread, &QThread::started, workerThread, []() {
-
-    //    });
-    //    connect(workerThread, &QThread::finished, workerThread, &QObject::deleteLater);
-    //    workerThread->start();
-
-    //    PlaySound(globalData->firewallStartSound().toStdWString().c_str(),
-    //        nullptr, SND_FILENAME | SND_ASYNC);
-    //    keybd_event('S', MapVirtualKey('S', 0), 0, 0);
-    //    TimeUtil::nanosleep(20);
-    //    keybd_event('D', MapVirtualKey('D', 0), 0, 0);
-    //    TimeUtil::nanosleep(20);
-    //    keybd_event(VK_SPACE, MapVirtualKey(VK_SPACE, 0), 0, 0);
-    //    TimeUtil::nanosleep(20);
-    //    keybd_event(VK_SPACE, MapVirtualKey(VK_SPACE, 0), KEYEVENTF_KEYUP, 0);
-    //    TimeUtil::nanosleep(100);
-    //    keybd_event('S', MapVirtualKey('S', 0), KEYEVENTF_KEYUP, 0);
-    //    TimeUtil::nanosleep(100);
-    //    keybd_event('D', MapVirtualKey('D', 0), KEYEVENTF_KEYUP, 0);
 }
 
 void MainWindow::initSystemTray()
