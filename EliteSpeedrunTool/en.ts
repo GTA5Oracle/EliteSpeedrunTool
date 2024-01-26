@@ -910,7 +910,7 @@ AdstarGod Firewall, easy to use
         <translation>Elite Speedrun Tool</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>*** 应用版本变更，请认真检查各项配置（热键、外观、提示音等）是否需要重新设置！***</source>
         <translation>*** The application version has changed, please check carefully if the configurations (hotkeys, appearance, sounds, etc.) need to be reset! ***</translation>
     </message>
@@ -1493,12 +1493,12 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <name>UpdateDialog</name>
     <message>
         <location filename="UpdateDialog.ui" line="+14"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_UpdateDialog.h" line="+135"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_UpdateDialog.h" line="+136"/>
         <source>检查更新</source>
         <translation>Check for update</translation>
     </message>
     <message>
-        <location line="+90"/>
+        <location line="+93"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_UpdateDialog.h" line="+1"/>
         <source>下载...</source>
         <translation>Download...</translation>
@@ -1534,7 +1534,7 @@ Error message: %2</translation>
         <translation>Checking for update, please wait...</translation>
     </message>
     <message>
-        <location line="+105"/>
+        <location line="+131"/>
         <source>发现新版本：%1</source>
         <translation>New version: %1</translation>
     </message>

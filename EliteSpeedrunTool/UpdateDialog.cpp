@@ -128,6 +128,28 @@ bool UpdateDialog::isNewVersion(QString remoteVersion)
     return hasNewVersion;
 }
 
+bool UpdateDialog::isNewVersionTag(QString remoteVersion)
+{
+    bool hasNewVersion = false;
+    try {
+        bool ok = true;
+        if (remoteVersion.toInt() > qEnvironmentVariableIntValue("ApplicationVersionCode", &ok)) {
+            hasNewVersion = true;
+        }
+        if (!ok) {
+            qCritical() << "check isNewVersionTag failed, ok is false";
+        }
+    } catch (const std::exception& ex) {
+        qCritical() << "check isNewVersionTag failed" << ex.what();
+    } catch (const std::string& ex) {
+        qCritical() << "check isNewVersionTag failed" << ex;
+    } catch (...) {
+        qCritical() << "check isNewVersionTag failed";
+    }
+
+    return hasNewVersion;
+}
+
 GitHubRelease* UpdateDialog::getData(QByteArray raw)
 {
     GitHubRelease* githubRelease = new GitHubRelease;
@@ -163,13 +185,17 @@ void UpdateDialog::updateViewToSuccess()
     ui.pbUpdate->setRange(0, 100);
     ui.pbUpdate->setValue(100);
 
-    bool hasNewVersion = isNewVersion(githubRelease->tagName);
+    bool hasNewVersion = isNewVersionTag(githubRelease->tagName);
     ui.textEdit->setVisible(hasNewVersion);
     ui.pbIgnoreThisVersion->setVisible(hasNewVersion);
     ui.pbDownload->setVisible(hasNewVersion);
     ui.labReleaseTime->setVisible(hasNewVersion);
     if (hasNewVersion) {
-        ui.labResult->setText(tr("发现新版本：%1").arg(githubRelease->tagName));
+        auto name = githubRelease->name;
+        if (name.startsWith('v')) {
+            name = name.mid(1);
+        }
+        ui.labResult->setText(tr("发现新版本：%1").arg(name));
         auto dateTime = QDateTime::fromString(githubRelease->publishedAt, Qt::ISODate);
         dateTime.setTimeSpec(Qt::UTC);
         QLocale::Language language = LanguageUtil::getQLocaleLanguage(globalData->language());

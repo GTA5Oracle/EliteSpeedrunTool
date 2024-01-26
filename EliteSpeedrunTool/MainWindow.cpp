@@ -126,7 +126,7 @@ void MainWindow::checkUpdate()
     UpdateDialog::sendCheckRequest(
         this,
         [this](GitHubRelease* release) {
-            if (UpdateDialog::isNewVersion(release->tagName)
+            if (UpdateDialog::isNewVersionTag(release->tagName)
                 && globalData->ignoredNewVersion() != release->tagName) {
                 (new UpdateDialog(release, this))->exec();
             } else {

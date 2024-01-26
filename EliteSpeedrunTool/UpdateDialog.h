@@ -23,6 +23,8 @@ public:
 
     static bool isNewVersion(QString remoteVersion);
 
+    static bool isNewVersionTag(QString remoteVersion);
+
     static void sendCheckRequest(
         QObject* parent,
         std::function<void(GitHubRelease*)> const& onSuccess,
