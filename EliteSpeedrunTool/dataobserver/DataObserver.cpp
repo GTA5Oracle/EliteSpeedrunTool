@@ -121,7 +121,9 @@ void DataObserver::onTimeout()
 void DataObserver::onMissionHashTimeout()
 {
     auto newMissionHash = missionHashFetcher.fetchData();
-    qDebug() << newMissionHash;
+    if (globalData->debugMode()) {
+        qDebug() << newMissionHash;
+    }
     // if (missionStrategy) {
     //     qDebug() << missionStrategy->getLabels();
     // }

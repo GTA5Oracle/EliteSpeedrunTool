@@ -87,7 +87,8 @@ private:
 
     static const QString hotkeyStatePattern;
 
-    bool displayInfoDialogIsShowing = false;
+    // 保证多线程原子性，不过现在用的是QTimer，并没有涉及到多线程
+    std::atomic<bool> displayInfoDialogIsShowing = false;
     DisplayInfoDialog* displayInfoDialog = nullptr;
 
     QHotkey* startFirewallHotkey = nullptr;

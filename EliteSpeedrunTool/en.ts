@@ -459,7 +459,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+139"/>
-        <location filename="MainWindow.cpp" line="+773"/>
+        <location filename="MainWindow.cpp" line="+772"/>
         <location line="+22"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+8"/>
         <source>点击启动</source>
@@ -782,7 +782,7 @@ AdstarGod Firewall, easy to use
         <translation>Click to continue</translation>
     </message>
     <message>
-        <location line="-632"/>
+        <location line="-631"/>
         <source>注册启用防火墙热键失败！</source>
         <oldsource>注册防火墙启动热键失败！</oldsource>
         <translation>Failed to register enable firewall hotkeys!</translation>
@@ -823,12 +823,12 @@ AdstarGod Firewall, easy to use
         <translation>Failed to register the termination game hotkey!</translation>
     </message>
     <message>
-        <location line="+139"/>
+        <location line="+138"/>
         <source>支付宝收款二维码 谢谢喵！</source>
         <translation>Alipay payment QR code. Thank you!</translation>
     </message>
     <message>
-        <location filename="MainWindow.h" line="+126"/>
+        <location filename="MainWindow.h" line="+127"/>
         <source>加入 Telegram 群组一起划水~</source>
         <translation>Join Telegram group~</translation>
     </message>
@@ -995,7 +995,7 @@ AdstarGod Firewall, easy to use
     <name>SettingDialog</name>
     <message>
         <location filename="SettingDialog.ui" line="+14"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1335"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1369"/>
         <source>设置</source>
         <translation>Settings</translation>
     </message>
@@ -1381,18 +1381,24 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Application needs to be restarted after switching languages</translation>
     </message>
     <message>
-        <location filename="SettingDialog.h" line="+14"/>
+        <location line="+58"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
+        <source>调试模式</source>
+        <translation>Debug mode</translation>
+    </message>
+    <message>
+        <location filename="SettingDialog.h" line="+16"/>
         <source>信息展示</source>
         <oldsource>全局热键</oldsource>
         <translation>Display info</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="+6"/>
         <source>语言</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="SettingDialog.cpp" line="+86"/>
+        <location filename="SettingDialog.cpp" line="+76"/>
         <source>选择文件</source>
         <translation>Choice a sound</translation>
     </message>
@@ -1422,37 +1428,42 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Outbound</translation>
     </message>
     <message>
-        <location filename="SettingDialog.h" line="+0"/>
+        <location filename="SettingDialog.h" line="-5"/>
         <source>断网</source>
         <translation>Firewall</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="+2"/>
         <source>计时器</source>
         <translation>Timer</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-4"/>
         <source>常规</source>
         <translation>General</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="+6"/>
         <source>社交</source>
         <translation>Social</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-1"/>
         <source>结束游戏</source>
         <translation>Terminate game</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-2"/>
         <source>任务信息</source>
         <translation>Mission data</translation>
     </message>
     <message>
-        <location line="+39"/>
+        <location line="+5"/>
+        <source>开发者选项</source>
+        <translation>Developer options</translation>
+    </message>
+    <message>
+        <location line="+45"/>
         <source>左对齐</source>
         <translation>Left alignment</translation>
     </message>

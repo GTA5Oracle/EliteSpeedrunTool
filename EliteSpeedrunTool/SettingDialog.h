@@ -11,8 +11,18 @@ public:
     explicit SettingDialog(QWidget* parent = nullptr);
     ~SettingDialog();
 
-    QString pageName[8] = { tr("常规"), tr("信息展示"), tr("断网"), tr("任务信息"), tr("计时器"), tr("结束游戏"), tr("社交"), tr("语言") };
-    QString pageIcon[8] = {
+    QString pageName[9] = {
+        tr("常规"),
+        tr("信息展示"),
+        tr("断网"),
+        tr("任务信息"),
+        tr("计时器"),
+        tr("结束游戏"),
+        tr("社交"),
+        tr("语言"),
+        tr("开发者选项"),
+    };
+    QString pageIcon[9] = {
         "://image/ic_setting.ico",
         "://image/ic_lighton.ico",
         "://image/ic_network.ico",
@@ -21,6 +31,7 @@ public:
         "://image/ic_plug.ico",
         "://image/ic_users.ico",
         "://image/ic_language.ico",
+        "://image/ic_doctor_watson.ico",
     };
 
 protected:
@@ -42,6 +53,10 @@ protected:
     void initCloseGameImmediatelySettings();
 
     void initSocialSettings();
+
+    void initLanguageSettings();
+
+    void initDevelopOptionsSettings();
 
     void setDisplayInfoCententSettings(DisplayInfoSubFunction f);
 

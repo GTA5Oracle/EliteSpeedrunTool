@@ -164,6 +164,9 @@ public:
     MissionDataNameUtil::MissionDataName missionDataName() const;
     void setMissionDataName(MissionDataNameUtil::MissionDataName newMissionDataName);
 
+    bool debugMode() const;
+    void setDebugMode(bool newDebugMode);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -207,6 +210,8 @@ signals:
     void closeGameImmediatelyHotkeyChanged();
 
     void missionDataNameChanged();
+
+    void debugModeChanged();
 
 private:
     bool mMinimizeToTray = false;
@@ -274,6 +279,9 @@ private:
     // 卡前置
     QString mCloseGameImmediatelyHotkey = "Ctrl+`";
 
+    // 开发者选项
+    bool mDebugMode = false;
+
 private:
     Q_PROPERTY(bool minimizeToTray READ minimizeToTray WRITE setMinimizeToTray NOTIFY minimizeToTrayChanged)
     Q_PROPERTY(QString styleName READ styleName WRITE setStyleName NOTIFY styleNameChanged)
@@ -310,4 +318,5 @@ private:
     Q_PROPERTY(QString closeGameImmediatelyHotkey READ closeGameImmediatelyHotkey WRITE setCloseGameImmediatelyHotkey NOTIFY closeGameImmediatelyHotkeyChanged)
     Q_PROPERTY(int autoTimerUpdateInterval READ autoTimerUpdateInterval WRITE setAutoTimerUpdateInterval NOTIFY autoTimerUpdateIntervalChanged)
     Q_PROPERTY(MissionDataNameUtil::MissionDataName missionDataName READ missionDataName WRITE setMissionDataName NOTIFY missionDataNameChanged FINAL)
+    Q_PROPERTY(bool debugMode READ debugMode WRITE setDebugMode NOTIFY debugModeChanged FINAL)
 };

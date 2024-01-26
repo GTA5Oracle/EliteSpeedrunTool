@@ -52,7 +52,9 @@ void AutoTimerUtil::timeOut()
     gtaHandle = memoryUtil->getProcessHandle(&pid);
 
     missionHash = memoryUtil->getGlobalUInt(MemoryUtil::globalMissionHash); // hash
-    qDebug() << missionHash << lastMissionHash;
+    if (globalData->debugMode()) {
+        qDebug() << missionHash << lastMissionHash;
+    }
     if (missionHash == MemoryUtil::hashPrisonBreak) {
         startTimerFlag = memoryUtil->getLocalInt(MemoryUtil::localFlagInitPrisonBreakTimer);
         summaryTime = memoryUtil->getGlobalUInt(MemoryUtil::globalPrisonBreakSummaryTime);
@@ -85,7 +87,9 @@ void AutoTimerUtil::timeOut()
 
     CloseHandle(gtaHandle);
 
-    qDebug() << memoryUtil->globalPtr << state << missionHash << startTimerFlag << summaryTime << currentStateTime << currentStateStartTime;
+    if (globalData->debugMode()) {
+        qDebug() << memoryUtil->globalPtr << state << missionHash << startTimerFlag << summaryTime << currentStateTime << currentStateStartTime;
+    }
 
     if (state == MissionState::Running && lastDoneState == MissionState::End) {
         flagTimeChangedTo1 = false;
@@ -119,10 +123,12 @@ void AutoTimerUtil::timeOut()
                         : MemoryUtil::localInitTimestamp); // 开始时间ptr
         }
         unsigned long long deltaTime = getCurrentTimeStamp() - currentStateStartTime - deltaLocalServerTime;
-        qDebug() << deltaTime
-                 << getCurrentTimeStamp()
-                 << currentStateStartTime
-                 << deltaLocalServerTime;
+        if (globalData->debugMode()) {
+            qDebug() << deltaTime
+                     << getCurrentTimeStamp()
+                     << currentStateStartTime
+                     << deltaLocalServerTime;
+        }
         deltaTime += summaryTime;
         time = deltaTime;
         sendUpdateTimeSignal(time);

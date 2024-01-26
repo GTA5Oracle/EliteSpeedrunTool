@@ -298,7 +298,6 @@ void MainWindow::initMenu()
             };
             connect(displayInfoDialog, &DisplayInfoDialog::finished, this, closeLambda);
             displayInfoDialog->show();
-            // TODO：加锁？
             displayInfoDialogIsShowing = true;
             showDisplayInfo();
         } else {
@@ -477,7 +476,7 @@ void MainWindow::initCloseGameImmediately()
     connect(globalData, &GlobalData::closeGameImmediatelyHotkeyChanged, this, [this]() {
         ui.labCloseGameImmediatelyHotkey->setText(globalData->closeGameImmediatelyHotkey());
     });
-    connect(ui.btnCloseGameImmediately, &QAbstractButton::toggled, this, [this]() {
+    connect(ui.btnCloseGameImmediately, &QAbstractButton::clicked, this, [this]() {
         closeGameImmediately();
     });
 }

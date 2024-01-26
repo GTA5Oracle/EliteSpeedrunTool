@@ -35,18 +35,8 @@ SettingDialog::SettingDialog(QWidget* parent)
     initTimerSettings();
     initCloseGameImmediatelySettings();
     initSocialSettings();
-
-    for (auto l : LanguageUtil::getInstance()->languages) {
-        ui.cbLanguage->addItem(LanguageUtil::getDisplayName(l.name), l.name);
-        if (l.name == globalData->language()) {
-            ui.cbLanguage->setCurrentIndex(ui.cbLanguage->count() - 1);
-        }
-    }
-    connect(ui.cbLanguage, &QComboBox::activated, this, [=]() {
-        globalData->setLanguage(ui.cbLanguage->currentData().toString());
-        LanguageUtil::applyLanguage();
-        ui.retranslateUi(this);
-    });
+    initLanguageSettings();
+    initDevelopOptionsSettings();
 
     initDisplayInfoSettings();
 }
@@ -524,6 +514,29 @@ void SettingDialog::initSocialSettings()
 
     connect(ui.tbDiscordRpHelp, &QAbstractButton::clicked, this, [=](int state) {
         QDesktopServices::openUrl(QUrl("https://discord.com/developers/docs/rich-presence/how-to"));
+    });
+}
+
+void SettingDialog::initLanguageSettings()
+{
+    for (auto l : LanguageUtil::getInstance()->languages) {
+        ui.cbLanguage->addItem(LanguageUtil::getDisplayName(l.name), l.name);
+        if (l.name == globalData->language()) {
+            ui.cbLanguage->setCurrentIndex(ui.cbLanguage->count() - 1);
+        }
+    }
+    connect(ui.cbLanguage, &QComboBox::activated, this, [=]() {
+        globalData->setLanguage(ui.cbLanguage->currentData().toString());
+        LanguageUtil::applyLanguage();
+        ui.retranslateUi(this);
+    });
+}
+
+void SettingDialog::initDevelopOptionsSettings()
+{
+    ui.cbDebugMode->setChecked(globalData->debugMode());
+    connect(ui.cbDebugMode, &QCheckBox::stateChanged, this, [=](int state) {
+        globalData->setDebugMode(state == Qt::Checked);
     });
 }
 

@@ -198,6 +198,10 @@ void GlobalData::readSettings()
     settings.beginGroup("Language");
     setLanguage(settings.value("Language", mLanguage).toString());
     settings.endGroup();
+
+    settings.beginGroup("DeveloperOptions");
+    setDebugMode(settings.value("DebugMode", mDebugMode).toBool());
+    settings.endGroup();
 }
 
 void GlobalData::writeSettings()
@@ -259,6 +263,10 @@ void GlobalData::writeSettings()
 
     settings.beginGroup("Language");
     settings.setValue("Language", mLanguage);
+    settings.endGroup();
+
+    settings.beginGroup("DeveloperOptions");
+    settings.setValue("DebugMode", mDebugMode);
     settings.endGroup();
 }
 
@@ -752,4 +760,17 @@ void GlobalData::setMissionDataName(MissionDataNameUtil::MissionDataName newMiss
         return;
     mMissionDataName = newMissionDataName;
     emit missionDataNameChanged();
+}
+
+bool GlobalData::debugMode() const
+{
+    return mDebugMode;
+}
+
+void GlobalData::setDebugMode(bool newDebugMode)
+{
+    if (mDebugMode == newDebugMode)
+        return;
+    mDebugMode = newDebugMode;
+    emit debugModeChanged();
 }
