@@ -17,11 +17,6 @@ public:
 
 private:
     RashkovskyDamageFetcher rashkovskyDamageFetcher = RashkovskyDamageFetcher();
-
-    QLabel labMissionName = QLabel(getDisplayName());
-
-    QLabel labDisplayRashkovskyDamage = QLabel();
-    QLabel labRashkovskyDamage = QLabel();
 };
 
 #endif // PRISONBREAKSTRATEGY_H

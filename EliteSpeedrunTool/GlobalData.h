@@ -222,10 +222,16 @@ private:
     QString mIgnoredNewVersion = "";
 
     // 信息展示
-    QList<DisplayInfoSubFunction> mFuncs = { DisplayInfoSubFunction::Firewall,
-        DisplayInfoSubFunction::Headshot, DisplayInfoSubFunction::Timer,
-        DisplayInfoSubFunction::AutoTimer, DisplayInfoSubFunction::VehicleDamage,
-        DisplayInfoSubFunction::RashkovskyDamage, DisplayInfoSubFunction::Kill };
+    QList<DisplayInfoSubFunction> mFuncs = {
+        DisplayInfoSubFunction::Firewall,
+        DisplayInfoSubFunction::Headshot,
+        DisplayInfoSubFunction::Timer,
+        DisplayInfoSubFunction::AutoTimer,
+        DisplayInfoSubFunction::VehicleDamage,
+        DisplayInfoSubFunction::RashkovskyDamage,
+        DisplayInfoSubFunction::Kill,
+        DisplayInfoSubFunction::PlaneDamage,
+    };
     QDisplayInfoSubFuncsMap mDisplayInfoSubFunctions;
     bool mDisplayInfoShow = true;
     bool mDisplayInfoTouchable = true;

@@ -4,7 +4,7 @@
 <context>
     <name>BakerBadBeatStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/BakerBadBeatStrategy.cpp" line="+37"/>
+        <location filename="dataobserver/missionstrategy/BakerBadBeatStrategy.cpp" line="+33"/>
         <source>出奇制胜</source>
         <translation>Casino - Bad Beat</translation>
     </message>
@@ -12,7 +12,7 @@
 <context>
     <name>BaseMissionStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/BaseMissionStrategy.cpp" line="+69"/>
+        <location filename="dataobserver/missionstrategy/BaseMissionStrategy.cpp" line="+89"/>
         <source>总击杀：%1</source>
         <translation>Total kills: %1</translation>
     </message>
@@ -40,7 +40,7 @@
 <context>
     <name>CasinoHeistAggressiveStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/CasinoHeistAggressiveStrategy.cpp" line="+37"/>
+        <location filename="dataobserver/missionstrategy/CasinoHeistAggressiveStrategy.cpp" line="+33"/>
         <source>名钻赌场豪劫：气势汹汹</source>
         <translation>Casino Heist - Aggressive</translation>
     </message>
@@ -56,7 +56,7 @@
 <context>
     <name>CasinoHeistSilentSneakyStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/CasinoHeistSilentSneakyStrategy.cpp" line="+30"/>
+        <location filename="dataobserver/missionstrategy/CasinoHeistSilentSneakyStrategy.cpp" line="+29"/>
         <source>名钻赌场豪劫：隐迹潜踪</source>
         <translation>Casino Heist - Silent &amp; Sneaky</translation>
     </message>
@@ -64,7 +64,7 @@
 <context>
     <name>CasinoHeistTheBigConStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/CasinoHeistTheBigConStrategy.cpp" line="+30"/>
+        <location filename="dataobserver/missionstrategy/CasinoHeistTheBigConStrategy.cpp" line="+29"/>
         <source>名钻赌场豪劫：兵不厌诈</source>
         <translation>Casino Heist - The Big Con</translation>
     </message>
@@ -366,7 +366,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
 <context>
     <name>DoomsdayAct1Strategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/DoomsdayAct1Strategy.cpp" line="+37"/>
+        <location filename="dataobserver/missionstrategy/DoomsdayAct1Strategy.cpp" line="+33"/>
         <source>数据泄露</source>
         <translation>The Data Breaches</translation>
     </message>
@@ -374,7 +374,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
 <context>
     <name>DoomsdayAct2Strategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/DoomsdayAct2Strategy.cpp" line="+37"/>
+        <location filename="dataobserver/missionstrategy/DoomsdayAct2Strategy.cpp" line="+33"/>
         <source>波格丹危机</source>
         <translation>The Bogdan Problem</translation>
     </message>
@@ -382,7 +382,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
 <context>
     <name>DoomsdayAct3Strategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/DoomsdayAct3Strategy.cpp" line="+37"/>
+        <location filename="dataobserver/missionstrategy/DoomsdayAct3Strategy.cpp" line="+33"/>
         <source>末日将至</source>
         <translation>The Doomsday Scenario</translation>
     </message>
@@ -390,7 +390,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
 <context>
     <name>EmptyStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/EmptyStrategy.cpp" line="+30"/>
+        <location filename="dataobserver/missionstrategy/EmptyStrategy.cpp" line="+29"/>
         <source>不在支持的任务中...</source>
         <translation>Not in a supported mission...</translation>
     </message>
@@ -398,7 +398,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
 <context>
     <name>FleecaJobStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/FleecaJobStrategy.cpp" line="+37"/>
+        <location filename="dataobserver/missionstrategy/FleecaJobStrategy.cpp" line="+33"/>
         <source>全福银行差事</source>
         <translation>The Fleeca Job</translation>
     </message>
@@ -406,7 +406,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
 <context>
     <name>HumaneLabsRaidStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/HumaneLabsRaidStrategy.cpp" line="+37"/>
+        <location filename="dataobserver/missionstrategy/HumaneLabsRaidStrategy.cpp" line="+33"/>
         <source>突袭人道研究实验室</source>
         <translation>The Humane Labs Raid</translation>
     </message>
@@ -422,7 +422,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
 <context>
     <name>LostMcRipStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/LostMcRipStrategy.cpp" line="+46"/>
+        <location filename="dataobserver/missionstrategy/LostMcRipStrategy.cpp" line="+39"/>
         <source>安息吧！失落摩托帮</source>
         <translation>Lost MC RIP</translation>
     </message>
@@ -872,7 +872,7 @@ AdstarGod Firewall, easy to use
 <context>
     <name>PacificStandardStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/PacificStandardStrategy.cpp" line="+30"/>
+        <location filename="dataobserver/missionstrategy/PacificStandardStrategy.cpp" line="+29"/>
         <source>太平洋标准银行差事</source>
         <translation>Pacific Standard</translation>
     </message>
@@ -880,7 +880,7 @@ AdstarGod Firewall, easy to use
 <context>
     <name>PrisonBreakStationStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/PrisonBreakStationStrategy.cpp" line="+53"/>
+        <location filename="dataobserver/missionstrategy/PrisonBreakStationStrategy.cpp" line="+43"/>
         <source>越狱：警察局</source>
         <translation>The Prison Break - Station</translation>
     </message>
@@ -888,7 +888,7 @@ AdstarGod Firewall, easy to use
 <context>
     <name>PrisonBreakStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/PrisonBreakStrategy.cpp" line="+37"/>
+        <location filename="dataobserver/missionstrategy/PrisonBreakStrategy.cpp" line="+33"/>
         <source>越狱</source>
         <translation>The Prison Break</translation>
     </message>
@@ -896,7 +896,7 @@ AdstarGod Firewall, easy to use
 <context>
     <name>PrisonBreakWetWorkStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/PrisonBreakWetWorkStrategy.cpp" line="+46"/>
+        <location filename="dataobserver/missionstrategy/PrisonBreakWetWorkStrategy.cpp" line="+39"/>
         <source>越狱：行刺</source>
         <translation>The Prison Break - Wet Work</translation>
     </message>
@@ -952,6 +952,11 @@ AdstarGod Firewall, easy to use
         <translation>Total kills</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <source>机损</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="GlobalData.cpp" line="+27"/>
         <source>停止后时间不归零</source>
         <translation>Time does not reset to zero after stopping</translation>
@@ -986,7 +991,7 @@ AdstarGod Firewall, easy to use
 <context>
     <name>SeriesAFundingStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/SeriesAFundingStrategy.cpp" line="+37"/>
+        <location filename="dataobserver/missionstrategy/SeriesAFundingStrategy.cpp" line="+33"/>
         <source>首轮募资</source>
         <translation>Series A Funding</translation>
     </message>

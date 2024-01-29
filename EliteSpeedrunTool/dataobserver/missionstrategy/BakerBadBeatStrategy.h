@@ -17,11 +17,6 @@ public:
 
 private:
     KillHostFetcher killHostFetcher = KillHostFetcher();
-
-    QLabel labMissionName = QLabel(getDisplayName());
-
-    QLabel labDisplayTotalKill = QLabel();
-    QLabel labTotalKill = QLabel();
 };
 
 #endif // BAKERBADBEATSTRATEGY_H

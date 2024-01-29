@@ -4,13 +4,11 @@
 PrisonBreakStrategy::PrisonBreakStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
-    labRashkovskyDamage.setFont(font);
 }
 
 QList<QLabel*> PrisonBreakStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << &labDisplayRashkovskyDamage;
+    return { &labDisplayRashkovskyDamage };
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> PrisonBreakStrategy::getDisplayLabelsAndItems()
@@ -21,15 +19,13 @@ QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> PrisonBreakStrategy::getDispl
 
 QList<QLabel*> PrisonBreakStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName << &labRashkovskyDamage;
+    return { &labMissionName, &labRashkovskyDamage };
 }
 
 void PrisonBreakStrategy::updateInfo()
 {
     auto data = rashkovskyDamageFetcher.fetchData();
-    auto text = getRashkovskyHurtPattern().arg(QString::number(data, 'f', 2));
-    labDisplayRashkovskyDamage.setText(text);
-    labRashkovskyDamage.setText(text);
+    updateRashkovskyHurtLabel(data);
 }
 
 const QString PrisonBreakStrategy::getDisplayName()

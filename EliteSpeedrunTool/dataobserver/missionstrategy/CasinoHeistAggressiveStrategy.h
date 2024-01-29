@@ -17,11 +17,6 @@ public:
 
 private:
     HeadshotFetcher headshotFetcher = HeadshotFetcher();
-
-    QLabel labMissionName = QLabel(getDisplayName());
-
-    QLabel labDisplayHeadshot = QLabel();
-    QLabel labHeadshot = QLabel();
 };
 
 #endif // CASINOHEISTAGGRESSIVESTRATEGY_H

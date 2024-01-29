@@ -13,6 +13,7 @@ enum DisplayInfoSubFunction {
     VehicleDamage = 5,
     RashkovskyDamage = 6,
     Kill = 7,
+    PlaneDamage = 8,
 };
 
 namespace DisplayInfoSubFunctionUtil {

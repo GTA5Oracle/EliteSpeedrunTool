@@ -4,32 +4,28 @@
 DoomsdayAct2Strategy::DoomsdayAct2Strategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
-    labVehicleDamage.setFont(font);
 }
 
 QList<QLabel*> DoomsdayAct2Strategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << &labDisplayVehicleDamage;
+    return { &labDisplayPlaneDamage };
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> DoomsdayAct2Strategy::getDisplayLabelsAndItems()
 {
     auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    return { qMakePair(&labDisplayVehicleDamage, displayInfoSubFunctions[DisplayInfoSubFunction::VehicleDamage]) };
+    return { qMakePair(&labDisplayPlaneDamage, displayInfoSubFunctions[DisplayInfoSubFunction::PlaneDamage]) };
 }
 
 QList<QLabel*> DoomsdayAct2Strategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName << &labVehicleDamage;
+    return { &labMissionName, &labPlaneDamage };
 }
 
 void DoomsdayAct2Strategy::updateInfo()
 {
     auto data = vehicleDamageFetcher.fetchData();
-    auto text = getPlaneDamagePattern().arg(QString::number(data, 'f', 2));
-    labDisplayVehicleDamage.setText(text);
-    labVehicleDamage.setText(text);
+    updatePlaneDamageLabel(data);
 }
 
 const QString DoomsdayAct2Strategy::getDisplayName()

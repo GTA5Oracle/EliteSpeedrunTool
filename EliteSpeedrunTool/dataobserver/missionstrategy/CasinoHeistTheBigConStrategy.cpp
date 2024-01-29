@@ -3,7 +3,6 @@
 CasinoHeistTheBigConStrategy::CasinoHeistTheBigConStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
 }
 
 QList<QLabel*> CasinoHeistTheBigConStrategy::getDisplayLabels()
@@ -18,7 +17,7 @@ QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> CasinoHeistTheBigConStrategy:
 
 QList<QLabel*> CasinoHeistTheBigConStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName;
+    return { &labMissionName };
 }
 
 void CasinoHeistTheBigConStrategy::updateInfo()

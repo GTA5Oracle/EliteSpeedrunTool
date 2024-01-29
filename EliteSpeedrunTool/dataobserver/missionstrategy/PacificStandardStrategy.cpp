@@ -3,12 +3,11 @@
 PacificStandardStrategy::PacificStandardStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
 }
 
 QList<QLabel*> PacificStandardStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>();
+    return {};
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> PacificStandardStrategy::getDisplayLabelsAndItems()
@@ -18,7 +17,7 @@ QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> PacificStandardStrategy::getD
 
 QList<QLabel*> PacificStandardStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName;
+    return { &labMissionName };
 }
 
 void PacificStandardStrategy::updateInfo()

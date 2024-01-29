@@ -4,14 +4,11 @@
 PrisonBreakWetWorkStrategy::PrisonBreakWetWorkStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
-    labHeadshot.setFont(font);
-    labKill.setFont(font);
 }
 
 QList<QLabel*> PrisonBreakWetWorkStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << &labDisplayHeadshot << &labDisplayKill;
+    return { &labDisplayHeadshot, &labDisplayKill };
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> PrisonBreakWetWorkStrategy::getDisplayLabelsAndItems()
@@ -25,20 +22,16 @@ QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> PrisonBreakWetWorkStrategy::g
 
 QList<QLabel*> PrisonBreakWetWorkStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName << &labHeadshot << &labKill;
+    return { &labMissionName, &labHeadshot, &labKill };
 }
 
 void PrisonBreakWetWorkStrategy::updateInfo()
 {
     auto headshot = headshotFetcher.fetchData();
-    auto headshotText = getHeadshotPattern().arg(QString::number(headshot));
-    labDisplayHeadshot.setText(headshotText);
-    labHeadshot.setText(headshotText);
+    updateHeadshotLabel(headshot);
 
     auto killHostClient1 = killHostClient1Fetcher.fetchData();
-    auto killText = getKillPattern().arg(QString::number(killHostClient1));
-    labDisplayKill.setText(killText);
-    labKill.setText(killText);
+    updateKillLabel(killHostClient1);
 }
 
 const QString PrisonBreakWetWorkStrategy::getDisplayName()

@@ -4,14 +4,11 @@
 LostMcRipStrategy::LostMcRipStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
-    labHeadshot.setFont(font);
-    labKill.setFont(font);
 }
 
 QList<QLabel*> LostMcRipStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << &labDisplayHeadshot << &labDisplayKill;
+    return { &labDisplayHeadshot, &labDisplayKill };
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> LostMcRipStrategy::getDisplayLabelsAndItems()
@@ -25,20 +22,16 @@ QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> LostMcRipStrategy::getDisplay
 
 QList<QLabel*> LostMcRipStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName << &labHeadshot << &labKill;
+    return { &labMissionName, &labHeadshot, &labKill };
 }
 
 void LostMcRipStrategy::updateInfo()
 {
     auto headshot = headshotFetcher.fetchData();
-    auto headshotText = getHeadshotPattern().arg(QString::number(headshot));
-    labDisplayHeadshot.setText(headshotText);
-    labHeadshot.setText(headshotText);
+    updateHeadshotLabel(headshot);
 
     auto killHost = killHostFetcher.fetchData();
-    auto killText = getKillPattern().arg(QString::number(killHost));
-    labDisplayKill.setText(killText);
-    labKill.setText(killText);
+    updateKillLabel(killHost);
 }
 
 const QString LostMcRipStrategy::getDisplayName()

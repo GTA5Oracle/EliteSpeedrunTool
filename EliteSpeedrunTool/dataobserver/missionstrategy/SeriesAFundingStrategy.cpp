@@ -4,32 +4,28 @@
 SeriesAFundingStrategy::SeriesAFundingStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
-    labTotalKill.setFont(font);
 }
 
 QList<QLabel*> SeriesAFundingStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << &labDisplayTotalKill;
+    return { &labDisplayKill };
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> SeriesAFundingStrategy::getDisplayLabelsAndItems()
 {
     auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    return { qMakePair(&labDisplayTotalKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]) };
+    return { qMakePair(&labDisplayKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]) };
 }
 
 QList<QLabel*> SeriesAFundingStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName << &labTotalKill;
+    return { &labMissionName, &labKill };
 }
 
 void SeriesAFundingStrategy::updateInfo()
 {
     auto data = killHostClient1Fetcher.fetchData();
-    auto text = getKillPattern().arg(QString::number(data));
-    labDisplayTotalKill.setText(text);
-    labTotalKill.setText(text);
+    updateKillLabel(data);
 }
 
 const QString SeriesAFundingStrategy::getDisplayName()

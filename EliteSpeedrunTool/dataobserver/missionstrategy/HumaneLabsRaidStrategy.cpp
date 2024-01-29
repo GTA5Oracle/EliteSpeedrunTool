@@ -4,32 +4,28 @@
 HumaneLabsRaidStrategy::HumaneLabsRaidStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
-    labVehicleDamage.setFont(font);
 }
 
 QList<QLabel*> HumaneLabsRaidStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << &labDisplayVehicleDamage;
+    return { &labDisplayPlaneDamage };
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> HumaneLabsRaidStrategy::getDisplayLabelsAndItems()
 {
     auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    return { qMakePair(&labDisplayVehicleDamage, displayInfoSubFunctions[DisplayInfoSubFunction::VehicleDamage]) };
+    return { qMakePair(&labDisplayPlaneDamage, displayInfoSubFunctions[DisplayInfoSubFunction::PlaneDamage]) };
 }
 
 QList<QLabel*> HumaneLabsRaidStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName << &labVehicleDamage;
+    return { &labMissionName, &labPlaneDamage };
 }
 
 void HumaneLabsRaidStrategy::updateInfo()
 {
     auto data = vehicleDamageFetcher.fetchData();
-    auto text = getPlaneDamagePattern().arg(QString::number(data, 'f', 2));
-    labDisplayVehicleDamage.setText(text);
-    labVehicleDamage.setText(text);
+    updatePlaneDamageLabel(data);
 }
 
 const QString HumaneLabsRaidStrategy::getDisplayName()

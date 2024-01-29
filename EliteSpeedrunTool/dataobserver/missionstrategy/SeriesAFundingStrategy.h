@@ -17,11 +17,6 @@ public:
 
 private:
     KillHostClient1Fetcher killHostClient1Fetcher = KillHostClient1Fetcher();
-
-    QLabel labMissionName = QLabel(getDisplayName());
-
-    QLabel labDisplayTotalKill = QLabel();
-    QLabel labTotalKill = QLabel();
 };
 
 #endif // SERIESAFUNDINGSTRATEGY_H

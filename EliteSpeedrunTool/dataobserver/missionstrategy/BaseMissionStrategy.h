@@ -24,6 +24,7 @@ public:
 
 protected:
     void initSettings();
+    void initLabel();
     void setLabelDisplay(QLabel* label, DisplayInfoSubFunctionItem* item);
     void setLabelTextAlignment(QLabel* label, DisplayInfoSubFunctionItem* item);
     void setLabelFont(QLabel* label, DisplayInfoSubFunctionItem* item);
@@ -35,16 +36,35 @@ protected:
     QString getPlaneDamagePattern(); // Valkyrie/Avenger机损
     QString getRashkovskyHurtPattern();
 
+    void updateKillLabel(int newValue);
+    void updateHeadshotLabel(int newValue);
+    void updateVehicleDamageLabel(float newValue);
+    void updatePlaneDamageLabel(float newValue); // Valkyrie/Avenger机损
+    void updateRashkovskyHurtLabel(float newValue);
+
 private:
     void initGlobalDataConnects();
     void initGlobalDataConnects(QLabel* label, DisplayInfoSubFunctionItem* item);
 
 protected:
     bool isCurrent = false;
-    bool isGlobalDataConnectsInited = false;
+    bool isLaterInited = false;
 
     QMap<QLabel*, bool> labelVisibleMap = {};
 
     QFont missionNameFont = QFont();
     QFont font = QFont();
+
+    QLabel labMissionName = QLabel();
+
+    QLabel labDisplayVehicleDamage = QLabel();
+    QLabel labVehicleDamage = QLabel();
+    QLabel labDisplayPlaneDamage = QLabel();
+    QLabel labPlaneDamage = QLabel();
+    QLabel labDisplayHeadshot = QLabel();
+    QLabel labDisplayRashkovskyDamage = QLabel();
+    QLabel labRashkovskyDamage = QLabel();
+    QLabel labHeadshot = QLabel();
+    QLabel labDisplayKill = QLabel();
+    QLabel labKill = QLabel();
 };

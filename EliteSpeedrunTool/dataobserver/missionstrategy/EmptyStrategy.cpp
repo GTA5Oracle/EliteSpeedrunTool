@@ -3,12 +3,11 @@
 EmptyStrategy::EmptyStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
 }
 
 QList<QLabel*> EmptyStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>();
+    return {};
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> EmptyStrategy::getDisplayLabelsAndItems()
@@ -18,7 +17,7 @@ QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> EmptyStrategy::getDisplayLabe
 
 QList<QLabel*> EmptyStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName;
+    return { &labMissionName };
 }
 
 void EmptyStrategy::updateInfo()

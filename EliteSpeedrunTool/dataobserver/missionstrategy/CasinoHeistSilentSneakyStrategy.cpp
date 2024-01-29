@@ -3,7 +3,6 @@
 CasinoHeistSilentSneakyStrategy::CasinoHeistSilentSneakyStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
 }
 
 QList<QLabel*> CasinoHeistSilentSneakyStrategy::getDisplayLabels()
@@ -18,7 +17,7 @@ QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> CasinoHeistSilentSneakyStrate
 
 QList<QLabel*> CasinoHeistSilentSneakyStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName;
+    return { &labMissionName };
 }
 
 void CasinoHeistSilentSneakyStrategy::updateInfo()

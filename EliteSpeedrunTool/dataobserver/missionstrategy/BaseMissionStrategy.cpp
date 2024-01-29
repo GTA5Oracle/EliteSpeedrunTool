@@ -5,8 +5,7 @@
 BaseMissionStrategy::BaseMissionStrategy(QObject* parent)
     : QObject { parent }
 {
-    missionNameFont.setPointSize(14);
-    font.setPointSize(12);
+    initLabel();
 }
 
 BaseMissionStrategy::~BaseMissionStrategy()
@@ -19,8 +18,9 @@ void BaseMissionStrategy::setCurrentStrategy(bool isCurrent)
     this->isCurrent = isCurrent;
     if (isCurrent) {
         initSettings();
-        if (!isGlobalDataConnectsInited) {
-            isGlobalDataConnectsInited = true;
+        if (!isLaterInited) {
+            isLaterInited = true;
+            labMissionName.setText(getDisplayName());
             initGlobalDataConnects();
         }
     }
@@ -45,6 +45,26 @@ void BaseMissionStrategy::initSettings()
         setLabelFont(labelsAndItem.first, labelsAndItem.second);
         setLabelTextStyle(labelsAndItem.first, labelsAndItem.second);
     }
+}
+
+void BaseMissionStrategy::initLabel()
+{
+    missionNameFont.setPointSize(14);
+    font.setPointSize(12);
+
+    labMissionName.setFont(missionNameFont);
+
+    labVehicleDamage.setFont(font);
+    labPlaneDamage.setFont(font);
+    labRashkovskyDamage.setFont(font);
+    labHeadshot.setFont(font);
+    labKill.setFont(font);
+
+    updateKillLabel(0);
+    updateHeadshotLabel(0);
+    updateVehicleDamageLabel(0.0f);
+    updatePlaneDamageLabel(0.0f);
+    updateRashkovskyHurtLabel(0.0f);
 }
 
 void BaseMissionStrategy::setLabelTextStyle(QLabel* label, DisplayInfoSubFunctionItem* item)
@@ -116,6 +136,41 @@ QString BaseMissionStrategy::getRashkovskyHurtPattern()
     default:
         return tr("拉什科夫斯基受伤：%1");
     }
+}
+
+void BaseMissionStrategy::updateKillLabel(int newValue)
+{
+    auto text = getKillPattern().arg(QString::number(newValue));
+    labDisplayKill.setText(text);
+    labKill.setText(text);
+}
+
+void BaseMissionStrategy::updateHeadshotLabel(int newValue)
+{
+    auto text = getHeadshotPattern().arg(QString::number(newValue));
+    labDisplayHeadshot.setText(text);
+    labHeadshot.setText(text);
+}
+
+void BaseMissionStrategy::updateVehicleDamageLabel(float newValue)
+{
+    auto text = getVehicleDamagePattern().arg(QString::number(newValue, 'f', 2));
+    labDisplayVehicleDamage.setText(text);
+    labVehicleDamage.setText(text);
+}
+
+void BaseMissionStrategy::updatePlaneDamageLabel(float newValue)
+{
+    auto text = getPlaneDamagePattern().arg(QString::number(newValue, 'f', 2));
+    labDisplayPlaneDamage.setText(text);
+    labPlaneDamage.setText(text);
+}
+
+void BaseMissionStrategy::updateRashkovskyHurtLabel(float newValue)
+{
+    auto text = getRashkovskyHurtPattern().arg(QString::number(newValue, 'f', 2));
+    labDisplayRashkovskyDamage.setText(text);
+    labRashkovskyDamage.setText(text);
 }
 
 void BaseMissionStrategy::initGlobalDataConnects()

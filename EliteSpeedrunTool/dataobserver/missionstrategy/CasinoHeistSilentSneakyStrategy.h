@@ -13,9 +13,6 @@ public:
     QList<QLabel*> getLabels() override;
     void updateInfo() override;
     const QString getDisplayName() override;
-
-private:
-    QLabel labMissionName = QLabel(getDisplayName());
 };
 
 #endif // CASINOHEISTSILENTSNEAKYSTRATEGY_H

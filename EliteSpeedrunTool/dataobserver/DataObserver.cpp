@@ -104,8 +104,13 @@ QList<QLabel*> DataObserver::getDisplayLabels()
 
 void DataObserver::onTimeout()
 {
+    /* 当前有合适的任务策略 */
     if (missionStrategy) {
-        missionStrategy->updateInfo();
+
+        /* 在任务中并且能够操控 */
+        if (1 == memoryUtil->getLocalInt(MemoryUtil::localInMissionCanControl)) {
+            missionStrategy->updateInfo();
+        }
 
         // 发送最新信息
         auto labels = missionStrategy->getLabels();

@@ -21,15 +21,6 @@ private:
     VehicleDamageFetcher vehicleDamageFetcher = VehicleDamageFetcher();
     HeadshotFetcher headshotFetcher = HeadshotFetcher();
     KillHostClient1Fetcher killHostClient1Fetcher = KillHostClient1Fetcher();
-
-    QLabel labMissionName = QLabel(getDisplayName());
-
-    QLabel labDisplayVehicleDamage = QLabel();
-    QLabel labVehicleDamage = QLabel();
-    QLabel labDisplayHeadshot = QLabel();
-    QLabel labHeadshot = QLabel();
-    QLabel labDisplayKill = QLabel();
-    QLabel labKill = QLabel();
 };
 
 #endif // PRISONBREAKSTATIONSTRATEGY_H

@@ -4,13 +4,11 @@
 FleecaJobStrategy::FleecaJobStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
-    labVehicleDamage.setFont(font);
 }
 
 QList<QLabel*> FleecaJobStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << &labDisplayVehicleDamage;
+    return { &labDisplayVehicleDamage };
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> FleecaJobStrategy::getDisplayLabelsAndItems()
@@ -21,15 +19,13 @@ QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> FleecaJobStrategy::getDisplay
 
 QList<QLabel*> FleecaJobStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName << &labVehicleDamage;
+    return { &labMissionName, &labVehicleDamage };
 }
 
 void FleecaJobStrategy::updateInfo()
 {
     auto data = vehicleDamageFetcher.fetchData();
-    auto text = getVehicleDamagePattern().arg(QString::number(data, 'f', 2));
-    labDisplayVehicleDamage.setText(text);
-    labVehicleDamage.setText(text);
+    updateVehicleDamageLabel(data);
 }
 
 const QString FleecaJobStrategy::getDisplayName()

@@ -4,13 +4,11 @@
 CasinoHeistAggressiveStrategy::CasinoHeistAggressiveStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
-    labHeadshot.setFont(font);
 }
 
 QList<QLabel*> CasinoHeistAggressiveStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << &labDisplayHeadshot;
+    return { &labDisplayHeadshot };
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> CasinoHeistAggressiveStrategy::getDisplayLabelsAndItems()
@@ -21,15 +19,13 @@ QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> CasinoHeistAggressiveStrategy
 
 QList<QLabel*> CasinoHeistAggressiveStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName << &labHeadshot;
+    return { &labMissionName, &labHeadshot };
 }
 
 void CasinoHeistAggressiveStrategy::updateInfo()
 {
     auto data = headshotFetcher.fetchData();
-    auto text = getHeadshotPattern().arg(QString::number(data));
-    labDisplayHeadshot.setText(text);
-    labHeadshot.setText(text);
+    updateHeadshotLabel(data);
 }
 
 const QString CasinoHeistAggressiveStrategy::getDisplayName()

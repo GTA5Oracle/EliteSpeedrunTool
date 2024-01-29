@@ -30,6 +30,9 @@ QString toDisplayString(DisplayInfoSubFunction f)
     case Kill:
         return QObject::tr("总击杀");
         break;
+    case PlaneDamage:
+        return QObject::tr("机损");
+        break;
     default:
         return "";
     }
@@ -58,6 +61,9 @@ QString toString(DisplayInfoSubFunction f)
         break;
     case Kill:
         return "Kill";
+        break;
+    case PlaneDamage:
+        return "PlaneDamage";
         break;
     default:
         return "";

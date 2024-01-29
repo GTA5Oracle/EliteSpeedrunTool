@@ -19,13 +19,6 @@ public:
 private:
     HeadshotFetcher headshotFetcher = HeadshotFetcher();
     KillHostFetcher killHostFetcher = KillHostFetcher();
-
-    QLabel labMissionName = QLabel(getDisplayName());
-
-    QLabel labDisplayHeadshot = QLabel();
-    QLabel labHeadshot = QLabel();
-    QLabel labDisplayKill = QLabel();
-    QLabel labKill = QLabel();
 };
 
 #endif // LOSTMCRIPSTRATEGY_H

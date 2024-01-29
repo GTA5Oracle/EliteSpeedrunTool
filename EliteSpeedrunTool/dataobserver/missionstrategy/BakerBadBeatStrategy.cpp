@@ -4,32 +4,28 @@
 BakerBadBeatStrategy::BakerBadBeatStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
-    labTotalKill.setFont(font);
 }
 
 QList<QLabel*> BakerBadBeatStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << &labDisplayTotalKill;
+    return { &labDisplayKill };
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> BakerBadBeatStrategy::getDisplayLabelsAndItems()
 {
     auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    return { qMakePair(&labDisplayTotalKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]) };
+    return { qMakePair(&labDisplayKill, displayInfoSubFunctions[DisplayInfoSubFunction::Kill]) };
 }
 
 QList<QLabel*> BakerBadBeatStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName << &labTotalKill;
+    return { &labMissionName, &labKill };
 }
 
 void BakerBadBeatStrategy::updateInfo()
 {
     auto data = killHostFetcher.fetchData();
-    auto text = getKillPattern().arg(QString::number(data));
-    labDisplayTotalKill.setText(text);
-    labTotalKill.setText(text);
+    updateKillLabel(data);
 }
 
 const QString BakerBadBeatStrategy::getDisplayName()

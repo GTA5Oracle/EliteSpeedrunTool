@@ -4,15 +4,11 @@
 PrisonBreakStationStrategy::PrisonBreakStationStrategy(QObject* parent)
     : BaseMissionStrategy { parent }
 {
-    labMissionName.setFont(missionNameFont);
-    labVehicleDamage.setFont(font);
-    labHeadshot.setFont(font);
-    labKill.setFont(font);
 }
 
 QList<QLabel*> PrisonBreakStationStrategy::getDisplayLabels()
 {
-    return QList<QLabel*>() << &labDisplayVehicleDamage << &labDisplayHeadshot << &labDisplayKill;
+    return { &labDisplayVehicleDamage, &labDisplayHeadshot, &labDisplayKill };
 }
 
 QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> PrisonBreakStationStrategy::getDisplayLabelsAndItems()
@@ -27,25 +23,19 @@ QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> PrisonBreakStationStrategy::g
 
 QList<QLabel*> PrisonBreakStationStrategy::getLabels()
 {
-    return QList<QLabel*>() << &labMissionName << &labVehicleDamage << &labHeadshot << &labKill;
+    return { &labMissionName, &labVehicleDamage, &labHeadshot, &labKill };
 }
 
 void PrisonBreakStationStrategy::updateInfo()
 {
     auto vehicleDamage = vehicleDamageFetcher.fetchData();
-    auto vehicleDamagetext = getVehicleDamagePattern().arg(QString::number(vehicleDamage, 'f', 2));
-    labDisplayVehicleDamage.setText(vehicleDamagetext);
-    labVehicleDamage.setText(vehicleDamagetext);
+    updateVehicleDamageLabel(vehicleDamage);
 
     auto headshot = headshotFetcher.fetchData();
-    auto headshotText = getHeadshotPattern().arg(QString::number(headshot));
-    labDisplayHeadshot.setText(headshotText);
-    labHeadshot.setText(headshotText);
+    updateHeadshotLabel(headshot);
 
     auto killHostClient1 = killHostClient1Fetcher.fetchData();
-    auto killText = getKillPattern().arg(QString::number(killHostClient1));
-    labDisplayKill.setText(killText);
-    labKill.setText(killText);
+    updateKillLabel(killHostClient1);
 }
 
 const QString PrisonBreakStationStrategy::getDisplayName()

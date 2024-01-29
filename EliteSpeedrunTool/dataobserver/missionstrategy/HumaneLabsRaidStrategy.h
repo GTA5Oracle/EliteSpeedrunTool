@@ -17,11 +17,6 @@ public:
 
 private:
     VehicleDamageFetcher vehicleDamageFetcher = VehicleDamageFetcher();
-
-    QLabel labMissionName = QLabel(getDisplayName());
-
-    QLabel labDisplayVehicleDamage = QLabel();
-    QLabel labVehicleDamage = QLabel();
 };
 
 #endif // HUMANELABSRAIDSTRATEGY_H
