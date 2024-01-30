@@ -7,12 +7,9 @@ Q_GLOBAL_STATIC(DataObserver, dataObserverInstance)
 DataObserver::DataObserver(QObject* parent)
     : QObject { parent }
 {
-    connect(timer, &QTimer::timeout, this, [this]() {
-        onTimeout();
-    });
-    connect(missionHashTimer, &QTimer::timeout, this, [this]() {
-        onMissionHashTimeout();
-    });
+    connect(timer, &QTimer::timeout, this, &DataObserver::onTimeout);
+    connect(missionHashTimer, &QTimer::timeout, this, &DataObserver::onMissionHashTimeout);
+
     connect(globalData, &GlobalData::missionDataUpdateIntervalChanged, this, [this]() {
         if (missionHashTimer) {
             missionHashTimer->setInterval(globalData->missionDataUpdateInterval());
@@ -104,22 +101,23 @@ QList<QLabel*> DataObserver::getDisplayLabels()
 
 void DataObserver::onTimeout()
 {
-    /* 当前有合适的任务策略 */
-    if (missionStrategy) {
-
+    /* 当前有合适的任务策略 并且 当前在支持的任务中 */
+    if (missionStrategy && missionStrategy != emptyStrategy) {
         /* 在任务中并且能够操控 */
         if (1 == memoryUtil->getLocalInt(MemoryUtil::localInMissionCanControl)) {
             missionStrategy->updateInfo();
         }
 
         // 发送最新信息
-        auto labels = missionStrategy->getLabels();
-        static QList<QString> missionDatas;
-        missionDatas.clear();
-        for (auto lab : labels) {
-            missionDatas += lab->text();
+        if (HttpServerController::instance()->isStarted()) {
+            auto labels = missionStrategy->getLabels();
+            static QList<QString> missionDatas;
+            missionDatas.clear();
+            for (auto lab : labels) {
+                missionDatas += lab->text();
+            }
+            HttpServerController::instance()->sendNewData(missionDatas.join("<br/>"));
         }
-        HttpServerController::instance()->sendNewData(missionDatas.join("<br/>"));
     }
 }
 
@@ -135,6 +133,7 @@ void DataObserver::onMissionHashTimeout()
     // 切换不同的任务策略
     if (missionStrategyMap.contains(newMissionHash)) {
         auto newMissionStrategy = missionStrategyMap[newMissionHash];
+        // 跟上次的MissionStrategy相同，直接跳过
         if (missionStrategy != newMissionStrategy) {
             lastMissionHash = newMissionHash;
             setMissionStrategy(newMissionStrategy);

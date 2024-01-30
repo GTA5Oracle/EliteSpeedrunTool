@@ -140,6 +140,12 @@ QString BaseMissionStrategy::getRashkovskyHurtPattern()
 
 void BaseMissionStrategy::updateKillLabel(int newValue)
 {
+    static QVariant lastValue;
+    if (!lastValue.isNull() && lastValue.toInt() == newValue) {
+        return;
+    }
+    lastValue.setValue(newValue);
+
     auto text = getKillPattern().arg(QString::number(newValue));
     labDisplayKill.setText(text);
     labKill.setText(text);
@@ -147,6 +153,12 @@ void BaseMissionStrategy::updateKillLabel(int newValue)
 
 void BaseMissionStrategy::updateHeadshotLabel(int newValue)
 {
+    static QVariant lastValue;
+    if (!lastValue.isNull() && lastValue.toInt() == newValue) {
+        return;
+    }
+    lastValue.setValue(newValue);
+
     auto text = getHeadshotPattern().arg(QString::number(newValue));
     labDisplayHeadshot.setText(text);
     labHeadshot.setText(text);
@@ -154,6 +166,12 @@ void BaseMissionStrategy::updateHeadshotLabel(int newValue)
 
 void BaseMissionStrategy::updateVehicleDamageLabel(float newValue)
 {
+    static QVariant lastValue;
+    if (!lastValue.isNull() && lastValue.toFloat() == newValue) {
+        return;
+    }
+    lastValue.setValue(newValue);
+
     auto text = getVehicleDamagePattern().arg(QString::number(newValue, 'f', 2));
     labDisplayVehicleDamage.setText(text);
     labVehicleDamage.setText(text);
@@ -161,6 +179,12 @@ void BaseMissionStrategy::updateVehicleDamageLabel(float newValue)
 
 void BaseMissionStrategy::updatePlaneDamageLabel(float newValue)
 {
+    static QVariant lastValue;
+    if (!lastValue.isNull() && lastValue.toFloat() == newValue) {
+        return;
+    }
+    lastValue.setValue(newValue);
+
     auto text = getPlaneDamagePattern().arg(QString::number(newValue, 'f', 2));
     labDisplayPlaneDamage.setText(text);
     labPlaneDamage.setText(text);
@@ -168,6 +192,12 @@ void BaseMissionStrategy::updatePlaneDamageLabel(float newValue)
 
 void BaseMissionStrategy::updateRashkovskyHurtLabel(float newValue)
 {
+    static QVariant lastValue;
+    if (!lastValue.isNull() && lastValue.toFloat() == newValue) {
+        return;
+    }
+    lastValue.setValue(newValue);
+
     auto text = getRashkovskyHurtPattern().arg(QString::number(newValue, 'f', 2));
     labDisplayRashkovskyDamage.setText(text);
     labRashkovskyDamage.setText(text);

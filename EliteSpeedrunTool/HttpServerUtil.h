@@ -126,6 +126,8 @@ public:
     void stopHttp();
     void initHttpServerUtil();
 
+    bool isStarted() const;
+
 signals:
     void sendNewDataSignal(QString missionData, QPrivateSignal);
 

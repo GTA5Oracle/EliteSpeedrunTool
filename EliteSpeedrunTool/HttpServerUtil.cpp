@@ -291,7 +291,9 @@ void HttpServerController::stop()
 
 void HttpServerController::sendNewData(QString missionData)
 {
-    emit sendNewDataSignal(missionData, QPrivateSignal());
+    if (started) {
+        emit sendNewDataSignal(missionData, QPrivateSignal());
+    }
 }
 
 void HttpServerController::startOrContinueTimer(bool isContinue, qint64 startTimestamp)
@@ -357,4 +359,9 @@ void HttpServerController::stopHttp()
 void HttpServerController::initHttpServerUtil()
 {
     emit initHttpServerUtilSignal(QPrivateSignal());
+}
+
+bool HttpServerController::isStarted() const
+{
+    return started;
 }
