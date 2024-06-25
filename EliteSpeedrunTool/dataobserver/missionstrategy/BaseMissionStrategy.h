@@ -13,6 +13,7 @@ public:
     void setCurrentStrategy(bool isCurrent);
     bool isCurrentStrategy();
     bool labelIsVisible(QLabel* label);
+    void resetLabelData();
 
     virtual QList<QLabel*> getDisplayLabels() = 0;
     virtual QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> getDisplayLabelsAndItems() = 0;
@@ -24,7 +25,7 @@ public:
 
 protected:
     void initSettings();
-    void initLabel();
+    void initLabelFont();
     void setLabelDisplay(QLabel* label, DisplayInfoSubFunctionItem* item);
     void setLabelTextAlignment(QLabel* label, DisplayInfoSubFunctionItem* item);
     void setLabelFont(QLabel* label, DisplayInfoSubFunctionItem* item);

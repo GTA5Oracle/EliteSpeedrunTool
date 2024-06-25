@@ -60,7 +60,11 @@ protected:
 
     void zeroTimer();
 
-    QString getFormattedTime(unsigned long long deltaTime, int* m, int* s, int* ms);
+    QString getFormattedTime(
+        unsigned long long deltaTime,
+        unsigned int* m,
+        unsigned int* s,
+        unsigned int* ms);
 
     void updateTimerString(qint64 currentDateTime = QDateTime::currentDateTime().toMSecsSinceEpoch());
 

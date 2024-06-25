@@ -23,7 +23,7 @@ public:
     void start();
     void stop();
     void timeOut();
-    long long getCurrentTimeStamp();
+    unsigned long long getCurrentTimeStamp();
     void stopAndReset(bool resetTime = true);
 
 private:
@@ -56,7 +56,7 @@ private:
     unsigned int inMissionCanControl = 0;
 
     bool startDisplayedTimer = false;
-    DWORD64 deltaLocalServerTime = 0;
+    unsigned long long deltaLocalServerTime = 0;
 
     int lastStartTimerFlag = 0;
     unsigned int lastTimeSummary = 0;

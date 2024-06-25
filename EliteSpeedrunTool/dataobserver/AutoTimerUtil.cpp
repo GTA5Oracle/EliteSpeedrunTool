@@ -58,17 +58,17 @@ void AutoTimerUtil::timeOut()
     if (missionHash == MemoryUtil::hashPrisonBreak) {
         startTimerFlag = memoryUtil->getLocalInt(MemoryUtil::localFlagInitPrisonBreakTimer);
         summaryTime = memoryUtil->getGlobalUInt(MemoryUtil::globalPrisonBreakSummaryTime);
-        currentStateStartTime = memoryUtil->getLocalLongLong(MemoryUtil::localInitPrisonBreakTimestamp); // 开始时间ptr
-        currentStateTime = memoryUtil->getLocalInt(MemoryUtil::localPrisonBreakTime); // 时间ptr
+        currentStateStartTime = memoryUtil->getLocalULongLong(MemoryUtil::localInitPrisonBreakTimestamp); // 开始时间ptr
+        currentStateTime = memoryUtil->getLocalUInt(MemoryUtil::localPrisonBreakTime); // 时间ptr
     } else {
         startTimerFlag = memoryUtil->getLocalInt(MemoryUtil::localFlagInitTimer);
         summaryTime = memoryUtil->getGlobalUInt(MemoryUtil::globalSummaryTime);
-        currentStateStartTime = memoryUtil->getLocalLongLong(MemoryUtil::localInitTimestamp); // 开始时间ptr
-        currentStateTime = memoryUtil->getLocalInt(MemoryUtil::localTime); // 时间ptr
+        currentStateStartTime = memoryUtil->getLocalULongLong(MemoryUtil::localInitTimestamp); // 开始时间ptr
+        currentStateTime = memoryUtil->getLocalUInt(MemoryUtil::localTime); // 时间ptr
     }
-    inMissionCanControl = memoryUtil->getLocalInt(MemoryUtil::localInMissionCanControl); // 是不是在任务中并且能够操控
+    inMissionCanControl = memoryUtil->getLocalUInt(MemoryUtil::localInMissionCanControl); // 是不是在任务中并且能够操控
     // 智障门有一瞬间hash变成0，解决方法是延时判断
-    static long long hashReallyValueTime = 0;
+    static unsigned long long hashReallyValueTime = 0;
     if (missionHash == 0 && lastMissionHash != 0) {
         if (!hashReallyValueTime) {
             hashReallyValueTime = getCurrentTimeStamp();
@@ -88,7 +88,7 @@ void AutoTimerUtil::timeOut()
     CloseHandle(gtaHandle);
 
     if (globalData->debugMode()) {
-        qDebug() << memoryUtil->globalPtr << state << missionHash << startTimerFlag << summaryTime << currentStateTime << currentStateStartTime;
+        qDebug() << memoryUtil->globalPtr << state << missionHash << startTimerFlag << summaryTime << currentStateTime << currentStateStartTime << inMissionCanControl;
     }
 
     if (state == MissionState::Running && lastDoneState == MissionState::End) {
@@ -117,12 +117,14 @@ void AutoTimerUtil::timeOut()
     if (state == MissionState::Running) {
         if (lastDoneState != state) {
             deltaLocalServerTime = getCurrentTimeStamp()
-                - memoryUtil->getLocalLongLong(
+                - memoryUtil->getLocalULongLong(
                     missionHash == MemoryUtil::hashPrisonBreak
                         ? MemoryUtil::localInitPrisonBreakTimestamp
                         : MemoryUtil::localInitTimestamp); // 开始时间ptr
         }
-        unsigned long long deltaTime = getCurrentTimeStamp() - currentStateStartTime - deltaLocalServerTime;
+        unsigned long long deltaTime = getCurrentTimeStamp()
+            - currentStateStartTime
+            - deltaLocalServerTime;
         if (globalData->debugMode()) {
             qDebug() << deltaTime
                      << getCurrentTimeStamp()
@@ -151,12 +153,13 @@ void AutoTimerUtil::timeOut()
     lastMissionHash = missionHash;
 }
 
-long long AutoTimerUtil::getCurrentTimeStamp()
+unsigned long long AutoTimerUtil::getCurrentTimeStamp()
 {
-    return QDateTime::currentDateTimeUtc()
-        .toTimeZone(QTimeZone("UTC+3"))
-        .time()
-        .msecsSinceStartOfDay();
+    return static_cast<unsigned long long>(
+        QDateTime::currentDateTimeUtc()
+            .toTimeZone(QTimeZone("UTC+3"))
+            .time()
+            .msecsSinceStartOfDay());
 }
 
 void AutoTimerUtil::stopAndReset(bool resetTime)

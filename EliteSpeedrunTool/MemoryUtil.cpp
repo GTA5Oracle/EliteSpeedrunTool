@@ -211,6 +211,13 @@ int MemoryUtil::getLocalInt(int index)
     return buffer;
 }
 
+unsigned int MemoryUtil::getLocalUInt(int index)
+{
+    unsigned int buffer;
+    read(missionPtr + (0x8 * index), &buffer, 4);
+    return buffer;
+}
+
 long long MemoryUtil::getLocalLongLong(int index)
 {
     long long buffer;

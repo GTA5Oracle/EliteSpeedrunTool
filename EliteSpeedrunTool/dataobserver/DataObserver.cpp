@@ -39,6 +39,9 @@ BaseMissionStrategy* DataObserver::getMissionStrategy() const
 
 void DataObserver::setMissionStrategy(BaseMissionStrategy* newMissionStrategy)
 {
+    if (newMissionStrategy == missionStrategy) {
+        return;
+    }
     if (missionStrategy) {
         emit onLabelsRemoved(missionStrategy->getLabels());
         emit onDisplayLabelsRemoved(missionStrategy->getDisplayLabels());
@@ -54,6 +57,8 @@ void DataObserver::setMissionStrategy(BaseMissionStrategy* newMissionStrategy)
     emit onMissionChanged();
     emit onLabelsAdded(newMissionStrategy->getLabels());
     emit onDisplayLabelsAdded(newMissionStrategy->getDisplayLabels());
+    // 在上面添加了Label后（Label有parent后）更新第一次的数据
+    newMissionStrategy->resetLabelData();
 }
 
 void DataObserver::startObserve()
@@ -101,10 +106,11 @@ QList<QLabel*> DataObserver::getDisplayLabels()
 
 void DataObserver::onTimeout()
 {
-    /* 当前有合适的任务策略 并且 当前在支持的任务中 */
-    if (missionStrategy && missionStrategy != emptyStrategy) {
-        /* 在任务中并且能够操控 */
-        if (1 == memoryUtil->getLocalInt(MemoryUtil::localInMissionCanControl)) {
+    /* 当前有合适的任务策略 */
+    if (missionStrategy) {
+        /* 当前在支持的任务中 并且 能够操控 */
+        if (missionStrategy != emptyStrategy
+            && 1 == memoryUtil->getLocalInt(MemoryUtil::localInMissionCanControl)) {
             missionStrategy->updateInfo();
         }
 

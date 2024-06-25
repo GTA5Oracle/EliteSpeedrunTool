@@ -35,8 +35,8 @@ public:
         qreal textShadowBlurRadius,
         const QPointF& textShadowOffset);
 
-    void setTime(int m, int s, int ms);
-    void setAutoTime(int m, int s, int ms);
+    void setTime(unsigned int m, unsigned int s, unsigned int ms);
+    void setAutoTime(unsigned int m, unsigned int s, unsigned int ms);
 
     static const QString timePattern;
 

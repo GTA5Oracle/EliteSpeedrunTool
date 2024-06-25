@@ -511,6 +511,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="btnRefreshBadSport">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
             <horstretch>0</horstretch>
@@ -518,7 +521,7 @@
            </sizepolicy>
           </property>
           <property name="text">
-           <string>刷新恶意值</string>
+           <string>刷新恶意值(暂时失效)</string>
           </property>
           <property name="icon">
            <iconset resource="resource.qrc">

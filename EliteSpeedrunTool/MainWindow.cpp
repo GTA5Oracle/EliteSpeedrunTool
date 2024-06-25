@@ -688,7 +688,11 @@ void MainWindow::zeroTimer()
     HttpServerController::instance()->zeroTimer();
 }
 
-QString MainWindow::getFormattedTime(unsigned long long deltaTime, int* m, int* s, int* ms)
+QString MainWindow::getFormattedTime(
+    unsigned long long deltaTime,
+    unsigned int* m,
+    unsigned int* s,
+    unsigned int* ms)
 {
     *m = deltaTime / 1000 / 60;
     *s = (deltaTime / 1000) % 60;
@@ -703,8 +707,9 @@ QString MainWindow::getFormattedTime(unsigned long long deltaTime, int* m, int* 
 
 void MainWindow::updateTimerString(qint64 currentDateTime)
 {
-    qint64 deltaTime = currentDateTime - timerTime;
-    int m, s, ms;
+    unsigned long long deltaTime = static_cast<unsigned long long>(
+        currentDateTime - timerTime);
+    unsigned int m, s, ms;
     QString t = getFormattedTime(deltaTime, &m, &s, &ms);
     ui.labTimer->setText(t);
     if (displayInfoDialogIsShowing && displayInfoDialog) {
@@ -714,7 +719,7 @@ void MainWindow::updateTimerString(qint64 currentDateTime)
 
 void MainWindow::updateAutoTimerString(unsigned long long deltaTime)
 {
-    int m, s, ms;
+    unsigned int m, s, ms;
     QString t = getFormattedTime(deltaTime, &m, &s, &ms);
     ui.labAutoTimer->setText(t);
     if (displayInfoDialogIsShowing && displayInfoDialog) {

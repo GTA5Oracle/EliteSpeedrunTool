@@ -16,33 +16,33 @@ public:
     DWORD64 globalPtr = 0;
     DWORD64 missionPtr = 0;
 
-    const static int globalMissionHash = 4718592 + 126144; // 任务HASH
-    const static int globalSummaryTime = 2685249 + 6465; // 之前所有阶段耗费的时间总和
-    const static int globalPrisonBreakSummaryTime = 2685249 + 6465; // 之前所有阶段耗费的时间总和
+    const static int globalMissionHash = 4718592 + 127178; // 任务HASH
+    const static int globalSummaryTime = 2685444 + 6489; // 之前所有阶段耗费的时间总和
+    const static int globalPrisonBreakSummaryTime = 2685444 + 6500; // 之前所有阶段耗费的时间总和
     // 变量的签名
-    const static int localInMissionCanControl = 31676; // 是不是在任务中并且能够操控
-    const static int localTime = 19728 + 987; // 任务每一段的时间
-    const static int localPrisonBreakTime = 19728 + 990; // 越狱的逃离时间
-    const static int localHeadshot = 19728 + 1740 + 1; // 总的爆头数
-    const static int localKillHost = 19728 + 1725 + 1; // 房主击杀数/首轮北边击杀总和/M1击杀总和
-    const static int localKillClient1 = 19728 + 1725 + 2; // 队友1击杀数/首轮南边击杀总和
-    const static int localVehicleDamage = 24562 + 1231; // 车辆受损程度
-    const static int localRashkovskyDamage = 24562 + 1230; // 拉什科夫斯基受伤程度
-    const static int localHeadshotHost = 31603 + 1 + (0 * 292) + 85; // 房主爆头数
-    const static int localHeadshotClient1 = 31603 + 1 + (1 * 292) + 85; // 队友1爆头数
+    const static int localInMissionCanControl = 31694; // 是不是在任务中并且能够操控
+    const static int localTime = 19746 + 987; // 任务每一段的时间
+    const static int localPrisonBreakTime = 19746 + 990; // 越狱的逃离时间
+    const static int localHeadshot = 19746 + 1740 + 1; // 总的爆头数
+    const static int localKillHost = 19746 + 1725 + 1; // 房主击杀数/首轮北边击杀总和/M1击杀总和
+    const static int localKillClient1 = 19746 + 1725 + 2; // 队友1击杀数/首轮南边击杀总和
+    const static int localVehicleDamage = 24580 + 1231; // 车辆受损程度
+    const static int localRashkovskyDamage = 24580 + 1230; // 拉什科夫斯基受伤程度
+    const static int localHeadshotHost = 31621 + 1 + (0 * 292) + 85; // 房主爆头数
+    const static int localHeadshotClient1 = 31621 + 1 + (1 * 292) + 85; // 队友1爆头数
 
     // 结算页面的数据
-    const static int globalTime = 2685249 + 3485 + 94; // 时间
-    const static int globalPrisonBreakTime = 2685249 + 3485 + 106; // 越狱的逃离时间
-    const static int globalHeadshot = 2685249 + 3485 + 114; // 总的爆头数
-    const static int globalKill = 2685249 + 3485 + 110; // 总的击杀数
-    const static int globalVehicleDamage = 2685249 + 3485 + 98; // 车辆受损程度
-    const static int globalRashkovskyDamage = 2685249 + 3485 + 102; // 拉什科夫斯基受伤程度
+    const static int globalTime = 2685444 + 3498 + 95; // 时间
+    const static int globalPrisonBreakTime = 2685444 + 3498 + 107; // 越狱的逃离时间
+    const static int globalHeadshot = 2685444 + 3498 + 115; // 总的爆头数
+    const static int globalKill = 2685444 + 3498 + 111; // 总的击杀数
+    const static int globalVehicleDamage = 2685444 + 3498 + 99; // 车辆受损程度
+    const static int globalRashkovskyDamage = 2685444 + 3498 + 103; // 拉什科夫斯基受伤程度
 
-    const static int localInitTimestamp = 19728 + 985; // 开始计时时的时间戳
-    const static int localInitPrisonBreakTimestamp = 19728 + 988; // 开始计时时的时间戳
-    const static int localFlagInitTimer = 19728 + 985 + 1; // 是否开始计时，1开始，0暂停
-    const static int localFlagInitPrisonBreakTimer = 19728 + 988 + 1; // 越狱逃离是否开始计时，1开始，0暂停
+    const static int localInitTimestamp = 19746 + 985; // 开始计时时的时间戳
+    const static int localInitPrisonBreakTimestamp = 19746 + 988; // 开始计时时的时间戳
+    const static int localFlagInitTimer = 19746 + 985 + 1; // 是否开始计时，1开始，0暂停
+    const static int localFlagInitPrisonBreakTimer = 19746 + 988 + 1; // 越狱逃离是否开始计时，1开始，0暂停
 
     // 任务HASH
     inline const static unsigned long long hashDoomsdayAct1 = 1175383697; // 末日1分红
@@ -50,7 +50,7 @@ public:
     inline const static unsigned long long hashDoomsdayAct3P1 = 3118746651; // 末日3分红前一段
     inline const static unsigned long long hashDoomsdayAct3P2 = 4263845131; // 末日3分红后一段
     inline const static unsigned long long hashFleecaJob = 3222096535; // 全福分红
-    inline const static unsigned long long hashPrisonBreakStation = 137052480; // 越狱：警察局
+    inline const static unsigned long long hashPrisonBreakStation = 2569787839; // 越狱：警察局
     inline const static unsigned long long hashPrisonBreakWetWork = 137052480; // 越狱：行刺
     inline const static unsigned long long hashPrisonBreak = 979654579; // 越狱分红
     inline const static unsigned long long hashHumaneLabsRaid = 3197980642; // 人道分红
@@ -92,6 +92,7 @@ public:
     float getGlobalFloat(int index);
 
     int getLocalInt(int index);
+    unsigned int getLocalUInt(int index);
     float getLocalFloat(int index);
     long long getLocalLongLong(int index);
     unsigned long long getLocalULongLong(int index);

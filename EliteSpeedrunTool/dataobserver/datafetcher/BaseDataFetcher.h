@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MemoryUtil.h"
-#include <QObject>
+#include <QDebug>
 
 template <typename T>
 class BaseDataFetcher : public QObject {

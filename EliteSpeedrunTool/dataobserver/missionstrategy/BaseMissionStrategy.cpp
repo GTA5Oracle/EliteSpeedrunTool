@@ -5,7 +5,7 @@
 BaseMissionStrategy::BaseMissionStrategy(QObject* parent)
     : QObject { parent }
 {
-    initLabel();
+    initLabelFont();
 }
 
 BaseMissionStrategy::~BaseMissionStrategy()
@@ -47,7 +47,7 @@ void BaseMissionStrategy::initSettings()
     }
 }
 
-void BaseMissionStrategy::initLabel()
+void BaseMissionStrategy::initLabelFont()
 {
     missionNameFont.setPointSize(14);
     font.setPointSize(12);
@@ -59,7 +59,10 @@ void BaseMissionStrategy::initLabel()
     labRashkovskyDamage.setFont(font);
     labHeadshot.setFont(font);
     labKill.setFont(font);
+}
 
+void BaseMissionStrategy::resetLabelData()
+{
     updateKillLabel(0);
     updateHeadshotLabel(0);
     updateVehicleDamageLabel(0.0f);
@@ -141,6 +144,12 @@ QString BaseMissionStrategy::getRashkovskyHurtPattern()
 void BaseMissionStrategy::updateKillLabel(int newValue)
 {
     static QVariant lastValue;
+    // 没有parent，setText无效
+    if (!labKill.parentWidget() && !labDisplayKill.parentWidget()) {
+        lastValue.clear();
+        return;
+    }
+    // 若跟上次更新的数据一样则直接跳过
     if (!lastValue.isNull() && lastValue.toInt() == newValue) {
         return;
     }
@@ -154,9 +163,16 @@ void BaseMissionStrategy::updateKillLabel(int newValue)
 void BaseMissionStrategy::updateHeadshotLabel(int newValue)
 {
     static QVariant lastValue;
+    // 没有parent，setText无效
+    if (!labHeadshot.parentWidget() && !labDisplayHeadshot.parentWidget()) {
+        lastValue.clear();
+        return;
+    }
+    // 若跟上次更新的数据一样则直接跳过
     if (!lastValue.isNull() && lastValue.toInt() == newValue) {
         return;
     }
+
     lastValue.setValue(newValue);
 
     auto text = getHeadshotPattern().arg(QString::number(newValue));
@@ -167,6 +183,12 @@ void BaseMissionStrategy::updateHeadshotLabel(int newValue)
 void BaseMissionStrategy::updateVehicleDamageLabel(float newValue)
 {
     static QVariant lastValue;
+    // 没有parent，setText无效
+    if (!labVehicleDamage.parentWidget() && !labDisplayVehicleDamage.parentWidget()) {
+        lastValue.clear();
+        return;
+    }
+    // 若跟上次更新的数据一样则直接跳过
     if (!lastValue.isNull() && lastValue.toFloat() == newValue) {
         return;
     }
@@ -180,6 +202,12 @@ void BaseMissionStrategy::updateVehicleDamageLabel(float newValue)
 void BaseMissionStrategy::updatePlaneDamageLabel(float newValue)
 {
     static QVariant lastValue;
+    // 没有parent，setText无效
+    if (!labPlaneDamage.parentWidget() && !labDisplayPlaneDamage.parentWidget()) {
+        lastValue.clear();
+        return;
+    }
+    // 若跟上次更新的数据一样则直接跳过
     if (!lastValue.isNull() && lastValue.toFloat() == newValue) {
         return;
     }
@@ -193,6 +221,12 @@ void BaseMissionStrategy::updatePlaneDamageLabel(float newValue)
 void BaseMissionStrategy::updateRashkovskyHurtLabel(float newValue)
 {
     static QVariant lastValue;
+    // 没有parent，setText无效
+    if (!labRashkovskyDamage.parentWidget() && !labDisplayRashkovskyDamage.parentWidget()) {
+        lastValue.clear();
+        return;
+    }
+    // 若跟上次更新的数据一样则直接跳过
     if (!lastValue.isNull() && lastValue.toFloat() == newValue) {
         return;
     }

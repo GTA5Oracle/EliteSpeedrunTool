@@ -8,8 +8,8 @@
 2 ICON "icon.ico"
 
 VS_VERSION_INFO VERSIONINFO
-    FILEVERSION 8,1,1,68
-    PRODUCTVERSION 8,1,1,68
+    FILEVERSION 8,1,1,69
+    PRODUCTVERSION 8,1,1,69
     FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
     FILEFLAGS VS_FF_DEBUG
@@ -26,8 +26,8 @@ VS_VERSION_INFO VERSIONINFO
             BEGIN
                 VALUE "CompanyName", "SkyD666\0"
                 VALUE "FileDescription", "Elite Speedrun Tool\0"
-                VALUE "FileVersion", "8.1.1.68\0"
-                VALUE "ProductVersion", "8.1.1.68\0"
+                VALUE "FileVersion", "8.1.1.69\0"
+                VALUE "ProductVersion", "8.1.1.69\0"
                 VALUE "ProductName", "Elite Speedrun Tool\0"
            END
         END

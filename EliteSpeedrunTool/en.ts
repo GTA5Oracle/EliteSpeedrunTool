@@ -12,7 +12,7 @@
 <context>
     <name>BaseMissionStrategy</name>
     <message>
-        <location filename="dataobserver/missionstrategy/BaseMissionStrategy.cpp" line="+89"/>
+        <location filename="dataobserver/missionstrategy/BaseMissionStrategy.cpp" line="+92"/>
         <source>总击杀：%1</source>
         <translation>Total kills: %1</translation>
     </message>
@@ -431,7 +431,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <name>MainWindow</name>
     <message>
         <location filename="MainWindow.ui" line="+25"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+584"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+585"/>
         <source>断网</source>
         <translation>Firewall</translation>
     </message>
@@ -459,7 +459,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+139"/>
-        <location filename="MainWindow.cpp" line="+772"/>
+        <location filename="MainWindow.cpp" line="+777"/>
         <location line="+22"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+8"/>
         <source>点击启动</source>
@@ -475,7 +475,7 @@ AdstarGod Firewall, easy to use
         <translation>Click to pause</translation>
     </message>
     <message>
-        <location line="+333"/>
+        <location line="+336"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+14"/>
         <source>立即结束游戏</source>
         <translation>Terminate the game</translation>
@@ -529,7 +529,7 @@ AdstarGod Firewall, easy to use
         <translation>Alipay...</translation>
     </message>
     <message>
-        <location line="-614"/>
+        <location line="-617"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+14"/>
         <source>计时</source>
         <translation>Manual timing</translation>
@@ -598,14 +598,8 @@ AdstarGod Firewall, easy to use
         <translation>This feature is provided by Zerkalo2147</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+1"/>
-        <source>刷新恶意值</source>
-        <translation>Refresh badsport</translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+3"/>
+        <location line="+37"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+4"/>
         <source>结束游戏</source>
         <translation>Terminate game</translation>
     </message>
@@ -635,7 +629,7 @@ AdstarGod Firewall, easy to use
         <translation>About Qt...</translation>
     </message>
     <message>
-        <location line="-586"/>
+        <location line="-589"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+22"/>
         <source>警告</source>
         <translation>Warning</translation>
@@ -654,8 +648,14 @@ AdstarGod Firewall, easy to use
         <translation>Refresh</translation>
     </message>
     <message>
-        <location line="+559"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-24"/>
+        <location line="+421"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+19"/>
+        <source>刷新恶意值(暂时失效)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+141"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-43"/>
         <source>关于本软件...</source>
         <translation>About...</translation>
     </message>
@@ -691,7 +691,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+30"/>
-        <location filename="MainWindow.cpp" line="-482"/>
+        <location filename="MainWindow.cpp" line="-487"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+4"/>
         <source>复制地址</source>
         <translation>Copy link</translation>
@@ -767,7 +767,7 @@ AdstarGod Firewall, easy to use
         <translation>Server address has been copied!</translation>
     </message>
     <message>
-        <location line="+457"/>
+        <location line="+462"/>
         <source>点击归零</source>
         <translation>Click to Zero</translation>
     </message>
@@ -782,7 +782,7 @@ AdstarGod Firewall, easy to use
         <translation>Click to continue</translation>
     </message>
     <message>
-        <location line="-631"/>
+        <location line="-636"/>
         <source>注册启用防火墙热键失败！</source>
         <oldsource>注册防火墙启动热键失败！</oldsource>
         <translation>Failed to register enable firewall hotkeys!</translation>
@@ -828,7 +828,7 @@ AdstarGod Firewall, easy to use
         <translation>Alipay payment QR code. Thank you!</translation>
     </message>
     <message>
-        <location filename="MainWindow.h" line="+127"/>
+        <location filename="MainWindow.h" line="+131"/>
         <source>加入 Telegram 群组一起划水~</source>
         <translation>Join Telegram group~</translation>
     </message>

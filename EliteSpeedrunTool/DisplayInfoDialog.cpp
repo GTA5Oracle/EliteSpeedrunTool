@@ -166,7 +166,7 @@ int DisplayInfoDialog::widgetCount()
     return ui->mainLayout->count();
 }
 
-void DisplayInfoDialog::setTime(int m, int s, int ms)
+void DisplayInfoDialog::setTime(unsigned int m, unsigned int s, unsigned int ms)
 {
     auto textSize = globalData->displayInfoSubFunctions()[DisplayInfoSubFunction::Timer]->textSize();
     ui->labTimer->setText(timePattern
@@ -177,7 +177,7 @@ void DisplayInfoDialog::setTime(int m, int s, int ms)
                               .arg(ms, 2, 10, QLatin1Char('0')));
 }
 
-void DisplayInfoDialog::setAutoTime(int m, int s, int ms)
+void DisplayInfoDialog::setAutoTime(unsigned int m, unsigned int s, unsigned int ms)
 {
     auto textSize = globalData->displayInfoSubFunctions()[DisplayInfoSubFunction::AutoTimer]->textSize();
     ui->labAutoTimer->setText(timePattern
