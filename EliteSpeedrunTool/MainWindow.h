@@ -133,7 +133,7 @@ private:
         + "</p>"
         + "<p>" + tr("特别感谢 <b>ACT3 帮会和 CEHT 帮会</b>对本工具的宣传和支持。特别感谢 <b>CZ9946 和 Adstargod</b> 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 <b>Alice</b> 对本工具的开发提供技术支持！") + "</p>"
         + "<p>" + tr("感谢所有提供赞助的朋友们！") + "</p>"
-        + QString("<p>Copyright <font>&#169;</font> 2023 SkyD666</p>"
+        + QString("<p>Copyright <font>&#169;</font> 2024 SkyD666</p>"
                   R"(<p>This program is free software: you can redistribute it and/or modify
                      it under the terms of the GNU General Public License as published by
                      the Free Software Foundation, either version 3 of the License, or
