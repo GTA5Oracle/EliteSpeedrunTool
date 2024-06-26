@@ -431,7 +431,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <name>MainWindow</name>
     <message>
         <location filename="MainWindow.ui" line="+25"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+585"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+584"/>
         <source>断网</source>
         <translation>Firewall</translation>
     </message>
@@ -475,7 +475,7 @@ AdstarGod Firewall, easy to use
         <translation>Click to pause</translation>
     </message>
     <message>
-        <location line="+336"/>
+        <location line="+333"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+14"/>
         <source>立即结束游戏</source>
         <translation>Terminate the game</translation>
@@ -529,7 +529,7 @@ AdstarGod Firewall, easy to use
         <translation>Alipay...</translation>
     </message>
     <message>
-        <location line="-617"/>
+        <location line="-614"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+14"/>
         <source>计时</source>
         <translation>Manual timing</translation>
@@ -598,8 +598,14 @@ AdstarGod Firewall, easy to use
         <translation>This feature is provided by Zerkalo2147</translation>
     </message>
     <message>
-        <location line="+37"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+4"/>
+        <location line="+16"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+1"/>
+        <source>刷新恶意值</source>
+        <translation>Refresh Badsport</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+3"/>
         <source>结束游戏</source>
         <translation>Terminate game</translation>
     </message>
@@ -629,7 +635,7 @@ AdstarGod Firewall, easy to use
         <translation>About Qt...</translation>
     </message>
     <message>
-        <location line="-589"/>
+        <location line="-586"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+22"/>
         <source>警告</source>
         <translation>Warning</translation>
@@ -648,14 +654,8 @@ AdstarGod Firewall, easy to use
         <translation>Refresh</translation>
     </message>
     <message>
-        <location line="+421"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+19"/>
-        <source>刷新恶意值(暂时失效)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+141"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-43"/>
+        <location line="+559"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-24"/>
         <source>关于本软件...</source>
         <translation>About...</translation>
     </message>
@@ -860,8 +860,9 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+4"/>
-        <source>特别感谢 &lt;b&gt;ACT3 帮会和 CEHT 帮会&lt;/b&gt;对本工具的宣传和支持。特别感谢 &lt;b&gt;CZ9946 和 Adstargod&lt;/b&gt; 两位大佬，他们对本工具的研发提供了大量的帮助！</source>
-        <translation>Special thanks to &lt;b&gt;World Save Act Elite and CEHT&lt;/b&gt; for promoting and supporting this tool. A big thank you to &lt;b&gt;CZ9946 and Adstargod&lt;/b&gt;, who provided significant assistance in the development of this tool!</translation>
+        <source>特别感谢 &lt;b&gt;ACT3 帮会和 CEHT 帮会&lt;/b&gt;对本工具的宣传和支持。特别感谢 &lt;b&gt;CZ9946 和 Adstargod&lt;/b&gt; 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 &lt;b&gt;Alice&lt;/b&gt; 对本工具的开发提供技术支持！</source>
+        <oldsource>特别感谢 &lt;b&gt;ACT3 帮会和 CEHT 帮会&lt;/b&gt;对本工具的宣传和支持。特别感谢 &lt;b&gt;CZ9946 和 Adstargod&lt;/b&gt; 两位大佬，他们对本工具的研发提供了大量的帮助！</oldsource>
+        <translation>Special thanks to &lt;b&gt;World Save Act Elite and CEHT&lt;/b&gt; for promoting and supporting this tool. A big thank you to &lt;b&gt;CZ9946 and Adstargod&lt;/b&gt;, who provided significant assistance in the development of this tool! Special thanks to &lt;b&gt;Alice&lt;/b&gt; for technical support!</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -954,7 +955,7 @@ AdstarGod Firewall, easy to use
     <message>
         <location line="+3"/>
         <source>机损</source>
-        <translation type="unfinished"></translation>
+        <translation>Airplane damage</translation>
     </message>
     <message>
         <location filename="GlobalData.cpp" line="+27"/>

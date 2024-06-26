@@ -252,7 +252,7 @@ int MemoryUtil::getBadSport()
     read(globalPtr - 0x120, &buffer, 8);
     read(buffer + 0xDD8, &buffer, 8);
     float badSport = 0;
-    read(buffer + 321 * 8, &badSport, 4);
+    read(buffer + 323 * 8, &badSport, 4);
     qInfo() << "BadSport is" << badSport;
     return badSport;
 }
