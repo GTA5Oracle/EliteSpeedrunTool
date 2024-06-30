@@ -23,7 +23,10 @@ DisplayInfoDialog::DisplayInfoDialog(QWidget* parent)
     setChildrenTransparentForMouseEvents();
     setDisplay();
     setTextAlignment();
-    setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    auto windowFlag = globalData->displayInfoToolWindow()
+        ? Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
+        : Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint;
+    setWindowFlags(windowFlag);
     qreal devicePixelRatio = screen()->devicePixelRatio();
     setGeometry(QRect(globalData->displayInfoPos() / devicePixelRatio, globalData->displayInfoSize() / devicePixelRatio));
 

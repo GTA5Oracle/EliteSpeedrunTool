@@ -459,7 +459,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+139"/>
-        <location filename="MainWindow.cpp" line="+777"/>
+        <location filename="MainWindow.cpp" line="+784"/>
         <location line="+22"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+8"/>
         <source>点击启动</source>
@@ -1001,7 +1001,7 @@ AdstarGod Firewall, easy to use
     <name>SettingDialog</name>
     <message>
         <location filename="SettingDialog.ui" line="+14"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1369"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1381"/>
         <source>设置</source>
         <translation>Settings</translation>
     </message>
@@ -1012,9 +1012,9 @@ AdstarGod Firewall, easy to use
         <translation>windowsvista style does not support dark mode, while other styles support dark mode following the system</translation>
     </message>
     <message>
-        <location line="+618"/>
+        <location line="+629"/>
         <location line="+457"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+24"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+25"/>
         <location line="+31"/>
         <source>启动</source>
         <translation>Enable</translation>
@@ -1102,13 +1102,13 @@ AdstarGod Firewall, easy to use
         <translation>Refresh data interval</translation>
     </message>
     <message>
-        <location line="-735"/>
+        <location line="-746"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-36"/>
         <source>窗口</source>
         <translation>Window</translation>
     </message>
     <message>
-        <location line="+35"/>
+        <location line="+46"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-7"/>
         <source>X 坐标</source>
         <translation>X</translation>
@@ -1132,12 +1132,12 @@ AdstarGod Firewall, easy to use
         <translation>Height</translation>
     </message>
     <message>
-        <location line="-285"/>
+        <location line="-296"/>
         <location line="+106"/>
-        <location line="+206"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-12"/>
+        <location line="+217"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-13"/>
         <location line="+4"/>
-        <location line="+9"/>
+        <location line="+10"/>
         <source>颜色</source>
         <translation>Color</translation>
     </message>
@@ -1148,8 +1148,8 @@ AdstarGod Firewall, easy to use
         <translation>Alpha</translation>
     </message>
     <message>
-        <location line="-485"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-7"/>
+        <location line="-496"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-8"/>
         <source>内容</source>
         <translation>Content</translation>
     </message>
@@ -1216,14 +1216,14 @@ AdstarGod Firewall, easy to use
         <translation>Text alignment</translation>
     </message>
     <message>
-        <location line="+274"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+12"/>
+        <location line="+285"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+13"/>
         <source>断网热键</source>
         <translation>Firewall hotkey</translation>
     </message>
     <message>
-        <location line="-366"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-15"/>
+        <location line="-377"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-16"/>
         <source>模糊半径</source>
         <translation>Blur radius</translation>
     </message>
@@ -1246,8 +1246,14 @@ AdstarGod Firewall, easy to use
         <translation>Vertical</translation>
     </message>
     <message>
-        <location line="+316"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+14"/>
+        <location line="+63"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+2"/>
+        <source>工具窗口（WS_EX_TOOLWINDOW）</source>
+        <translation>Tool window (WS_EX_TOOLWINDOW)</translation>
+    </message>
+    <message>
+        <location line="+264"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+13"/>
         <source>启动音效</source>
         <translation>Start</translation>
     </message>

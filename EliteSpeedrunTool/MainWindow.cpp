@@ -116,6 +116,13 @@ void MainWindow::initGlobalDataConnects()
             timer->setInterval(globalData->timerUpdateInterval());
         }
     });
+
+    connect(globalData, &GlobalData::displayInfoToolWindowChanged, this, [this]() {
+        if (displayInfoDialog) {
+            ui.actionDisplayInfo->setChecked(false);
+            ui.actionDisplayInfo->setChecked(true);
+        }
+    });
 }
 
 void MainWindow::checkUpdate()

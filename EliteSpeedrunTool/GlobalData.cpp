@@ -147,6 +147,7 @@ void GlobalData::readSettings()
     rect.top = GetSystemMetrics(SM_YVIRTUALSCREEN);
     rect.right = GetSystemMetrics(SM_CXVIRTUALSCREEN) + rect.left;
     rect.bottom = GetSystemMetrics(SM_CYVIRTUALSCREEN) + rect.top;
+    setDisplayInfoToolWindow(settings.value("DisplayInfoToolWindow", mDisplayInfoToolWindow).toBool());
     setDisplayInfoShow(settings.value("DisplayInfoShow", mDisplayInfoShow).toBool());
     setDisplayInfoTouchable(settings.value("DisplayInfoTouchable", mDisplayInfoShow).toBool());
     setDisplayInfoServer(settings.value("DisplayInfoServer", mDisplayInfoServer).toBool());
@@ -217,6 +218,7 @@ void GlobalData::writeSettings()
     settings.endGroup();
 
     settings.beginGroup("DisplayInfo");
+    settings.setValue("DisplayInfoToolWindow", mDisplayInfoToolWindow);
     settings.setValue("DisplayInfoShow", mDisplayInfoShow);
     settings.setValue("DisplayInfoTouchable", mDisplayInfoTouchable);
     settings.setValue("DisplayInfoServer", mDisplayInfoServer);
@@ -773,4 +775,17 @@ void GlobalData::setDebugMode(bool newDebugMode)
         return;
     mDebugMode = newDebugMode;
     emit debugModeChanged();
+}
+
+bool GlobalData::displayInfoToolWindow() const
+{
+    return mDisplayInfoToolWindow;
+}
+
+void GlobalData::setDisplayInfoToolWindow(bool newDisplayInfoToolWindow)
+{
+    if (mDisplayInfoToolWindow == newDisplayInfoToolWindow)
+        return;
+    mDisplayInfoToolWindow = newDisplayInfoToolWindow;
+    emit displayInfoToolWindowChanged();
 }

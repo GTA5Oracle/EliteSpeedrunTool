@@ -20,8 +20,8 @@
    <string>信息展示</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/image/icon.png</normaloff>:/image/icon.png</iconset>
+   <iconset resource="resource.qrc">
+    <normaloff>:/image/ic_icon.png</normaloff>:/image/ic_icon.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -99,6 +99,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

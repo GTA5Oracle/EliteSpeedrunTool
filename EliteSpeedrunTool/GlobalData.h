@@ -167,6 +167,9 @@ public:
     bool debugMode() const;
     void setDebugMode(bool newDebugMode);
 
+    bool displayInfoToolWindow() const;
+    void setDisplayInfoToolWindow(bool newDisplayInfoToolWindow);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -213,6 +216,8 @@ signals:
 
     void debugModeChanged();
 
+    void displayInfoToolWindowChanged();
+
 private:
     bool mMinimizeToTray = false;
     QString mStyleName = "windowsvista";
@@ -233,6 +238,7 @@ private:
         DisplayInfoSubFunction::PlaneDamage,
     };
     QDisplayInfoSubFuncsMap mDisplayInfoSubFunctions;
+    bool mDisplayInfoToolWindow = true;
     bool mDisplayInfoShow = true;
     bool mDisplayInfoTouchable = true;
     bool mDisplayInfoServer = false;
@@ -325,4 +331,5 @@ private:
     Q_PROPERTY(int autoTimerUpdateInterval READ autoTimerUpdateInterval WRITE setAutoTimerUpdateInterval NOTIFY autoTimerUpdateIntervalChanged)
     Q_PROPERTY(MissionDataNameUtil::MissionDataName missionDataName READ missionDataName WRITE setMissionDataName NOTIFY missionDataNameChanged FINAL)
     Q_PROPERTY(bool debugMode READ debugMode WRITE setDebugMode NOTIFY debugModeChanged FINAL)
+    Q_PROPERTY(bool displayInfoToolWindow READ displayInfoToolWindow WRITE setDisplayInfoToolWindow NOTIFY displayInfoToolWindowChanged FINAL)
 };

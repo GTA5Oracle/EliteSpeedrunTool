@@ -321,6 +321,11 @@ void SettingDialog::initDisplayInfoSettings()
     rect.top = GetSystemMetrics(SM_YVIRTUALSCREEN);
     rect.right = GetSystemMetrics(SM_CXVIRTUALSCREEN) + rect.left;
     rect.bottom = GetSystemMetrics(SM_CYVIRTUALSCREEN) + rect.top;
+    // Tool Window
+    ui.cbDisplayInfoToolWindow->setChecked(globalData->displayInfoToolWindow());
+    connect(ui.cbDisplayInfoToolWindow, &QCheckBox::stateChanged, this, [=](int state) {
+        globalData->setDisplayInfoToolWindow(state == Qt::Checked);
+    });
     // XY
     {
         auto displayInfoPos = globalData->displayInfoPos();
