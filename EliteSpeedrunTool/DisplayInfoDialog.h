@@ -42,7 +42,7 @@ public:
 
     static const QString textQssPattern;
 
-    void insertWidget(int index, QWidget* widget);
+    void addWidget(QWidget* widget);
     void removeWidget(QWidget* widget);
     void removeAllInsertedWidget();
     bool containWidget(QWidget* widget);

@@ -3,12 +3,25 @@
 
 #include "BaseDataFetcher.h"
 
-class VehicleDamageFetcher : public BaseDataFetcher<float> {
+#include <QLabel>
+
+class VehicleDamageFetcher : public BaseDataFetcher {
     Q_OBJECT
 public:
     explicit VehicleDamageFetcher(QObject* parent = nullptr);
 
-    float fetchData() override;
+    QString getDisplayName() override;
+
+    QString id() override;
+
+    QVariant fetchData() override;
+
+    void fetchDataAndUpdateLabel() override;
+
+    DisplayInfoSubFunction getType() override;
+
+private:
+    QString getVehicleDamagePattern();
 };
 
 #endif // VEHICLEDAMAGEFETCHER_H

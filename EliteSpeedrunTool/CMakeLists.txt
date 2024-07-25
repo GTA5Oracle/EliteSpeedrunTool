@@ -26,6 +26,7 @@ set(PROJECT_SOURCES
         DisplayInfoDialog.h DisplayInfoDialog.cpp DisplayInfoDialog.ui
         UpdateDialog.h UpdateDialog.cpp UpdateDialog.ui
         DescriptionDialog.h DescriptionDialog.cpp DescriptionDialog.ui
+        AcknowledgementDialog.h AcknowledgementDialog.cpp AcknowledgementDialog.ui
         LogUtil.h LogUtil.cpp
         LanguageUtil.h LanguageUtil.cpp
         MemoryUtil.h MemoryUtil.cpp
@@ -37,30 +38,50 @@ set(PROJECT_SOURCES
         dataobserver/AutoTimerUtil.h dataobserver/AutoTimerUtil.cpp
         dataobserver/DataObserver.h dataobserver/DataObserver.cpp
         #=================
+        dataobserver/missionstrategy/MissionStrategyUtil.h dataobserver/missionstrategy/MissionStrategyUtil.cpp
         dataobserver/missionstrategy/BaseMissionStrategy.h dataobserver/missionstrategy/BaseMissionStrategy.cpp
-        dataobserver/missionstrategy/DoomsdayAct1Strategy.h dataobserver/missionstrategy/DoomsdayAct1Strategy.cpp
-        dataobserver/missionstrategy/DoomsdayAct2Strategy.h dataobserver/missionstrategy/DoomsdayAct2Strategy.cpp
-        dataobserver/missionstrategy/DoomsdayAct3Strategy.h dataobserver/missionstrategy/DoomsdayAct3Strategy.cpp
+        dataobserver/missionstrategy/act1/TheDataBreachesStrategy.h dataobserver/missionstrategy/act1/TheDataBreachesStrategy.cpp
+        dataobserver/missionstrategy/act1/Act1DeadCourierStrategy.h dataobserver/missionstrategy/act1/Act1DeadCourierStrategy.cpp
+        dataobserver/missionstrategy/act1/Act1SignalInterceptsStrategy.h dataobserver/missionstrategy/act1/Act1SignalInterceptsStrategy.cpp
+        dataobserver/missionstrategy/act1/Act1ServerFarmStrategy.h dataobserver/missionstrategy/act1/Act1ServerFarmStrategy.cpp
+        dataobserver/missionstrategy/act2/TheBogdanProblemStrategy.h dataobserver/missionstrategy/act2/TheBogdanProblemStrategy.cpp
+        dataobserver/missionstrategy/act2/Act2AvengerStrategy.h dataobserver/missionstrategy/act2/Act2AvengerStrategy.cpp
+        dataobserver/missionstrategy/act2/Act2RescueUlpStrategy.h dataobserver/missionstrategy/act2/Act2RescueUlpStrategy.cpp
+        dataobserver/missionstrategy/act2/Act2SalvageHardDrivesStrategy.h dataobserver/missionstrategy/act2/Act2SalvageHardDrivesStrategy.cpp
+        dataobserver/missionstrategy/act2/Act2SubmarineReconStrategy.h dataobserver/missionstrategy/act2/Act2SubmarineReconStrategy.cpp
+        dataobserver/missionstrategy/act3/TheDoomsdayScenarioStrategy.h dataobserver/missionstrategy/act3/TheDoomsdayScenarioStrategy.cpp
+        dataobserver/missionstrategy/act3/Act3RescueAgent14Strategy.h dataobserver/missionstrategy/act3/Act3RescueAgent14Strategy.cpp
+        dataobserver/missionstrategy/act3/Act3EscortUlpStrategy.h dataobserver/missionstrategy/act3/Act3EscortUlpStrategy.cpp
+        dataobserver/missionstrategy/act3/Act3BarrageStrategy.h dataobserver/missionstrategy/act3/Act3BarrageStrategy.cpp
+        dataobserver/missionstrategy/act3/Act3KhanjaliStrategy.h dataobserver/missionstrategy/act3/Act3KhanjaliStrategy.cpp
+        dataobserver/missionstrategy/act3/Act3AirDefensesStrategy.h dataobserver/missionstrategy/act3/Act3AirDefensesStrategy.cpp
         dataobserver/missionstrategy/LostMcRipStrategy.h dataobserver/missionstrategy/LostMcRipStrategy.cpp
         dataobserver/missionstrategy/EmptyStrategy.h dataobserver/missionstrategy/EmptyStrategy.cpp
-        dataobserver/missionstrategy/FleecaJobStrategy.h dataobserver/missionstrategy/FleecaJobStrategy.cpp
-        dataobserver/missionstrategy/PrisonBreakStationStrategy.h dataobserver/missionstrategy/PrisonBreakStationStrategy.cpp
-        dataobserver/missionstrategy/PrisonBreakWetWorkStrategy.h dataobserver/missionstrategy/PrisonBreakWetWorkStrategy.cpp
-        dataobserver/missionstrategy/PrisonBreakStrategy.h dataobserver/missionstrategy/PrisonBreakStrategy.cpp
-        dataobserver/missionstrategy/SeriesAFundingStrategy.h dataobserver/missionstrategy/SeriesAFundingStrategy.cpp
-        dataobserver/missionstrategy/HumaneLabsRaidStrategy.h dataobserver/missionstrategy/HumaneLabsRaidStrategy.cpp
-        dataobserver/missionstrategy/PacificStandardStrategy.h dataobserver/missionstrategy/PacificStandardStrategy.cpp
-        dataobserver/missionstrategy/CasinoHeistTheBigConStrategy.h dataobserver/missionstrategy/CasinoHeistTheBigConStrategy.cpp
-        dataobserver/missionstrategy/CasinoHeistSilentSneakyStrategy.h dataobserver/missionstrategy/CasinoHeistSilentSneakyStrategy.cpp
-        dataobserver/missionstrategy/CasinoHeistAggressiveStrategy.h dataobserver/missionstrategy/CasinoHeistAggressiveStrategy.cpp
-        dataobserver/missionstrategy/CasinoHeistEndStageStrategy.h dataobserver/missionstrategy/CasinoHeistEndStageStrategy.cpp
-        dataobserver/missionstrategy/BakerBadBeatStrategy.h dataobserver/missionstrategy/BakerBadBeatStrategy.cpp
+        dataobserver/missionstrategy/fleecajob/TheFleecaJobStrategy.h dataobserver/missionstrategy/fleecajob/TheFleecaJobStrategy.cpp
+        dataobserver/missionstrategy/fleecajob/FleecaJobScopeOutStrategy.h dataobserver/missionstrategy/fleecajob/FleecaJobScopeOutStrategy.cpp
+        dataobserver/missionstrategy/fleecajob/FleecaJobKurumaStrategy.h dataobserver/missionstrategy/fleecajob/FleecaJobKurumaStrategy.cpp
+        dataobserver/missionstrategy/prisonbreak/PrisonBreakStationStrategy.h dataobserver/missionstrategy/prisonbreak/PrisonBreakStationStrategy.cpp
+        dataobserver/missionstrategy/prisonbreak/PrisonBreakWetWorkStrategy.h dataobserver/missionstrategy/prisonbreak/PrisonBreakWetWorkStrategy.cpp
+        dataobserver/missionstrategy/prisonbreak/ThePrisonBreakStrategy.h dataobserver/missionstrategy/prisonbreak/ThePrisonBreakStrategy.cpp
+        dataobserver/missionstrategy/seriesa/SeriesAFundingStrategy.h dataobserver/missionstrategy/seriesa/SeriesAFundingStrategy.cpp
+        dataobserver/missionstrategy/humanelabsraid/TheHumaneLabsRaidStrategy.h dataobserver/missionstrategy/humanelabsraid/TheHumaneLabsRaidStrategy.cpp
+        dataobserver/missionstrategy/humanelabsraid/HumaneRaidInsurgentsStrategy.h dataobserver/missionstrategy/humanelabsraid/HumaneRaidInsurgentsStrategy.cpp
+        dataobserver/missionstrategy/pacificstandard/ThePacificStandardStrategy.h dataobserver/missionstrategy/pacificstandard/ThePacificStandardStrategy.cpp
+        dataobserver/missionstrategy/casinoheist/CasinoHeistTheBigConStrategy.h dataobserver/missionstrategy/casinoheist/CasinoHeistTheBigConStrategy.cpp
+        dataobserver/missionstrategy/casinoheist/CasinoHeistSilentSneakyStrategy.h dataobserver/missionstrategy/casinoheist/CasinoHeistSilentSneakyStrategy.cpp
+        dataobserver/missionstrategy/casinoheist/CasinoHeistAggressiveStrategy.h dataobserver/missionstrategy/casinoheist/CasinoHeistAggressiveStrategy.cpp
+        dataobserver/missionstrategy/casinoheist/CasinoHeistEndStageStrategy.h dataobserver/missionstrategy/casinoheist/CasinoHeistEndStageStrategy.cpp
+        dataobserver/missionstrategy/casino/CasinoBadBeatStrategy.h dataobserver/missionstrategy/casino/CasinoBadBeatStrategy.cpp
         #=================
         dataobserver/datafetcher/BaseDataFetcher.h
+        dataobserver/datafetcher/DataFetcherUtil.h dataobserver/datafetcher/DataFetcherUtil.cpp
         dataobserver/datafetcher/MissionHashFetcher.h dataobserver/datafetcher/MissionHashFetcher.cpp
         dataobserver/datafetcher/HeadshotFetcher.h dataobserver/datafetcher/HeadshotFetcher.cpp
-        dataobserver/datafetcher/KillHostFetcher.h dataobserver/datafetcher/KillHostFetcher.cpp
-        dataobserver/datafetcher/KillHostClient1Fetcher.h dataobserver/datafetcher/KillHostClient1Fetcher.cpp
+        dataobserver/datafetcher/KillFetcher.h dataobserver/datafetcher/KillFetcher.cpp
+        dataobserver/datafetcher/Kill1Fetcher.h dataobserver/datafetcher/Kill1Fetcher.cpp
+        dataobserver/datafetcher/Kill2Fetcher.h dataobserver/datafetcher/Kill2Fetcher.cpp
+        dataobserver/datafetcher/Kill3Fetcher.h dataobserver/datafetcher/Kill3Fetcher.cpp
+        dataobserver/datafetcher/Kill4Fetcher.h dataobserver/datafetcher/Kill4Fetcher.cpp
         dataobserver/datafetcher/VehicleDamageFetcher.h dataobserver/datafetcher/VehicleDamageFetcher.cpp
         dataobserver/datafetcher/RashkovskyDamageFetcher.h dataobserver/datafetcher/RashkovskyDamageFetcher.cpp
         AutoCapture.h AutoCapture.cpp

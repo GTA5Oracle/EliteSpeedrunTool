@@ -55,7 +55,7 @@ void AutoTimerUtil::timeOut()
     if (globalData->debugMode()) {
         qDebug() << missionHash << lastMissionHash;
     }
-    if (missionHash == MemoryUtil::hashPrisonBreak) {
+    if (missionHash == MemoryUtil::hashThePrisonBreak) {
         startTimerFlag = memoryUtil->getLocalInt(MemoryUtil::localFlagInitPrisonBreakTimer);
         summaryTime = memoryUtil->getGlobalUInt(MemoryUtil::globalPrisonBreakSummaryTime);
         currentStateStartTime = memoryUtil->getLocalULongLong(MemoryUtil::localInitPrisonBreakTimestamp); // 开始时间ptr
@@ -118,7 +118,7 @@ void AutoTimerUtil::timeOut()
         if (lastDoneState != state) {
             deltaLocalServerTime = getCurrentTimeStamp()
                 - memoryUtil->getLocalULongLong(
-                    missionHash == MemoryUtil::hashPrisonBreak
+                                       missionHash == MemoryUtil::hashThePrisonBreak
                         ? MemoryUtil::localInitPrisonBreakTimestamp
                         : MemoryUtil::localInitTimestamp); // 开始时间ptr
         }
@@ -219,7 +219,7 @@ void AutoTimerUtil::onTimerCallback()
 
 unsigned long long AutoTimerUtil::getRealTime(unsigned long long data)
 {
-    if (missionHash != MemoryUtil::hashPrisonBreak) {
+    if (missionHash != MemoryUtil::hashThePrisonBreak) {
         // 除了越狱之外的任务默认+10s
         return data + 10000;
     } else {

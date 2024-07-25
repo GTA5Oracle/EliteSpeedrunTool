@@ -593,6 +593,7 @@
     <addaction name="actionGitHub"/>
     <addaction name="actionHelpTranslate"/>
     <addaction name="separator"/>
+    <addaction name="actionAcknowledgement"/>
     <addaction name="actionAboutQt"/>
     <addaction name="actionAbout"/>
    </widget>
@@ -785,6 +786,11 @@
   <action name="actionBuyMeACoffee">
    <property name="text">
     <string>Buy Me A Coffee...</string>
+   </property>
+  </action>
+  <action name="actionAcknowledgement">
+   <property name="text">
+    <string>鸣谢...</string>
    </property>
   </action>
  </widget>

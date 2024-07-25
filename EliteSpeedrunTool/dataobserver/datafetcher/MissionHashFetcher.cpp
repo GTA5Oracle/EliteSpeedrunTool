@@ -5,7 +5,26 @@ MissionHashFetcher::MissionHashFetcher(QObject* parent)
 {
 }
 
-unsigned int MissionHashFetcher::fetchData()
+QString MissionHashFetcher::getDisplayName()
 {
-    return getGlobalData(MemoryUtil::globalMissionHash);
+    return tr("任务 ID");
+}
+
+QString MissionHashFetcher::id()
+{
+    return "MissionHash";
+}
+
+void MissionHashFetcher::fetchDataAndUpdateLabel()
+{
+}
+
+QVariant MissionHashFetcher::fetchData()
+{
+    return QVariant::fromValue(getGlobalData<unsigned int>(MemoryUtil::globalMissionHash));
+}
+
+DisplayInfoSubFunction MissionHashFetcher::getType()
+{
+    return DisplayInfoSubFunction::Firewall; // Meaningless
 }

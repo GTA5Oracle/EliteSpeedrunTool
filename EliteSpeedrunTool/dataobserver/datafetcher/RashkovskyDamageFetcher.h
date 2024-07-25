@@ -3,12 +3,25 @@
 
 #include "BaseDataFetcher.h"
 
-class RashkovskyDamageFetcher : public BaseDataFetcher<float> {
+#include <QLabel>
+
+class RashkovskyDamageFetcher : public BaseDataFetcher {
     Q_OBJECT
 public:
     explicit RashkovskyDamageFetcher(QObject* parent = nullptr);
 
-    float fetchData() override;
+    QString getDisplayName() override;
+
+    QString id() override;
+
+    QVariant fetchData() override;
+
+    void fetchDataAndUpdateLabel() override;
+
+    DisplayInfoSubFunction getType() override;
+
+private:
+    QString getRashkovskyHurtPattern();
 };
 
 #endif // RASHKOVSKYDAMAGEFETCHER_H

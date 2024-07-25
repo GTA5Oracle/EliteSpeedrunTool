@@ -1,12 +1,22 @@
 #include "DataObserver.h"
 #include "GlobalData.h"
 #include "HttpServerUtil.h"
+#include "dataobserver/datafetcher/DataFetcherUtil.h"
+#include "dataobserver/missionstrategy/MissionStrategyUtil.h"
+
+#include <QCoreApplication>
 
 Q_GLOBAL_STATIC(DataObserver, dataObserverInstance)
 
 DataObserver::DataObserver(QObject* parent)
     : QObject { parent }
 {
+    for (auto mission : missionStrategyUtil->missionStrategies) {
+        for (auto hash : mission->missionHash()) {
+            hashToMissionStrategy[hash] = mission;
+        }
+    }
+
     connect(timer, &QTimer::timeout, this, &DataObserver::onTimeout);
     connect(missionHashTimer, &QTimer::timeout, this, &DataObserver::onMissionHashTimeout);
 
@@ -20,11 +30,33 @@ DataObserver::DataObserver(QObject* parent)
             timer->setInterval(globalData->missionDataUpdateInterval());
         }
     });
+    // Reset the missionStrategy when the data displayed by the current mission changes in order to reload the data
+    connect(missionStrategyUtil, &MissionStrategyUtil::onMissionToDataFetchersChanged, this,
+        [this](QString missionId, QSet<QString> oldFetchers, QSet<QString> newFetchers) {
+            if (missionStrategy && missionStrategy->id() == missionId) {
+                stopObserve();
+                QSet<QString> needToRemove = oldFetchers - newFetchers;
+                missionStrategy->setCurrentStrategy(false);
+                missionStrategy = nullptr;
+                QList<QLabel*> needToRemoveLabels, needToRemoveDisplayLabels;
+                for (auto& fetcherId : needToRemove) {
+                    auto fetcher = dataFetcherUtil->dataFetcherMap[fetcherId];
+                    needToRemoveLabels << fetcher->getLabel();
+                    needToRemoveDisplayLabels << fetcher->getDisplayLabel();
+                }
+                emit onLabelsRemoved(needToRemoveLabels);
+                emit onDisplayLabelsRemoved(needToRemoveDisplayLabels);
+                startObserve();
+            }
+        });
+
+    connect(qApp, &QCoreApplication::aboutToQuit, this, [=]() {
+        destruct();
+    });
 }
 
 DataObserver::~DataObserver()
 {
-    destruct();
 }
 
 DataObserver* DataObserver::instance()
@@ -57,8 +89,6 @@ void DataObserver::setMissionStrategy(BaseMissionStrategy* newMissionStrategy)
     emit onMissionChanged();
     emit onLabelsAdded(newMissionStrategy->getLabels());
     emit onDisplayLabelsAdded(newMissionStrategy->getDisplayLabels());
-    // 在上面添加了Label后（Label有parent后）更新第一次的数据
-    newMissionStrategy->resetLabelData();
 }
 
 void DataObserver::startObserve()
@@ -109,7 +139,7 @@ void DataObserver::onTimeout()
     /* 当前有合适的任务策略 */
     if (missionStrategy) {
         /* 当前在支持的任务中 并且 能够操控 */
-        if (missionStrategy != emptyStrategy
+        if (missionStrategy != missionStrategyUtil->emptyStrategy
             && 1 == memoryUtil->getLocalInt(MemoryUtil::localInMissionCanControl)) {
             missionStrategy->updateInfo();
         }
@@ -129,7 +159,7 @@ void DataObserver::onTimeout()
 
 void DataObserver::onMissionHashTimeout()
 {
-    auto newMissionHash = missionHashFetcher.fetchData();
+    auto newMissionHash = missionHashFetcher.fetchData().value<unsigned long long>();
     if (globalData->debugMode()) {
         qDebug() << newMissionHash;
     }
@@ -137,17 +167,17 @@ void DataObserver::onMissionHashTimeout()
     //     qDebug() << missionStrategy->getLabels();
     // }
     // 切换不同的任务策略
-    if (missionStrategyMap.contains(newMissionHash)) {
-        auto newMissionStrategy = missionStrategyMap[newMissionHash];
+    if (hashToMissionStrategy.contains(newMissionHash)) {
+        auto newMissionStrategy = hashToMissionStrategy[newMissionHash];
         // 跟上次的MissionStrategy相同，直接跳过
         if (missionStrategy != newMissionStrategy) {
             lastMissionHash = newMissionHash;
             setMissionStrategy(newMissionStrategy);
         }
     } else {
-        if (missionStrategy != emptyStrategy) {
+        if (missionStrategy != missionStrategyUtil->emptyStrategy) {
             lastMissionHash = newMissionHash;
-            setMissionStrategy(emptyStrategy);
+            setMissionStrategy(missionStrategyUtil->emptyStrategy);
         }
     }
 }

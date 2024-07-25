@@ -46,6 +46,8 @@ protected:
 
     void initMissionDataSettings();
 
+    void setMissionDataCombineListWidgetData(QSet<QString> includedDataFetchers);
+
     void initTimerSettings();
 
     void initDisplayInfoSettings();

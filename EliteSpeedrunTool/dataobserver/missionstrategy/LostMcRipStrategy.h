@@ -2,23 +2,19 @@
 #define LOSTMCRIPSTRATEGY_H
 
 #include "BaseMissionStrategy.h"
-#include "dataobserver/datafetcher/HeadshotFetcher.h"
-#include "dataobserver/datafetcher/KillHostFetcher.h"
 
 class LostMcRipStrategy : public BaseMissionStrategy {
     Q_OBJECT
 public:
     explicit LostMcRipStrategy(QObject* parent = nullptr);
 
-    QList<QLabel*> getDisplayLabels() override;
-    QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> getDisplayLabelsAndItems() override;
-    QList<QLabel*> getLabels() override;
-    void updateInfo() override;
     const QString getDisplayName() override;
 
-private:
-    HeadshotFetcher headshotFetcher = HeadshotFetcher();
-    KillHostFetcher killHostFetcher = KillHostFetcher();
+    QSet<QString> defaultDataFetchers() override;
+
+    QString id() override;
+
+    const QSet<unsigned long long> missionHash() override;
 };
 
 #endif // LOSTMCRIPSTRATEGY_H

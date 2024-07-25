@@ -8,11 +8,13 @@ class EmptyStrategy : public BaseMissionStrategy {
 public:
     explicit EmptyStrategy(QObject* parent = nullptr);
 
-    QList<QLabel*> getDisplayLabels() override;
-    QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> getDisplayLabelsAndItems() override;
-    QList<QLabel*> getLabels() override;
-    void updateInfo() override;
     const QString getDisplayName() override;
+
+    QSet<QString> defaultDataFetchers() override;
+
+    QString id() override;
+
+    const QSet<unsigned long long> missionHash() override;
 };
 
 #endif // EMPTYSTRATEGY_H

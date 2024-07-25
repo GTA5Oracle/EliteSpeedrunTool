@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include "AcknowledgementDialog.h"
 #include "DescriptionDialog.h"
 #include "DiscordUtil.h"
 #include "FirewallUtil.h"
@@ -411,6 +412,10 @@ void MainWindow::initMenu()
         QDesktopServices::openUrl(QUrl("https://discord.gg/pEWEjeJTa3"));
     });
 
+    connect(ui.actionAcknowledgement, &QAction::triggered, this, [this]() {
+        AcknowledgementDialog(this).exec();
+    });
+
     connect(ui.actionAboutQt, &QAction::triggered, this, []() { qApp->aboutQt(); });
 
     connect(ui.actionAbout, &QAction::triggered, this, [this]() {
@@ -544,7 +549,7 @@ void MainWindow::initMissionData()
             return;
         }
         for (auto label : labels) {
-            displayInfoDialog->insertWidget(displayInfoDialog->widgetCount() - 1, label);
+            displayInfoDialog->addWidget(label);
         }
     });
     connect(dataObserver, &DataObserver::onDisplayLabelsRemoved, this, [this](QList<QLabel*> labels) {
@@ -606,8 +611,8 @@ void MainWindow::initDisplayInfoDialogData()
     if (displayInfoDialog) {
         for (auto label : dataObserver->getDisplayLabels()) {
             if (!displayInfoDialog->containWidget(label)) {
-                displayInfoDialog->insertWidget(displayInfoDialog->widgetCount() - 1, label);
-                label->setVisible(dataObserver->getMissionStrategy()->labelIsVisible(label));
+                displayInfoDialog->addWidget(label);
+                // label->setVisible(dataObserver->getMissionStrategy()->labelIsVisible(label));
             }
         }
     }

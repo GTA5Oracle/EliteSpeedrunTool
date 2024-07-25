@@ -44,7 +44,7 @@ public:
 
     static GlobalData* instance();
 
-    inline QString getSettingsFilePath();
+    QString getSettingsFilePath();
 
     void init();
     void destory();

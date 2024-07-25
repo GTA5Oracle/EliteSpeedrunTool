@@ -24,8 +24,10 @@ public:
     const static int localTime = 19746 + 987; // 任务每一段的时间
     const static int localPrisonBreakTime = 19746 + 990; // 越狱的逃离时间
     const static int localHeadshot = 19746 + 1740 + 1; // 总的爆头数
-    const static int localKillHost = 19746 + 1725 + 1; // 房主击杀数/首轮北边击杀总和/M1击杀总和
-    const static int localKillClient1 = 19746 + 1725 + 2; // 队友1击杀数/首轮南边击杀总和
+    const static int localKill1 = 19746 + 1725 + 1; // 房主击杀数/首轮北边击杀总和/M1击杀总和
+    const static int localKill2 = 19746 + 1725 + 2; // 队友1击杀数/首轮南边击杀总和
+    const static int localKill3 = 19746 + 1725 + 3;
+    const static int localKill4 = 19746 + 1725 + 4;
     const static int localVehicleDamage = 24580 + 1231; // 车辆受损程度
     const static int localRashkovskyDamage = 24580 + 1230; // 拉什科夫斯基受伤程度
     const static int localHeadshotHost = 31621 + 1 + (0 * 292) + 85; // 房主爆头数
@@ -45,18 +47,42 @@ public:
     const static int localFlagInitPrisonBreakTimer = 19746 + 988 + 1; // 越狱逃离是否开始计时，1开始，0暂停
 
     // 任务HASH
-    inline const static unsigned long long hashDoomsdayAct1 = 1175383697; // 末日1分红
-    inline const static unsigned long long hashDoomsdayAct2 = 3883215059; // 末日2分红
-    inline const static unsigned long long hashDoomsdayAct3P1 = 3118746651; // 末日3分红前一段
-    inline const static unsigned long long hashDoomsdayAct3P2 = 4263845131; // 末日3分红后一段
-    inline const static unsigned long long hashFleecaJob = 3222096535; // 全福分红
+    // ACT1
+    inline const static unsigned long long hashTheDataBreaches = 1175383697; // 末日1分红
+    inline const static unsigned long long hashAct1DeadCourier = 2310376779; // 准备任务：亡命速递
+    inline const static unsigned long long hashAct1SignalIntercepts = 2988089418; // 准备任务：拦截信号
+    inline const static unsigned long long hashAct1ServerFarm = 83978007; // 准备任务：服务器群组
+    // ACT2
+    inline const static unsigned long long hashTheBogdanProblem = 3883215059; // 末日2分红
+    inline const static unsigned long long hashAct2Avenger = 1673641696; // 准备任务：复仇者
+    inline const static unsigned long long hashAct2RescueUlp = 1549726198; // 准备任务：营救 ULP
+    inline const static unsigned long long hashAct2SalvageHardDrives = 1146411126; // 准备任务：抢救硬盘
+    inline const static unsigned long long hashAct2SubmarineRecon = 1981951486; // 准备任务：潜水艇侦察
+    // ACT3
+    inline const static unsigned long long hashTheDoomsdayScenarioP1 = 3118746651; // 末日3分红前一段
+    inline const static unsigned long long hashTheDoomsdayScenarioP2 = 4263845131; // 末日3分红后一段
+    inline const static unsigned long long hashAct3RescueAgent14 = 1865386823; // 准备任务：营救 14 号探员
+    inline const static unsigned long long hashAct3EscortUlp = 1374735669; // 准备任务：护送 ULP
+    inline const static unsigned long long hashAct3Barrage = 2643765252; // 准备任务：巴拉杰
+    inline const static unsigned long long hashAct3Khanjali = 1579954143; // 准备任务：可汗贾利
+    inline const static unsigned long long hashAct3AirDefenses = 4184233611; // 准备任务：空中防御
+    // 全福
+    inline const static unsigned long long hashTheFleecaJob = 3222096535; // 全福分红
+    inline const static unsigned long long hashFleecaJobScopeOut = 1771792820; // 全福探查
+    inline const static unsigned long long hashFleecaJobKuruma = 3458614835; // 全福骷髅马
+    // 越狱
     inline const static unsigned long long hashPrisonBreakStation = 2569787839; // 越狱：警察局
     inline const static unsigned long long hashPrisonBreakWetWork = 137052480; // 越狱：行刺
-    inline const static unsigned long long hashPrisonBreak = 979654579; // 越狱分红
-    inline const static unsigned long long hashHumaneLabsRaid = 3197980642; // 人道分红
+    inline const static unsigned long long hashThePrisonBreak = 979654579; // 越狱分红
+    // 人道
+    inline const static unsigned long long hashTheHumaneLabsRaid = 3197980642; // 人道分红
+    inline const static unsigned long long hashHumaneRaidInsurgents = 2039847454; // 突袭人道研究实验室：叛乱分子
+    // 首轮
     inline const static unsigned long long hashSeriesAFunding = 164435858; // 首轮分红
-    inline const static unsigned long long hashPacificStandardP1 = 4062993727; // 太平洋分红前一段
-    inline const static unsigned long long hashPacificStandardP2 = 1309288309; // 太平洋分红后一段
+    // 太平洋
+    inline const static unsigned long long hashThePacificStandardP1 = 4062993727; // 太平洋分红前一段
+    inline const static unsigned long long hashThePacificStandardP2 = 1309288309; // 太平洋分红后一段
+    // 赌场
     inline const static unsigned long long hashCasinoHeistAggressive1 = 14334224; // 赌场：气势汹汹
     inline const static unsigned long long hashCasinoHeistAggressive2 = 1142061386; // 赌场：气势汹汹
     inline const static unsigned long long hashCasinoHeistAggressive3 = 2648873158; // 赌场：气势汹汹
@@ -71,8 +97,9 @@ public:
     inline const static unsigned long long hashCasinoHeistTheBigCon3 = 3077120672; // 赌场：兵不厌诈
     inline const static unsigned long long hashCasinoHeistTheBigCon4 = 3528605896; // 赌场：兵不厌诈
     inline const static unsigned long long hashCasinoHeistEndStage = 2981742808; // 赌场。三个方式的最后阶段
+
     inline const static unsigned long long hashLostMcRip = 2389264995; // 安息吧！失落摩托帮
-    inline const static unsigned long long hashBakerBadBeat = 2805392149; // 贝克女士：出奇制胜
+    inline const static unsigned long long hashCasinoBadBeat = 2805392149; // 贝克女士：出奇制胜
 
     HWND getWindowHwnd();
     HANDLE getProcessHandle(DWORD* pid, DWORD dwDesiredAccess = PROCESS_ALL_ACCESS);

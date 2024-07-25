@@ -136,9 +136,10 @@ void DisplayInfoDialog::setChildrenTransparentForMouseEvents(bool transparent)
     ui->labAutoTimer->setAttribute(Qt::WA_TransparentForMouseEvents, transparent);
 }
 
-void DisplayInfoDialog::insertWidget(int index, QWidget* widget)
+void DisplayInfoDialog::addWidget(QWidget* widget)
 {
-    ui->mainLayout->insertWidget(index, widget);
+    ui->mainLayout->addWidget(widget);
+    ui->mainLayout->update();
     insertedWidget << widget;
 }
 
@@ -149,6 +150,7 @@ void DisplayInfoDialog::removeWidget(QWidget* widget)
     if (widget->parent() == ui->widget) { // 这里就是== ui->widget没错Layout不能作为单独的parent
         widget->setParent(nullptr);
     }
+    ui->mainLayout->update();
     insertedWidget.removeOne(widget);
 }
 

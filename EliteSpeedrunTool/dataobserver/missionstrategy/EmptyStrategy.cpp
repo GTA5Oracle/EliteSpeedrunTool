@@ -5,26 +5,22 @@ EmptyStrategy::EmptyStrategy(QObject* parent)
 {
 }
 
-QList<QLabel*> EmptyStrategy::getDisplayLabels()
-{
-    return {};
-}
-
-QList<QPair<QLabel*, DisplayInfoSubFunctionItem*>> EmptyStrategy::getDisplayLabelsAndItems()
-{
-    return {};
-}
-
-QList<QLabel*> EmptyStrategy::getLabels()
-{
-    return { &labMissionName };
-}
-
-void EmptyStrategy::updateInfo()
-{
-}
-
 const QString EmptyStrategy::getDisplayName()
 {
-    return tr("不在支持的任务中...");
+    return tr("未收录的任务");
+}
+
+QSet<QString> EmptyStrategy::defaultDataFetchers()
+{
+    return {};
+}
+
+QString EmptyStrategy::id()
+{
+    return "Empty";
+}
+
+const QSet<unsigned long long> EmptyStrategy::missionHash()
+{
+    return {};
 }
