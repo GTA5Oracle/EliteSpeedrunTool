@@ -1281,7 +1281,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
                       </font>
                      </property>
                      <property name="text">
-                      <string>&gt;&gt;</string>
+                      <string notr="true">&gt;&gt;</string>
                      </property>
                     </widget>
                    </item>
@@ -1299,7 +1299,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
                       </font>
                      </property>
                      <property name="text">
-                      <string>&lt;&lt;</string>
+                      <string notr="true">&lt;&lt;</string>
                      </property>
                     </widget>
                    </item>
@@ -1824,7 +1824,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>90</width>
+            <width>98</width>
             <height>84</height>
            </rect>
           </property>
@@ -1885,7 +1885,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>91</width>
+            <width>98</width>
             <height>45</height>
            </rect>
           </property>

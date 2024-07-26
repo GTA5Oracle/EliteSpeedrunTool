@@ -13,9 +13,11 @@ const QString HumaneRaidInsurgentsStrategy::getDisplayName()
 
 QSet<QString> HumaneRaidInsurgentsStrategy::defaultDataFetchers()
 {
-    return { dataFetcherUtil->headshotFetcher->id(),
+    return {
+        dataFetcherUtil->headshotFetcher->id(),
         dataFetcherUtil->killFetcher->id(),
-        dataFetcherUtil->vehicleDamageFetcher->id() };
+        dataFetcherUtil->vehicleDamageFetcher->id(),
+    };
 }
 
 QString HumaneRaidInsurgentsStrategy::id()

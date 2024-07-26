@@ -28,8 +28,10 @@
 #include "fleecajob/FleecaJobScopeOutStrategy.h"
 #include "fleecajob/TheFleecaJobStrategy.h"
 #include "humanelabsraid/HumaneRaidInsurgentsStrategy.h"
+#include "humanelabsraid/HumaneRaidValkyrieStrategy.h"
 #include "humanelabsraid/TheHumaneLabsRaidStrategy.h"
 #include "pacificstandard/ThePacificStandardStrategy.h"
+#include "prisonbreak/PrisonBreakBusStrategy.h"
 #include "prisonbreak/PrisonBreakStationStrategy.h"
 #include "prisonbreak/PrisonBreakWetWorkStrategy.h"
 #include "prisonbreak/ThePrisonBreakStrategy.h"
@@ -68,16 +70,18 @@ public:
     Act3KhanjaliStrategy* act3KhanjaliStrategy = new Act3KhanjaliStrategy(this);
     Act3AirDefensesStrategy* act3AirDefensesStrategy = new Act3AirDefensesStrategy(this);
 
-    TheFleecaJobStrategy* theFleecaJobStrategy = new TheFleecaJobStrategy(this);
     FleecaJobScopeOutStrategy* fleecaJobScopeOutStrategy = new FleecaJobScopeOutStrategy(this);
     FleecaJobKurumaStrategy* fleecaJobKurumaStrategy = new FleecaJobKurumaStrategy(this);
+    TheFleecaJobStrategy* theFleecaJobStrategy = new TheFleecaJobStrategy(this);
 
+    PrisonBreakBusStrategy* prisonBreakBusStrategy = new PrisonBreakBusStrategy(this);
     PrisonBreakStationStrategy* prisonBreakStationStrategy = new PrisonBreakStationStrategy(this);
     PrisonBreakWetWorkStrategy* prisonBreakWetWorkStrategy = new PrisonBreakWetWorkStrategy(this);
     ThePrisonBreakStrategy* thePrisonBreakStrategy = new ThePrisonBreakStrategy(this);
 
-    TheHumaneLabsRaidStrategy* theHumaneLabsRaidStrategy = new TheHumaneLabsRaidStrategy(this);
     HumaneRaidInsurgentsStrategy* humaneRaidInsurgentsStrategy = new HumaneRaidInsurgentsStrategy(this);
+    HumaneRaidValkyrieStrategy* humaneRaidValkyrieStrategy = new HumaneRaidValkyrieStrategy(this);
+    TheHumaneLabsRaidStrategy* theHumaneLabsRaidStrategy = new TheHumaneLabsRaidStrategy(this);
 
     SeriesAFundingStrategy* seriesAFundingStrategy = new SeriesAFundingStrategy(this);
 
@@ -114,11 +118,13 @@ public:
         fleecaJobKurumaStrategy,
         theFleecaJobStrategy,
 
+        prisonBreakBusStrategy,
         prisonBreakStationStrategy,
         prisonBreakWetWorkStrategy,
         thePrisonBreakStrategy,
 
         humaneRaidInsurgentsStrategy,
+        humaneRaidValkyrieStrategy,
         theHumaneLabsRaidStrategy,
 
         seriesAFundingStrategy,

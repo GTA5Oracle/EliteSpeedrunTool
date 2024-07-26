@@ -7,39 +7,39 @@
         <location filename="AcknowledgementDialog.ui" line="+14"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_AcknowledgementDialog.h" line="+59"/>
         <source>致谢</source>
-        <translation type="unfinished"></translation>
+        <translation>Acknowledgement</translation>
     </message>
     <message>
         <location line="+21"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_AcknowledgementDialog.h" line="+1"/>
         <source>注：按名称字典序排序，不分先后。若您没有在致谢名单上发现您的名字，请联系作者，联系方式见“关于”页面。</source>
-        <translation type="unfinished"></translation>
+        <translation>Note: Listed in alphabetical order by name, with no particular ranking. If you don&apos;t see your name in the acknowledgements, please contact the authors. Contact information can be found on the &quot;About&quot; page.</translation>
     </message>
     <message>
         <location filename="AcknowledgementDialog.cpp" line="+12"/>
         <source>特别感谢 ACT3 帮会和 CEHT 帮会对本工具的宣传和支持。特别感谢 CZ9946 和 Adstargod 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</source>
-        <translation type="unfinished"></translation>
+        <translation>Special thanks to World Save Act Elite and CEHT for promoting and supporting this tool. A big thanks to CZ29946 and Adstargod, who provided significant assistance in the development of this tool! Special thanks to Alice2333 for technical support!</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>感谢所有提供帮助与赞助的朋友们！</source>
-        <translation type="unfinished"></translation>
+        <translation>Thanks to all our friends for the help and sponsorship!</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>测试/技术支持：</source>
-        <translation type="unfinished"></translation>
+        <translation>Testing/Technical support:</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>赞助支持：</source>
-        <translation type="unfinished"></translation>
+        <translation>Sponsors:</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>以及其他未透露 / 不愿透露昵称的朋友！</source>
         <oldsource>以及其他未透露昵称和不愿透露昵称的朋友！</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>And to our unnamed/anonymous friends!</translation>
     </message>
 </context>
 <context>
@@ -48,7 +48,7 @@
         <location filename="dataobserver/missionstrategy/act1/Act1DeadCourierStrategy.cpp" line="+11"/>
         <source>准备任务：亡命速递</source>
         <oldsource>亡命速递</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Dead Courier</translation>
     </message>
 </context>
 <context>
@@ -57,7 +57,7 @@
         <location filename="dataobserver/missionstrategy/act1/Act1ServerFarmStrategy.cpp" line="+11"/>
         <source>准备任务：服务器群组</source>
         <oldsource>服务器群组</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Server Farm</translation>
     </message>
 </context>
 <context>
@@ -66,7 +66,7 @@
         <location filename="dataobserver/missionstrategy/act1/Act1SignalInterceptsStrategy.cpp" line="+11"/>
         <source>准备任务：拦截信号</source>
         <oldsource>拦截信号</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Signal Intercepts</translation>
     </message>
 </context>
 <context>
@@ -74,7 +74,7 @@
     <message>
         <location filename="dataobserver/missionstrategy/act2/Act2AvengerStrategy.cpp" line="+11"/>
         <source>准备任务：复仇者</source>
-        <translation type="unfinished"></translation>
+        <translation>Avenger</translation>
     </message>
 </context>
 <context>
@@ -82,7 +82,7 @@
     <message>
         <location filename="dataobserver/missionstrategy/act2/Act2RescueUlpStrategy.cpp" line="+11"/>
         <source>准备任务：营救 ULP</source>
-        <translation type="unfinished"></translation>
+        <translation>Rescue ULP</translation>
     </message>
 </context>
 <context>
@@ -90,7 +90,7 @@
     <message>
         <location filename="dataobserver/missionstrategy/act2/Act2SalvageHardDrivesStrategy.cpp" line="+11"/>
         <source>准备任务：抢救硬盘</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvage Hard Drives</translation>
     </message>
 </context>
 <context>
@@ -98,7 +98,7 @@
     <message>
         <location filename="dataobserver/missionstrategy/act2/Act2SubmarineReconStrategy.cpp" line="+11"/>
         <source>准备任务：潜水艇侦察</source>
-        <translation type="unfinished"></translation>
+        <translation>Submarine Recon</translation>
     </message>
 </context>
 <context>
@@ -107,7 +107,7 @@
         <location filename="dataobserver/missionstrategy/act3/Act3AirDefensesStrategy.cpp" line="+11"/>
         <source>准备任务：空中防御</source>
         <oldsource>空中防御</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Air Defenses</translation>
     </message>
 </context>
 <context>
@@ -116,7 +116,7 @@
         <location filename="dataobserver/missionstrategy/act3/Act3BarrageStrategy.cpp" line="+11"/>
         <source>准备任务：巴拉杰</source>
         <oldsource>巴拉杰</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Barrage</translation>
     </message>
 </context>
 <context>
@@ -125,7 +125,7 @@
         <location filename="dataobserver/missionstrategy/act3/Act3EscortUlpStrategy.cpp" line="+11"/>
         <source>准备任务：护送 ULP</source>
         <oldsource>护送 ULP</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Escort ULP</translation>
     </message>
 </context>
 <context>
@@ -134,7 +134,7 @@
         <location filename="dataobserver/missionstrategy/act3/Act3KhanjaliStrategy.cpp" line="+11"/>
         <source>准备任务：可汗贾利</source>
         <oldsource>可汗贾利</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Khanjali</translation>
     </message>
 </context>
 <context>
@@ -143,7 +143,7 @@
         <location filename="dataobserver/missionstrategy/act3/Act3RescueAgent14Strategy.cpp" line="+11"/>
         <source>准备任务：营救 14 号探员</source>
         <oldsource>营救 14 号探员</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Rescue Agent 14</translation>
     </message>
 </context>
 <context>
@@ -152,7 +152,7 @@
         <location filename="dataobserver/missionstrategy/casino/CasinoBadBeatStrategy.cpp" line="+11"/>
         <source>赌场 - 出奇制胜</source>
         <oldsource>出奇制胜</oldsource>
-        <translation type="unfinished">Casino - Bad Beat</translation>
+        <translation>Casino - Bad Beat</translation>
     </message>
 </context>
 <context>
@@ -160,7 +160,7 @@
     <message>
         <location filename="dataobserver/missionstrategy/casinoheist/CasinoHeistAggressiveStrategy.cpp" line="+11"/>
         <source>名钻赌场豪劫：气势汹汹</source>
-        <translation type="unfinished">Casino Heist - Aggressive</translation>
+        <translation>Casino Heist - Aggressive</translation>
     </message>
 </context>
 <context>
@@ -169,7 +169,7 @@
         <location filename="dataobserver/missionstrategy/casinoheist/CasinoHeistEndStageStrategy.cpp" line="+11"/>
         <source>名钻赌场豪劫（结算前）</source>
         <oldsource>名钻赌场豪劫</oldsource>
-        <translation type="unfinished">Casino Heist</translation>
+        <translation>Casino Heist (Final stage)</translation>
     </message>
 </context>
 <context>
@@ -177,7 +177,7 @@
     <message>
         <location filename="dataobserver/missionstrategy/casinoheist/CasinoHeistSilentSneakyStrategy.cpp" line="+11"/>
         <source>名钻赌场豪劫：隐迹潜踪</source>
-        <translation type="unfinished">Casino Heist - Silent &amp; Sneaky</translation>
+        <translation>Casino Heist - Silent &amp; Sneaky</translation>
     </message>
 </context>
 <context>
@@ -185,7 +185,7 @@
     <message>
         <location filename="dataobserver/missionstrategy/casinoheist/CasinoHeistTheBigConStrategy.cpp" line="+11"/>
         <source>名钻赌场豪劫：兵不厌诈</source>
-        <translation type="unfinished">Casino Heist - The Big Con</translation>
+        <translation>Casino Heist - The Big Con</translation>
     </message>
 </context>
 <context>
@@ -488,7 +488,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
         <location filename="dataobserver/missionstrategy/EmptyStrategy.cpp" line="+10"/>
         <source>未收录的任务</source>
         <oldsource>不在支持的任务中...</oldsource>
-        <translation type="unfinished">Not in a supported mission...</translation>
+        <translation>Unknown mission</translation>
     </message>
 </context>
 <context>
@@ -496,7 +496,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <message>
         <location filename="dataobserver/missionstrategy/fleecajob/FleecaJobKurumaStrategy.cpp" line="+11"/>
         <source>全福银行差事：骷髅马</source>
-        <translation type="unfinished"></translation>
+        <translation>Fleeca Job - Kuruma</translation>
     </message>
 </context>
 <context>
@@ -504,7 +504,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <message>
         <location filename="dataobserver/missionstrategy/fleecajob/FleecaJobScopeOutStrategy.cpp" line="+11"/>
         <source>全福银行差事：探查</source>
-        <translation type="unfinished"></translation>
+        <translation>Fleeca Job - Scope Out</translation>
     </message>
 </context>
 <context>
@@ -512,7 +512,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <message>
         <location filename="dataobserver/datafetcher/HeadshotFetcher.cpp" line="+11"/>
         <source>总爆头</source>
-        <translation type="unfinished">Total headshots</translation>
+        <translation>Total headshots</translation>
     </message>
 </context>
 <context>
@@ -520,7 +520,15 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <message>
         <location filename="dataobserver/missionstrategy/humanelabsraid/HumaneRaidInsurgentsStrategy.cpp" line="+11"/>
         <source>突袭人道研究实验室：叛乱分子</source>
-        <translation type="unfinished"></translation>
+        <translation>Humane Raid - Insurgents</translation>
+    </message>
+</context>
+<context>
+    <name>HumaneRaidValkyrieStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/humanelabsraid/HumaneRaidValkyrieStrategy.cpp" line="+11"/>
+        <source>突袭人道研究实验室：女武神</source>
+        <translation>Humane Raid - Valkyrie</translation>
     </message>
 </context>
 <context>
@@ -528,7 +536,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <message>
         <location filename="dataobserver/datafetcher/Kill1Fetcher.cpp" line="+12"/>
         <source>击杀（小队 1）</source>
-        <translation type="unfinished"></translation>
+        <translation>Kills (Team 1)</translation>
     </message>
 </context>
 <context>
@@ -536,7 +544,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <message>
         <location filename="dataobserver/datafetcher/Kill2Fetcher.cpp" line="+11"/>
         <source>击杀（小队 2）</source>
-        <translation type="unfinished"></translation>
+        <translation>Kills (Team 2)</translation>
     </message>
 </context>
 <context>
@@ -544,7 +552,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <message>
         <location filename="dataobserver/datafetcher/Kill3Fetcher.cpp" line="+12"/>
         <source>击杀（小队 3）</source>
-        <translation type="unfinished"></translation>
+        <translation>Kills (Team 3)</translation>
     </message>
 </context>
 <context>
@@ -552,7 +560,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <message>
         <location filename="dataobserver/datafetcher/Kill4Fetcher.cpp" line="+12"/>
         <source>击杀（小队 4）</source>
-        <translation type="unfinished"></translation>
+        <translation>Kills (Team 4)</translation>
     </message>
 </context>
 <context>
@@ -560,7 +568,7 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <message>
         <location filename="dataobserver/datafetcher/KillFetcher.cpp" line="+12"/>
         <source>总击杀</source>
-        <translation type="unfinished">Total kills</translation>
+        <translation>Total kills</translation>
     </message>
 </context>
 <context>
@@ -784,7 +792,7 @@ AdstarGod Firewall, easy to use
         <location line="+20"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+4"/>
         <source>鸣谢...</source>
-        <translation type="unfinished"></translation>
+        <translation>Acknowledgment...</translation>
     </message>
     <message>
         <location line="-139"/>
@@ -1022,7 +1030,15 @@ AdstarGod Firewall, easy to use
     <message>
         <location filename="dataobserver/datafetcher/MissionHashFetcher.cpp" line="+10"/>
         <source>任务 ID</source>
-        <translation type="unfinished"></translation>
+        <translation>Mission ID</translation>
+    </message>
+</context>
+<context>
+    <name>PrisonBreakBusStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/prisonbreak/PrisonBreakBusStrategy.cpp" line="+11"/>
+        <source>越狱：巴士</source>
+        <translation>Prison Break - Bus</translation>
     </message>
 </context>
 <context>
@@ -1030,7 +1046,7 @@ AdstarGod Firewall, easy to use
     <message>
         <location filename="dataobserver/missionstrategy/prisonbreak/PrisonBreakStationStrategy.cpp" line="+11"/>
         <source>越狱：警察局</source>
-        <translation type="unfinished">The Prison Break - Station</translation>
+        <translation>Prison Break - Station</translation>
     </message>
 </context>
 <context>
@@ -1038,7 +1054,7 @@ AdstarGod Firewall, easy to use
     <message>
         <location filename="dataobserver/missionstrategy/prisonbreak/PrisonBreakWetWorkStrategy.cpp" line="+11"/>
         <source>越狱：行刺</source>
-        <translation type="unfinished">The Prison Break - Wet Work</translation>
+        <translation>Prison Break - Wet Work</translation>
     </message>
 </context>
 <context>
@@ -1133,7 +1149,7 @@ AdstarGod Firewall, easy to use
     <message>
         <location filename="dataobserver/datafetcher/RashkovskyDamageFetcher.cpp" line="+11"/>
         <source>拉什科夫斯基受伤</source>
-        <translation type="unfinished">Rashkovsky hurt</translation>
+        <translation>Rashkovsky hurt</translation>
     </message>
 </context>
 <context>
@@ -1148,7 +1164,7 @@ AdstarGod Firewall, easy to use
     <name>SettingDialog</name>
     <message>
         <location filename="SettingDialog.ui" line="+14"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1568"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1570"/>
         <source>设置</source>
         <translation>Settings</translation>
     </message>
@@ -1162,21 +1178,21 @@ AdstarGod Firewall, easy to use
         <location line="+629"/>
         <location line="+756"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+25"/>
-        <location line="+41"/>
+        <location line="+39"/>
         <source>启动</source>
         <translation>Enable</translation>
     </message>
     <message>
         <location line="-741"/>
         <location line="+756"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-40"/>
-        <location line="+41"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-38"/>
+        <location line="+39"/>
         <source>停止</source>
         <translation>Disable</translation>
     </message>
     <message>
         <location line="-738"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-40"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-38"/>
         <source>音效</source>
         <translation>Sound</translation>
     </message>
@@ -1221,7 +1237,7 @@ AdstarGod Firewall, easy to use
         <location line="+209"/>
         <location line="+514"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+17"/>
-        <location line="+22"/>
+        <location line="+20"/>
         <source>建议设置为 50-200 之间，配置低的用户请适当增大数值</source>
         <oldsource>建议设置为50-200之间，配置低的用户请适当增大数值</oldsource>
         <translation>Suggested setting is between 50 to 200. Users with lower computer performance should consider increasing the value accordingly</translation>
@@ -1242,15 +1258,15 @@ AdstarGod Firewall, easy to use
         <location line="-493"/>
         <location line="+396"/>
         <location line="+118"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-21"/>
-        <location line="+15"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-19"/>
+        <location line="+13"/>
         <location line="+7"/>
         <source>刷新间隔</source>
         <translation>Refresh data interval</translation>
     </message>
     <message>
         <location line="-1045"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-46"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-44"/>
         <source>窗口</source>
         <translation>Window</translation>
     </message>
@@ -1467,58 +1483,46 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     </message>
     <message>
         <location line="+28"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+10"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+8"/>
         <source>数据组合</source>
-        <translation type="unfinished"></translation>
+        <translation>Data combinations</translation>
     </message>
     <message>
         <location line="+46"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-8"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-6"/>
         <source>任务</source>
-        <translation type="unfinished"></translation>
+        <translation>Mission</translation>
     </message>
     <message>
         <location line="+43"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>已包含</source>
-        <translation type="unfinished"></translation>
+        <translation>Included</translation>
     </message>
     <message>
         <location line="+15"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>未包含</source>
-        <translation type="unfinished"></translation>
+        <translation>Not included</translation>
     </message>
     <message>
         <location line="+30"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>操作</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ops</translation>
     </message>
     <message>
-        <location line="+39"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
-        <source>&gt;&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+18"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
-        <source>&lt;&lt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+45"/>
+        <location line="+102"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>恢复默认</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset</translation>
     </message>
     <message>
         <location line="+9"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>注：某些数据（例如“载具受损”）仅针对部分任务有效。若您在某些任务中发现所选的数据数值不正确，不用担心，这是很正常的事情。</source>
         <oldsource>注：某些数据（例如“载具受损”）仅针对部分任务有效，当您在某些任务中发现所选的数据数值不正确，是很正常的事情。</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Note: Certain data (e.g. “Vehicle damage”) are only valid for some missions. Don&apos;t worry if you find that the selected data values are incorrect in some missions, this is normal.</translation>
     </message>
     <message>
         <location line="+62"/>
@@ -1654,7 +1658,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location filename="SettingDialog.ui" line="-901"/>
         <location filename="SettingDialog.h" line="-4"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-29"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-27"/>
         <source>常规</source>
         <translation>General</translation>
     </message>
@@ -1710,7 +1714,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location filename="dataobserver/missionstrategy/act2/TheBogdanProblemStrategy.cpp" line="+11"/>
         <source>波格丹危机</source>
-        <translation type="unfinished">The Bogdan Problem</translation>
+        <translation>The Bogdan Problem</translation>
     </message>
 </context>
 <context>
@@ -1718,7 +1722,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location filename="dataobserver/missionstrategy/act1/TheDataBreachesStrategy.cpp" line="+11"/>
         <source>数据泄露</source>
-        <translation type="unfinished">The Data Breaches</translation>
+        <translation>The Data Breaches</translation>
     </message>
 </context>
 <context>
@@ -1726,7 +1730,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location filename="dataobserver/missionstrategy/act3/TheDoomsdayScenarioStrategy.cpp" line="+11"/>
         <source>末日将至</source>
-        <translation type="unfinished">The Doomsday Scenario</translation>
+        <translation>The Doomsday Scenario</translation>
     </message>
 </context>
 <context>
@@ -1734,7 +1738,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location filename="dataobserver/missionstrategy/fleecajob/TheFleecaJobStrategy.cpp" line="+11"/>
         <source>全福银行差事</source>
-        <translation type="unfinished">The Fleeca Job</translation>
+        <translation>The Fleeca Job</translation>
     </message>
 </context>
 <context>
@@ -1742,7 +1746,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location filename="dataobserver/missionstrategy/humanelabsraid/TheHumaneLabsRaidStrategy.cpp" line="+11"/>
         <source>突袭人道研究实验室</source>
-        <translation type="unfinished">The Humane Labs Raid</translation>
+        <translation>The Humane Labs Raid</translation>
     </message>
 </context>
 <context>
@@ -1750,7 +1754,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location filename="dataobserver/missionstrategy/pacificstandard/ThePacificStandardStrategy.cpp" line="+11"/>
         <source>太平洋标准银行差事</source>
-        <translation type="unfinished">Pacific Standard</translation>
+        <translation>The Pacific Standard Job</translation>
     </message>
 </context>
 <context>
@@ -1758,7 +1762,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location filename="dataobserver/missionstrategy/prisonbreak/ThePrisonBreakStrategy.cpp" line="+11"/>
         <source>越狱</source>
-        <translation type="unfinished">The Prison Break</translation>
+        <translation>The Prison Break</translation>
     </message>
 </context>
 <context>
@@ -1826,7 +1830,7 @@ Error message: %2</translation>
     <message>
         <location filename="dataobserver/datafetcher/VehicleDamageFetcher.cpp" line="+11"/>
         <source>载具受损</source>
-        <translation type="unfinished"></translation>
+        <translation>Vehicle damage</translation>
     </message>
 </context>
 </TS>

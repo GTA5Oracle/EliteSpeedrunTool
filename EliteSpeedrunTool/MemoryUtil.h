@@ -67,16 +67,18 @@ public:
     inline const static unsigned long long hashAct3Khanjali = 1579954143; // 准备任务：可汗贾利
     inline const static unsigned long long hashAct3AirDefenses = 4184233611; // 准备任务：空中防御
     // 全福
-    inline const static unsigned long long hashTheFleecaJob = 3222096535; // 全福分红
     inline const static unsigned long long hashFleecaJobScopeOut = 1771792820; // 全福探查
     inline const static unsigned long long hashFleecaJobKuruma = 3458614835; // 全福骷髅马
+    inline const static unsigned long long hashTheFleecaJob = 3222096535; // 全福分红
     // 越狱
+    inline const static unsigned long long hashPrisonBreakBus = 2652883801; // 越狱：巴士
     inline const static unsigned long long hashPrisonBreakStation = 2569787839; // 越狱：警察局
     inline const static unsigned long long hashPrisonBreakWetWork = 137052480; // 越狱：行刺
     inline const static unsigned long long hashThePrisonBreak = 979654579; // 越狱分红
     // 人道
-    inline const static unsigned long long hashTheHumaneLabsRaid = 3197980642; // 人道分红
+    inline const static unsigned long long hashHumaneRaidValkyrie = 1324253820; // 突袭人道研究实验室：女武神
     inline const static unsigned long long hashHumaneRaidInsurgents = 2039847454; // 突袭人道研究实验室：叛乱分子
+    inline const static unsigned long long hashTheHumaneLabsRaid = 3197980642; // 人道分红
     // 首轮
     inline const static unsigned long long hashSeriesAFunding = 164435858; // 首轮分红
     // 太平洋
