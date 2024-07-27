@@ -1,5 +1,4 @@
-#ifndef CASINOHEISTAGGRESSIVESTRATEGY_H
-#define CASINOHEISTAGGRESSIVESTRATEGY_H
+#pragma once
 
 #include "../BaseMissionStrategy.h"
 
@@ -16,5 +15,3 @@ public:
 
     const QSet<unsigned long long> missionHash() override;
 };
-
-#endif // CASINOHEISTAGGRESSIVESTRATEGY_H

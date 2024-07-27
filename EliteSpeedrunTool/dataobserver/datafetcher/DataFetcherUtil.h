@@ -1,5 +1,4 @@
-#ifndef DATAFETCHERUTIL_H
-#define DATAFETCHERUTIL_H
+#pragma once
 
 #include "HeadshotFetcher.h"
 #include "Kill1Fetcher.h"
@@ -8,7 +7,7 @@
 #include "Kill4Fetcher.h"
 #include "KillFetcher.h"
 #include "MissionHashFetcher.h"
-#include "RashkovskyDamageFetcher.h"
+#include "RashkovskyHurtFetcher.h"
 #include "VehicleDamageFetcher.h"
 
 #include <QObject>
@@ -28,7 +27,7 @@ public:
     Kill3Fetcher* kill3Fetcher = new Kill3Fetcher(this);
     Kill4Fetcher* kill4Fetcher = new Kill4Fetcher(this);
     MissionHashFetcher* missionHashFetcher = new MissionHashFetcher(this);
-    RashkovskyDamageFetcher* rashkovskyDamageFetcher = new RashkovskyDamageFetcher(this);
+    RashkovskyHurtFetcher* rashkovskyDamageFetcher = new RashkovskyHurtFetcher(this);
     VehicleDamageFetcher* vehicleDamageFetcher = new VehicleDamageFetcher(this);
 
     QList<BaseDataFetcher*> dataFetchers = {
@@ -42,5 +41,3 @@ public:
 
     QMap<QString, BaseDataFetcher*> dataFetcherMap;
 };
-
-#endif // DATAFETCHERUTIL_H

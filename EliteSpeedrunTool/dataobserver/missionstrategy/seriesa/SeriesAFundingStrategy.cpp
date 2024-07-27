@@ -13,7 +13,7 @@ const QString SeriesAFundingStrategy::getDisplayName()
 
 QSet<QString> SeriesAFundingStrategy::defaultDataFetchers()
 {
-    return { dataFetcherUtil->kill1Fetcher->id() };
+    return { dataFetcherUtil->killFetcher->id() };
 }
 
 QString SeriesAFundingStrategy::id()

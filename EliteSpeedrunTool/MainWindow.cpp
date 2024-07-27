@@ -26,7 +26,7 @@
 #include <QState>
 #include <QUrl>
 
-const QString MainWindow::hotkeyStatePattern = "F: %1, %2  T: %3, %4, %5  X: %6";
+const QString MainWindow::hotkeyStatePattern = "🧱: %1, %2  ⏱️: %3, %4, %5  ❌: %6";
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)

@@ -1,5 +1,4 @@
-#ifndef LOTTIEUTIL_H
-#define LOTTIEUTIL_H
+#pragma once
 
 #include <QDir>
 #define lottieUtil (LottieUtil::instance())
@@ -19,5 +18,3 @@ private:
 
 signals:
 };
-
-#endif // LOTTIEUTIL_H

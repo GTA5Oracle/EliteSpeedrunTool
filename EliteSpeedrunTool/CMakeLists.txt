@@ -72,12 +72,18 @@ set(PROJECT_SOURCES
         dataobserver/missionstrategy/prisonbreak/PrisonBreakWetWorkStrategy.h dataobserver/missionstrategy/prisonbreak/PrisonBreakWetWorkStrategy.cpp
         dataobserver/missionstrategy/prisonbreak/ThePrisonBreakStrategy.h dataobserver/missionstrategy/prisonbreak/ThePrisonBreakStrategy.cpp
 
+        dataobserver/missionstrategy/seriesa/SeriesAWeedStrategy.h dataobserver/missionstrategy/seriesa/SeriesAWeedStrategy.cpp
         dataobserver/missionstrategy/seriesa/SeriesAFundingStrategy.h dataobserver/missionstrategy/seriesa/SeriesAFundingStrategy.cpp
 
         dataobserver/missionstrategy/humanelabsraid/HumaneRaidInsurgentsStrategy.h dataobserver/missionstrategy/humanelabsraid/HumaneRaidInsurgentsStrategy.cpp
         dataobserver/missionstrategy/humanelabsraid/HumaneRaidValkyrieStrategy.h dataobserver/missionstrategy/humanelabsraid/HumaneRaidValkyrieStrategy.cpp
         dataobserver/missionstrategy/humanelabsraid/TheHumaneLabsRaidStrategy.h dataobserver/missionstrategy/humanelabsraid/TheHumaneLabsRaidStrategy.cpp
 
+        dataobserver/missionstrategy/pacificstandard/PacificStandardVansStrategy.h dataobserver/missionstrategy/pacificstandard/PacificStandardVansStrategy.cpp
+        dataobserver/missionstrategy/pacificstandard/PacificStandardSignalStrategy.h dataobserver/missionstrategy/pacificstandard/PacificStandardSignalStrategy.cpp
+        dataobserver/missionstrategy/pacificstandard/PacificStandardHackStrategy.h dataobserver/missionstrategy/pacificstandard/PacificStandardHackStrategy.cpp
+        dataobserver/missionstrategy/pacificstandard/PacificStandardConvoyStrategy.h dataobserver/missionstrategy/pacificstandard/PacificStandardConvoyStrategy.cpp
+        dataobserver/missionstrategy/pacificstandard/PacificStandardBikesStrategy.h dataobserver/missionstrategy/pacificstandard/PacificStandardBikesStrategy.cpp
         dataobserver/missionstrategy/pacificstandard/ThePacificStandardStrategy.h dataobserver/missionstrategy/pacificstandard/ThePacificStandardStrategy.cpp
 
         dataobserver/missionstrategy/casinoheist/CasinoHeistTheBigConStrategy.h dataobserver/missionstrategy/casinoheist/CasinoHeistTheBigConStrategy.cpp
@@ -97,7 +103,7 @@ set(PROJECT_SOURCES
         dataobserver/datafetcher/Kill3Fetcher.h dataobserver/datafetcher/Kill3Fetcher.cpp
         dataobserver/datafetcher/Kill4Fetcher.h dataobserver/datafetcher/Kill4Fetcher.cpp
         dataobserver/datafetcher/VehicleDamageFetcher.h dataobserver/datafetcher/VehicleDamageFetcher.cpp
-        dataobserver/datafetcher/RashkovskyDamageFetcher.h dataobserver/datafetcher/RashkovskyDamageFetcher.cpp
+        dataobserver/datafetcher/RashkovskyHurtFetcher.h dataobserver/datafetcher/RashkovskyHurtFetcher.cpp
         AutoCapture.h AutoCapture.cpp
         resource.qrc
 )

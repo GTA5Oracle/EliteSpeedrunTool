@@ -1,5 +1,4 @@
-#ifndef DOOMSDAYACT1STRATEGY_H
-#define DOOMSDAYACT1STRATEGY_H
+#pragma once
 
 #include "../BaseMissionStrategy.h"
 
@@ -16,5 +15,3 @@ public:
 
     const QSet<unsigned long long> missionHash() override;
 };
-
-#endif // DOOMSDAYACT1STRATEGY_H

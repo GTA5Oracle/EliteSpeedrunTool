@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     QApplication::setOrganizationName("SkyD666");
     QApplication::setApplicationName(QObject::tr("精英速通工具"));
     QApplication::setApplicationVersion("8.5.1.69");
-    qputenv("ApplicationVersionCode", "20240726");
+    qputenv("ApplicationVersionCode", "20240727");
 
     qApp->setStyle(globalData->styleName());
 

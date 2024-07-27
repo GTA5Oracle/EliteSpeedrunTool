@@ -1,5 +1,4 @@
-#ifndef VEHICLEDAMAGEFETCHER_H
-#define VEHICLEDAMAGEFETCHER_H
+#pragma once
 
 #include "BaseDataFetcher.h"
 
@@ -23,5 +22,3 @@ public:
 private:
     QString getVehicleDamagePattern();
 };
-
-#endif // VEHICLEDAMAGEFETCHER_H

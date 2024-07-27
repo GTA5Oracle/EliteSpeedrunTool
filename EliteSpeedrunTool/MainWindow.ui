@@ -790,7 +790,7 @@
   </action>
   <action name="actionAcknowledgement">
    <property name="text">
-    <string>鸣谢...</string>
+    <string>致谢...</string>
    </property>
   </action>
  </widget>

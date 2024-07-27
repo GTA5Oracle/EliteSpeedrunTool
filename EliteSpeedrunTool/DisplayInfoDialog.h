@@ -1,5 +1,4 @@
-#ifndef SCREENSHOTDISPLAYDIALOG_H
-#define SCREENSHOTDISPLAYDIALOG_H
+#pragma once
 
 #include "GlobalData.h"
 #include <QDialog>
@@ -67,5 +66,3 @@ protected:
     void mouseMoveEvent(QMouseEvent* event) override;
     void closeEvent(QCloseEvent* event) override;
 };
-
-#endif // SCREENSHOTDISPLAYDIALOG_H

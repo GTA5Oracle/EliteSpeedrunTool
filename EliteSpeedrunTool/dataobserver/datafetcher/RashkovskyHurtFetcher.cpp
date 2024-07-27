@@ -1,37 +1,37 @@
-#include "RashkovskyDamageFetcher.h"
+#include "RashkovskyHurtFetcher.h"
 #include "GlobalData.h"
 
-RashkovskyDamageFetcher::RashkovskyDamageFetcher(QObject* parent)
+RashkovskyHurtFetcher::RashkovskyHurtFetcher(QObject* parent)
     : BaseDataFetcher { parent }
 {
 }
 
-QString RashkovskyDamageFetcher::getDisplayName()
+QString RashkovskyHurtFetcher::getDisplayName()
 {
     return tr("拉什科夫斯基受伤");
 }
 
-QString RashkovskyDamageFetcher::id()
+QString RashkovskyHurtFetcher::id()
 {
     return "RashkovskyHurt";
 }
 
-QVariant RashkovskyDamageFetcher::fetchData()
+QVariant RashkovskyHurtFetcher::fetchData()
 {
     return QVariant::fromValue(getLocalData<float>(MemoryUtil::localRashkovskyDamage));
 }
 
-void RashkovskyDamageFetcher::fetchDataAndUpdateLabel()
+void RashkovskyHurtFetcher::fetchDataAndUpdateLabel()
 {
     updateLabel(fetchData(), getRashkovskyHurtPattern());
 }
 
-DisplayInfoSubFunction RashkovskyDamageFetcher::getType()
+DisplayInfoSubFunction RashkovskyHurtFetcher::getType()
 {
     return DisplayInfoSubFunction::RashkovskyDamage;
 }
 
-QString RashkovskyDamageFetcher::getRashkovskyHurtPattern()
+QString RashkovskyHurtFetcher::getRashkovskyHurtPattern()
 {
     switch (globalData->missionDataName()) {
     case MissionDataNameUtil::MissionDataName::Emoji:

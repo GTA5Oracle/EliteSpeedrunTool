@@ -2,10 +2,10 @@
 
 #include "../BaseMissionStrategy.h"
 
-class Act1SignalInterceptsStrategy : public BaseMissionStrategy {
+class PacificStandardHackStrategy : public BaseMissionStrategy {
     Q_OBJECT
 public:
-    explicit Act1SignalInterceptsStrategy(QObject* parent = nullptr);
+    explicit PacificStandardHackStrategy(QObject* parent = nullptr);
 
     const QString getDisplayName() override;
 

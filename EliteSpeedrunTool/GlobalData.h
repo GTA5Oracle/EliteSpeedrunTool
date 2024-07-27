@@ -257,7 +257,7 @@ private:
     int mFirewallDirection = NET_FW_RULE_DIR_OUT;
 
     // 任务数据
-    int mMissionDataUpdateInterval = 100;
+    int mMissionDataUpdateInterval = 50;
     QList<MissionDataNameUtil::MissionDataName> mMissionDataNames = {
         MissionDataNameUtil::MissionDataName::FullName,
         MissionDataNameUtil::MissionDataName::Emoji,
@@ -275,8 +275,8 @@ private:
         TimerStopStrategy::StopSecondZero
     };
     TimerStopStrategy mTimerStopStrategy = TimerStopStrategy::OnlyStop;
-    int mTimerUpdateInterval = 50;
-    int mAutoTimerUpdateInterval = 50;
+    int mTimerUpdateInterval = 30;
+    int mAutoTimerUpdateInterval = 30;
 
     // 语言
     QString mLanguage = "";

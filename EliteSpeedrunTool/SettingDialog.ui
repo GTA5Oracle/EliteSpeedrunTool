@@ -46,7 +46,7 @@
       <enum>QFrame::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -1017,8 +1017,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>443</width>
-                <height>459</height>
+                <width>186</width>
+                <height>236</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1407,8 +1407,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>178</width>
-            <height>685</height>
+            <width>433</width>
+            <height>565</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -1572,7 +1572,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
                  <item>
                   <widget class="QLabel" name="label_33">
                    <property name="text">
-                    <string>建议设置为 50-200 之间，配置低的用户请适当增大数值</string>
+                    <string>建议设置为 10-50 之间，配置低的用户请适当增大数值</string>
                    </property>
                    <property name="wordWrap">
                     <bool>true</bool>

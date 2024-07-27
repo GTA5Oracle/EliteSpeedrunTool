@@ -73,7 +73,7 @@ public:
     // 越狱
     inline const static unsigned long long hashPrisonBreakBus = 2652883801; // 越狱：巴士
     inline const static unsigned long long hashPrisonBreakStation = 2569787839; // 越狱：警察局
-    inline const static unsigned long long hashPrisonBreakWetWork = 137052480; // 越狱：行刺
+    inline const static unsigned long long hashPrisonBreakWetWork = 842031918; // 越狱：行刺
     inline const static unsigned long long hashThePrisonBreak = 979654579; // 越狱分红
     // 人道
     inline const static unsigned long long hashHumaneRaidValkyrie = 1324253820; // 突袭人道研究实验室：女武神
@@ -81,9 +81,15 @@ public:
     inline const static unsigned long long hashTheHumaneLabsRaid = 3197980642; // 人道分红
     // 首轮
     inline const static unsigned long long hashSeriesAFunding = 164435858; // 首轮分红
+    inline const static unsigned long long hashSeriesAWeed = 4280918227; // 首轮：大麻
     // 太平洋
     inline const static unsigned long long hashThePacificStandardP1 = 4062993727; // 太平洋分红前一段
     inline const static unsigned long long hashThePacificStandardP2 = 1309288309; // 太平洋分红后一段
+    inline const static unsigned long long hashPacificStandardVans = 3141270655; // 太平洋：厢型车
+    inline const static unsigned long long hashPacificStandardSignal = 124038394; // 太平洋：信号
+    inline const static unsigned long long hashPacificStandardHack = 2698675922; // 太平洋：破解
+    inline const static unsigned long long hashPacificStandardConvoy = 1756125549; // 太平洋：车队
+    inline const static unsigned long long hashPacificStandardBikes = 911181645; // 太平洋：摩托车
     // 赌场
     inline const static unsigned long long hashCasinoHeistAggressive1 = 14334224; // 赌场：气势汹汹
     inline const static unsigned long long hashCasinoHeistAggressive2 = 1142061386; // 赌场：气势汹汹

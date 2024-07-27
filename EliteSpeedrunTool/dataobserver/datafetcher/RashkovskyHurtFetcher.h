@@ -1,14 +1,13 @@
-#ifndef RASHKOVSKYDAMAGEFETCHER_H
-#define RASHKOVSKYDAMAGEFETCHER_H
+#pragma once
 
 #include "BaseDataFetcher.h"
 
 #include <QLabel>
 
-class RashkovskyDamageFetcher : public BaseDataFetcher {
+class RashkovskyHurtFetcher : public BaseDataFetcher {
     Q_OBJECT
 public:
-    explicit RashkovskyDamageFetcher(QObject* parent = nullptr);
+    explicit RashkovskyHurtFetcher(QObject* parent = nullptr);
 
     QString getDisplayName() override;
 
@@ -23,5 +22,3 @@ public:
 private:
     QString getRashkovskyHurtPattern();
 };
-
-#endif // RASHKOVSKYDAMAGEFETCHER_H

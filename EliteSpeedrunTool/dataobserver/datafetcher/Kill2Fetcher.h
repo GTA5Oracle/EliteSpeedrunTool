@@ -1,5 +1,4 @@
-#ifndef KILLHOSTCLIENT1FETCHER_H
-#define KILLHOSTCLIENT1FETCHER_H
+#pragma once
 
 #include "BaseDataFetcher.h"
 #include <QLabel>
@@ -22,5 +21,3 @@ public:
 private:
     QString getKillPattern();
 };
-
-#endif // KILLHOSTCLIENT1FETCHER_H

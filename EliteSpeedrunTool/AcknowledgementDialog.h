@@ -28,6 +28,8 @@ private:
         "KK",
         "xiakeyi",
         "Alice2333",
+        "愚蠢的土拨鼠",
+        "康康",
     };
 
     QList<QString> sponsors = {

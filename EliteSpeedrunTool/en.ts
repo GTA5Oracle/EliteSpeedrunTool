@@ -791,7 +791,8 @@ AdstarGod Firewall, easy to use
     <message>
         <location line="+20"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+4"/>
-        <source>鸣谢...</source>
+        <source>致谢...</source>
+        <oldsource>鸣谢...</oldsource>
         <translation>Acknowledgment...</translation>
     </message>
     <message>
@@ -1034,6 +1035,46 @@ AdstarGod Firewall, easy to use
     </message>
 </context>
 <context>
+    <name>PacificStandardBikesStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/pacificstandard/PacificStandardBikesStrategy.cpp" line="+11"/>
+        <source>太平洋标准银行差事：摩托车</source>
+        <translation>Pacific Standard - Bikes</translation>
+    </message>
+</context>
+<context>
+    <name>PacificStandardConvoyStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/pacificstandard/PacificStandardConvoyStrategy.cpp" line="+11"/>
+        <source>太平洋标准银行差事：车队</source>
+        <translation>Pacific Standard - Convoy</translation>
+    </message>
+</context>
+<context>
+    <name>PacificStandardHackStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/pacificstandard/PacificStandardHackStrategy.cpp" line="+11"/>
+        <source>太平洋标准银行差事：破解</source>
+        <translation>Pacific Standard - Hack</translation>
+    </message>
+</context>
+<context>
+    <name>PacificStandardSignalStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/pacificstandard/PacificStandardSignalStrategy.cpp" line="+11"/>
+        <source>太平洋标准银行差事：信号</source>
+        <translation>Pacific Standard - Signal</translation>
+    </message>
+</context>
+<context>
+    <name>PacificStandardVansStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/pacificstandard/PacificStandardVansStrategy.cpp" line="+11"/>
+        <source>太平洋标准银行差事：厢型车</source>
+        <translation>Pacific Standard - Vans</translation>
+    </message>
+</context>
+<context>
     <name>PrisonBreakBusStrategy</name>
     <message>
         <location filename="dataobserver/missionstrategy/prisonbreak/PrisonBreakBusStrategy.cpp" line="+11"/>
@@ -1145,9 +1186,9 @@ AdstarGod Firewall, easy to use
     </message>
 </context>
 <context>
-    <name>RashkovskyDamageFetcher</name>
+    <name>RashkovskyHurtFetcher</name>
     <message>
-        <location filename="dataobserver/datafetcher/RashkovskyDamageFetcher.cpp" line="+11"/>
+        <location filename="dataobserver/datafetcher/RashkovskyHurtFetcher.cpp" line="+11"/>
         <source>拉什科夫斯基受伤</source>
         <translation>Rashkovsky hurt</translation>
     </message>
@@ -1158,6 +1199,14 @@ AdstarGod Firewall, easy to use
         <location filename="dataobserver/missionstrategy/seriesa/SeriesAFundingStrategy.cpp" line="+11"/>
         <source>首轮募资</source>
         <translation>Series A Funding</translation>
+    </message>
+</context>
+<context>
+    <name>SeriesAWeedStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/seriesa/SeriesAWeedStrategy.cpp" line="+11"/>
+        <source>首轮募资：大麻</source>
+        <translation>Series A - Weed</translation>
     </message>
 </context>
 <context>
@@ -1235,16 +1284,14 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+209"/>
-        <location line="+514"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+17"/>
-        <location line="+20"/>
         <source>建议设置为 50-200 之间，配置低的用户请适当增大数值</source>
         <oldsource>建议设置为50-200之间，配置低的用户请适当增大数值</oldsource>
         <translation>Suggested setting is between 50 to 200. Users with lower computer performance should consider increasing the value accordingly</translation>
     </message>
     <message>
-        <location line="-96"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-5"/>
+        <location line="+418"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+15"/>
         <source>计时器热键</source>
         <translation>Timer hotkeys</translation>
     </message>
@@ -1509,7 +1556,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <location line="+30"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>操作</source>
-        <translation type="unfinished">Ops</translation>
+        <translation>Ops</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -1532,14 +1579,16 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     </message>
     <message>
         <location line="+39"/>
+        <location line="+118"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+2"/>
+        <location line="+7"/>
         <source>建议设置为 10-50 之间，配置低的用户请适当增大数值</source>
         <oldsource>建议设置为30-70之间，配置低的用户请适当增大数值</oldsource>
         <translation>Suggested setting is between 10 to 50. Users with lower computer performance should consider increasing the value accordingly</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
+        <location line="-102"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-6"/>
         <source>手动计时</source>
         <translation>Manual timing</translation>
     </message>

@@ -1,5 +1,4 @@
-#ifndef MISSIONSTRATEGYUTIL_H
-#define MISSIONSTRATEGYUTIL_H
+#pragma once
 
 #include "BaseMissionStrategy.h"
 #include "EmptyStrategy.h"
@@ -30,12 +29,18 @@
 #include "humanelabsraid/HumaneRaidInsurgentsStrategy.h"
 #include "humanelabsraid/HumaneRaidValkyrieStrategy.h"
 #include "humanelabsraid/TheHumaneLabsRaidStrategy.h"
+#include "pacificstandard/PacificStandardBikesStrategy.h"
+#include "pacificstandard/PacificStandardConvoyStrategy.h"
+#include "pacificstandard/PacificStandardHackStrategy.h"
+#include "pacificstandard/PacificStandardSignalStrategy.h"
+#include "pacificstandard/PacificStandardVansStrategy.h"
 #include "pacificstandard/ThePacificStandardStrategy.h"
 #include "prisonbreak/PrisonBreakBusStrategy.h"
 #include "prisonbreak/PrisonBreakStationStrategy.h"
 #include "prisonbreak/PrisonBreakWetWorkStrategy.h"
 #include "prisonbreak/ThePrisonBreakStrategy.h"
 #include "seriesa/SeriesAFundingStrategy.h"
+#include "seriesa/SeriesAWeedStrategy.h"
 #include <QObject>
 
 #define missionStrategyUtil (MissionStrategyUtil::instance())
@@ -83,8 +88,14 @@ public:
     HumaneRaidValkyrieStrategy* humaneRaidValkyrieStrategy = new HumaneRaidValkyrieStrategy(this);
     TheHumaneLabsRaidStrategy* theHumaneLabsRaidStrategy = new TheHumaneLabsRaidStrategy(this);
 
+    SeriesAWeedStrategy* seriesAWeedStrategy = new SeriesAWeedStrategy(this);
     SeriesAFundingStrategy* seriesAFundingStrategy = new SeriesAFundingStrategy(this);
 
+    PacificStandardBikesStrategy* pacificStandardBikesStrategy = new PacificStandardBikesStrategy(this);
+    PacificStandardConvoyStrategy* pacificStandardConvoyStrategy = new PacificStandardConvoyStrategy(this);
+    PacificStandardHackStrategy* pacificStandardHackStrategy = new PacificStandardHackStrategy(this);
+    PacificStandardSignalStrategy* pacificStandardSignalStrategy = new PacificStandardSignalStrategy(this);
+    PacificStandardVansStrategy* pacificStandardVansStrategy = new PacificStandardVansStrategy(this);
     ThePacificStandardStrategy* thePacificStandardStrategy = new ThePacificStandardStrategy(this);
 
     CasinoHeistAggressiveStrategy* casinoHeistAggressiveStrategy = new CasinoHeistAggressiveStrategy(this);
@@ -127,8 +138,14 @@ public:
         humaneRaidValkyrieStrategy,
         theHumaneLabsRaidStrategy,
 
+        seriesAWeedStrategy,
         seriesAFundingStrategy,
 
+        pacificStandardVansStrategy,
+        pacificStandardSignalStrategy,
+        pacificStandardHackStrategy,
+        pacificStandardConvoyStrategy,
+        pacificStandardBikesStrategy,
         thePacificStandardStrategy,
 
         casinoHeistAggressiveStrategy,
@@ -157,5 +174,3 @@ private:
 signals:
     void onMissionToDataFetchersChanged(QString, QSet<QString> oldFetchers, QSet<QString> newFetchers);
 };
-
-#endif // MISSIONSTRATEGYUTIL_H
