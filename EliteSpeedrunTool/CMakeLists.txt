@@ -67,16 +67,24 @@ set(PROJECT_SOURCES
         dataobserver/missionstrategy/fleecajob/FleecaJobScopeOutStrategy.h dataobserver/missionstrategy/fleecajob/FleecaJobScopeOutStrategy.cpp
         dataobserver/missionstrategy/fleecajob/FleecaJobKurumaStrategy.h dataobserver/missionstrategy/fleecajob/FleecaJobKurumaStrategy.cpp
 
+        dataobserver/missionstrategy/prisonbreak/PrisonBreakPlaneStrategy.h dataobserver/missionstrategy/prisonbreak/PrisonBreakPlaneStrategy.cpp
         dataobserver/missionstrategy/prisonbreak/PrisonBreakBusStrategy.h dataobserver/missionstrategy/prisonbreak/PrisonBreakBusStrategy.cpp
         dataobserver/missionstrategy/prisonbreak/PrisonBreakStationStrategy.h dataobserver/missionstrategy/prisonbreak/PrisonBreakStationStrategy.cpp
         dataobserver/missionstrategy/prisonbreak/PrisonBreakWetWorkStrategy.h dataobserver/missionstrategy/prisonbreak/PrisonBreakWetWorkStrategy.cpp
         dataobserver/missionstrategy/prisonbreak/ThePrisonBreakStrategy.h dataobserver/missionstrategy/prisonbreak/ThePrisonBreakStrategy.cpp
 
+        dataobserver/missionstrategy/seriesa/SeriesACokeStrategy.h dataobserver/missionstrategy/seriesa/SeriesACokeStrategy.cpp
+        dataobserver/missionstrategy/seriesa/SeriesATrashTruckStrategy.h dataobserver/missionstrategy/seriesa/SeriesATrashTruckStrategy.cpp
+        dataobserver/missionstrategy/seriesa/SeriesABikersStrategy.h dataobserver/missionstrategy/seriesa/SeriesABikersStrategy.cpp
         dataobserver/missionstrategy/seriesa/SeriesAWeedStrategy.h dataobserver/missionstrategy/seriesa/SeriesAWeedStrategy.cpp
+        dataobserver/missionstrategy/seriesa/SeriesAStealMethStrategy.h dataobserver/missionstrategy/seriesa/SeriesAStealMethStrategy.cpp
         dataobserver/missionstrategy/seriesa/SeriesAFundingStrategy.h dataobserver/missionstrategy/seriesa/SeriesAFundingStrategy.cpp
 
+        dataobserver/missionstrategy/humanelabsraid/HumaneRaidKeyCodesStrategy.h dataobserver/missionstrategy/humanelabsraid/HumaneRaidKeyCodesStrategy.cpp
         dataobserver/missionstrategy/humanelabsraid/HumaneRaidInsurgentsStrategy.h dataobserver/missionstrategy/humanelabsraid/HumaneRaidInsurgentsStrategy.cpp
+        dataobserver/missionstrategy/humanelabsraid/HumaneRaidEmpStrategy.h dataobserver/missionstrategy/humanelabsraid/HumaneRaidEmpStrategy.cpp
         dataobserver/missionstrategy/humanelabsraid/HumaneRaidValkyrieStrategy.h dataobserver/missionstrategy/humanelabsraid/HumaneRaidValkyrieStrategy.cpp
+        dataobserver/missionstrategy/humanelabsraid/HumaneRaidDeliverEmpStrategy.h dataobserver/missionstrategy/humanelabsraid/HumaneRaidDeliverEmpStrategy.cpp
         dataobserver/missionstrategy/humanelabsraid/TheHumaneLabsRaidStrategy.h dataobserver/missionstrategy/humanelabsraid/TheHumaneLabsRaidStrategy.cpp
 
         dataobserver/missionstrategy/pacificstandard/PacificStandardVansStrategy.h dataobserver/missionstrategy/pacificstandard/PacificStandardVansStrategy.cpp

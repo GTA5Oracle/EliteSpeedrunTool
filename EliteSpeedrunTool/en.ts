@@ -516,11 +516,35 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     </message>
 </context>
 <context>
+    <name>HumaneRaidDeliverEmpStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/humanelabsraid/HumaneRaidDeliverEmpStrategy.cpp" line="+11"/>
+        <source>突袭人道研究实验室：运送电磁脉冲装置</source>
+        <translation>Humane Raid - Deliver EMP</translation>
+    </message>
+</context>
+<context>
+    <name>HumaneRaidEmpStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/humanelabsraid/HumaneRaidEmpStrategy.cpp" line="+11"/>
+        <source>突袭人道研究实验室：电磁脉冲装置</source>
+        <translation>Humane Raid - EMP</translation>
+    </message>
+</context>
+<context>
     <name>HumaneRaidInsurgentsStrategy</name>
     <message>
         <location filename="dataobserver/missionstrategy/humanelabsraid/HumaneRaidInsurgentsStrategy.cpp" line="+11"/>
         <source>突袭人道研究实验室：叛乱分子</source>
         <translation>Humane Raid - Insurgents</translation>
+    </message>
+</context>
+<context>
+    <name>HumaneRaidKeyCodesStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/humanelabsraid/HumaneRaidKeyCodesStrategy.cpp" line="+11"/>
+        <source>突袭人道研究实验室：关键密码</source>
+        <translation>Humane Raid - Key Codes</translation>
     </message>
 </context>
 <context>
@@ -1083,6 +1107,14 @@ AdstarGod Firewall, easy to use
     </message>
 </context>
 <context>
+    <name>PrisonBreakPlaneStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/prisonbreak/PrisonBreakPlaneStrategy.cpp" line="+11"/>
+        <source>越狱：飞机</source>
+        <translation>Prison Break - Plane</translation>
+    </message>
+</context>
+<context>
     <name>PrisonBreakStationStrategy</name>
     <message>
         <location filename="dataobserver/missionstrategy/prisonbreak/PrisonBreakStationStrategy.cpp" line="+11"/>
@@ -1194,11 +1226,43 @@ AdstarGod Firewall, easy to use
     </message>
 </context>
 <context>
+    <name>SeriesABikersStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/seriesa/SeriesABikersStrategy.cpp" line="+11"/>
+        <source>首轮募资：摩托车手</source>
+        <translation>Series A - Bikers</translation>
+    </message>
+</context>
+<context>
+    <name>SeriesACokeStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/seriesa/SeriesACokeStrategy.cpp" line="+11"/>
+        <source>首轮募资：可卡因</source>
+        <translation>Series A - Coke</translation>
+    </message>
+</context>
+<context>
     <name>SeriesAFundingStrategy</name>
     <message>
         <location filename="dataobserver/missionstrategy/seriesa/SeriesAFundingStrategy.cpp" line="+11"/>
         <source>首轮募资</source>
         <translation>Series A Funding</translation>
+    </message>
+</context>
+<context>
+    <name>SeriesAStealMethStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/seriesa/SeriesAStealMethStrategy.cpp" line="+11"/>
+        <source>首轮募资：窃取冰毒</source>
+        <translation>Series A - Steal Meth</translation>
+    </message>
+</context>
+<context>
+    <name>SeriesATrashTruckStrategy</name>
+    <message>
+        <location filename="dataobserver/missionstrategy/seriesa/SeriesATrashTruckStrategy.cpp" line="+11"/>
+        <source>首轮募资：垃圾车</source>
+        <translation>Series A - Trash Truck</translation>
     </message>
 </context>
 <context>

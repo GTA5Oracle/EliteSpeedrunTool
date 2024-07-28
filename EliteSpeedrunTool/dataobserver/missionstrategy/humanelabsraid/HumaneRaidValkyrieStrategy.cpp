@@ -26,5 +26,5 @@ QString HumaneRaidValkyrieStrategy::id()
 
 const QSet<unsigned long long> HumaneRaidValkyrieStrategy::missionHash()
 {
-    return { MemoryUtil::hashTheHumaneLabsRaid };
+    return { MemoryUtil::hashHumaneRaidValkyrie };
 }

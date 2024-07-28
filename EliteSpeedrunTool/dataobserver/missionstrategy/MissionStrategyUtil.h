@@ -26,7 +26,10 @@
 #include "fleecajob/FleecaJobKurumaStrategy.h"
 #include "fleecajob/FleecaJobScopeOutStrategy.h"
 #include "fleecajob/TheFleecaJobStrategy.h"
+#include "humanelabsraid/HumaneRaidDeliverEmpStrategy.h"
+#include "humanelabsraid/HumaneRaidEmpStrategy.h"
 #include "humanelabsraid/HumaneRaidInsurgentsStrategy.h"
+#include "humanelabsraid/HumaneRaidKeyCodesStrategy.h"
 #include "humanelabsraid/HumaneRaidValkyrieStrategy.h"
 #include "humanelabsraid/TheHumaneLabsRaidStrategy.h"
 #include "pacificstandard/PacificStandardBikesStrategy.h"
@@ -36,10 +39,15 @@
 #include "pacificstandard/PacificStandardVansStrategy.h"
 #include "pacificstandard/ThePacificStandardStrategy.h"
 #include "prisonbreak/PrisonBreakBusStrategy.h"
+#include "prisonbreak/PrisonBreakPlaneStrategy.h"
 #include "prisonbreak/PrisonBreakStationStrategy.h"
 #include "prisonbreak/PrisonBreakWetWorkStrategy.h"
 #include "prisonbreak/ThePrisonBreakStrategy.h"
+#include "seriesa/SeriesABikersStrategy.h"
+#include "seriesa/SeriesACokeStrategy.h"
 #include "seriesa/SeriesAFundingStrategy.h"
+#include "seriesa/SeriesAStealMethStrategy.h"
+#include "seriesa/SeriesATrashTruckStrategy.h"
 #include "seriesa/SeriesAWeedStrategy.h"
 #include <QObject>
 
@@ -79,16 +87,24 @@ public:
     FleecaJobKurumaStrategy* fleecaJobKurumaStrategy = new FleecaJobKurumaStrategy(this);
     TheFleecaJobStrategy* theFleecaJobStrategy = new TheFleecaJobStrategy(this);
 
+    PrisonBreakPlaneStrategy* prisonBreakPlaneStrategy = new PrisonBreakPlaneStrategy(this);
     PrisonBreakBusStrategy* prisonBreakBusStrategy = new PrisonBreakBusStrategy(this);
     PrisonBreakStationStrategy* prisonBreakStationStrategy = new PrisonBreakStationStrategy(this);
     PrisonBreakWetWorkStrategy* prisonBreakWetWorkStrategy = new PrisonBreakWetWorkStrategy(this);
     ThePrisonBreakStrategy* thePrisonBreakStrategy = new ThePrisonBreakStrategy(this);
 
+    HumaneRaidKeyCodesStrategy* humaneRaidKeyCodesStrategy = new HumaneRaidKeyCodesStrategy(this);
     HumaneRaidInsurgentsStrategy* humaneRaidInsurgentsStrategy = new HumaneRaidInsurgentsStrategy(this);
+    HumaneRaidEmpStrategy* humaneRaidEmpStrategy = new HumaneRaidEmpStrategy(this);
     HumaneRaidValkyrieStrategy* humaneRaidValkyrieStrategy = new HumaneRaidValkyrieStrategy(this);
+    HumaneRaidDeliverEmpStrategy* humaneRaidDeliverEmpStrategy = new HumaneRaidDeliverEmpStrategy(this);
     TheHumaneLabsRaidStrategy* theHumaneLabsRaidStrategy = new TheHumaneLabsRaidStrategy(this);
 
+    SeriesACokeStrategy* seriesACokeStrategy = new SeriesACokeStrategy(this);
+    SeriesATrashTruckStrategy* seriesATrashTruckStrategy = new SeriesATrashTruckStrategy(this);
+    SeriesABikersStrategy* seriesABikersStrategy = new SeriesABikersStrategy(this);
     SeriesAWeedStrategy* seriesAWeedStrategy = new SeriesAWeedStrategy(this);
+    SeriesAStealMethStrategy* seriesAStealMethStrategy = new SeriesAStealMethStrategy(this);
     SeriesAFundingStrategy* seriesAFundingStrategy = new SeriesAFundingStrategy(this);
 
     PacificStandardBikesStrategy* pacificStandardBikesStrategy = new PacificStandardBikesStrategy(this);
@@ -129,16 +145,24 @@ public:
         fleecaJobKurumaStrategy,
         theFleecaJobStrategy,
 
+        prisonBreakPlaneStrategy,
         prisonBreakBusStrategy,
         prisonBreakStationStrategy,
         prisonBreakWetWorkStrategy,
         thePrisonBreakStrategy,
 
+        humaneRaidKeyCodesStrategy,
         humaneRaidInsurgentsStrategy,
+        humaneRaidEmpStrategy,
         humaneRaidValkyrieStrategy,
+        humaneRaidDeliverEmpStrategy,
         theHumaneLabsRaidStrategy,
 
+        seriesACokeStrategy,
+        seriesATrashTruckStrategy,
+        seriesABikersStrategy,
         seriesAWeedStrategy,
+        seriesAStealMethStrategy,
         seriesAFundingStrategy,
 
         pacificStandardVansStrategy,

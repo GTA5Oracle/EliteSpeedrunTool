@@ -71,17 +71,26 @@ public:
     inline const static unsigned long long hashFleecaJobKuruma = 3458614835; // 全福骷髅马
     inline const static unsigned long long hashTheFleecaJob = 3222096535; // 全福分红
     // 越狱
+    inline const static unsigned long long hashPrisonBreakPlane = 793579785; // 越狱：飞机
     inline const static unsigned long long hashPrisonBreakBus = 2652883801; // 越狱：巴士
     inline const static unsigned long long hashPrisonBreakStation = 2569787839; // 越狱：警察局
     inline const static unsigned long long hashPrisonBreakWetWork = 842031918; // 越狱：行刺
     inline const static unsigned long long hashThePrisonBreak = 979654579; // 越狱分红
     // 人道
-    inline const static unsigned long long hashHumaneRaidValkyrie = 1324253820; // 突袭人道研究实验室：女武神
+    inline const static unsigned long long hashHumaneRaidKeyCodes1 = 466825080; // 突袭人道研究实验室：关键密码1
+    inline const static unsigned long long hashHumaneRaidKeyCodes2 = 3348094115; // 突袭人道研究实验室：关键密码2
     inline const static unsigned long long hashHumaneRaidInsurgents = 2039847454; // 突袭人道研究实验室：叛乱分子
-    inline const static unsigned long long hashTheHumaneLabsRaid = 3197980642; // 人道分红
+    inline const static unsigned long long hashHumaneRaidEmp = 2136235844; // 突袭人道研究实验室：电磁脉冲装置
+    inline const static unsigned long long hashHumaneRaidValkyrie = 1324253820; // 突袭人道研究实验室：女武神
+    inline const static unsigned long long hashHumaneRaidDeliverEmp = 496643418; // 突袭人道研究实验室：运送电磁脉冲装置
+    inline const static unsigned long long hashTheHumaneLabsRaid = 3197980642; // 突袭人道研究实验室 分红
     // 首轮
-    inline const static unsigned long long hashSeriesAFunding = 164435858; // 首轮分红
-    inline const static unsigned long long hashSeriesAWeed = 4280918227; // 首轮：大麻
+    inline const static unsigned long long hashSeriesACoke = 3704629663; // 首轮募资：可卡因
+    inline const static unsigned long long hashSeriesATrashTruck = 1571421055; // 首轮募资：垃圾车
+    inline const static unsigned long long hashSeriesABikers = 3664952125; // 首轮募资：摩托车手
+    inline const static unsigned long long hashSeriesAWeed = 4280918227; // 首轮募资：大麻
+    inline const static unsigned long long hashSeriesAStealMeth = 1585746186; // 首轮募资：窃取冰毒
+    inline const static unsigned long long hashSeriesAFunding = 164435858; // 募资 分红
     // 太平洋
     inline const static unsigned long long hashThePacificStandardP1 = 4062993727; // 太平洋分红前一段
     inline const static unsigned long long hashThePacificStandardP2 = 1309288309; // 太平洋分红后一段

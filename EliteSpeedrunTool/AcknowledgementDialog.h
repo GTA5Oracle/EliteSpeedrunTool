@@ -30,6 +30,17 @@ private:
         "Alice2333",
         "愚蠢的土拨鼠",
         "康康",
+        "_-K32-_",
+        "LanChaTu-C",
+        "StudenT_Tan02",
+        "steeptakagi",
+        "AnotherDaaay27",
+        "wdxdzl",
+        "___Sakiko___",
+        "Going_Bad",
+        "colourpen907",
+        "-oll006-",
+        "___Ady-sxr___",
     };
 
     QList<QString> sponsors = {
