@@ -41,6 +41,7 @@ private:
         "colourpen907",
         "-oll006-",
         "___Ady-sxr___",
+        "老司机",
     };
 
     QList<QString> sponsors = {
@@ -57,5 +58,10 @@ private:
         "Easy",
         "Zeroday",
         "Azusa ～",
+        "-neverRE",
+        "愚蠢的土拨鼠",
+        "12",
+        "xiakeyi",
+        "超级无敌大王",
     };
 };

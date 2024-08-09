@@ -7,7 +7,7 @@ class FirewallUtil {
 public:
     FirewallUtil();
 
-    static bool firewallIsEnabled();
+    static bool firewallIsEnabled(long& enabledTypes);
 
     static INetFwRule* getNetFwRule();
 

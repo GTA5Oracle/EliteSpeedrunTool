@@ -615,19 +615,19 @@ Answer: Real-time updates would consume computer resources unnecessarily, and th
     <name>MainWindow</name>
     <message>
         <location filename="MainWindow.ui" line="+25"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+589"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+689"/>
         <source>断网</source>
         <translation>Firewall</translation>
     </message>
     <message>
-        <location line="+107"/>
+        <location line="+234"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-1"/>
         <source>播放提示音</source>
         <translation>Play sound</translation>
     </message>
     <message>
-        <location line="-12"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-3"/>
+        <location line="-131"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-8"/>
         <source>代言人：Adstargod
 星神断网，好用没烦恼
 😋</source>
@@ -636,16 +636,16 @@ AdstarGod Firewall, easy to use
 😋</translation>
     </message>
     <message>
-        <location line="-42"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-3"/>
+        <location line="-50"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-4"/>
         <source>Windows 防火墙未启用，无法使用断网功能！</source>
         <translation>Windows Firewall is not enabled, and the network disconnection feature cannot be used!</translation>
     </message>
     <message>
-        <location line="+139"/>
-        <location filename="MainWindow.cpp" line="+789"/>
+        <location line="+266"/>
+        <location filename="MainWindow.cpp" line="+799"/>
         <location line="+22"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+8"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+14"/>
         <source>点击启动</source>
         <translation>Start counting</translation>
     </message>
@@ -696,7 +696,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+163"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-33"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-39"/>
         <source>爱发电...</source>
         <translation>Ai Fa Dian...</translation>
     </message>
@@ -713,8 +713,45 @@ AdstarGod Firewall, easy to use
         <translation>Alipay...</translation>
     </message>
     <message>
-        <location line="-615"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+15"/>
+        <location line="-788"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+8"/>
+        <source>代言人</source>
+        <translation>Spokesperson</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+4"/>
+        <source>防火墙状态</source>
+        <translation>Firewall status</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+1"/>
+        <source>域</source>
+        <translation>Domain</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+1"/>
+        <source>专用</source>
+        <translation>Private</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+1"/>
+        <source>公用</source>
+        <translation>Public</translation>
+    </message>
+    <message>
+        <location line="+60"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+1"/>
+        <source>注意：公用网络防火墙未开启，请先测试断网是否有效</source>
+        <oldsource>注意：公共网络防火墙未开启，请先测试断网是否有效</oldsource>
+        <translation>Note: The public type firewall is not turned on, please test whether the disconnection is effective</translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+5"/>
         <source>计时</source>
         <translation>Manual timing</translation>
     </message>
@@ -801,7 +838,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+124"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-37"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-43"/>
         <source>检查更新...</source>
         <translation>Check for update...</translation>
     </message>
@@ -826,7 +863,7 @@ AdstarGod Firewall, easy to use
         <translation>About Qt...</translation>
     </message>
     <message>
-        <location line="-587"/>
+        <location line="-714"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+23"/>
         <source>警告</source>
         <translation>Warning</translation>
@@ -845,7 +882,7 @@ AdstarGod Firewall, easy to use
         <translation>Refresh</translation>
     </message>
     <message>
-        <location line="+560"/>
+        <location line="+687"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-25"/>
         <source>关于本软件...</source>
         <translation>About...</translation>
@@ -882,7 +919,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+30"/>
-        <location filename="MainWindow.cpp" line="-491"/>
+        <location filename="MainWindow.cpp" line="-501"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+4"/>
         <source>复制地址</source>
         <translation>Copy link</translation>
@@ -931,7 +968,7 @@ AdstarGod Firewall, easy to use
         <translation>Help us translate...</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="+111"/>
+        <location filename="MainWindow.cpp" line="+121"/>
         <location line="+17"/>
         <source>已关闭</source>
         <translation>Stopped</translation>
@@ -942,7 +979,7 @@ AdstarGod Firewall, easy to use
         <translation>Running</translation>
     </message>
     <message>
-        <location line="-116"/>
+        <location line="-126"/>
         <source>服务器未运行</source>
         <translation>Server is not running</translation>
     </message>
@@ -958,7 +995,7 @@ AdstarGod Firewall, easy to use
         <translation>Server address has been copied!</translation>
     </message>
     <message>
-        <location line="+466"/>
+        <location line="+476"/>
         <source>点击归零</source>
         <translation>Click to Zero</translation>
     </message>
@@ -973,7 +1010,7 @@ AdstarGod Firewall, easy to use
         <translation>Click to continue</translation>
     </message>
     <message>
-        <location line="-640"/>
+        <location line="-650"/>
         <source>注册启用防火墙热键失败！</source>
         <oldsource>注册防火墙启动热键失败！</oldsource>
         <translation>Failed to register enable firewall hotkeys!</translation>

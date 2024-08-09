@@ -15,7 +15,7 @@ FirewallUtil::FirewallUtil()
 {
 }
 
-bool FirewallUtil::firewallIsEnabled()
+bool FirewallUtil::firewallIsEnabled(long& enabledTypes)
 {
     bool enabled = false;
 
@@ -42,13 +42,30 @@ bool FirewallUtil::firewallIsEnabled()
     VARIANT_BOOL bFirewallEnabled;
     long fwCurrentProfileTypes;
     pNetFwPolicy2->get_CurrentProfileTypes(&fwCurrentProfileTypes);
-    hr = pNetFwPolicy2->get_FirewallEnabled((NET_FW_PROFILE_TYPE2_)fwCurrentProfileTypes, &bFirewallEnabled);
+    enabledTypes = 0;
+    NET_FW_PROFILE_TYPE2 profileTypes[] = { NET_FW_PROFILE2_DOMAIN, NET_FW_PROFILE2_PRIVATE, NET_FW_PROFILE2_PUBLIC };
+    for (NET_FW_PROFILE_TYPE2 type : profileTypes) {
+        hr = pNetFwPolicy2->get_FirewallEnabled((NET_FW_PROFILE_TYPE2)(fwCurrentProfileTypes & type), &bFirewallEnabled);
+        bool currentEnabled = false;
 
-    if (SUCCEEDED(hr)) {
-        enabled = bFirewallEnabled == VARIANT_TRUE;
-    } else {
-        enabled = false;
-        qCritical() << "Failed to get firewall status: " << hr;
+        if (SUCCEEDED(hr)) {
+            currentEnabled = bFirewallEnabled == VARIANT_TRUE;
+        } else {
+            currentEnabled = false;
+            qCritical() << "Failed to get firewall status: " << hr << " type: " << type;
+        }
+
+        enabled |= currentEnabled;
+
+        if (currentEnabled) {
+            qInfo() << "NET_FW_PROFILE_TYPE2: " << type << " enabled";
+            enabledTypes |= type;
+        } else {
+            qCritical() << "NET_FW_PROFILE_TYPE2: " << type << " disabled";
+            if (type == NET_FW_PROFILE2_PUBLIC) {
+                qCritical() << "NET_FW_PROFILE2_PUBLIC disabled!!!";
+            }
+        }
     }
 
     pNetFwPolicy2->Release();
@@ -231,13 +248,6 @@ void FirewallUtil::init()
         qCritical("get_CurrentProfileTypes failed: %ld", hr);
         release();
         return;
-    }
-
-    // When possible we avoid adding firewall rules to the Public profile.
-    // If Public is currently active and it is not the only active profile, we remove it from the bitmask
-    if ((CurrentProfilesBitMask & NET_FW_PROFILE2_PUBLIC)
-        && (CurrentProfilesBitMask != NET_FW_PROFILE2_PUBLIC)) {
-        CurrentProfilesBitMask ^= NET_FW_PROFILE2_PUBLIC;
     }
 
     auto fwRule = getNetFwRule();

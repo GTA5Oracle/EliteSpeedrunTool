@@ -391,7 +391,7 @@ void MainWindow::initMenu()
     });
 
     connect(ui.actionAiFaDian, &QAction::triggered, this, []() {
-        QDesktopServices::openUrl(QUrl("https://afdian.net/a/SkyD666"));
+        QDesktopServices::openUrl(QUrl("https://afdian.com/a/SkyD666"));
     });
     connect(ui.actionBuyMeACoffee, &QAction::triggered, this, []() {
         QDesktopServices::openUrl(QUrl("https://www.buymeacoffee.com/SkyD666"));
@@ -426,7 +426,17 @@ void MainWindow::initMenu()
 void MainWindow::initFirewall()
 {
     connect(ui.pbFirewallRefreshState, &QAbstractButton::clicked, this, [=]() {
-        bool firewallIsEnabled = FirewallUtil::firewallIsEnabled();
+        long enabledTypes = 0;
+        bool firewallIsEnabled = FirewallUtil::firewallIsEnabled(enabledTypes);
+        QPair<NET_FW_PROFILE_TYPE2, QLabel*> types[] = {
+            qMakePair(NET_FW_PROFILE2_DOMAIN, ui.labFirewallDomainState),
+            qMakePair(NET_FW_PROFILE2_PRIVATE, ui.labFirewallPrivateState),
+            qMakePair(NET_FW_PROFILE2_PUBLIC, ui.labFirewallPublicState),
+        };
+        for (auto type : types) {
+            type.second->setText((enabledTypes & type.first) ? "✅" : "⛔");
+        }
+        ui.labFirewallPublicTypeDisabled->setVisible(!(enabledTypes & NET_FW_PROFILE2_PUBLIC) && firewallIsEnabled);
         ui.btnStartFirewall->setEnabled(firewallIsEnabled);
         ui.btnStartFirewall->setDisabled(!firewallIsEnabled);
         ui.btnStartFirewall->setCheckable(firewallIsEnabled);
