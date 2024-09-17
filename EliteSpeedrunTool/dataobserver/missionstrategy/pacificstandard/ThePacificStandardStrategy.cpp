@@ -1,5 +1,5 @@
 #include "ThePacificStandardStrategy.h"
-#include "MemoryUtil.h"
+#include "memoryutil/MemoryUtil.h"
 
 ThePacificStandardStrategy::ThePacificStandardStrategy(QObject* parent)
     : BaseMissionStrategy { parent }

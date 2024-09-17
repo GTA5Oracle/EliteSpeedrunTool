@@ -37,6 +37,8 @@ public:
 protected:
     void initGeneralSettings();
 
+    void initTabEnabled();
+
     QString getSoundFile(QString dir = QString());
 
     int currentSubFunctionIndex = 0;

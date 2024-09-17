@@ -31,6 +31,7 @@ SettingDialog::SettingDialog(QWidget* parent)
     }
     connect(ui.lwPage, &QListWidget::currentRowChanged, ui.stackedWidget, &QStackedWidget::setCurrentIndex);
 
+    initTabEnabled();
     initGeneralSettings();
     initFirewallSettings();
     initMissionDataSettings();
@@ -71,6 +72,12 @@ void SettingDialog::initGeneralSettings()
     connect(ui.cbStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
         globalData->setStyleName(ui.cbStyle->itemData(index).toString());
     });
+}
+
+void SettingDialog::initTabEnabled()
+{
+    ui.tabMissionData->setEnabled(MemoryUtil::enableReadMemory);
+    ui.groupBoxAutoTimer->setEnabled(MemoryUtil::enableReadMemory);
 }
 
 QString SettingDialog::getSoundFile(QString dir)

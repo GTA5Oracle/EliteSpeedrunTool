@@ -1,5 +1,5 @@
 #include "CasinoHeistTheBigConStrategy.h"
-#include "MemoryUtil.h"
+#include "memoryutil/MemoryUtil.h"
 
 CasinoHeistTheBigConStrategy::CasinoHeistTheBigConStrategy(QObject* parent)
     : BaseMissionStrategy { parent }

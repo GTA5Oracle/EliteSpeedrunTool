@@ -24,6 +24,8 @@ public:
 protected:
     void closeEvent(QCloseEvent* event) override;
 
+    void initTabEnabled();
+
     void initGlobalDataConnects();
 
     void checkUpdate();

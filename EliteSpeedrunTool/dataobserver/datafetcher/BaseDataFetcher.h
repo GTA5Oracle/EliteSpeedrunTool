@@ -2,7 +2,7 @@
 
 #include "DisplayInfoSubFunction.h"
 #include "GlobalData.h"
-#include "MemoryUtil.h"
+#include "memoryutil/MemoryUtil.h"
 #include <QDebug>
 #include <QGraphicsDropShadowEffect>
 #include <QLabel>

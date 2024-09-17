@@ -46,7 +46,7 @@
       <enum>QFrame::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -72,8 +72,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>151</width>
-            <height>210</height>
+            <width>447</width>
+            <height>488</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -178,7 +178,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>270</width>
+                <width>429</width>
                 <height>478</height>
                </rect>
               </property>
@@ -519,8 +519,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>251</width>
-                <height>255</height>
+                <width>443</width>
+                <height>459</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -712,8 +712,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>204</width>
-            <height>723</height>
+            <width>433</width>
+            <height>588</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -986,7 +986,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
         <number>0</number>
        </property>
        <item>
-        <widget class="QTabWidget" name="tabWidget_3">
+        <widget class="QTabWidget" name="tabMissionData">
          <property name="currentIndex">
           <number>1</number>
          </property>
@@ -1017,8 +1017,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>186</width>
-                <height>236</height>
+                <width>443</width>
+                <height>459</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -1413,7 +1413,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_18">
            <item>
-            <widget class="QGroupBox" name="groupBox_16">
+            <widget class="QGroupBox" name="groupBoxAutoTimer">
              <property name="title">
               <string>自动计时</string>
              </property>
@@ -1660,8 +1660,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>125</width>
-            <height>89</height>
+            <width>447</width>
+            <height>488</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -1735,8 +1735,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>207</width>
-            <height>143</height>
+            <width>447</width>
+            <height>488</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -1824,8 +1824,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>84</height>
+            <width>447</width>
+            <height>488</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1885,8 +1885,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>45</height>
+            <width>447</width>
+            <height>488</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_34">

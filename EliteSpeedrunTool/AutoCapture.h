@@ -1,5 +1,5 @@
 #pragma once
-#include "MemoryUtil.h"
+#include "memoryutil/MemoryUtil.h"
 #include <QObject>
 
 // #define AutoCapture (AutoCapture::instance());

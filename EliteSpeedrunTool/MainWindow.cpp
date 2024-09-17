@@ -7,11 +7,11 @@
 #include "HttpServerUtil.h"
 #include "LogUtil.h"
 #include "LottieUtil.h"
-#include "MemoryUtil.h"
 #include "SettingDialog.h"
 #include "UpdateDialog.h"
 #include "dataobserver/AutoTimerUtil.h"
 #include "dataobserver/DataObserver.h"
+#include "memoryutil/MemoryUtil.h"
 #include <MMSystem.h>
 #include <QBoxLayout>
 #include <QClipboard>
@@ -64,6 +64,8 @@ MainWindow::MainWindow(QWidget* parent)
     labState->setPalette(palette);
     ui.statusbar->addPermanentWidget(labState);
 
+    initTabEnabled();
+
     initFirewall();
 
     initTimerStateMachine();
@@ -101,6 +103,17 @@ void MainWindow::closeEvent(QCloseEvent* event)
     if (event->isAccepted()) {
         qApp->exit();
     }
+}
+
+void MainWindow::initTabEnabled()
+{
+    ui.tabAutoTimer->setEnabled(MemoryUtil::enableReadMemory);
+    ui.tabMissionData->setEnabled(MemoryUtil::enableReadMemory);
+    ui.tabBadSport->setEnabled(MemoryUtil::enableReadMemory);
+    ui.tabWidget->setTabEnabled(ui.tabWidget->indexOf(ui.tabAutoTimer), MemoryUtil::enableReadMemory);
+    ui.tabWidget->setTabEnabled(ui.tabWidget->indexOf(ui.tabMissionData), MemoryUtil::enableReadMemory);
+    ui.tabWidget->setTabEnabled(ui.tabWidget->indexOf(ui.tabBadSport), MemoryUtil::enableReadMemory);
+    ui.tabWidget->setStyleSheet("QTabBar::tab::disabled {width: 0; height: 0; margin: 0; padding: 0; border: none;} ");
 }
 
 void MainWindow::initGlobalDataConnects()

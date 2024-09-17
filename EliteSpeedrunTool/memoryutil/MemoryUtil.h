@@ -1,5 +1,5 @@
 #pragma once
-#include <QObject>
+
 #include <QString>
 #include <QTimer>
 #include <windows.h>
@@ -12,6 +12,8 @@ public:
     explicit MemoryUtil();
 
     static MemoryUtil* instance();
+
+    static bool enableReadMemory;
 
     DWORD64 globalPtr = 0;
     DWORD64 missionPtr = 0;
@@ -118,35 +120,40 @@ public:
     inline const static unsigned long long hashLostMcRip = 2389264995; // 安息吧！失落摩托帮
     inline const static unsigned long long hashCasinoBadBeat = 2805392149; // 贝克女士：出奇制胜
 
-    HWND getWindowHwnd();
-    HANDLE getProcessHandle(DWORD* pid, DWORD dwDesiredAccess = PROCESS_ALL_ACCESS);
-    HMODULE getProcessModuleHandle(DWORD pid, CONST TCHAR* moduleName);
+    virtual HWND getWindowHwnd();
+    virtual HANDLE getProcessHandle(DWORD* pid, DWORD dwDesiredAccess = PROCESS_ALL_ACCESS);
+    virtual HMODULE getProcessModuleHandle(DWORD pid, CONST TCHAR* moduleName);
 
-    WINBOOL read(unsigned long long address, LPVOID buffer, SIZE_T size);
-    unsigned long long findPattern(QString pattern);
-    unsigned long long rip37(unsigned long long address);
+    virtual WINBOOL read(unsigned long long address, LPVOID buffer, SIZE_T size);
+    virtual unsigned long long findPattern(QString pattern);
+    virtual unsigned long long rip37(unsigned long long address);
 
-    bool initGlobalPtr();
-    void initMissionPtr();
+    virtual bool initGlobalPtr();
+    virtual void initMissionPtr();
 
-    int getGlobalInt(int index);
-    int getGlobalUInt(int index);
-    long long getGlobalLongLong(int index);
-    unsigned long long getGlobalULongLong(int index);
-    float getGlobalFloat(int index);
+    virtual int getGlobalInt(int index);
+    virtual int getGlobalUInt(int index);
+    virtual long long getGlobalLongLong(int index);
+    virtual unsigned long long getGlobalULongLong(int index);
+    virtual float getGlobalFloat(int index);
 
-    int getLocalInt(int index);
-    unsigned int getLocalUInt(int index);
-    float getLocalFloat(int index);
-    long long getLocalLongLong(int index);
-    unsigned long long getLocalULongLong(int index);
-    bool getLocalBool(int index);
+    virtual int getLocalInt(int index);
+    virtual unsigned int getLocalUInt(int index);
+    virtual float getLocalFloat(int index);
+    virtual long long getLocalLongLong(int index);
+    virtual unsigned long long getLocalULongLong(int index);
+    virtual bool getLocalBool(int index);
 
     // 恶意值
-    int getBadSport();
+    virtual int getBadSport();
+
+    virtual void refresh();
 
 private:
+    static MemoryUtil* utilInstance;
+
     QTimer* gtaProcessTimer = new QTimer(this);
+
 signals:
     void onMissionPtrChanged();
 };

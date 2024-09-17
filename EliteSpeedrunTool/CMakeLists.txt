@@ -29,7 +29,8 @@ set(PROJECT_SOURCES
         AcknowledgementDialog.h AcknowledgementDialog.cpp AcknowledgementDialog.ui
         LogUtil.h LogUtil.cpp
         LanguageUtil.h LanguageUtil.cpp
-        MemoryUtil.h MemoryUtil.cpp
+        memoryutil/MemoryUtil.h memoryutil/MemoryUtil.cpp
+        memoryutil/FakeMemoryUtil.h memoryutil/FakeMemoryUtil.cpp
         HttpServerUtil.h HttpServerUtil.cpp
         DisplayInfoSubFunction.h DisplayInfoSubFunction.cpp
         DiscordUtil.h DiscordUtil.cpp

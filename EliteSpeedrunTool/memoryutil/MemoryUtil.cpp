@@ -1,14 +1,38 @@
 #include "MemoryUtil.h"
+#include "FakeMemoryUtil.h"
 #include <Psapi.h>
 #include <QDebug>
 #include <QList>
 #include <Tlhelp32.h>
 #include <tchar.h>
 
-Q_GLOBAL_STATIC(MemoryUtil, memoryUtilInstance)
+MemoryUtil* MemoryUtil::utilInstance = nullptr;
+bool MemoryUtil::enableReadMemory = false;
 
 MemoryUtil::MemoryUtil()
 {
+}
+
+MemoryUtil* MemoryUtil::instance()
+{
+    if (utilInstance != nullptr) {
+        return utilInstance;
+    }
+    if (enableReadMemory) {
+        utilInstance = new MemoryUtil();
+    } else {
+        utilInstance = new FakeMemoryUtil();
+    }
+    utilInstance->refresh();
+    return utilInstance;
+}
+
+void MemoryUtil::refresh()
+{
+    if (!enableReadMemory) {
+        return;
+    }
+
     // 不断刷新GTA进程的信息，防止先启动工具后启动游戏导致地址不正确
     initGlobalPtr();
     initMissionPtr();
@@ -17,11 +41,6 @@ MemoryUtil::MemoryUtil()
         initMissionPtr();
     });
     gtaProcessTimer->start(15000);
-}
-
-MemoryUtil* MemoryUtil::instance()
-{
-    return memoryUtilInstance;
 }
 
 WINBOOL MemoryUtil::read(unsigned long long address, LPVOID buffer, SIZE_T size)

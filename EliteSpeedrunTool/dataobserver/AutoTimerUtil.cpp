@@ -1,6 +1,6 @@
 #include "dataobserver/AutoTimerUtil.h"
 #include "GlobalData.h"
-#include "MemoryUtil.h"
+#include "memoryutil/MemoryUtil.h"
 #include <QDateTime>
 
 Q_GLOBAL_STATIC(AutoTimerUtil, autoTimerUtilInstance)

@@ -41,7 +41,6 @@ private:
         "colourpen907",
         "-oll006-",
         "___Ady-sxr___",
-        "老司机",
     };
 
     QList<QString> sponsors = {
@@ -63,5 +62,7 @@ private:
         "12",
         "xiakeyi",
         "超级无敌大王",
+        "老司机",
+        "Roffzei",
     };
 };
