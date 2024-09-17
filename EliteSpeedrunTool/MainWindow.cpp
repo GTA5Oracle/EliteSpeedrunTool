@@ -6,11 +6,8 @@
 #include "GlobalData.h"
 #include "HttpServerUtil.h"
 #include "LogUtil.h"
-#include "LottieUtil.h"
 #include "SettingDialog.h"
 #include "UpdateDialog.h"
-#include "dataobserver/AutoTimerUtil.h"
-#include "dataobserver/DataObserver.h"
 #include "memoryutil/MemoryUtil.h"
 #include <MMSystem.h>
 #include <QBoxLayout>
@@ -37,8 +34,6 @@ MainWindow::MainWindow(QWidget* parent)
 
     connect(qApp, &QCoreApplication::aboutToQuit, this, [=]() {
         HttpServerController::instance()->stop();
-        autoTimerUtil->stop();
-        dataObserver->destruct();
         qInfo("Exiting...");
         globalData->destory();
     });
@@ -64,19 +59,11 @@ MainWindow::MainWindow(QWidget* parent)
     labState->setPalette(palette);
     ui.statusbar->addPermanentWidget(labState);
 
-    initTabEnabled();
-
     initFirewall();
 
     initTimerStateMachine();
 
     initCloseGameImmediately();
-
-    initAutoTimer();
-
-    initMissionData();
-
-    initBadSport();
 
     initGlobalDataConnects();
 }
@@ -103,17 +90,6 @@ void MainWindow::closeEvent(QCloseEvent* event)
     if (event->isAccepted()) {
         qApp->exit();
     }
-}
-
-void MainWindow::initTabEnabled()
-{
-    ui.tabAutoTimer->setEnabled(MemoryUtil::enableReadMemory);
-    ui.tabMissionData->setEnabled(MemoryUtil::enableReadMemory);
-    ui.tabBadSport->setEnabled(MemoryUtil::enableReadMemory);
-    ui.tabWidget->setTabEnabled(ui.tabWidget->indexOf(ui.tabAutoTimer), MemoryUtil::enableReadMemory);
-    ui.tabWidget->setTabEnabled(ui.tabWidget->indexOf(ui.tabMissionData), MemoryUtil::enableReadMemory);
-    ui.tabWidget->setTabEnabled(ui.tabWidget->indexOf(ui.tabBadSport), MemoryUtil::enableReadMemory);
-    ui.tabWidget->setStyleSheet("QTabBar::tab::disabled {width: 0; height: 0; margin: 0; padding: 0; border: none;} ");
 }
 
 void MainWindow::initGlobalDataConnects()
@@ -305,7 +281,6 @@ void MainWindow::initMenu()
         globalData->setDisplayInfoShow(checked);
         if (checked) {
             displayInfoDialog = new DisplayInfoDialog();
-            initDisplayInfoDialogData();
             auto closeLambda = [this](int result) {
                 disconnect(this, nullptr, displayInfoDialog, nullptr);
                 displayInfoDialogIsShowing = false;
@@ -516,131 +491,6 @@ void MainWindow::initCloseGameImmediately()
     });
 }
 
-void MainWindow::initAutoTimer()
-{
-    connect(ui.btnStartAutoTimer, &QAbstractButton::toggled, this, [this](bool checked) {
-        if (checked) {
-            autoTimerUtil->start();
-        } else {
-            autoTimerUtil->stop();
-        }
-    });
-    connect(ui.btnStopAndResetAutoTimer, &QAbstractButton::clicked, this, [this]() {
-        autoTimerUtil->stopAndReset(true);
-    });
-    connect(autoTimerUtil, &AutoTimerUtil::updateTime, this, [=](unsigned long long data) {
-        updateAutoTimerString(data);
-    });
-    connect(autoTimerUtil, &AutoTimerUtil::stopped, this, [=]() {
-        if (ui.btnStartAutoTimer->isChecked()) {
-            ui.btnStartAutoTimer->setChecked(false);
-        }
-    });
-
-    connect(autoTimerUtil, &AutoTimerUtil::timerStarted, this, [=](unsigned long long data) {
-        HttpServerController::instance()->startAutoTimer(static_cast<qint64>(data));
-    });
-    connect(autoTimerUtil, &AutoTimerUtil::timerPaused, this, [=](unsigned long long data) {
-        HttpServerController::instance()->pauseAutoTimer(static_cast<qint64>(data));
-    });
-}
-
-void MainWindow::initMissionData()
-{
-    connect(ui.btnStartMissionData, &QAbstractButton::toggled, this, [this](bool checked) {
-        if (checked) {
-            dataObserver->startObserve();
-        } else {
-            dataObserver->stopObserve();
-        }
-    });
-    connect(dataObserver, &DataObserver::onStartObserve, this, [this]() {
-        if (!ui.btnStartMissionData->isChecked()) {
-            ui.btnStartMissionData->setChecked(true);
-        }
-    });
-    connect(dataObserver, &DataObserver::onStopObserve, this, [this]() {
-        if (ui.btnStartMissionData->isChecked()) {
-            ui.btnStartMissionData->setChecked(false);
-        }
-    });
-    connect(dataObserver, &DataObserver::onMissionChanged, this, [this]() {
-        discordUtil->setCurrentMission(dataObserver->getMissionStrategy()->getDisplayName());
-    });
-    connect(dataObserver, &DataObserver::onDisplayLabelsAdded, this, [this](QList<QLabel*> labels) {
-        if (!displayInfoDialog) {
-            return;
-        }
-        for (auto label : labels) {
-            displayInfoDialog->addWidget(label);
-        }
-    });
-    connect(dataObserver, &DataObserver::onDisplayLabelsRemoved, this, [this](QList<QLabel*> labels) {
-        if (!displayInfoDialog) {
-            return;
-        }
-        for (auto label : labels) {
-            displayInfoDialog->removeWidget(label);
-        }
-    });
-    connect(dataObserver, &DataObserver::onLabelsAdded, this, [this](QList<QLabel*> labels) {
-        QBoxLayout* layout = (QBoxLayout*)ui.scrollAreaMissionDataContents->layout();
-        for (int i = labels.count() - 1; i >= 0; --i) {
-            layout->insertWidget(0, labels[i]);
-        }
-        if (!ui.scrollAreaMissionDataContents->children().isEmpty()) {
-            ui.loMissionData->pause();
-            ui.loMissionDataContainer->setVisible(false);
-            ui.scrollAreaMissionData->setVisible(true);
-        }
-    });
-    connect(dataObserver, &DataObserver::onLabelsRemoved, this, [this](QList<QLabel*> labels) {
-        auto layout = ui.scrollAreaMissionDataContents->layout();
-        for (auto label : labels) {
-            layout->removeWidget(label);
-            label->setParent(nullptr);
-        }
-        if (ui.scrollAreaMissionDataContents->children().isEmpty()) {
-            ui.loMissionData->resume();
-            ui.loMissionDataContainer->setVisible(true);
-            ui.scrollAreaMissionData->setVisible(false);
-        }
-    });
-    ui.scrollAreaMissionData->setVisible(false);
-    ui.loMissionDataContainer->layout()->setAlignment(Qt::AlignCenter);
-    auto randomLottie = lottieUtil->randomLottie();
-    if (!randomLottie.isEmpty()) {
-        ui.loMissionData->setSource(QUrl(randomLottie));
-    }
-}
-
-void MainWindow::initBadSport()
-{
-    connect(ui.btnRefreshBadSport, &QAbstractButton::clicked, this, [this]() {
-        auto badSport = memoryUtil->getBadSport();
-        ui.labBadSport->setText(QString::number(badSport));
-        if (badSport < 30) {
-            ui.labBadSport->setStyleSheet("color: green");
-        } else if (badSport < 50) {
-            ui.labBadSport->setStyleSheet("color: yellow");
-        } else if (badSport >= 50) {
-            ui.labBadSport->setStyleSheet("color: red");
-        }
-    });
-}
-
-void MainWindow::initDisplayInfoDialogData()
-{
-    if (displayInfoDialog) {
-        for (auto label : dataObserver->getDisplayLabels()) {
-            if (!displayInfoDialog->containWidget(label)) {
-                displayInfoDialog->addWidget(label);
-                // label->setVisible(dataObserver->getMissionStrategy()->labelIsVisible(label));
-            }
-        }
-    }
-}
-
 void MainWindow::showDisplayInfo()
 {
     if (!topMostTimer) {
@@ -749,16 +599,6 @@ void MainWindow::updateTimerString(qint64 currentDateTime)
     ui.labTimer->setText(t);
     if (displayInfoDialogIsShowing && displayInfoDialog) {
         displayInfoDialog->setTime(m, s, ms);
-    }
-}
-
-void MainWindow::updateAutoTimerString(unsigned long long deltaTime)
-{
-    unsigned int m, s, ms;
-    QString t = getFormattedTime(deltaTime, &m, &s, &ms);
-    ui.labAutoTimer->setText(t);
-    if (displayInfoDialogIsShowing && displayInfoDialog) {
-        displayInfoDialog->setAutoTime(m, s, ms);
     }
 }
 

@@ -1,7 +1,6 @@
 #include "SettingDialog.h"
 #include "GlobalData.h"
 #include "LanguageUtil.h"
-#include "dataobserver/missionstrategy/MissionStrategyUtil.h"
 #include <QColorDialog>
 #include <QDesktopServices>
 #include <QFileDialog>
@@ -11,7 +10,6 @@
 #include <QScreen>
 #include <QStyleFactory>
 #include <QTimer>
-#include <dataobserver/datafetcher/DataFetcherUtil.h>
 #include <windows.h>
 
 SettingDialog::SettingDialog(QWidget* parent)
@@ -31,10 +29,8 @@ SettingDialog::SettingDialog(QWidget* parent)
     }
     connect(ui.lwPage, &QListWidget::currentRowChanged, ui.stackedWidget, &QStackedWidget::setCurrentIndex);
 
-    initTabEnabled();
     initGeneralSettings();
     initFirewallSettings();
-    initMissionDataSettings();
     initTimerSettings();
     initCloseGameImmediatelySettings();
     initSocialSettings();
@@ -72,12 +68,6 @@ void SettingDialog::initGeneralSettings()
     connect(ui.cbStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
         globalData->setStyleName(ui.cbStyle->itemData(index).toString());
     });
-}
-
-void SettingDialog::initTabEnabled()
-{
-    ui.tabMissionData->setEnabled(MemoryUtil::enableReadMemory);
-    ui.groupBoxAutoTimer->setEnabled(MemoryUtil::enableReadMemory);
 }
 
 QString SettingDialog::getSoundFile(QString dir)
@@ -208,107 +198,6 @@ void SettingDialog::initFirewallSettings()
     }
 }
 
-// 任务信息设置
-void SettingDialog::initMissionDataSettings()
-{
-    // 刷新间隔
-    ui.sbMissionDataUpdateInterval->setValue(globalData->missionDataUpdateInterval());
-    connect(ui.sbMissionDataUpdateInterval, &QSpinBox::valueChanged, this, [=](int value) {
-        globalData->setMissionDataUpdateInterval(value);
-    });
-
-    // 数据名称显示方式 ===========================================
-    {
-        int i = 0;
-        int currentMissionDataNameIndex = 0;
-        for (auto s : globalData->missionDataNames()) {
-            ui.cbMissionDataName->addItem(MissionDataNameUtil::toDisplayString(s), s);
-            if (s == globalData->missionDataName()) {
-                currentMissionDataNameIndex = i;
-            }
-            i++;
-        }
-        connect(ui.cbMissionDataName, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [=](int index) {
-                globalData->setMissionDataName(
-                    ui.cbMissionDataName->itemData(index).value<MissionDataNameUtil::MissionDataName>());
-            });
-        ui.cbMissionDataName->setCurrentIndex(currentMissionDataNameIndex);
-    }
-
-    // 数据组合 ===========================================
-    connect(ui.cbMissionDataCombine, QOverload<int>::of(&QComboBox::currentIndexChanged),
-        this, [=](int index) {
-            const auto includedDataFetchers = missionStrategyUtil->missionToDataFetchers()
-                                                  [ui.cbMissionDataCombine->itemData(index).value<QString>()];
-            setMissionDataCombineListWidgetData(includedDataFetchers);
-        });
-
-    for (auto mission : missionStrategyUtil->missionStrategies) {
-        ui.cbMissionDataCombine->addItem(mission->getUniqueDisplayName(), mission->id());
-    }
-
-    // 有选中时按钮才可用
-    ui.tbMissionDataCombineAdd->setEnabled(false);
-    connect(ui.lwMissionDataCombineExcluded, &QListWidget::currentRowChanged, this, [=](int currentRow) {
-        ui.tbMissionDataCombineAdd->setEnabled(currentRow >= 0);
-    });
-    ui.tbMissionDataCombineRemove->setEnabled(false);
-    connect(ui.lwMissionDataCombineIncluded, &QListWidget::currentRowChanged, this, [=](int currentRow) {
-        ui.tbMissionDataCombineRemove->setEnabled(currentRow >= 0);
-    });
-
-    connect(ui.tbMissionDataCombineAdd, &QAbstractButton::clicked, this, [=]() {
-        auto currentExcludedDataFetcher = ui.lwMissionDataCombineExcluded
-                                              ->takeItem(ui.lwMissionDataCombineExcluded->currentRow());
-        ui.lwMissionDataCombineIncluded->addItem(currentExcludedDataFetcher);
-        QString currentMissionId = ui.cbMissionDataCombine->currentData().value<QString>();
-        QString currentExcludedId = currentExcludedDataFetcher->data(Qt::UserRole).value<QString>();
-        missionStrategyUtil->insertToMissionToDataFetchers(currentMissionId, currentExcludedId);
-    });
-    connect(ui.tbMissionDataCombineRemove, &QAbstractButton::clicked, this, [=]() {
-        auto currentIncludedDataFetcher = ui.lwMissionDataCombineIncluded
-                                              ->takeItem(ui.lwMissionDataCombineIncluded->currentRow());
-        ui.lwMissionDataCombineExcluded->addItem(currentIncludedDataFetcher);
-        QString currentMissionId = ui.cbMissionDataCombine->currentData().value<QString>();
-        QString currentIncludedId = currentIncludedDataFetcher->data(Qt::UserRole).value<QString>();
-        missionStrategyUtil->removeFromMissionToDataFetchers(currentMissionId, currentIncludedId);
-    });
-    connect(ui.pbMissionDataCombineReset, &QAbstractButton::clicked, this, [=]() {
-        QString currentMissionId = ui.cbMissionDataCombine->currentData().value<QString>();
-        missionStrategyUtil->updateMissionToDataFetchers(currentMissionId,
-            missionStrategyUtil->missionIdToObject[currentMissionId]->defaultDataFetchers());
-
-        setMissionDataCombineListWidgetData(missionStrategyUtil->missionToDataFetchers()[currentMissionId]);
-    });
-}
-
-void SettingDialog::setMissionDataCombineListWidgetData(QSet<QString> includedDataFetchers)
-{
-    // Included
-    ui.lwMissionDataCombineIncluded->clear();
-    for (const QString& dataFetcherId : includedDataFetchers) {
-        BaseDataFetcher* currentDataFetcher = dataFetcherUtil->dataFetcherMap[dataFetcherId];
-        QListWidgetItem* newItem = new QListWidgetItem(currentDataFetcher->getDisplayName(), ui.lwMissionDataCombineIncluded);
-        newItem->setData(Qt::UserRole, dataFetcherId);
-        ui.lwMissionDataCombineIncluded->addItem(newItem);
-    }
-    // Excluded
-    ui.lwMissionDataCombineExcluded->clear();
-    QList<QString> excludedDataFetchers = {};
-    for (auto fetcher : dataFetcherUtil->dataFetchers) {
-        if (!includedDataFetchers.contains(fetcher->id())) {
-            excludedDataFetchers.append(fetcher->id());
-        }
-    }
-    for (QString& dataFetcherId : excludedDataFetchers) {
-        BaseDataFetcher* currentDataFetcher = dataFetcherUtil->dataFetcherMap[dataFetcherId];
-        QListWidgetItem* newItem = new QListWidgetItem(currentDataFetcher->getDisplayName(), ui.lwMissionDataCombineExcluded);
-        newItem->setData(Qt::UserRole, dataFetcherId);
-        ui.lwMissionDataCombineExcluded->addItem(newItem);
-    }
-}
-
 // 计时器设置
 void SettingDialog::initTimerSettings()
 {
@@ -367,11 +256,6 @@ void SettingDialog::initTimerSettings()
     ui.sbTimerUpdateInterval->setValue(globalData->timerUpdateInterval());
     connect(ui.sbTimerUpdateInterval, &QSpinBox::valueChanged, this, [=](int value) {
         globalData->setTimerUpdateInterval(value);
-    });
-    // 自动计时刷新间隔
-    ui.sbAutoTimerUpdateInterval->setValue(globalData->autoTimerUpdateInterval());
-    connect(ui.sbAutoTimerUpdateInterval, &QSpinBox::valueChanged, this, [=](int value) {
-        globalData->setAutoTimerUpdateInterval(value);
     });
 
     // 停止计时器策略

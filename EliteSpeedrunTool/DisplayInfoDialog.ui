@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>303</width>
-    <height>256</height>
+    <height>87</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -47,22 +47,6 @@
         <property name="spacing">
          <number>0</number>
         </property>
-        <item>
-         <widget class="QLabel" name="labAutoTimer">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: rgb(255, 255, 0);</string>
-          </property>
-          <property name="text">
-           <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt;00:00&lt;/span&gt;&lt;span style=&quot; font-size:22pt;&quot;&gt;.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
-        </item>
         <item>
          <widget class="QLabel" name="labTimer">
           <property name="sizePolicy">

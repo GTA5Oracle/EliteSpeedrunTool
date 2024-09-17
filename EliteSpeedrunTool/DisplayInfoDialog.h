@@ -28,14 +28,8 @@ public:
         const QColor& textShadowColor,
         qreal textShadowBlurRadius,
         const QPointF& textShadowOffset);
-    void setAutoTimerTextStyle(
-        const QColor& textColor,
-        const QColor& textShadowColor,
-        qreal textShadowBlurRadius,
-        const QPointF& textShadowOffset);
 
     void setTime(unsigned int m, unsigned int s, unsigned int ms);
-    void setAutoTime(unsigned int m, unsigned int s, unsigned int ms);
 
     static const QString timePattern;
 

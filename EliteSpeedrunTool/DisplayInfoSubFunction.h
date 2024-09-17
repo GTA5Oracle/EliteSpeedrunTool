@@ -7,13 +7,7 @@
 
 enum DisplayInfoSubFunction {
     Firewall = 1,
-    Headshot = 2,
     Timer = 3,
-    AutoTimer = 4,
-    VehicleDamage = 5,
-    RashkovskyDamage = 6,
-    Kill = 7,
-    PlaneDamage = 8,
 };
 
 namespace DisplayInfoSubFunctionUtil {

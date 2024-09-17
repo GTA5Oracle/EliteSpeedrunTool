@@ -12,26 +12,8 @@ QString toDisplayString(DisplayInfoSubFunction f)
     case Firewall:
         return QObject::tr("断网");
         break;
-    case Headshot:
-        return QObject::tr("总爆头");
-        break;
     case Timer:
         return QObject::tr("计时");
-        break;
-    case AutoTimer:
-        return QObject::tr("自动计时");
-        break;
-    case VehicleDamage:
-        return QObject::tr("车损");
-        break;
-    case RashkovskyDamage:
-        return QObject::tr("拉什科夫斯基受伤");
-        break;
-    case Kill:
-        return QObject::tr("总击杀");
-        break;
-    case PlaneDamage:
-        return QObject::tr("机损");
         break;
     default:
         return "";
@@ -44,26 +26,8 @@ QString toString(DisplayInfoSubFunction f)
     case Firewall:
         return "Firewall";
         break;
-    case Headshot:
-        return "Headshot";
-        break;
     case Timer:
         return "Timer";
-        break;
-    case AutoTimer:
-        return "AutoTimer";
-        break;
-    case VehicleDamage:
-        return "VehicleDamage";
-        break;
-    case RashkovskyDamage:
-        return "RashkovskyDamage";
-        break;
-    case Kill:
-        return "Kill";
-        break;
-    case PlaneDamage:
-        return "PlaneDamage";
         break;
     default:
         return "";

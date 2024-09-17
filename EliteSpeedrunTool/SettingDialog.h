@@ -11,22 +11,20 @@ public:
     explicit SettingDialog(QWidget* parent = nullptr);
     ~SettingDialog();
 
-    QString pageName[9] = {
+    QString pageName[8] = {
         tr("常规"),
         tr("信息展示"),
         tr("断网"),
-        tr("任务信息"),
         tr("计时器"),
         tr("结束游戏"),
         tr("社交"),
         tr("语言"),
         tr("开发者选项"),
     };
-    QString pageIcon[9] = {
+    QString pageIcon[8] = {
         "://image/ic_setting.ico",
         "://image/ic_lighton.ico",
         "://image/ic_network.ico",
-        "://image/ic_spy.ico",
         "://image/ic_clock.ico",
         "://image/ic_plug.ico",
         "://image/ic_users.ico",
@@ -37,18 +35,12 @@ public:
 protected:
     void initGeneralSettings();
 
-    void initTabEnabled();
-
     QString getSoundFile(QString dir = QString());
 
     int currentSubFunctionIndex = 0;
-    DisplayInfoSubFunction currentSubFunction = DisplayInfoSubFunction::Headshot;
+    DisplayInfoSubFunction currentSubFunction = DisplayInfoSubFunction::Timer;
 
     void initFirewallSettings();
-
-    void initMissionDataSettings();
-
-    void setMissionDataCombineListWidgetData(QSet<QString> includedDataFetchers);
 
     void initTimerSettings();
 

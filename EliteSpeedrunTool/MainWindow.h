@@ -24,8 +24,6 @@ public:
 protected:
     void closeEvent(QCloseEvent* event) override;
 
-    void initTabEnabled();
-
     void initGlobalDataConnects();
 
     void checkUpdate();
@@ -41,14 +39,6 @@ protected:
     void initFirewall();
 
     void initCloseGameImmediately();
-
-    void initAutoTimer();
-
-    void initMissionData();
-
-    void initBadSport();
-
-    void initDisplayInfoDialogData();
 
     void showDisplayInfo();
 
@@ -69,8 +59,6 @@ protected:
         unsigned int* ms);
 
     void updateTimerString(qint64 currentDateTime = QDateTime::currentDateTime().toMSecsSinceEpoch());
-
-    void updateAutoTimerString(unsigned long long deltaTime);
 
     void initTimerStateMachine();
 
@@ -123,7 +111,7 @@ private:
 
     QString license = "<h3>" + QApplication::applicationDisplayName()
         + " v" + QApplication::applicationVersion() + "</h3>"
-        + tr("<p>一个 GTAOL 精英、速通工具，支持快速启动防火墙、自动统计任务数据、计时等。本工具仅读取内存，不会修改任何内存。</p>")
+        + tr("<p>一个 GTAOL 精英、速通工具，支持快速启动防火墙、计时、结束游戏等。</p>")
         + "<p>"
         + tr("程序开发：SkyD666") + "<br>"
         + tr("游戏逆向：Zerkalo2147")
