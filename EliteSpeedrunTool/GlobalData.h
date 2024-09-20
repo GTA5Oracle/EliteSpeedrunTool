@@ -170,6 +170,12 @@ public:
     bool displayInfoToolWindow() const;
     void setDisplayInfoToolWindow(bool newDisplayInfoToolWindow);
 
+    QString suspendAndResumeHotkey() const;
+    void setSuspendAndResumeHotkey(const QString& newSuspendAndResumeHotkey);
+
+    int suspendAndResumeDuration() const;
+    void setSuspendAndResumeDuration(int newSuspendAndResumeDuration);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -217,6 +223,10 @@ signals:
     void debugModeChanged();
 
     void displayInfoToolWindowChanged();
+
+    void suspendAndResumeHotkeyChanged();
+
+    void suspendAndResumeDurationChanged();
 
 private:
     bool mMinimizeToTray = false;
@@ -282,7 +292,11 @@ private:
     // 社交
     bool mDiscordShowRichPresence = false;
 
-    // 卡前置
+    // 卡单
+    QString mSuspendAndResumeHotkey = "Ctrl+Alt+`";
+    int mSuspendAndResumeDuration = 9000;
+
+    // 结束游戏
     QString mCloseGameImmediatelyHotkey = "Ctrl+`";
 
     // 开发者选项
@@ -326,4 +340,6 @@ private:
     Q_PROPERTY(MissionDataNameUtil::MissionDataName missionDataName READ missionDataName WRITE setMissionDataName NOTIFY missionDataNameChanged FINAL)
     Q_PROPERTY(bool debugMode READ debugMode WRITE setDebugMode NOTIFY debugModeChanged FINAL)
     Q_PROPERTY(bool displayInfoToolWindow READ displayInfoToolWindow WRITE setDisplayInfoToolWindow NOTIFY displayInfoToolWindowChanged FINAL)
+    Q_PROPERTY(QString suspendAndResumeHotkey READ suspendAndResumeHotkey WRITE setSuspendAndResumeHotkey NOTIFY suspendAndResumeHotkeyChanged FINAL)
+    Q_PROPERTY(int suspendAndResumeDuration READ suspendAndResumeDuration WRITE setSuspendAndResumeDuration NOTIFY suspendAndResumeDurationChanged FINAL)
 };

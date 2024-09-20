@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QList>
 #include <netfw.h>
 #include <windows.h>
 
@@ -9,7 +10,7 @@ public:
 
     static bool firewallIsEnabled(long& enabledTypes);
 
-    static INetFwRule* getNetFwRule();
+    static QList<INetFwRule*> getNetFwRule();
 
     static bool setNetFwRuleEnabled(bool enabled);
 
@@ -18,6 +19,11 @@ public:
     static void release();
 
     static bool getIsEnabled();
+
+private:
+    static INetFwRule* getNetFwRule(NET_FW_RULE_DIRECTION direction);
+
+    static bool setNetFwRuleEnabled(bool enabled, NET_FW_RULE_DIRECTION direction);
 
 private:
     static bool inited;
@@ -32,7 +38,8 @@ private:
 
     static INetFwRules* pFwRules;
 
-    static BSTR bstrRuleName;
+    static BSTR bstrRuleInName;
+    static BSTR bstrRuleOutName;
 
     static BSTR bstrRuleLPorts;
 

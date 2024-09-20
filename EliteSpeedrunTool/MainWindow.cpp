@@ -7,8 +7,8 @@
 #include "HttpServerUtil.h"
 #include "LogUtil.h"
 #include "SettingDialog.h"
+#include "SuspendUtil.h"
 #include "UpdateDialog.h"
-#include "memoryutil/MemoryUtil.h"
 #include <MMSystem.h>
 #include <QBoxLayout>
 #include <QClipboard>
@@ -23,7 +23,7 @@
 #include <QState>
 #include <QUrl>
 
-const QString MainWindow::hotkeyStatePattern = "🧱: %1, %2  ⏱️: %3, %4, %5  ❌: %6";
+const QString MainWindow::hotkeyStatePattern = "🧱: %1, %2  ⏱️: %3, %4, %5  👤: %6  ❌: %7";
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
@@ -62,6 +62,8 @@ MainWindow::MainWindow(QWidget* parent)
     initFirewall();
 
     initTimerStateMachine();
+
+    initSuspendProcess();
 
     initCloseGameImmediately();
 
@@ -140,6 +142,7 @@ void MainWindow::removeAllHotkeys()
     removeHotkey(startTimerHotkey);
     removeHotkey(pauseTimerHotkey);
     removeHotkey(stopTimerHotkey);
+    removeHotkey(suspendAndResumeHotkey);
     removeHotkey(closeGameImmediatelyHotkey);
 }
 
@@ -161,6 +164,7 @@ void MainWindow::setHotkey()
         globalData->timerStartHotkey(),
         globalData->timerPauseHotkey(),
         globalData->timerStopHotkey(),
+        globalData->suspendAndResumeHotkey(),
         globalData->closeGameImmediatelyHotkey()));
 
     // 防火墙
@@ -244,6 +248,18 @@ void MainWindow::setHotkey()
             } else {
                 QMessageBox::critical(this, QString(), tr("注册暂停计时器热键失败！"));
             }
+        }
+    }
+
+    // 卡单
+    if (!globalData->suspendAndResumeHotkey().isEmpty()) {
+        suspendAndResumeHotkey = new QHotkey(QKeySequence(globalData->suspendAndResumeHotkey()), true, qApp);
+        if (suspendAndResumeHotkey->isRegistered()) {
+            connect(suspendAndResumeHotkey, &QHotkey::activated, qApp, [this]() {
+                ui.btnSuspendProcess->click();
+            });
+        } else {
+            QMessageBox::critical(this, QString(), tr("注册卡单热键失败！"));
         }
     }
 
@@ -480,6 +496,28 @@ void MainWindow::initFirewall()
     ui.btnStartFirewall->setFocus();
 }
 
+void MainWindow::initSuspendProcess()
+{
+    ui.widgetPsSuspendEulaUnaccepted->setVisible(!suspendUtil->isEulaAccepted());
+    connect(suspendUtil, &SuspendUtil::onAcceptedChanged, this, [this]() {
+        ui.widgetPsSuspendEulaUnaccepted->setVisible(!suspendUtil->isEulaAccepted());
+    });
+    connect(ui.btnAcceptPsSuspendEula, &QAbstractButton::clicked, this, [this]() {
+        suspendUtil->acceptEula();
+    });
+
+    ui.labSuspendProcessHotkey->setText(globalData->suspendAndResumeHotkey());
+    connect(globalData, &GlobalData::suspendAndResumeHotkeyChanged, this, [this]() {
+        ui.labSuspendProcessHotkey->setText(globalData->suspendAndResumeHotkey());
+    });
+    connect(ui.btnSuspendProcess, &QAbstractButton::clicked, this, [this]() {
+        ui.btnSuspendProcess->setEnabled(false);
+        suspendUtil->suspendAndResumeProcess(globalData->suspendAndResumeDuration(), [this]() {
+            ui.btnSuspendProcess->setEnabled(true);
+        });
+    });
+}
+
 void MainWindow::initCloseGameImmediately()
 {
     ui.labCloseGameImmediatelyHotkey->setText(globalData->closeGameImmediatelyHotkey());
@@ -703,16 +741,8 @@ void MainWindow::initTimerStateMachine()
 
 void MainWindow::closeGameImmediately()
 {
-    DWORD p;
-    const auto game = memoryUtil->getProcessHandle(&p, PROCESS_TERMINATE);
-    if (!TerminateProcess(game, 1)) {
-        // TerminateProcess 返回0，说明执行失败
-        system("taskkill /f /t /im GTA5.exe");
-        qWarning("Execute TerminateProcess fails, using taskkill command to terminate GTA5.exe");
-    } else {
-        qInfo("Execute TerminateProcess API succeeds");
-    }
-    CloseHandle(game);
+    system("taskkill /f /t /im GTA5.exe");
+    qInfo("Using taskkill command to terminate GTA5.exe");
 }
 
 void MainWindow::initSystemTray()

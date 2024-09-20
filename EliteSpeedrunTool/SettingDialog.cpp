@@ -32,6 +32,7 @@ SettingDialog::SettingDialog(QWidget* parent)
     initGeneralSettings();
     initFirewallSettings();
     initTimerSettings();
+    initSuspendProcess();
     initCloseGameImmediatelySettings();
     initSocialSettings();
     initLanguageSettings();
@@ -179,6 +180,7 @@ void SettingDialog::initFirewallSettings()
     // 防火墙方向
     {
         QList<QPair<int, QString>> firewallDirections = {
+            std::pair(0, tr("入站+出站")),
             std::pair(NET_FW_RULE_DIR_IN, tr("入站")),
             std::pair(NET_FW_RULE_DIR_OUT, tr("出站")),
         };
@@ -449,6 +451,31 @@ void SettingDialog::initDisplayInfoSettings()
         });
     setDisplayInfoCententSettings(currentSubFunction);
     ui.cbDisplayInfoFunction->setCurrentIndex(currentSubFunctionIndex);
+}
+
+void SettingDialog::initSuspendProcess()
+{
+    ui.keySeqSuspendProcess->setKeySequence(QKeySequence(globalData->suspendAndResumeHotkey()));
+    connect(ui.keySeqSuspendProcess, &QKeySequenceEdit::editingFinished, this, [=]() {
+        if (ui.keySeqSuspendProcess->keySequence().count() > 1) {
+            QKeyCombination value = ui.keySeqSuspendProcess->keySequence()[0];
+            QKeySequence shortcut(value);
+            ui.keySeqSuspendProcess->setKeySequence(shortcut);
+            globalData->setSuspendAndResumeHotkey(shortcut.toString());
+        } else {
+            globalData->setSuspendAndResumeHotkey(ui.keySeqSuspendProcess->keySequence().toString());
+        }
+    });
+
+    connect(ui.tbClearSuspendProcessEdit, &QAbstractButton::clicked, this, [=]() {
+        ui.keySeqSuspendProcess->clear();
+        globalData->setSuspendAndResumeHotkey("");
+    });
+
+    ui.sbSuspendProcessDuration->setValue(globalData->suspendAndResumeDuration());
+    connect(ui.sbSuspendProcessDuration, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setSuspendAndResumeDuration(value);
+    });
 }
 
 void SettingDialog::initCloseGameImmediatelySettings()

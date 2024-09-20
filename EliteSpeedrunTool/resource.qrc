@@ -23,5 +23,6 @@
         <file>image/ic_plug.ico</file>
         <file>image/ic_dunce_hat.ico</file>
         <file>image/ic_doctor_watson.ico</file>
+        <file>image/ic_user.ico</file>
     </qresource>
 </RCC>

@@ -29,11 +29,12 @@ set(PROJECT_SOURCES
         AcknowledgementDialog.h AcknowledgementDialog.cpp AcknowledgementDialog.ui
         LogUtil.h LogUtil.cpp
         LanguageUtil.h LanguageUtil.cpp
-        memoryutil/MemoryUtil.h memoryutil/MemoryUtil.cpp
         HttpServerUtil.h HttpServerUtil.cpp
         DisplayInfoSubFunction.h DisplayInfoSubFunction.cpp
         DiscordUtil.h DiscordUtil.cpp
         TimeUtil.h TimeUtil.cpp
+        SuspendUtil.h SuspendUtil.cpp
+        NumberUtil.h NumberUtil.cpp
         resource.qrc
 )
 

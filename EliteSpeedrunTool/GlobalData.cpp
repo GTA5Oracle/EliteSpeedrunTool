@@ -192,6 +192,11 @@ void GlobalData::readSettings()
     setDiscordShowRichPresence(settings.value("DiscordShowRichPresence", mDiscordShowRichPresence).toBool());
     settings.endGroup();
 
+    settings.beginGroup("SuspendProcess");
+    setSuspendAndResumeHotkey(settings.value("SuspendAndResumeHotkey", mSuspendAndResumeHotkey).toString());
+    setSuspendAndResumeDuration(settings.value("SuspendAndResumeDuration", mSuspendAndResumeDuration).toInt());
+    settings.endGroup();
+
     settings.beginGroup("CloseGame");
     setCloseGameImmediatelyHotkey(settings.value("CloseGameImmediatelyHotkey", mCloseGameImmediatelyHotkey).toString());
     settings.endGroup();
@@ -257,6 +262,11 @@ void GlobalData::writeSettings()
 
     settings.beginGroup("Social");
     settings.setValue("DiscordShowRichPresence", mDiscordShowRichPresence);
+    settings.endGroup();
+
+    settings.beginGroup("SuspendProcess");
+    settings.setValue("SuspendAndResumeHotkey", mSuspendAndResumeHotkey);
+    settings.setValue("SuspendAndResumeDuration", mSuspendAndResumeDuration);
     settings.endGroup();
 
     settings.beginGroup("CloseGame");
@@ -788,4 +798,30 @@ void GlobalData::setDisplayInfoToolWindow(bool newDisplayInfoToolWindow)
         return;
     mDisplayInfoToolWindow = newDisplayInfoToolWindow;
     emit displayInfoToolWindowChanged();
+}
+
+QString GlobalData::suspendAndResumeHotkey() const
+{
+    return mSuspendAndResumeHotkey;
+}
+
+void GlobalData::setSuspendAndResumeHotkey(const QString& newSuspendAndResumeHotkey)
+{
+    if (mSuspendAndResumeHotkey == newSuspendAndResumeHotkey)
+        return;
+    mSuspendAndResumeHotkey = newSuspendAndResumeHotkey;
+    emit suspendAndResumeHotkeyChanged();
+}
+
+int GlobalData::suspendAndResumeDuration() const
+{
+    return mSuspendAndResumeDuration;
+}
+
+void GlobalData::setSuspendAndResumeDuration(int newSuspendAndResumeDuration)
+{
+    if (mSuspendAndResumeDuration == newSuspendAndResumeDuration)
+        return;
+    mSuspendAndResumeDuration = newSuspendAndResumeDuration;
+    emit suspendAndResumeDurationChanged();
 }

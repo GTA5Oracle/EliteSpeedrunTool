@@ -1,5 +1,6 @@
 #include "FirewallUtil.h"
 #include "GlobalData.h"
+#include "NumberUtil.h"
 
 bool FirewallUtil::inited = false;
 bool FirewallUtil::isEnabled = false;
@@ -7,7 +8,8 @@ HRESULT FirewallUtil::hrComInit = S_OK;
 INetFwPolicy2* FirewallUtil::pNetFwPolicy2 = nullptr;
 long FirewallUtil::CurrentProfilesBitMask = 0;
 INetFwRules* FirewallUtil::pFwRules = nullptr;
-BSTR FirewallUtil::bstrRuleName;
+BSTR FirewallUtil::bstrRuleInName;
+BSTR FirewallUtil::bstrRuleOutName;
 BSTR FirewallUtil::bstrRuleLPorts;
 BSTR FirewallUtil::bstrRuleGroup;
 
@@ -95,7 +97,7 @@ Cleanup:
     return hr;
 }
 
-INetFwRule* FirewallUtil::getNetFwRule()
+INetFwRule* FirewallUtil::getNetFwRule(NET_FW_RULE_DIRECTION direction)
 {
     if (!inited)
         return nullptr;
@@ -104,7 +106,7 @@ INetFwRule* FirewallUtil::getNetFwRule()
 
     INetFwRule* pFwRule = NULL;
 
-    hr = pFwRules->Item(bstrRuleName, (INetFwRule**)&pFwRule);
+    hr = pFwRules->Item(direction == NET_FW_RULE_DIR_IN ? bstrRuleInName : bstrRuleOutName, (INetFwRule**)&pFwRule);
     if (SUCCEEDED(hr)) {
         qInfo("Found NetFwRule by pFwRules->Item()");
         HRESULT h, h2;
@@ -117,7 +119,7 @@ INetFwRule* FirewallUtil::getNetFwRule()
                     .toStdWString()
                     .c_str()));
         }
-        h2 = pFwRule->put_Direction(static_cast<NET_FW_RULE_DIRECTION>(globalData->firewallDirection()));
+        h2 = pFwRule->put_Direction(direction);
         if (!SUCCEEDED(h)) {
             qCritical("put_ApplicationName failed! (%ld)", h);
         } else if (!SUCCEEDED(h2)) {
@@ -140,7 +142,7 @@ INetFwRule* FirewallUtil::getNetFwRule()
     }
 
     // Populate the Firewall Rule object
-    pFwRule->put_Name(bstrRuleName);
+    pFwRule->put_Name(direction == NET_FW_RULE_DIR_IN ? bstrRuleInName : bstrRuleOutName);
     if (!globalData->firewallAppPath().isEmpty()) {
         pFwRule->put_ApplicationName(SysAllocString(
             QString(globalData->firewallAppPath())
@@ -148,10 +150,10 @@ INetFwRule* FirewallUtil::getNetFwRule()
                 .toStdWString()
                 .c_str()));
     }
-    pFwRule->put_Protocol(NET_FW_IP_PROTOCOL_TCP);
+    // pFwRule->put_Protocol(NET_FW_IP_PROTOCOL_TCP);
     //    pFwRule->put_LocalPorts(bstrRuleLPorts);
     pFwRule->put_Grouping(bstrRuleGroup);
-    pFwRule->put_Direction(static_cast<NET_FW_RULE_DIRECTION>(globalData->firewallDirection()));
+    pFwRule->put_Direction(direction);
     //    pFwRule->put_Profiles(CurrentProfilesBitMask);
     pFwRule->put_Action(NET_FW_ACTION_BLOCK);
     pFwRule->put_Enabled(VARIANT_TRUE);
@@ -173,11 +175,19 @@ Cleanup:
     return nullptr;
 }
 
-bool FirewallUtil::setNetFwRuleEnabled(bool enabled)
+QList<INetFwRule*> FirewallUtil::getNetFwRule()
 {
-    if (enabled == isEnabled)
-        return true;
-    INetFwRule* fwRule = getNetFwRule();
+    int dir = globalData->firewallDirection();
+    if (dir == 0) {
+        return { getNetFwRule(NET_FW_RULE_DIR_IN), getNetFwRule(NET_FW_RULE_DIR_OUT) };
+    } else {
+        return { getNetFwRule(static_cast<NET_FW_RULE_DIRECTION_>(dir)) };
+    }
+}
+
+bool FirewallUtil::setNetFwRuleEnabled(bool enabled, NET_FW_RULE_DIRECTION direction)
+{
+    INetFwRule* fwRule = getNetFwRule(direction);
     if (!fwRule) {
         qCritical("getNetFwRule() return null!");
         qCritical("Firewall operate failed!");
@@ -189,7 +199,6 @@ bool FirewallUtil::setNetFwRuleEnabled(bool enabled)
         qCritical("Firewall operate failed!");
         return false;
     }
-    isEnabled = enabled;
 
     if (enabled) {
         qInfo("Firewall successfully enabled!");
@@ -199,6 +208,27 @@ bool FirewallUtil::setNetFwRuleEnabled(bool enabled)
     return true;
 }
 
+bool FirewallUtil::setNetFwRuleEnabled(bool enabled)
+{
+    int dir = globalData->firewallDirection();
+    if (dir == 0) {
+        bool in = setNetFwRuleEnabled(enabled, NET_FW_RULE_DIR_IN);
+        bool out = setNetFwRuleEnabled(enabled, NET_FW_RULE_DIR_OUT);
+        if (in && out) {
+            isEnabled = enabled;
+        } else {
+            setNetFwRuleEnabled(!enabled, NET_FW_RULE_DIR_IN);
+            setNetFwRuleEnabled(!enabled, NET_FW_RULE_DIR_OUT);
+            isEnabled = !enabled;
+        }
+        return in && out;
+    } else {
+        bool result = setNetFwRuleEnabled(enabled, static_cast<NET_FW_RULE_DIRECTION_>(dir));
+        isEnabled = result ? enabled : !enabled;
+        return result;
+    }
+}
+
 void FirewallUtil::init()
 {
     if (inited)
@@ -206,7 +236,8 @@ void FirewallUtil::init()
 
     qInfo("Initializing the firewall...");
     hrComInit = S_OK;
-    bstrRuleName = SysAllocString(L"AutoFirewall");
+    bstrRuleInName = SysAllocString(L"AutoFirewallIn");
+    bstrRuleOutName = SysAllocString(L"AutoFirewallOut");
     //    bstrRuleLPorts = SysAllocString(L"80");
     bstrRuleGroup = SysAllocString(L"AutoFirewall");
 
@@ -250,13 +281,27 @@ void FirewallUtil::init()
         return;
     }
 
-    auto fwRule = getNetFwRule();
-    if (fwRule) {
-        VARIANT_BOOL enabled;
-        fwRule->get_Enabled(&enabled);
-        isEnabled = (enabled == VARIANT_TRUE);
+    QList<INetFwRule*> fwRules = getNetFwRule();
+    int allEnabled = 0;
+    for (auto rule : fwRules) {
+        if (rule) {
+            VARIANT_BOOL enabled;
+            rule->get_Enabled(&enabled);
+            allEnabled = (allEnabled << 1) | (enabled == VARIANT_TRUE);
+        } else {
+            qInfo("auto fwRule = getNetFwRule(); fwRule is null");
+        }
+    }
+    if (allEnabled == 0) {
+        isEnabled = false;
     } else {
-        qInfo("auto fwRule = getNetFwRule(); fwRule is null");
+        if (fwRules.size() == NumberUtil::bitCount(allEnabled)) {
+            isEnabled = true;
+        } else {
+            qCritical("Not all firewall rules have same enabled");
+            setNetFwRuleEnabled(false);
+            isEnabled = false;
+        }
     }
 
     inited = true;
@@ -270,15 +315,18 @@ void FirewallUtil::release()
         return;
 
     // Free BSTR's
-    SysFreeString(bstrRuleName);
+    SysFreeString(bstrRuleInName);
+    SysFreeString(bstrRuleOutName);
     SysFreeString(bstrRuleLPorts);
 
-    INetFwRule* fwRule = getNetFwRule();
-    if (fwRule != NULL) {
-        BSTR name = nullptr;
-        fwRule->get_Name(&name);
-        pFwRules->Remove(name);
-        fwRule->Release();
+    QList<INetFwRule*> fwRules = getNetFwRule();
+    for (auto rule : fwRules) {
+        if (rule) {
+            BSTR name = nullptr;
+            rule->get_Name(&name);
+            pFwRules->Remove(name);
+            rule->Release();
+        }
     }
 
     // Release the INetFwRules object
