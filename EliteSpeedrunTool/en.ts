@@ -209,7 +209,7 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
     <name>DisplayInfoDialog</name>
     <message>
         <location filename="DisplayInfoDialog.ui" line="+20"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_DisplayInfoDialog.h" line="+87"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_DisplayInfoDialog.h" line="+100"/>
         <source>信息展示</source>
         <translation>Display Info</translation>
     </message>
@@ -226,7 +226,7 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
     <name>MainWindow</name>
     <message>
         <location filename="MainWindow.ui" line="+31"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+573"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+698"/>
         <source>断网</source>
         <translation>Firewall</translation>
     </message>
@@ -254,7 +254,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+266"/>
-        <location filename="MainWindow.cpp" line="+690"/>
+        <location filename="MainWindow.cpp" line="+770"/>
         <location line="+22"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+14"/>
         <source>点击启动</source>
@@ -276,8 +276,8 @@ AdstarGod Firewall, easy to use
         <translation>Terminate the game</translation>
     </message>
     <message>
-        <location line="+21"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+2"/>
+        <location line="+212"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+10"/>
         <source>帮助(&amp;H)</source>
         <translation>&amp;Help</translation>
     </message>
@@ -307,7 +307,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+163"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-32"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-40"/>
         <source>爱发电...</source>
         <translation>Ai Fa Dian...</translation>
     </message>
@@ -324,7 +324,7 @@ AdstarGod Firewall, easy to use
         <translation>Alipay...</translation>
     </message>
     <message>
-        <location line="-601"/>
+        <location line="-792"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+8"/>
         <source>代言人</source>
         <translation>Spokesperson</translation>
@@ -373,14 +373,33 @@ AdstarGod Firewall, easy to use
         <translation>Terminate game</translation>
     </message>
     <message>
-        <location line="+101"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+6"/>
+        <location line="+32"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+8"/>
+        <source>末日将至爆头</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+164"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-2"/>
+        <source>选择区域 (延时 5 秒)</source>
+        <oldsource>选择区域</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+1"/>
+        <source>截图</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+83"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+7"/>
         <source>赞助(&amp;S)</source>
         <translation>&amp;Sponsor</translation>
     </message>
     <message>
         <location line="+124"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-36"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-44"/>
         <source>检查更新...</source>
         <translation>Check for update...</translation>
     </message>
@@ -405,7 +424,7 @@ AdstarGod Firewall, easy to use
         <translation>About Qt...</translation>
     </message>
     <message>
-        <location line="-527"/>
+        <location line="-718"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+23"/>
         <source>警告</source>
         <translation>Warning</translation>
@@ -448,8 +467,27 @@ AdstarGod Firewall, easy to use
         <translation>Suspend the game process</translation>
     </message>
     <message>
-        <location line="+132"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-43"/>
+        <location line="+77"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+4"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+1"/>
+        <source>主力模式</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+65"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+3"/>
+        <source>请在进隧道动画前截图以开始，然后在天基炮后，开门前截图以结束。理论上，所显示数值减去马头数，即为每个人的爆头数。</source>
+        <oldsource>请在进隧道动画前调出经验数值以开始，然后在天基炮后，开门前调出经验数值以结束。理论上，所显示数值减去马头数，即为每个人的爆头数。</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+165"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-51"/>
         <source>关于本软件...</source>
         <translation>About...</translation>
     </message>
@@ -485,7 +523,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+30"/>
-        <location filename="MainWindow.cpp" line="-388"/>
+        <location filename="MainWindow.cpp" line="-434"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="+4"/>
         <source>复制地址</source>
         <translation>Copy link</translation>
@@ -561,7 +599,7 @@ AdstarGod Firewall, easy to use
         <translation>Server address has been copied!</translation>
     </message>
     <message>
-        <location line="+363"/>
+        <location line="+409"/>
         <source>点击归零</source>
         <translation>Click to Zero</translation>
     </message>
@@ -576,7 +614,7 @@ AdstarGod Firewall, easy to use
         <translation>Click to continue</translation>
     </message>
     <message>
-        <location line="-548"/>
+        <location line="-621"/>
         <source>注册启用防火墙热键失败！</source>
         <oldsource>注册防火墙启动热键失败！</oldsource>
         <translation>Failed to register enable firewall hotkeys!</translation>
@@ -622,12 +660,22 @@ AdstarGod Firewall, easy to use
         <translation>Failed to register the termination game hotkey!</translation>
     </message>
     <message>
-        <location line="+137"/>
+        <location line="+17"/>
+        <source>注册末日将至爆头识别启动热键失败！</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>注册末日将至爆头识别关闭热键失败！</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+138"/>
         <source>支付宝收款二维码 谢谢喵！</source>
         <translation>Alipay payment QR code. Thank you!</translation>
     </message>
     <message>
-        <location filename="MainWindow.h" line="+125"/>
+        <location filename="MainWindow.h" line="+130"/>
         <source>加入 Telegram 群组一起划水~</source>
         <translation>Join Telegram group~</translation>
     </message>
@@ -683,6 +731,11 @@ AdstarGod Firewall, easy to use
         <translation>Manual timing</translation>
     </message>
     <message>
+        <location line="+3"/>
+        <source>末日将至爆头</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="GlobalData.cpp" line="+27"/>
         <source>停止后时间不归零</source>
         <translation>Time does not reset to zero after stopping</translation>
@@ -715,10 +768,43 @@ AdstarGod Firewall, easy to use
     </message>
 </context>
 <context>
+    <name>RegionSelectorDialog</name>
+    <message>
+        <location filename="RegionSelectorDialog.ui" line="+14"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_RegionSelectorDialog.h" line="+438"/>
+        <source>区域选择</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+637"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_RegionSelectorDialog.h" line="+2"/>
+        <source>RGB:(255,255,255)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+221"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_RegionSelectorDialog.h" line="+1"/>
+        <source>0 x 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+221"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_RegionSelectorDialog.h" line="+1"/>
+        <source>(0,0)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+221"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_RegionSelectorDialog.h" line="+1"/>
+        <source>请仅框选经验数值，不要选中等级</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingDialog</name>
     <message>
         <location filename="SettingDialog.ui" line="+14"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1340"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1475"/>
         <source>设置</source>
         <translation>Settings</translation>
     </message>
@@ -746,13 +832,15 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="-271"/>
+        <location line="+590"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-23"/>
+        <location line="+37"/>
         <source>音效</source>
         <translation>Sound</translation>
     </message>
     <message>
-        <location line="+93"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+5"/>
+        <location line="-497"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-32"/>
         <source>默认值为出站，设置将在下次启动防火墙时生效。</source>
         <translation>The default value is outbound. The settings will take effect the next time the firewall is started.</translation>
     </message>
@@ -957,19 +1045,23 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+264"/>
+        <location line="+575"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+13"/>
+        <location line="+37"/>
         <source>启动音效</source>
         <translation>Start</translation>
     </message>
     <message>
-        <location line="+29"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
+        <location line="-546"/>
+        <location line="+582"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-36"/>
+        <location line="+37"/>
         <source>停止音效</source>
         <translation>Stop</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
+        <location line="-575"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-36"/>
         <source>操作失败音效</source>
         <translation>Operation failed</translation>
     </message>
@@ -1043,22 +1135,22 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Note: The timer will be reset to zero after going from &quot;Pause&quot; to &quot;Stop&quot; no matter which strategy is selected</translation>
     </message>
     <message>
-        <location line="+185"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+5"/>
+        <location line="+325"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+11"/>
         <source>结束游戏热键</source>
         <translation>Terminate game hotkey</translation>
     </message>
     <message>
-        <location line="-112"/>
-        <location line="+121"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-3"/>
-        <location line="+4"/>
+        <location line="-252"/>
+        <location line="+261"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-9"/>
+        <location line="+10"/>
         <source>执行</source>
         <translation>Execute</translation>
     </message>
     <message>
-        <location line="-130"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-5"/>
+        <location line="-270"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-11"/>
         <source>卡单热键</source>
         <translation>Suspend game hotkey</translation>
     </message>
@@ -1076,8 +1168,27 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Suggested setting is between 6000 to 13000</translation>
     </message>
     <message>
-        <location line="+136"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+3"/>
+        <location line="+49"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
+        <source>末日降至爆头识别热键</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
+        <source>进隧道前</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
+        <source>出炮后 (重置)</source>
+        <oldsource>进炮前 (重置)</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+192"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+6"/>
         <source>Discord</source>
         <translation>Discord</translation>
     </message>
@@ -1112,12 +1223,12 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Display info</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>语言</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="SettingDialog.cpp" line="+76"/>
+        <location filename="SettingDialog.cpp" line="+77"/>
         <source>选择文件</source>
         <translation>Choice a sound</translation>
     </message>
@@ -1152,7 +1263,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Outbound</translation>
     </message>
     <message>
-        <location filename="SettingDialog.h" line="-5"/>
+        <location filename="SettingDialog.h" line="-6"/>
         <source>断网</source>
         <translation>Firewall</translation>
     </message>
@@ -1167,7 +1278,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>General</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+7"/>
         <source>社交</source>
         <translation>Social</translation>
     </message>
@@ -1177,9 +1288,14 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Terminate game</translation>
     </message>
     <message>
-        <location line="-1"/>
+        <location line="-2"/>
         <source>卡单</source>
         <translation>Suspend game</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>末日将至爆头识别</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
@@ -1187,7 +1303,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Developer options</translation>
     </message>
     <message>
-        <location line="+45"/>
+        <location line="+48"/>
         <source>左对齐</source>
         <translation>Left alignment</translation>
     </message>

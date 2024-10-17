@@ -1,4 +1,6 @@
 #include "TimeUtil.h"
+#include <QEventLoop>
+#include <QTimer>
 #include <chrono>
 
 TimeUtil::TimeUtil()
@@ -33,4 +35,17 @@ long long TimeUtil::currentTimestamp()
     auto duration = std::chrono::system_clock::now().time_since_epoch();
     // 转换为毫秒级的时间戳
     return std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+}
+
+void TimeUtil::delay(long long ms)
+{
+    QEventLoop loop;
+
+    // 创建一个定时器，在ms后触发停止事件循环
+    QTimer::singleShot(ms, &loop, &QEventLoop::quit);
+
+    // 进入事件循环，等待3秒后定时器触发
+    qDebug() << "Waiting for " << ms << " ms...";
+    loop.exec(); // 事件循环会阻塞，直到 quit() 被调用
+    qDebug() << "Finished waiting.";
 }

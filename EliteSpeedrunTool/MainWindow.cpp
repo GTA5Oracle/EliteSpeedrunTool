@@ -6,8 +6,11 @@
 #include "GlobalData.h"
 #include "HttpServerUtil.h"
 #include "LogUtil.h"
+#include "RegionSelectorDialog.h"
+#include "RpRecognizeUtil.h"
 #include "SettingDialog.h"
 #include "SuspendUtil.h"
+#include "TimeUtil.h"
 #include "UpdateDialog.h"
 #include <MMSystem.h>
 #include <QBoxLayout>
@@ -68,6 +71,8 @@ MainWindow::MainWindow(QWidget* parent)
     initCloseGameImmediately();
 
     initGlobalDataConnects();
+
+    initAct3Headshot();
 }
 
 MainWindow::~MainWindow()
@@ -142,6 +147,8 @@ void MainWindow::removeAllHotkeys()
     removeHotkey(startTimerHotkey);
     removeHotkey(pauseTimerHotkey);
     removeHotkey(stopTimerHotkey);
+    removeHotkey(act3HeadshotStartHotkey);
+    removeHotkey(act3HeadshotStopHotkey);
     removeHotkey(suspendAndResumeHotkey);
     removeHotkey(closeGameImmediatelyHotkey);
 }
@@ -272,6 +279,33 @@ void MainWindow::setHotkey()
             });
         } else {
             QMessageBox::critical(this, QString(), tr("注册快速结束游戏热键失败！"));
+        }
+    }
+
+    // 末日将至爆头识别
+    if (!globalData->act3HeadshotStartHotkey().isEmpty() && !globalData->act3HeadshotStopHotkey().isEmpty()) {
+        bool sameHotkey = globalData->act3HeadshotStartHotkey() == globalData->act3HeadshotStopHotkey();
+        act3HeadshotStartHotkey = new QHotkey(QKeySequence(globalData->act3HeadshotStartHotkey()), true, qApp);
+        if (act3HeadshotStartHotkey->isRegistered()) {
+            connect(act3HeadshotStartHotkey, &QHotkey::activated, qApp, [this, sameHotkey]() {
+                if (sameHotkey) {
+                    ui.btnRpOcr->toggle();
+                } else {
+                    ui.btnRpOcr->setChecked(true);
+                }
+            });
+        } else {
+            QMessageBox::critical(this, QString(), tr("注册末日将至爆头识别启动热键失败！"));
+        }
+        if (!sameHotkey) {
+            act3HeadshotStopHotkey = new QHotkey(QKeySequence(globalData->act3HeadshotStopHotkey()), true, qApp);
+            if (act3HeadshotStopHotkey->isRegistered()) {
+                connect(act3HeadshotStopHotkey, &QHotkey::activated, qApp, [this]() {
+                    ui.btnRpOcr->setChecked(false);
+                });
+            } else {
+                QMessageBox::critical(this, QString(), tr("注册末日将至爆头识别关闭热键失败！"));
+            }
         }
     }
 }
@@ -494,6 +528,52 @@ void MainWindow::initFirewall()
     });
 
     ui.btnStartFirewall->setFocus();
+}
+
+void MainWindow::initAct3Headshot()
+{
+    connect(ui.btnSelectRegion, &QAbstractButton::clicked, this, [this]() {
+        ui.btnSelectRegion->setEnabled(false);
+        QTimer::singleShot(5000, this, [this]() {
+            RpRecognizeUtil::sendInput();
+            TimeUtil::delay(500);
+            ui.btnSelectRegion->setEnabled(true);
+            auto dialog = RegionSelectorDialog(globalData->rpRect(), this);
+            if (dialog.exec() == QDialog::Accepted) {
+                auto rect = dialog.getRect();
+                qDebug() << rect;
+                globalData->setRpRect(rect);
+            }
+        });
+    });
+
+    ui.btnRpOcr->setEnabled(!globalData->rpRect().isEmpty());
+    connect(globalData, &GlobalData::rpRectChanged, this, [this]() {
+        ui.btnRpOcr->setEnabled(!globalData->rpRect().isEmpty());
+    });
+    connect(ui.btnRpOcr, &QAbstractButton::toggled, this, [this](bool checked) {
+        ui.btnRpOcr->setEnabled(false);
+        QPixmap image;
+        if (checked) {
+            PlaySound(globalData->act3HeadshotStartSound().toStdWString().c_str(), nullptr, SND_FILENAME | SND_ASYNC);
+            ui.labAct3HeadshotRp->setText(QString::number(RpRecognizeUtil::start(this, image)));
+        } else {
+            PlaySound(globalData->act3HeadshotStopSound().toStdWString().c_str(), nullptr, SND_FILENAME | SND_ASYNC);
+            int stopRp;
+            int count = RpRecognizeUtil::stop(this, ui.cbAct3HeadshotHost->isChecked(), image, stopRp);
+            ui.labAct3Headshot->setText(QString::number(count));
+            ui.labAct3HeadshotRp->setText(QString::number(stopRp));
+            if (displayInfoDialogIsShowing && displayInfoDialog) {
+                displayInfoDialog->setAct3Headshot(count);
+            }
+        }
+        if (!image.isNull()) {
+            ui.labAct3HeadshotImg->setPixmap(image);
+        }
+        QTimer::singleShot(5000, this, [this]() {
+            ui.btnRpOcr->setEnabled(true);
+        });
+    });
 }
 
 void MainWindow::initSuspendProcess()

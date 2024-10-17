@@ -27,6 +27,10 @@ set(PROJECT_SOURCES
         UpdateDialog.h UpdateDialog.cpp UpdateDialog.ui
         DescriptionDialog.h DescriptionDialog.cpp DescriptionDialog.ui
         AcknowledgementDialog.h AcknowledgementDialog.cpp AcknowledgementDialog.ui
+        RegionSelectorRect.h RegionSelectorRect.cpp
+        RegionSelectorGraphicsView.h RegionSelectorGraphicsView.cpp
+        RegionSelectorDialog.h RegionSelectorDialog.cpp RegionSelectorDialog.ui
+        memoryutil/MemoryUtil.h memoryutil/MemoryUtil.cpp
         LogUtil.h LogUtil.cpp
         LanguageUtil.h LanguageUtil.cpp
         HttpServerUtil.h HttpServerUtil.cpp
@@ -35,6 +39,7 @@ set(PROJECT_SOURCES
         TimeUtil.h TimeUtil.cpp
         SuspendUtil.h SuspendUtil.cpp
         NumberUtil.h NumberUtil.cpp
+        RpRecognizeUtil.h RpRecognizeUtil.cpp
         resource.qrc
 )
 
@@ -105,3 +110,8 @@ endif()
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../DiscordGameSDK ${CMAKE_CURRENT_BINARY_DIR}/DiscordGameSDK)
 include_directories(../DiscordGameSDK)
 target_link_libraries(EliteSpeedrunTool PRIVATE DiscordGameSDK)
+
+# set(OpenCV_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../OpenCV)
+# find_package(OpenCV REQUIRED)
+# include_directories(${OpenCV_INCLUDE_DIRS})
+# target_link_libraries(EliteSpeedrunTool PRIVATE ${OpenCV_LIBS})

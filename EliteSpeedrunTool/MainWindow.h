@@ -38,6 +38,8 @@ protected:
 
     void initFirewall();
 
+    void initAct3Headshot();
+
     void initSuspendProcess();
 
     void initCloseGameImmediately();
@@ -95,6 +97,9 @@ private:
     QHotkey* stopTimerHotkey = nullptr;
 
     QHotkey* suspendAndResumeHotkey = nullptr;
+
+    QHotkey* act3HeadshotStartHotkey = nullptr;
+    QHotkey* act3HeadshotStopHotkey = nullptr;
 
     QHotkey* closeGameImmediatelyHotkey = nullptr;
 

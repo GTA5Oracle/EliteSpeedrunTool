@@ -4,6 +4,7 @@
 #include <QColor>
 #include <QMetaType>
 #include <QPoint>
+#include <QRegion>
 #include <QSettings>
 #include <QSize>
 #include <QString>
@@ -176,6 +177,21 @@ public:
     int suspendAndResumeDuration() const;
     void setSuspendAndResumeDuration(int newSuspendAndResumeDuration);
 
+    QRect rpRect() const;
+    void setRpRect(const QRect& newRpRegion);
+
+    QString act3HeadshotStartHotkey() const;
+    void setAct3HeadshotStartHotkey(const QString& newAct3HeadshotStartHotkey);
+
+    QString act3HeadshotStopHotkey() const;
+    void setAct3HeadshotStopHotkey(const QString& newAct3HeadshotStopHotkey);
+
+    QString act3HeadshotStartSound() const;
+    void setAct3HeadshotStartSound(const QString& newAct3HeadshotStartSound);
+
+    QString act3HeadshotStopSound() const;
+    void setAct3HeadshotStopSound(const QString& newAct3HeadshotStopSound);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -228,6 +244,16 @@ signals:
 
     void suspendAndResumeDurationChanged();
 
+    void rpRectChanged();
+
+    void act3HeadshotStartHotkeyChanged();
+
+    void act3HeadshotStopHotkeyChanged();
+
+    void act3HeadshotStartSoundChanged();
+
+    void act3HeadshotStopSoundChanged();
+
 private:
     bool mMinimizeToTray = false;
     QString mStyleName = "windowsvista";
@@ -240,6 +266,7 @@ private:
     QList<DisplayInfoSubFunction> mFuncs = {
         DisplayInfoSubFunction::Firewall,
         DisplayInfoSubFunction::Timer,
+        DisplayInfoSubFunction::Act3Headshot,
     };
     QDisplayInfoSubFuncsMap mDisplayInfoSubFunctions;
     bool mDisplayInfoToolWindow = true;
@@ -296,11 +323,20 @@ private:
     QString mSuspendAndResumeHotkey = "Ctrl+Alt+`";
     int mSuspendAndResumeDuration = 9000;
 
+    // 末日将至爆头识别
+    QString mAct3HeadshotStartHotkey = "F2";
+    QString mAct3HeadshotStopHotkey = "F3";
+    QString mAct3HeadshotStartSound = "./sound/genter1a.wav";
+    QString mAct3HeadshotStopSound = "./sound/uplan1.wav";
+
     // 结束游戏
     QString mCloseGameImmediatelyHotkey = "Ctrl+`";
 
     // 开发者选项
     bool mDebugMode = false;
+
+    // 经验条
+    QRect mRpRect = QRect(0, 0, 0, 0);
 
 private:
     Q_PROPERTY(bool minimizeToTray READ minimizeToTray WRITE setMinimizeToTray NOTIFY minimizeToTrayChanged)
@@ -342,4 +378,9 @@ private:
     Q_PROPERTY(bool displayInfoToolWindow READ displayInfoToolWindow WRITE setDisplayInfoToolWindow NOTIFY displayInfoToolWindowChanged FINAL)
     Q_PROPERTY(QString suspendAndResumeHotkey READ suspendAndResumeHotkey WRITE setSuspendAndResumeHotkey NOTIFY suspendAndResumeHotkeyChanged FINAL)
     Q_PROPERTY(int suspendAndResumeDuration READ suspendAndResumeDuration WRITE setSuspendAndResumeDuration NOTIFY suspendAndResumeDurationChanged FINAL)
+    Q_PROPERTY(QRect rpRect READ rpRect WRITE setRpRect NOTIFY rpRectChanged FINAL)
+    Q_PROPERTY(QString act3HeadshotStartHotkey READ act3HeadshotStartHotkey WRITE setAct3HeadshotStartHotkey NOTIFY act3HeadshotStartHotkeyChanged FINAL)
+    Q_PROPERTY(QString act3HeadshotStopHotkey READ act3HeadshotStopHotkey WRITE setAct3HeadshotStopHotkey NOTIFY act3HeadshotStopHotkeyChanged FINAL)
+    Q_PROPERTY(QString act3HeadshotStartSound READ act3HeadshotStartSound WRITE setAct3HeadshotStartSound NOTIFY act3HeadshotStartSoundChanged FINAL)
+    Q_PROPERTY(QString act3HeadshotStopSound READ act3HeadshotStopSound WRITE setAct3HeadshotStopSound NOTIFY act3HeadshotStopSoundChanged FINAL)
 };

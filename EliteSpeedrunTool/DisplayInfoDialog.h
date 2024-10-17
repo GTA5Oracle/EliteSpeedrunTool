@@ -2,6 +2,7 @@
 
 #include "GlobalData.h"
 #include <QDialog>
+#include <QLabel>
 
 namespace Ui {
 class DisplayInfoDialog;
@@ -23,13 +24,16 @@ public:
     void setFont();
 
     void setTextStyle();
-    void setTimerTextStyle(
+    void setTextStyle(
+        QLabel* label,
         const QColor& textColor,
         const QColor& textShadowColor,
         qreal textShadowBlurRadius,
         const QPointF& textShadowOffset);
 
     void setTime(unsigned int m, unsigned int s, unsigned int ms);
+
+    void setAct3Headshot(int headshot);
 
     static const QString timePattern;
 

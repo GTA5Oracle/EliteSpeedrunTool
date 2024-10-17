@@ -15,6 +15,9 @@ QString toDisplayString(DisplayInfoSubFunction f)
     case Timer:
         return QObject::tr("计时");
         break;
+    case Act3Headshot:
+        return QObject::tr("末日将至爆头");
+        break;
     default:
         return "";
     }
@@ -28,6 +31,9 @@ QString toString(DisplayInfoSubFunction f)
         break;
     case Timer:
         return "Timer";
+        break;
+    case Act3Headshot:
+        return "Act3Headshot";
         break;
     default:
         return "";

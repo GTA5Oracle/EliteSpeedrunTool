@@ -11,4 +11,6 @@ public:
     static BOOLEAN nanosleep(LONGLONG ns);
 
     static long long currentTimestamp();
+
+    static void delay(long long ms);
 };

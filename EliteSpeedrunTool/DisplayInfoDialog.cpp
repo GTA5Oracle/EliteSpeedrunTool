@@ -54,12 +54,14 @@ void DisplayInfoDialog::setDisplay()
 {
     auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
     ui->labTimer->setVisible(displayInfoSubFunctions[DisplayInfoSubFunction::Timer]->display());
+    ui->labAct3Headshot->setVisible(displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot]->display());
 }
 
 void DisplayInfoDialog::setTextAlignment()
 {
     auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
     ui->labTimer->setAlignment(displayInfoSubFunctions[DisplayInfoSubFunction::Timer]->textAlignment());
+    ui->labAct3Headshot->setAlignment(displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot]->textAlignment());
 }
 
 void DisplayInfoDialog::setFont()
@@ -69,34 +71,47 @@ void DisplayInfoDialog::setFont()
         QFont(displayInfoSubFunctions[DisplayInfoSubFunction::Timer]->fontFamily(),
             displayInfoSubFunctions[DisplayInfoSubFunction::Timer]->textSize()));
     setTime(0, 0, 0); // 更新字体大小
+    ui->labAct3Headshot->setFont(
+        QFont(displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot]->fontFamily(),
+            displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot]->textSize()));
+    ui->labTimer->setText("0"); // 更新字体大小
 }
 
 void DisplayInfoDialog::setTextStyle()
 {
     auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
     auto timerItem = displayInfoSubFunctions[DisplayInfoSubFunction::Timer];
+    auto act3HeadshotItem = displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot];
 
-    setTimerTextStyle(
+    setTextStyle(
+        ui->labTimer,
         timerItem->textColor(),
         timerItem->textShadowColor(),
         timerItem->textShadowBlurRadius(),
         timerItem->textShadowOffset());
+    setTextStyle(
+        ui->labAct3Headshot,
+        act3HeadshotItem->textColor(),
+        act3HeadshotItem->textShadowColor(),
+        act3HeadshotItem->textShadowBlurRadius(),
+        act3HeadshotItem->textShadowOffset());
 }
 
-void DisplayInfoDialog::setTimerTextStyle(
+void DisplayInfoDialog::setTextStyle(
+    QLabel* label,
     const QColor& textColor,
     const QColor& textShadowColor,
     qreal textShadowBlurRadius,
     const QPointF& textShadowOffset)
 {
-    ui->labTimer->setStyleSheet(
+    label->setStyleSheet(
         textQssPattern.arg(textColor.name()));
 
     QGraphicsDropShadowEffect* timerEffect = new QGraphicsDropShadowEffect(this);
     timerEffect->setColor(textShadowColor);
     timerEffect->setBlurRadius(textShadowBlurRadius);
     timerEffect->setOffset(textShadowOffset);
-    ui->labTimer->setGraphicsEffect(timerEffect);
+    label->setGraphicsEffect(timerEffect);
 }
 
 void DisplayInfoDialog::setTouchable(bool touchable)
@@ -108,6 +123,7 @@ void DisplayInfoDialog::setChildrenTransparentForMouseEvents(bool transparent)
 {
     ui->widget->setAttribute(Qt::WA_TransparentForMouseEvents, transparent);
     ui->labTimer->setAttribute(Qt::WA_TransparentForMouseEvents, transparent);
+    ui->labAct3Headshot->setAttribute(Qt::WA_TransparentForMouseEvents, transparent);
 }
 
 void DisplayInfoDialog::addWidget(QWidget* widget)
@@ -156,66 +172,84 @@ void DisplayInfoDialog::setTime(unsigned int m, unsigned int s, unsigned int ms)
                               .arg(ms, 2, 10, QLatin1Char('0')));
 }
 
+void DisplayInfoDialog::setAct3Headshot(int headshot)
+{
+    ui->labAct3Headshot->setText(QString::number(headshot));
+}
+
 void DisplayInfoDialog::initGlobalDataConnects()
 {
     auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
     auto timerItem = displayInfoSubFunctions[DisplayInfoSubFunction::Timer];
+    auto act3HeadshotItem = displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot];
+    QList<QPair<DisplayInfoSubFunctionItem*, QLabel*>> items = {
+        qMakePair(timerItem, ui->labTimer),
+        qMakePair(act3HeadshotItem, ui->labAct3Headshot),
+    };
 
-    connect(timerItem, &DisplayInfoSubFunctionItem::displayChanged, this,
-        [this](bool newDisplay) {
-            ui->labTimer->setVisible(newDisplay);
-        });
+    for (auto& item : items) {
+        DisplayInfoSubFunctionItem* displayInfoSubFunctionItem = item.first;
+        QLabel* label = item.second;
+        connect(displayInfoSubFunctionItem, &DisplayInfoSubFunctionItem::displayChanged, this,
+            [label](bool newDisplay) {
+                label->setVisible(newDisplay);
+            });
 
-    connect(timerItem, &DisplayInfoSubFunctionItem::textAlignmentChanged, this,
-        [this](const Qt::Alignment& newTextAlignment) {
-            ui->labTimer->setAlignment(newTextAlignment);
-        });
+        connect(displayInfoSubFunctionItem, &DisplayInfoSubFunctionItem::textAlignmentChanged, this,
+            [label](const Qt::Alignment& newTextAlignment) {
+                label->setAlignment(newTextAlignment);
+            });
 
-    connect(timerItem, &DisplayInfoSubFunctionItem::textSizeChanged, this,
-        [this, timerItem](int newTextSize) {
-            ui->labTimer->setFont(QFont(timerItem->fontFamily(), newTextSize));
-        });
+        connect(displayInfoSubFunctionItem, &DisplayInfoSubFunctionItem::textSizeChanged, this,
+            [displayInfoSubFunctionItem, label](int newTextSize) {
+                label->setFont(QFont(displayInfoSubFunctionItem->fontFamily(), newTextSize));
+            });
 
-    connect(timerItem, &DisplayInfoSubFunctionItem::textColorChanged, this,
-        [this, timerItem](const QColor& newTextColor) {
-            setTimerTextStyle(
-                newTextColor,
-                timerItem->textShadowColor(),
-                timerItem->textShadowBlurRadius(),
-                timerItem->textShadowOffset());
-        });
+        connect(displayInfoSubFunctionItem, &DisplayInfoSubFunctionItem::textColorChanged, this,
+            [this, displayInfoSubFunctionItem, label](const QColor& newTextColor) {
+                setTextStyle(
+                    label,
+                    newTextColor,
+                    displayInfoSubFunctionItem->textShadowColor(),
+                    displayInfoSubFunctionItem->textShadowBlurRadius(),
+                    displayInfoSubFunctionItem->textShadowOffset());
+            });
 
-    connect(timerItem, &DisplayInfoSubFunctionItem::textShadowColorChanged, this,
-        [this, timerItem](const QColor& newTextShadowColor) {
-            setTimerTextStyle(
-                timerItem->textColor(),
-                newTextShadowColor,
-                timerItem->textShadowBlurRadius(),
-                timerItem->textShadowOffset());
-        });
+        connect(displayInfoSubFunctionItem, &DisplayInfoSubFunctionItem::textShadowColorChanged, this,
+            [this, displayInfoSubFunctionItem, label](const QColor& newTextShadowColor) {
+                setTextStyle(
+                    label,
+                    displayInfoSubFunctionItem->textColor(),
+                    newTextShadowColor,
+                    displayInfoSubFunctionItem->textShadowBlurRadius(),
+                    displayInfoSubFunctionItem->textShadowOffset());
+            });
 
-    connect(timerItem, &DisplayInfoSubFunctionItem::textShadowBlurRadiusChanged, this,
-        [this, timerItem](int newTextShadowBlurRadius) {
-            setTimerTextStyle(
-                timerItem->textColor(),
-                timerItem->textShadowColor(),
-                newTextShadowBlurRadius,
-                timerItem->textShadowOffset());
-        });
+        connect(displayInfoSubFunctionItem, &DisplayInfoSubFunctionItem::textShadowBlurRadiusChanged, this,
+            [this, displayInfoSubFunctionItem, label](int newTextShadowBlurRadius) {
+                setTextStyle(
+                    label,
+                    displayInfoSubFunctionItem->textColor(),
+                    displayInfoSubFunctionItem->textShadowColor(),
+                    newTextShadowBlurRadius,
+                    displayInfoSubFunctionItem->textShadowOffset());
+            });
 
-    connect(timerItem, &DisplayInfoSubFunctionItem::textShadowOffsetChanged, this,
-        [this, timerItem](QPointF newTextShadowOffset) {
-            setTimerTextStyle(
-                timerItem->textColor(),
-                timerItem->textShadowColor(),
-                timerItem->textShadowBlurRadius(),
-                newTextShadowOffset);
-        });
+        connect(displayInfoSubFunctionItem, &DisplayInfoSubFunctionItem::textShadowOffsetChanged, this,
+            [this, displayInfoSubFunctionItem, label](QPointF newTextShadowOffset) {
+                setTextStyle(
+                    label,
+                    displayInfoSubFunctionItem->textColor(),
+                    displayInfoSubFunctionItem->textShadowColor(),
+                    displayInfoSubFunctionItem->textShadowBlurRadius(),
+                    newTextShadowOffset);
+            });
 
-    connect(timerItem, &DisplayInfoSubFunctionItem::fontFamilyChanged, this,
-        [this, timerItem](const QString& newFontFamily) {
-            ui->labTimer->setFont(QFont(newFontFamily, timerItem->textSize()));
-        });
+        connect(displayInfoSubFunctionItem, &DisplayInfoSubFunctionItem::fontFamilyChanged, this,
+            [displayInfoSubFunctionItem, label](const QString& newFontFamily) {
+                label->setFont(QFont(newFontFamily, displayInfoSubFunctionItem->textSize()));
+            });
+    }
 
     // ==========================
     connect(globalData, &GlobalData::displayInfoPosChanged, this, [this]() {

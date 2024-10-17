@@ -8,6 +8,7 @@
 enum DisplayInfoSubFunction {
     Firewall = 1,
     Timer = 3,
+    Act3Headshot = 9,
 };
 
 namespace DisplayInfoSubFunctionUtil {

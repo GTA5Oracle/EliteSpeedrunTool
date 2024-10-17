@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>303</width>
-    <height>87</height>
+    <height>116</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -60,6 +60,27 @@
           </property>
           <property name="text">
            <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt;00:00&lt;/span&gt;&lt;span style=&quot; font-size:22pt;&quot;&gt;.00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labAct3Headshot">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>26</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 0);</string>
+          </property>
+          <property name="text">
+           <string notr="true">0</string>
           </property>
          </widget>
         </item>

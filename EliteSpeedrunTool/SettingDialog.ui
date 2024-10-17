@@ -46,7 +46,7 @@
       <enum>QFrame::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -1193,8 +1193,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>447</width>
-            <height>488</height>
+            <width>130</width>
+            <height>215</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -1273,6 +1273,146 @@ C:\Program Files (x86)\nn\nn.exe</string>
            </item>
            <item>
             <spacer name="verticalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>1</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page">
+      <layout class="QVBoxLayout" name="verticalLayout_16">
+       <item>
+        <widget class="QScrollArea" name="scrollArea_4">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_4">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>429</width>
+            <height>470</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_24">
+           <item>
+            <widget class="QGroupBox" name="groupBox_17">
+             <property name="title">
+              <string>末日降至爆头识别热键</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_8">
+              <item row="0" column="3">
+               <widget class="QToolButton" name="tbClearAct3HeadshotStart">
+                <property name="icon">
+                 <iconset resource="resource.qrc">
+                  <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QKeySequenceEdit" name="keySeqAct3HeadshotStart"/>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_40">
+                <property name="text">
+                 <string>进隧道前</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="3">
+               <widget class="QToolButton" name="tbClearAct3HeadshotStop">
+                <property name="icon">
+                 <iconset resource="resource.qrc">
+                  <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QKeySequenceEdit" name="keySeqAct3HeadshotStop"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_41">
+                <property name="text">
+                 <string>出炮后 (重置)</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_18">
+             <property name="title">
+              <string>音效</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_9">
+              <item row="2" column="3">
+               <widget class="QToolButton" name="tbAct3HeadshotStopSound">
+                <property name="text">
+                 <string notr="true">...</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_32">
+                <property name="text">
+                 <string>启动音效</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QToolButton" name="tbAct3HeadshotStartSound">
+                <property name="text">
+                 <string notr="true">...</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QToolButton" name="tbAct3HeadshotPlayStartSound">
+                <property name="icon">
+                 <iconset resource="resource.qrc">
+                  <normaloff>:/image/ic_sound.ico</normaloff>:/image/ic_sound.ico</iconset>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="2">
+               <widget class="QToolButton" name="tbAct3HeadshotPlayStopSound">
+                <property name="icon">
+                 <iconset resource="resource.qrc">
+                  <normaloff>:/image/ic_sound.ico</normaloff>:/image/ic_sound.ico</iconset>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="leAct3HeadshotStartSoundPath"/>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="leAct3HeadshotStopSoundPath"/>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_42">
+                <property name="text">
+                 <string>停止音效</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_4">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>

@@ -176,6 +176,11 @@ void GlobalData::readSettings()
     setMissionDataUpdateInterval(settings.value("MissionDataUpdateInterval", mMissionDataUpdateInterval).toInt());
     setMissionDataName(MissionDataNameUtil::fromString(
         settings.value("MissionDataName", MissionDataNameUtil::toString(mMissionDataName)).toString()));
+    setRpRect(settings.value("RpRect", mRpRect).toRect());
+    setAct3HeadshotStartHotkey(settings.value("Act3HeadshotStartHotkey", mAct3HeadshotStartHotkey).toString());
+    setAct3HeadshotStopHotkey(settings.value("Act3HeadshotStopHotkey", mAct3HeadshotStopHotkey).toString());
+    setAct3HeadshotStartSound(settings.value("Act3HeadshotStartSound", mAct3HeadshotStartSound).toString());
+    setAct3HeadshotStopSound(settings.value("Act3HeadshotStopSound", mAct3HeadshotStopSound).toString());
     settings.endGroup();
 
     settings.beginGroup("Timer");
@@ -249,6 +254,11 @@ void GlobalData::writeSettings()
     settings.beginGroup("MissionData");
     settings.setValue("MissionDataInterval", mMissionDataUpdateInterval);
     settings.setValue("MissionDataName", MissionDataNameUtil::toString(mMissionDataName));
+    settings.setValue("RpRect", mRpRect);
+    settings.setValue("Act3HeadshotStartHotkey", mAct3HeadshotStartHotkey);
+    settings.setValue("Act3HeadshotStopHotkey", mAct3HeadshotStopHotkey);
+    settings.setValue("Act3HeadshotStartSound", mAct3HeadshotStartSound);
+    settings.setValue("Act3HeadshotStopSound", mAct3HeadshotStopSound);
     settings.endGroup();
 
     settings.beginGroup("Timer");
@@ -824,4 +834,69 @@ void GlobalData::setSuspendAndResumeDuration(int newSuspendAndResumeDuration)
         return;
     mSuspendAndResumeDuration = newSuspendAndResumeDuration;
     emit suspendAndResumeDurationChanged();
+}
+
+QRect GlobalData::rpRect() const
+{
+    return mRpRect;
+}
+
+void GlobalData::setRpRect(const QRect& newRpRect)
+{
+    if (mRpRect == newRpRect)
+        return;
+    mRpRect = newRpRect;
+    emit rpRectChanged();
+}
+
+QString GlobalData::act3HeadshotStartHotkey() const
+{
+    return mAct3HeadshotStartHotkey;
+}
+
+void GlobalData::setAct3HeadshotStartHotkey(const QString& newAct3HeadshotStartHotkey)
+{
+    if (mAct3HeadshotStartHotkey == newAct3HeadshotStartHotkey)
+        return;
+    mAct3HeadshotStartHotkey = newAct3HeadshotStartHotkey;
+    emit act3HeadshotStartHotkeyChanged();
+}
+
+QString GlobalData::act3HeadshotStopHotkey() const
+{
+    return mAct3HeadshotStopHotkey;
+}
+
+void GlobalData::setAct3HeadshotStopHotkey(const QString& newAct3HeadshotStopHotkey)
+{
+    if (mAct3HeadshotStopHotkey == newAct3HeadshotStopHotkey)
+        return;
+    mAct3HeadshotStopHotkey = newAct3HeadshotStopHotkey;
+    emit act3HeadshotStopHotkeyChanged();
+}
+
+QString GlobalData::act3HeadshotStartSound() const
+{
+    return mAct3HeadshotStartSound;
+}
+
+void GlobalData::setAct3HeadshotStartSound(const QString& newAct3HeadshotStartSound)
+{
+    if (mAct3HeadshotStartSound == newAct3HeadshotStartSound)
+        return;
+    mAct3HeadshotStartSound = newAct3HeadshotStartSound;
+    emit act3HeadshotStartSoundChanged();
+}
+
+QString GlobalData::act3HeadshotStopSound() const
+{
+    return mAct3HeadshotStopSound;
+}
+
+void GlobalData::setAct3HeadshotStopSound(const QString& newAct3HeadshotStopSound)
+{
+    if (mAct3HeadshotStopSound == newAct3HeadshotStopSound)
+        return;
+    mAct3HeadshotStopSound = newAct3HeadshotStopSound;
+    emit act3HeadshotStopSoundChanged();
 }

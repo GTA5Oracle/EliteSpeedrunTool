@@ -32,6 +32,7 @@ SettingDialog::SettingDialog(QWidget* parent)
     initGeneralSettings();
     initFirewallSettings();
     initTimerSettings();
+    initAct3Headshot();
     initSuspendProcess();
     initCloseGameImmediatelySettings();
     initSocialSettings();
@@ -451,6 +452,76 @@ void SettingDialog::initDisplayInfoSettings()
         });
     setDisplayInfoCententSettings(currentSubFunction);
     ui.cbDisplayInfoFunction->setCurrentIndex(currentSubFunctionIndex);
+}
+
+void SettingDialog::initAct3Headshot()
+{
+    ui.keySeqAct3HeadshotStart->setKeySequence(QKeySequence(globalData->act3HeadshotStartHotkey()));
+    connect(ui.keySeqAct3HeadshotStart, &QKeySequenceEdit::editingFinished, this, [=]() {
+        if (ui.keySeqAct3HeadshotStart->keySequence().count() > 1) {
+            QKeyCombination value = ui.keySeqAct3HeadshotStart->keySequence()[0];
+            QKeySequence shortcut(value);
+            ui.keySeqAct3HeadshotStart->setKeySequence(shortcut);
+            globalData->setAct3HeadshotStartHotkey(shortcut.toString());
+        } else {
+            globalData->setAct3HeadshotStartHotkey(ui.keySeqAct3HeadshotStart->keySequence().toString());
+        }
+    });
+
+    connect(ui.tbClearAct3HeadshotStart, &QAbstractButton::clicked, this, [=]() {
+        ui.keySeqAct3HeadshotStart->clear();
+        globalData->setAct3HeadshotStartHotkey("");
+    });
+
+    ui.keySeqAct3HeadshotStop->setKeySequence(QKeySequence(globalData->act3HeadshotStopHotkey()));
+    connect(ui.keySeqAct3HeadshotStop, &QKeySequenceEdit::editingFinished, this, [=]() {
+        if (ui.keySeqAct3HeadshotStop->keySequence().count() > 1) {
+            QKeyCombination value = ui.keySeqAct3HeadshotStop->keySequence()[0];
+            QKeySequence shortcut(value);
+            ui.keySeqAct3HeadshotStop->setKeySequence(shortcut);
+            globalData->setAct3HeadshotStopHotkey(shortcut.toString());
+        } else {
+            globalData->setAct3HeadshotStopHotkey(ui.keySeqAct3HeadshotStop->keySequence().toString());
+        }
+    });
+
+    connect(ui.tbClearAct3HeadshotStop, &QAbstractButton::clicked, this, [=]() {
+        ui.keySeqAct3HeadshotStop->clear();
+        globalData->setAct3HeadshotStopHotkey("");
+    });
+
+    // 音效
+    ui.leAct3HeadshotStartSoundPath->setText(globalData->act3HeadshotStartSound());
+    connect(ui.tbAct3HeadshotStartSound, &QAbstractButton::clicked, this, [=]() {
+        QString fileName = getSoundFile(globalData->act3HeadshotStartSound());
+        if (!fileName.isEmpty()) {
+            ui.leAct3HeadshotStartSoundPath->setText(fileName);
+            globalData->setAct3HeadshotStartSound(fileName);
+        }
+    });
+    connect(ui.leAct3HeadshotStartSoundPath, &QLineEdit::textChanged, this, [=](const QString& text) {
+        globalData->setAct3HeadshotStartSound(text);
+    });
+    connect(ui.tbAct3HeadshotPlayStartSound, &QAbstractButton::clicked, this, [=]() {
+        PlaySound(globalData->act3HeadshotStartSound().toStdWString().c_str(),
+            nullptr, SND_FILENAME | SND_ASYNC);
+    });
+
+    ui.leAct3HeadshotStopSoundPath->setText(globalData->act3HeadshotStopSound());
+    connect(ui.tbAct3HeadshotStopSound, &QAbstractButton::clicked, this, [=]() {
+        QString fileName = getSoundFile(globalData->act3HeadshotStopSound());
+        if (!fileName.isEmpty()) {
+            ui.leAct3HeadshotStopSoundPath->setText(fileName);
+            globalData->setAct3HeadshotStopSound(fileName);
+        }
+    });
+    connect(ui.leAct3HeadshotStopSoundPath, &QLineEdit::textChanged, this, [=](const QString& text) {
+        globalData->setAct3HeadshotStopSound(text);
+    });
+    connect(ui.tbAct3HeadshotPlayStopSound, &QAbstractButton::clicked, this, [=]() {
+        PlaySound(globalData->act3HeadshotStopSound().toStdWString().c_str(),
+            nullptr, SND_FILENAME | SND_ASYNC);
+    });
 }
 
 void SettingDialog::initSuspendProcess()
