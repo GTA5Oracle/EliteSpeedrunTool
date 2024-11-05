@@ -39,6 +39,23 @@ QString toString(DisplayInfoSubFunction f)
         return "";
     }
 };
+
+QString defaultRtssOsdText(DisplayInfoSubFunction f)
+{
+    switch (f) {
+    case Firewall:
+        return "<C0=FFFF00><C0>%1<C>";
+        break;
+    case Timer:
+        return "<C0=FFFF00><S0=-70><C0>%1:%2.<S0>%3<S><C>";
+        break;
+    case Act3Headshot:
+        return "<C0=FFFF00><C0>%1<C>";
+        break;
+    default:
+        return "%1";
+    }
+};
 }
 
 DisplayInfoSubFunctionItem::DisplayInfoSubFunctionItem(QObject* parent)
@@ -161,4 +178,30 @@ void DisplayInfoSubFunctionItem::setFontFamily(const QString& newFontFamily)
         return;
     mFontFamily = newFontFamily;
     emit fontFamilyChanged(mFontFamily);
+}
+
+QString DisplayInfoSubFunctionItem::rtssOsdText() const
+{
+    return mRtssOsdText;
+}
+
+void DisplayInfoSubFunctionItem::setRtssOsdText(const QString& newRtssOsdText)
+{
+    if (mRtssOsdText == newRtssOsdText)
+        return;
+    mRtssOsdText = newRtssOsdText;
+    emit rtssOsdTextChanged();
+}
+
+bool DisplayInfoSubFunctionItem::rtssDisplay() const
+{
+    return mRtssDisplay;
+}
+
+void DisplayInfoSubFunctionItem::setRtssDisplay(bool newRtssDisplay)
+{
+    if (mRtssDisplay == newRtssDisplay)
+        return;
+    mRtssDisplay = newRtssDisplay;
+    emit rtssDisplayChanged();
 }

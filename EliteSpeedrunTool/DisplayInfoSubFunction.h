@@ -14,6 +14,7 @@ enum DisplayInfoSubFunction {
 namespace DisplayInfoSubFunctionUtil {
 QString toDisplayString(DisplayInfoSubFunction f);
 QString toString(DisplayInfoSubFunction f);
+QString defaultRtssOsdText(DisplayInfoSubFunction f);
 }
 
 class DisplayInfoSubFunctionItem : public QObject {
@@ -49,6 +50,12 @@ public:
     const QString& fontFamily() const;
     void setFontFamily(const QString& newFontFamily);
 
+    QString rtssOsdText() const;
+    void setRtssOsdText(const QString& newRtssOsdText);
+
+    bool rtssDisplay() const;
+    void setRtssDisplay(bool newRtssDisplay);
+
 signals:
     void displayChanged(bool newDisplay);
     void textAlignmentChanged(const Qt::Alignment& newTextAlignment);
@@ -58,6 +65,9 @@ signals:
     void textShadowBlurRadiusChanged(int newTextShadowBlurRadius);
     void textShadowOffsetChanged(QPointF newTextShadowOffset);
     void fontFamilyChanged(const QString& newFontFamily);
+    void rtssOsdTextChanged();
+
+    void rtssDisplayChanged();
 
 private:
     bool mDisplay = true;
@@ -68,6 +78,8 @@ private:
     int mTextShadowBlurRadius = 7;
     QPointF mTextShadowOffset = { 0, 0 };
     QString mFontFamily = QFont().family();
+    bool mRtssDisplay = true;
+    QString mRtssOsdText = "";
 
     Q_PROPERTY(bool display READ display WRITE setDisplay NOTIFY displayChanged)
     Q_PROPERTY(Qt::Alignment textAlignment READ textAlignment WRITE setTextAlignment NOTIFY textAlignmentChanged)
@@ -77,4 +89,6 @@ private:
     Q_PROPERTY(int textShadowBlurRadius READ textShadowBlurRadius WRITE setTextShadowBlurRadius NOTIFY textShadowBlurRadiusChanged)
     Q_PROPERTY(QPointF textShadowOffset READ textShadowOffset WRITE setTextShadowOffset NOTIFY textShadowOffsetChanged)
     Q_PROPERTY(QString fontFamily READ fontFamily WRITE setFontFamily NOTIFY fontFamilyChanged)
+    Q_PROPERTY(QString rtssOsdText READ rtssOsdText WRITE setRtssOsdText NOTIFY rtssOsdTextChanged FINAL)
+    Q_PROPERTY(bool rtssDisplay READ rtssDisplay WRITE setRtssDisplay NOTIFY rtssDisplayChanged FINAL)
 };

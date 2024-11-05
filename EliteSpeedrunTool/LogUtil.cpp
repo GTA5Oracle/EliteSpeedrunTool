@@ -17,7 +17,7 @@ LogUtil::LogUtil()
 
 QString LogUtil::getLogDir()
 {
-    return QCoreApplication::applicationDirPath() + "/Logs";
+    return QCoreApplication::applicationDirPath() + "/logs";
 }
 
 QString LogUtil::getLogFilePath()

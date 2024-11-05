@@ -648,7 +648,7 @@ QLabel {
             </font>
            </property>
            <property name="text">
-            <string>RGB:(255,255,255)</string>
+            <string notr="true">RGB:(255,255,255)</string>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -869,7 +869,7 @@ QLabel {
             </font>
            </property>
            <property name="text">
-            <string>0 x 0</string>
+            <string notr="true">0 x 0</string>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -1090,7 +1090,7 @@ QLabel {
             </font>
            </property>
            <property name="text">
-            <string>(0,0)</string>
+            <string notr="true">(0,0)</string>
            </property>
            <property name="scaledContents">
             <bool>true</bool>

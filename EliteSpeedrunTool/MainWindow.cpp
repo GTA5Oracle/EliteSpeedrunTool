@@ -8,6 +8,7 @@
 #include "LogUtil.h"
 #include "RegionSelectorDialog.h"
 #include "RpRecognizeUtil.h"
+#include "RtssUtil.h"
 #include "SettingDialog.h"
 #include "SuspendUtil.h"
 #include "TimeUtil.h"
@@ -566,6 +567,7 @@ void MainWindow::initAct3Headshot()
             if (displayInfoDialogIsShowing && displayInfoDialog) {
                 displayInfoDialog->setAct3Headshot(count);
             }
+            rtssUtil->updateAct3Headshot(count);
         }
         if (!image.isNull()) {
             ui.labAct3HeadshotImg->setPixmap(image);
@@ -687,6 +689,7 @@ void MainWindow::zeroTimer()
     if (displayInfoDialogIsShowing && displayInfoDialog) {
         displayInfoDialog->setTime(0, 0, 0);
     }
+    rtssUtil->updateTimer(0);
     ui.labTimer->setText(DisplayInfoDialog::timePattern.arg("26", "00", "00", "16", "00"));
     HttpServerController::instance()->zeroTimer();
 }
@@ -718,6 +721,7 @@ void MainWindow::updateTimerString(qint64 currentDateTime)
     if (displayInfoDialogIsShowing && displayInfoDialog) {
         displayInfoDialog->setTime(m, s, ms);
     }
+    rtssUtil->updateTimer(deltaTime);
 }
 
 void MainWindow::initTimerStateMachine()

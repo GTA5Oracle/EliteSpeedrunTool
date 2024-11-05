@@ -21,8 +21,9 @@
         <file>image/ic_users.ico</file>
         <file>image/ic_question.ico</file>
         <file>image/ic_plug.ico</file>
-        <file>image/ic_dunce_hat.ico</file>
         <file>image/ic_doctor_watson.ico</file>
         <file>image/ic_user.ico</file>
+        <file>image/ic_file_eye.ico</file>
+        <file>image/ic_monitor_blue_grad.ico</file>
     </qresource>
 </RCC>

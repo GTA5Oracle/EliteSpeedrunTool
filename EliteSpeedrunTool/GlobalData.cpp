@@ -161,6 +161,10 @@ void GlobalData::readSettings()
     settings.endGroup();
     readSubFuncSettingsMap(settings);
 
+    settings.beginGroup("Rtss");
+    setRtssOverlay(settings.value("RtssOverlay", mRtssOverlay).toBool());
+    settings.endGroup();
+
     settings.beginGroup("Firewall");
     setFirewallStartHotkey(settings.value("FirewallStartHotkey", mFirewallStartHotkey).toString());
     setFirewallStopHotkey(settings.value("FirewallStopHotkey", mFirewallStopHotkey).toString());
@@ -240,6 +244,10 @@ void GlobalData::writeSettings()
     settings.endGroup();
     writeSubFuncSettingsMap(settings);
 
+    settings.beginGroup("Rtss");
+    settings.setValue("RtssOverlay", mRtssOverlay);
+    settings.endGroup();
+
     settings.beginGroup("Firewall");
     settings.setValue("FirewallStartHotkey", mFirewallStartHotkey);
     settings.setValue("FirewallStopHotkey", mFirewallStopHotkey);
@@ -316,6 +324,8 @@ void GlobalData::readSubFuncSettingsMap(QSettings& settings)
         defaultValue->setTextShadowBlurRadius(settings.value("TextShadowBlurRadius", defaultValue->textShadowBlurRadius()).toInt());
         defaultValue->setTextShadowOffset(settings.value("TextShadowOffset", defaultValue->textShadowOffset()).value<QPointF>());
         defaultValue->setFontFamily(settings.value("FontFamily", defaultValue->fontFamily()).toString());
+        defaultValue->setRtssDisplay(settings.value("RtssDisplay", defaultValue->rtssDisplay()).toBool());
+        defaultValue->setRtssOsdText(settings.value("RtssOsdText", DisplayInfoSubFunctionUtil::defaultRtssOsdText(i.key())).toString());
         GlobalData::mDisplayInfoSubFunctions[i.key()] = defaultValue;
         settings.endGroup();
     }
@@ -336,6 +346,8 @@ void GlobalData::writeSubFuncSettingsMap(QSettings& settings)
         settings.setValue("TextShadowBlurRadius", currentValue->textShadowBlurRadius());
         settings.setValue("TextShadowOffset", currentValue->textShadowOffset());
         settings.setValue("FontFamily", currentValue->fontFamily());
+        settings.setValue("RtssDisplay", currentValue->rtssDisplay());
+        settings.setValue("RtssOsdText", currentValue->rtssOsdText());
         settings.endGroup();
     }
     settings.endGroup();
@@ -899,4 +911,17 @@ void GlobalData::setAct3HeadshotStopSound(const QString& newAct3HeadshotStopSoun
         return;
     mAct3HeadshotStopSound = newAct3HeadshotStopSound;
     emit act3HeadshotStopSoundChanged();
+}
+
+bool GlobalData::rtssOverlay() const
+{
+    return mRtssOverlay;
+}
+
+void GlobalData::setRtssOverlay(bool newRtssOverlay)
+{
+    if (mRtssOverlay == newRtssOverlay)
+        return;
+    mRtssOverlay = newRtssOverlay;
+    emit rtssOverlayChanged();
 }

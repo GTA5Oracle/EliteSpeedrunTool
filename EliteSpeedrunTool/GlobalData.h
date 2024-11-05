@@ -192,6 +192,9 @@ public:
     QString act3HeadshotStopSound() const;
     void setAct3HeadshotStopSound(const QString& newAct3HeadshotStopSound);
 
+    bool rtssOverlay() const;
+    void setRtssOverlay(bool newRtssOverlay);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -241,18 +244,16 @@ signals:
     void displayInfoToolWindowChanged();
 
     void suspendAndResumeHotkeyChanged();
-
     void suspendAndResumeDurationChanged();
 
     void rpRectChanged();
 
     void act3HeadshotStartHotkeyChanged();
-
     void act3HeadshotStopHotkeyChanged();
-
     void act3HeadshotStartSoundChanged();
-
     void act3HeadshotStopSoundChanged();
+
+    void rtssOverlayChanged();
 
 private:
     bool mMinimizeToTray = false;
@@ -276,6 +277,9 @@ private:
     QPoint mDisplayInfoPos = { 20, 20 };
     QSize mDisplayInfoSize = { 300, 100 };
     QColor mDisplayInfoBackground = Qt::transparent;
+
+    // RTSS
+    bool mRtssOverlay = true;
 
     // 防火墙
     QString mFirewallStartHotkey = "F9";
@@ -383,4 +387,5 @@ private:
     Q_PROPERTY(QString act3HeadshotStopHotkey READ act3HeadshotStopHotkey WRITE setAct3HeadshotStopHotkey NOTIFY act3HeadshotStopHotkeyChanged FINAL)
     Q_PROPERTY(QString act3HeadshotStartSound READ act3HeadshotStartSound WRITE setAct3HeadshotStartSound NOTIFY act3HeadshotStartSoundChanged FINAL)
     Q_PROPERTY(QString act3HeadshotStopSound READ act3HeadshotStopSound WRITE setAct3HeadshotStopSound NOTIFY act3HeadshotStopSoundChanged FINAL)
+    Q_PROPERTY(bool rtssOverlay READ rtssOverlay WRITE setRtssOverlay NOTIFY rtssOverlayChanged FINAL)
 };

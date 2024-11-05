@@ -40,6 +40,7 @@ SettingDialog::SettingDialog(QWidget* parent)
     initDevelopOptionsSettings();
 
     initDisplayInfoSettings();
+    initRtssSettings();
 }
 
 SettingDialog::~SettingDialog()
@@ -448,10 +449,47 @@ void SettingDialog::initDisplayInfoSettings()
         this, [=](int index) {
             currentSubFunctionIndex = index;
             currentSubFunction = ui.cbDisplayInfoFunction->itemData(index).value<DisplayInfoSubFunction>();
-            setDisplayInfoCententSettings(currentSubFunction);
+            setDisplayInfoSubFunctionSettings(currentSubFunction);
         });
-    setDisplayInfoCententSettings(currentSubFunction);
+    setDisplayInfoSubFunctionSettings(currentSubFunction);
     ui.cbDisplayInfoFunction->setCurrentIndex(currentSubFunctionIndex);
+}
+
+void SettingDialog::initRtssSettings()
+{
+    ui.cbRtssOverlay->setChecked(globalData->rtssOverlay());
+    ui.gbRtssSubFunction->setEnabled(globalData->rtssOverlay());
+    connect(ui.cbRtssOverlay, &QCheckBox::stateChanged, this, [=](int state) {
+        globalData->setRtssOverlay(state == Qt::Checked);
+        ui.gbRtssSubFunction->setEnabled(state == Qt::Checked);
+    });
+
+    // 在OSD上展示
+    connect(ui.cbRtssSubFunctionOsd, &QCheckBox::stateChanged, this, [=](int state) {
+        globalData->displayInfoSubFunctions()[currentRtssSubFunction]->setRtssDisplay(state == Qt::Checked);
+    });
+    // OSD文本
+    connect(ui.teRtssSubFunctionOsdText, &QPlainTextEdit::textChanged, this, [=]() {
+        globalData->displayInfoSubFunctions()[currentRtssSubFunction]->setRtssOsdText(ui.teRtssSubFunctionOsdText->toPlainText());
+    });
+    // 重置OSD文本
+    connect(ui.tbRtssSubFunctionResetOsdText, &QAbstractButton::clicked, this, [=]() {
+        ui.teRtssSubFunctionOsdText->setPlainText(DisplayInfoSubFunctionUtil::defaultRtssOsdText(currentRtssSubFunction));
+    });
+
+    // 设置子项
+    for (auto f : globalData->funcs()) {
+        ui.cbRtssSubFunction->addItem(DisplayInfoSubFunctionUtil::toDisplayString(f), f);
+    }
+    ui.cbRtssSubFunction->removeItem(0); // 暂时不显示防火墙
+    connect(ui.cbRtssSubFunction, QOverload<int>::of(&QComboBox::currentIndexChanged),
+        this, [=](int index) {
+            currentRtssSubFunctionIndex = index;
+            currentRtssSubFunction = ui.cbRtssSubFunction->itemData(index).value<DisplayInfoSubFunction>();
+            setRtssSubFunctionSettings(currentRtssSubFunction);
+        });
+    setRtssSubFunctionSettings(currentRtssSubFunction);
+    ui.cbRtssSubFunction->setCurrentIndex(currentRtssSubFunctionIndex);
 }
 
 void SettingDialog::initAct3Headshot()
@@ -608,7 +646,7 @@ void SettingDialog::initDevelopOptionsSettings()
     });
 }
 
-void SettingDialog::setDisplayInfoCententSettings(DisplayInfoSubFunction f)
+void SettingDialog::setDisplayInfoSubFunctionSettings(DisplayInfoSubFunction f)
 {
     auto currentSetting = globalData->displayInfoSubFunctions()[f];
     ui.cbDisplayInfoFuncEnable->setChecked(currentSetting->display());
@@ -631,4 +669,11 @@ void SettingDialog::setDisplayInfoCententSettings(DisplayInfoSubFunction f)
             ui.cbDisplayInfoTextVAlign->setCurrentIndex(i);
         }
     }
+}
+
+void SettingDialog::setRtssSubFunctionSettings(DisplayInfoSubFunction f)
+{
+    auto currentSetting = globalData->displayInfoSubFunctions()[f];
+    ui.cbRtssSubFunctionOsd->setChecked(currentSetting->rtssDisplay());
+    ui.teRtssSubFunctionOsdText->setPlainText(currentSetting->rtssOsdText());
 }

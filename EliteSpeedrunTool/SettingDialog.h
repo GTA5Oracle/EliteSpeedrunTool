@@ -11,25 +11,27 @@ public:
     explicit SettingDialog(QWidget* parent = nullptr);
     ~SettingDialog();
 
-    QString pageName[10] = {
+    QString pageName[11] = {
         tr("常规"),
         tr("信息展示"),
+        tr("RTSS"),
         tr("断网"),
         tr("计时器"),
         tr("卡单"),
-        tr("末日将至爆头识别"),
+        tr("末日将至爆头"),
         tr("结束游戏"),
         tr("社交"),
         tr("语言"),
         tr("开发者选项"),
     };
-    QString pageIcon[10] = {
+    QString pageIcon[11] = {
         "://image/ic_setting.ico",
         "://image/ic_lighton.ico",
+        "://image/ic_monitor_blue_grad.ico",
         "://image/ic_network.ico",
         "://image/ic_clock.ico",
         "://image/ic_user.ico",
-        "://image/ic_user.ico",
+        "://image/ic_file_eye.ico",
         "://image/ic_plug.ico",
         "://image/ic_users.ico",
         "://image/ic_language.ico",
@@ -44,11 +46,16 @@ protected:
     int currentSubFunctionIndex = 0;
     DisplayInfoSubFunction currentSubFunction = DisplayInfoSubFunction::Timer;
 
+    int currentRtssSubFunctionIndex = 0;
+    DisplayInfoSubFunction currentRtssSubFunction = DisplayInfoSubFunction::Timer;
+
     void initFirewallSettings();
 
     void initTimerSettings();
 
     void initDisplayInfoSettings();
+
+    void initRtssSettings();
 
     void initAct3Headshot();
 
@@ -62,7 +69,9 @@ protected:
 
     void initDevelopOptionsSettings();
 
-    void setDisplayInfoCententSettings(DisplayInfoSubFunction f);
+    void setDisplayInfoSubFunctionSettings(DisplayInfoSubFunction f);
+
+    void setRtssSubFunctionSettings(DisplayInfoSubFunction f);
 
 private:
     Ui::SettingDialog ui;

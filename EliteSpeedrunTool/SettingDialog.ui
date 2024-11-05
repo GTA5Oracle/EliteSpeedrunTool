@@ -46,7 +46,7 @@
       <enum>QFrame::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -178,7 +178,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>270</width>
+                <width>429</width>
                 <height>478</height>
                </rect>
               </property>
@@ -244,7 +244,7 @@
                <item>
                 <widget class="QCheckBox" name="cbDisplayInfoFuncEnable">
                  <property name="text">
-                  <string>在屏幕上显示</string>
+                  <string>在屏幕上显示该项</string>
                  </property>
                 </widget>
                </item>
@@ -681,6 +681,149 @@
               </layout>
              </widget>
             </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_2">
+      <layout class="QVBoxLayout" name="verticalLayout_36">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QScrollArea" name="scrollArea_12">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_12">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>447</width>
+            <height>488</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_33">
+           <item>
+            <widget class="QCheckBox" name="cbRtssOverlay">
+             <property name="text">
+              <string>连接到 RTSS</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_45">
+             <property name="text">
+              <string>注意：此功能需要启动 RivaTuner Statistics Server</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="gbRtssSubFunction">
+             <property name="title">
+              <string>子项</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_37">
+              <item>
+               <widget class="QComboBox" name="cbRtssSubFunction">
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                  <bold>true</bold>
+                 </font>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_44">
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>注：该组内的设置仅针对所选的功能</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="cbRtssSubFunctionOsd">
+                <property name="text">
+                 <string>在 RTSS 上显示该项</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="groupBox_19">
+                <property name="title">
+                 <string>OSD 文本格式</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_38">
+                 <item>
+                  <widget class="QPlainTextEdit" name="teRtssSubFunctionOsdText"/>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_5">
+                   <item>
+                    <widget class="QLabel" name="label_43">
+                     <property name="text">
+                      <string>OSD 文本格式在下次更新数据时生效</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="tbRtssSubFunctionResetOsdText">
+                     <property name="text">
+                      <string>重置 OSD 文本格式</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>1</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -1292,6 +1435,18 @@ C:\Program Files (x86)\nn\nn.exe</string>
      </widget>
      <widget class="QWidget" name="page">
       <layout class="QVBoxLayout" name="verticalLayout_16">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
        <item>
         <widget class="QScrollArea" name="scrollArea_4">
          <property name="widgetResizable">
@@ -1302,8 +1457,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>429</width>
-            <height>470</height>
+            <width>180</width>
+            <height>218</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_24">
