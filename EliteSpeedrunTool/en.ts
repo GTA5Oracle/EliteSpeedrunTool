@@ -239,10 +239,13 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
     <message>
         <location line="-131"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_MainWindow.h" line="-8"/>
-        <source>代言人：Adstargod
+        <source>代言人：AdstarGod
 星神断网，好用没烦恼
 😋</source>
-        <translation>Spokesperson: Adstargod
+        <oldsource>代言人：Adstargod
+星神断网，好用没烦恼
+😋</oldsource>
+        <translation>Spokesperson: AdstarGod
 AdstarGod Firewall, easy to use
 😋</translation>
     </message>
@@ -780,7 +783,7 @@ AdstarGod Firewall, easy to use
     <name>SettingDialog</name>
     <message>
         <location filename="SettingDialog.ui" line="+14"/>
-        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1586"/>
+        <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1589"/>
         <source>设置</source>
         <translation>Settings</translation>
     </message>
@@ -791,7 +794,7 @@ AdstarGod Firewall, easy to use
         <translation>windowsvista style does not support dark mode, while other styles support dark mode following the system</translation>
     </message>
     <message>
-        <location line="+772"/>
+        <location line="+774"/>
         <location line="+289"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+33"/>
         <location line="+24"/>
@@ -870,7 +873,7 @@ AdstarGod Firewall, easy to use
         <translation>Refresh data interval</translation>
     </message>
     <message>
-        <location line="-721"/>
+        <location line="-723"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-37"/>
         <source>窗口</source>
         <translation>Window</translation>
@@ -958,7 +961,7 @@ AdstarGod Firewall, easy to use
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>在屏幕上显示该项</source>
         <oldsource>在屏幕上显示</oldsource>
-        <translation type="unfinished">Display on screen</translation>
+        <translation>Display this item on screen</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -988,48 +991,48 @@ AdstarGod Firewall, easy to use
         <location line="+285"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+13"/>
         <source>连接到 RTSS</source>
-        <translation type="unfinished"></translation>
+        <translation>Connect to RTSS</translation>
     </message>
     <message>
         <location line="+7"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>注意：此功能需要启动 RivaTuner Statistics Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Note: This feature requires RivaTuner Statistics Server</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+10"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>子项</source>
-        <translation type="unfinished"></translation>
+        <translation>Sub-item</translation>
     </message>
     <message>
         <location line="+21"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>注：该组内的设置仅针对所选的功能</source>
-        <translation type="unfinished"></translation>
+        <translation>Note: The settings in this group apply only to the selected item</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+10"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>在 RTSS 上显示该项</source>
         <oldsource>在 RTSS 上显示</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Display this item on RTSS</translation>
     </message>
     <message>
         <location line="+7"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>OSD 文本格式</source>
         <oldsource>OSD 文本</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>OSD text format</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+90"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+3"/>
         <source>断网热键</source>
         <translation>Firewall hotkey</translation>
     </message>
     <message>
-        <location line="-520"/>
+        <location line="-522"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="-24"/>
         <source>模糊半径</source>
         <translation>Blur radius</translation>
@@ -1059,17 +1062,17 @@ AdstarGod Firewall, easy to use
         <translation>Tool window (WS_EX_TOOLWINDOW)</translation>
     </message>
     <message>
-        <location line="+251"/>
+        <location line="+263"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+15"/>
         <source>OSD 文本格式在下次更新数据时生效</source>
         <oldsource>OSD 文本格式在下次更新时生效</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>OSD text format will take effect with the next data update</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+10"/>
         <location filename="../build-MinSizeRel/EliteSpeedrunTool_autogen/include/ui_SettingDialog.h" line="+1"/>
         <source>重置 OSD 文本格式</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset OSD text format</translation>
     </message>
     <message>
         <location line="+136"/>
@@ -1316,12 +1319,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Terminate game</translation>
     </message>
     <message>
-        <location line="-5"/>
-        <source>RTSS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="-2"/>
         <source>卡单</source>
         <translation>Suspend game</translation>
     </message>

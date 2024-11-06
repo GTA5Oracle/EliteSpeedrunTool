@@ -14,7 +14,7 @@ public:
     QString pageName[11] = {
         tr("常规"),
         tr("信息展示"),
-        tr("RTSS"),
+        "RTSS",
         tr("断网"),
         tr("计时器"),
         tr("卡单"),

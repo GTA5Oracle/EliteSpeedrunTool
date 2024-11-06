@@ -47,10 +47,10 @@ QString defaultRtssOsdText(DisplayInfoSubFunction f)
         return "<C0=FFFF00><C0>%1<C>";
         break;
     case Timer:
-        return "<C0=FFFF00><S0=-70><C0>%1:%2.<S0>%3<S><C>";
+        return "<C0=FFFF00><S0=170><S1=-100><C0><S0>%1:%2.<S><S1>%3<S><C>";
         break;
     case Act3Headshot:
-        return "<C0=FFFF00><C0>%1<C>";
+        return "<C0=FFFF00><S0=170><C0><S0>%1<S><C>";
         break;
     default:
         return "%1";

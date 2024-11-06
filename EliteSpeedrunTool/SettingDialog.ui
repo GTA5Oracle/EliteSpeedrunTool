@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>569</width>
-    <height>512</height>
+    <width>619</width>
+    <height>516</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,7 +73,7 @@
             <x>0</x>
             <y>0</y>
             <width>151</width>
-            <height>210</height>
+            <height>217</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -178,8 +178,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>429</width>
-                <height>478</height>
+                <width>270</width>
+                <height>485</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -520,7 +520,7 @@
                 <x>0</x>
                 <y>0</y>
                 <width>251</width>
-                <height>255</height>
+                <height>262</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -712,8 +712,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>447</width>
-            <height>488</height>
+            <width>497</width>
+            <height>492</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -728,6 +728,9 @@
             <widget class="QLabel" name="label_45">
              <property name="text">
               <string>注意：此功能需要启动 RivaTuner Statistics Server</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -757,6 +760,9 @@
                 <property name="text">
                  <string>注：该组内的设置仅针对所选的功能</string>
                 </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
@@ -779,23 +785,19 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_5">
                    <item>
                     <widget class="QLabel" name="label_43">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
                       <string>OSD 文本格式在下次更新数据时生效</string>
                      </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
                     </widget>
-                   </item>
-                   <item>
-                    <spacer name="horizontalSpacer">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>40</width>
-                       <height>20</height>
-                      </size>
-                     </property>
-                    </spacer>
                    </item>
                    <item>
                     <widget class="QToolButton" name="tbRtssSubFunctionResetOsdText">
@@ -855,8 +857,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>204</width>
-            <height>723</height>
+            <width>203</width>
+            <height>742</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -1138,8 +1140,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>178</width>
-            <height>518</height>
+            <width>177</width>
+            <height>530</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -1337,7 +1339,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
             <x>0</x>
             <y>0</y>
             <width>130</width>
-            <height>215</height>
+            <height>218</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -1457,7 +1459,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>180</width>
+            <width>179</width>
             <height>218</height>
            </rect>
           </property>
@@ -1609,7 +1611,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>125</width>
+            <width>124</width>
             <height>89</height>
            </rect>
           </property>
@@ -1685,7 +1687,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
             <x>0</x>
             <y>0</y>
             <width>207</width>
-            <height>143</height>
+            <height>146</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -1774,7 +1776,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
             <x>0</x>
             <y>0</y>
             <width>98</width>
-            <height>84</height>
+            <height>87</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1835,7 +1837,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
             <x>0</x>
             <y>0</y>
             <width>98</width>
-            <height>45</height>
+            <height>46</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_34">

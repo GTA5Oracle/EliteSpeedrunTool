@@ -57,7 +57,7 @@
              <x>0</x>
              <y>0</y>
              <width>396</width>
-             <height>290</height>
+             <height>298</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -131,7 +131,7 @@
                     </font>
                    </property>
                    <property name="text">
-                    <string>代言人：Adstargod
+                    <string>代言人：AdstarGod
 星神断网，好用没烦恼
 😋</string>
                    </property>
@@ -713,7 +713,7 @@
      <x>0</x>
      <y>0</y>
      <width>428</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">
