@@ -1,6 +1,7 @@
 #include "SettingDialog.h"
 #include "GlobalData.h"
 #include "LanguageUtil.h"
+#include "NetworkAdapterUtil.h"
 #include <QColorDialog>
 #include <QDesktopServices>
 #include <QFileDialog>
@@ -31,6 +32,7 @@ SettingDialog::SettingDialog(QWidget* parent)
 
     initGeneralSettings();
     initFirewallSettings();
+    initNetworkAdaptersSettings();
     initTimerSettings();
     initAct3Headshot();
     initSuspendProcess();
@@ -73,97 +75,91 @@ void SettingDialog::initGeneralSettings()
     });
 }
 
+void SettingDialog::initSoundWidgets(
+    const QString& soundPath,
+    QLineEdit* soundPathEdit,
+    QAbstractButton* playButton,
+    QAbstractButton* selectFileButton,
+    std::function<void(const QString&)> onUpdateSoundPath)
+{
+    soundPathEdit->setText(soundPath);
+    connect(selectFileButton, &QAbstractButton::clicked, this, [=]() {
+        QString fileName = getSoundFile(soundPath);
+        if (!fileName.isEmpty()) {
+            soundPathEdit->setText(fileName);
+            onUpdateSoundPath(fileName);
+        }
+    });
+    connect(soundPathEdit, &QLineEdit::textChanged, this, [onUpdateSoundPath](const QString& text) {
+        onUpdateSoundPath(text);
+    });
+    connect(playButton, &QAbstractButton::clicked, this, [soundPathEdit]() {
+        PlaySound(soundPathEdit->text().toStdWString().c_str(), nullptr, SND_FILENAME | SND_ASYNC);
+    });
+}
+
+void SettingDialog::initHotkeyWidgets(
+    const QString& hotkey,
+    QKeySequenceEdit* keySequenceEdit,
+    QAbstractButton* clearButton,
+    std::function<void(const QString&)> onUpdateHotkey)
+{
+    keySequenceEdit->setKeySequence(QKeySequence(hotkey));
+    connect(keySequenceEdit, &QKeySequenceEdit::editingFinished, this, [=]() {
+        if (keySequenceEdit->keySequence().count() > 1) {
+            QKeyCombination value = keySequenceEdit->keySequence()[0];
+            QKeySequence shortcut(value);
+            keySequenceEdit->setKeySequence(shortcut);
+            onUpdateHotkey(shortcut.toString());
+        } else {
+            onUpdateHotkey(keySequenceEdit->keySequence().toString());
+        }
+    });
+    connect(clearButton, &QAbstractButton::clicked, this, [=]() {
+        keySequenceEdit->clear();
+        onUpdateHotkey("");
+    });
+}
+
 QString SettingDialog::getSoundFile(QString dir)
 {
-    return QFileDialog::getOpenFileName(this, tr("选择文件"), dir, tr("WAV 文件 (*.wav)"));
+    return QFileDialog::getOpenFileName(this, tr("选择音频文件"), dir, tr("WAV 文件 (*.wav)"));
 }
 
 // 防火墙
 void SettingDialog::initFirewallSettings()
 {
-    // 热键
-    ui.keySeqStartFirewall->setKeySequence(QKeySequence(globalData->firewallStartHotkey()));
-    connect(ui.keySeqStartFirewall, &QKeySequenceEdit::editingFinished, this, [=]() {
-        if (ui.keySeqStartFirewall->keySequence().count() > 1) {
-            QKeyCombination value = ui.keySeqStartFirewall->keySequence()[0];
-            QKeySequence shortcut(value);
-            ui.keySeqStartFirewall->setKeySequence(shortcut);
-            globalData->setFirewallStartHotkey(shortcut.toString());
-        } else {
-            globalData->setFirewallStartHotkey(ui.keySeqStartFirewall->keySequence().toString());
-        }
-    });
-
-    connect(ui.tbClearStartFirewallHotkeyEdit, &QAbstractButton::clicked, this, [=]() {
-        ui.keySeqStartFirewall->clear();
-        globalData->setFirewallStartHotkey("");
-    });
-
-    ui.keySeqStopFirewall->setKeySequence(QKeySequence(globalData->firewallStopHotkey()));
-    connect(ui.keySeqStopFirewall, &QKeySequenceEdit::editingFinished, this, [=]() {
-        if (ui.keySeqStopFirewall->keySequence().count() > 1) {
-            QKeyCombination value = ui.keySeqStopFirewall->keySequence()[0];
-            QKeySequence shortcut(value);
-            ui.keySeqStopFirewall->setKeySequence(shortcut);
-            globalData->setFirewallStopHotkey(shortcut.toString());
-        } else {
-            globalData->setFirewallStopHotkey(ui.keySeqStopFirewall->keySequence().toString());
-        }
-    });
-
-    connect(ui.tbClearStopFirewallHotkeyEdit, &QAbstractButton::clicked, this, [=]() {
-        ui.keySeqStopFirewall->clear();
-        globalData->setFirewallStopHotkey("");
-    });
+    // 快捷键
+    initHotkeyWidgets(
+        globalData->firewallStartHotkey(),
+        ui.keySeqStartFirewall,
+        ui.tbClearStartFirewallHotkeyEdit,
+        [](const QString& hotkey) { globalData->setFirewallStartHotkey(hotkey); });
+    initHotkeyWidgets(
+        globalData->firewallStopHotkey(),
+        ui.keySeqStopFirewall,
+        ui.tbClearStopFirewallHotkeyEdit,
+        [](const QString& hotkey) { globalData->setFirewallStopHotkey(hotkey); });
 
     // 音效
-    ui.leFirewallStartSoundPath->setText(globalData->firewallStartSound());
-    connect(ui.tbFirewallSelectStartSound, &QAbstractButton::clicked, this, [=]() {
-        QString fileName = getSoundFile(globalData->firewallStartSound());
-        if (!fileName.isEmpty()) {
-            ui.leFirewallStartSoundPath->setText(fileName);
-            globalData->setFirewallStartSound(fileName);
-        }
-    });
-    connect(ui.leFirewallStartSoundPath, &QLineEdit::textChanged, this, [=](const QString& text) {
-        globalData->setFirewallStartSound(text);
-    });
-    connect(ui.tbFirewallPlayStartSound, &QAbstractButton::clicked, this, [=]() {
-        PlaySound(globalData->firewallStartSound().toStdWString().c_str(),
-            nullptr, SND_FILENAME | SND_ASYNC);
-    });
-
-    ui.leFirewallStopSoundPath->setText(globalData->firewallStopSound());
-    connect(ui.tbFirewallSelectStopSound, &QAbstractButton::clicked, this, [=]() {
-        QString fileName = getSoundFile(globalData->firewallStopSound());
-        if (!fileName.isEmpty()) {
-            ui.leFirewallStopSoundPath->setText(fileName);
-            globalData->setFirewallStopSound(fileName);
-        }
-    });
-    connect(ui.leFirewallStopSoundPath, &QLineEdit::textChanged, this, [=](const QString& text) {
-        globalData->setFirewallStopSound(text);
-    });
-    connect(ui.tbFirewallPlayStopSound, &QAbstractButton::clicked, this, [=]() {
-        PlaySound(globalData->firewallStopSound().toStdWString().c_str(),
-            nullptr, SND_FILENAME | SND_ASYNC);
-    });
-
-    ui.leFirewallErrorSoundPath->setText(globalData->firewallErrorSound());
-    connect(ui.tbFirewallSelectErrorSound, &QAbstractButton::clicked, this, [=]() {
-        QString fileName = getSoundFile(globalData->firewallErrorSound());
-        if (!fileName.isEmpty()) {
-            ui.leFirewallErrorSoundPath->setText(fileName);
-            globalData->setFirewallErrorSound(fileName);
-        }
-    });
-    connect(ui.leFirewallErrorSoundPath, &QLineEdit::textChanged, this, [=](const QString& text) {
-        globalData->setFirewallErrorSound(text);
-    });
-    connect(ui.tbFirewallPlayErrorSound, &QAbstractButton::clicked, this, [=]() {
-        PlaySound(globalData->firewallErrorSound().toStdWString().c_str(),
-            nullptr, SND_FILENAME | SND_ASYNC);
-    });
+    initSoundWidgets(
+        globalData->firewallStartSound(),
+        ui.leFirewallStartSoundPath,
+        ui.tbFirewallPlayStartSound,
+        ui.tbFirewallSelectStartSound,
+        [](const QString& fileName) { globalData->setFirewallStartSound(fileName); });
+    initSoundWidgets(
+        globalData->firewallStopSound(),
+        ui.leFirewallStopSoundPath,
+        ui.tbFirewallPlayStopSound,
+        ui.tbFirewallSelectStopSound,
+        [](const QString& fileName) { globalData->setFirewallStopSound(fileName); });
+    initSoundWidgets(
+        globalData->firewallErrorSound(),
+        ui.leFirewallErrorSoundPath,
+        ui.tbFirewallPlayErrorSound,
+        ui.tbFirewallSelectErrorSound,
+        [](const QString& fileName) { globalData->setFirewallErrorSound(fileName); });
 
     // 防火墙针对的exe程序
     ui.leFirewallAppPath->setText(globalData->firewallAppPath());
@@ -202,59 +198,78 @@ void SettingDialog::initFirewallSettings()
     }
 }
 
+void SettingDialog::initNetworkAdaptersSettings()
+{
+    // 选择网络适配器
+    auto adapters = networkAdapterUtil->networkAdapters();
+    for (const auto& adapter : adapters) {
+        auto item = new QListWidgetItem(adapter.name);
+        item->setData(Qt::UserRole, adapter.deviceId);
+        item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+        item->setCheckState(globalData->selectedNetworkAdapters().contains(adapter.deviceId) ? Qt::Checked : Qt::Unchecked);
+        ui.lwNetworkAdapters->addItem(item);
+    }
+    connect(ui.lwNetworkAdapters, &QListWidget::itemChanged, this, [=](QListWidgetItem* item) {
+        QList<QString> adapters;
+        adapters.append(globalData->selectedNetworkAdapters());
+        auto adapterName = item->data(Qt::UserRole).toString();
+        if (item->checkState() == Qt::Checked) {
+            if (!adapters.contains(adapterName)) {
+                adapters.append(adapterName);
+            }
+        } else {
+            if (adapters.contains(adapterName)) {
+                adapters.removeAll(adapterName);
+            }
+        }
+        globalData->setSelectedNetworkAdapters(adapters);
+    });
+
+    // 快捷键
+    initHotkeyWidgets(
+        globalData->networkAdaptersDisableHotkey(),
+        ui.keySeqDisableNetworkAdapter,
+        ui.tbClearDisableNetworkAdapterHotkeyEdit,
+        [](const QString& hotkey) { globalData->setNetworkAdaptersDisableHotkey(hotkey); });
+    initHotkeyWidgets(
+        globalData->networkAdaptersEnableHotkey(),
+        ui.keySeqEnableNetworkAdapter,
+        ui.tbClearEnableNetworkAdapteHotkeyEdit,
+        [](const QString& hotkey) { globalData->setNetworkAdaptersEnableHotkey(hotkey); });
+
+    // 音效
+    initSoundWidgets(
+        globalData->networkAdaptersDisableSound(),
+        ui.leDisableNetworkAdapterSoundPath,
+        ui.tbPlayDisableNetworkAdapterSound,
+        ui.tbSelectDisableNetworkAdapterSound,
+        [](const QString& fileName) { globalData->setNetworkAdaptersDisableSound(fileName); });
+    initSoundWidgets(
+        globalData->networkAdaptersEnableSound(),
+        ui.leEnableNetworkAdapterSoundPath,
+        ui.tbPlayEnableNetworkAdapterSound,
+        ui.tbSelectEnableNetworkAdapterSound,
+        [](const QString& fileName) { globalData->setNetworkAdaptersEnableSound(fileName); });
+}
+
 // 计时器设置
 void SettingDialog::initTimerSettings()
 {
-    ui.keySeqStartTimer->setKeySequence(QKeySequence(globalData->timerStartHotkey()));
-    connect(ui.keySeqStartTimer, &QKeySequenceEdit::editingFinished, this, [=]() {
-        if (ui.keySeqStartTimer->keySequence().count() > 1) {
-            QKeyCombination value = ui.keySeqStartTimer->keySequence()[0];
-            QKeySequence shortcut(value);
-            ui.keySeqStartTimer->setKeySequence(shortcut);
-            globalData->setTimerStartHotkey(shortcut.toString());
-        } else {
-            globalData->setTimerStartHotkey(ui.keySeqStartTimer->keySequence().toString());
-        }
-    });
-
-    connect(ui.tbClearStartTimerHotkeyEdit, &QAbstractButton::clicked, this, [=]() {
-        ui.keySeqStartTimer->clear();
-        globalData->setTimerStartHotkey("");
-    });
-
-    ui.keySeqPauseTimer->setKeySequence(QKeySequence(globalData->timerPauseHotkey()));
-    connect(ui.keySeqPauseTimer, &QKeySequenceEdit::editingFinished, this, [=]() {
-        if (ui.keySeqPauseTimer->keySequence().count() > 1) {
-            QKeyCombination value = ui.keySeqPauseTimer->keySequence()[0];
-            QKeySequence shortcut(value);
-            ui.keySeqPauseTimer->setKeySequence(shortcut);
-            globalData->setTimerPauseHotkey(shortcut.toString());
-        } else {
-            globalData->setTimerPauseHotkey(ui.keySeqPauseTimer->keySequence().toString());
-        }
-    });
-
-    connect(ui.tbClearPauseTimerHotkeyEdit, &QAbstractButton::clicked, this, [=]() {
-        ui.keySeqPauseTimer->clear();
-        globalData->setTimerPauseHotkey("");
-    });
-
-    ui.keySeqStopTimer->setKeySequence(QKeySequence(globalData->timerStopHotkey()));
-    connect(ui.keySeqStopTimer, &QKeySequenceEdit::editingFinished, this, [=]() {
-        if (ui.keySeqStopTimer->keySequence().count() > 1) {
-            QKeyCombination value = ui.keySeqStopTimer->keySequence()[0];
-            QKeySequence shortcut(value);
-            ui.keySeqStopTimer->setKeySequence(shortcut);
-            globalData->setTimerStopHotkey(shortcut.toString());
-        } else {
-            globalData->setTimerStopHotkey(ui.keySeqStopTimer->keySequence().toString());
-        }
-    });
-
-    connect(ui.tbClearStopTimerHotkeyEdit, &QAbstractButton::clicked, this, [=]() {
-        ui.keySeqStopTimer->clear();
-        globalData->setTimerStopHotkey("");
-    });
+    initHotkeyWidgets(
+        globalData->timerStartHotkey(),
+        ui.keySeqStartTimer,
+        ui.tbClearStartTimerHotkeyEdit,
+        [](const QString& hotkey) { globalData->setTimerStartHotkey(hotkey); });
+    initHotkeyWidgets(
+        globalData->timerPauseHotkey(),
+        ui.keySeqPauseTimer,
+        ui.tbClearPauseTimerHotkeyEdit,
+        [](const QString& hotkey) { globalData->setTimerPauseHotkey(hotkey); });
+    initHotkeyWidgets(
+        globalData->timerStopHotkey(),
+        ui.keySeqStopTimer,
+        ui.tbClearStopTimerHotkeyEdit,
+        [](const QString& hotkey) { globalData->setTimerStopHotkey(hotkey); });
 
     // 手动计时刷新间隔
     ui.sbTimerUpdateInterval->setValue(globalData->timerUpdateInterval());
@@ -494,92 +509,39 @@ void SettingDialog::initRtssSettings()
 
 void SettingDialog::initAct3Headshot()
 {
-    ui.keySeqAct3HeadshotStart->setKeySequence(QKeySequence(globalData->act3HeadshotStartHotkey()));
-    connect(ui.keySeqAct3HeadshotStart, &QKeySequenceEdit::editingFinished, this, [=]() {
-        if (ui.keySeqAct3HeadshotStart->keySequence().count() > 1) {
-            QKeyCombination value = ui.keySeqAct3HeadshotStart->keySequence()[0];
-            QKeySequence shortcut(value);
-            ui.keySeqAct3HeadshotStart->setKeySequence(shortcut);
-            globalData->setAct3HeadshotStartHotkey(shortcut.toString());
-        } else {
-            globalData->setAct3HeadshotStartHotkey(ui.keySeqAct3HeadshotStart->keySequence().toString());
-        }
-    });
-
-    connect(ui.tbClearAct3HeadshotStart, &QAbstractButton::clicked, this, [=]() {
-        ui.keySeqAct3HeadshotStart->clear();
-        globalData->setAct3HeadshotStartHotkey("");
-    });
-
-    ui.keySeqAct3HeadshotStop->setKeySequence(QKeySequence(globalData->act3HeadshotStopHotkey()));
-    connect(ui.keySeqAct3HeadshotStop, &QKeySequenceEdit::editingFinished, this, [=]() {
-        if (ui.keySeqAct3HeadshotStop->keySequence().count() > 1) {
-            QKeyCombination value = ui.keySeqAct3HeadshotStop->keySequence()[0];
-            QKeySequence shortcut(value);
-            ui.keySeqAct3HeadshotStop->setKeySequence(shortcut);
-            globalData->setAct3HeadshotStopHotkey(shortcut.toString());
-        } else {
-            globalData->setAct3HeadshotStopHotkey(ui.keySeqAct3HeadshotStop->keySequence().toString());
-        }
-    });
-
-    connect(ui.tbClearAct3HeadshotStop, &QAbstractButton::clicked, this, [=]() {
-        ui.keySeqAct3HeadshotStop->clear();
-        globalData->setAct3HeadshotStopHotkey("");
-    });
+    initHotkeyWidgets(
+        globalData->act3HeadshotStartHotkey(),
+        ui.keySeqAct3HeadshotStart,
+        ui.tbClearAct3HeadshotStart,
+        [](const QString& hotkey) { globalData->setAct3HeadshotStartHotkey(hotkey); });
+    initHotkeyWidgets(
+        globalData->act3HeadshotStopHotkey(),
+        ui.keySeqAct3HeadshotStop,
+        ui.tbClearAct3HeadshotStop,
+        [](const QString& hotkey) { globalData->setAct3HeadshotStopHotkey(hotkey); });
 
     // 音效
-    ui.leAct3HeadshotStartSoundPath->setText(globalData->act3HeadshotStartSound());
-    connect(ui.tbAct3HeadshotStartSound, &QAbstractButton::clicked, this, [=]() {
-        QString fileName = getSoundFile(globalData->act3HeadshotStartSound());
-        if (!fileName.isEmpty()) {
-            ui.leAct3HeadshotStartSoundPath->setText(fileName);
-            globalData->setAct3HeadshotStartSound(fileName);
-        }
-    });
-    connect(ui.leAct3HeadshotStartSoundPath, &QLineEdit::textChanged, this, [=](const QString& text) {
-        globalData->setAct3HeadshotStartSound(text);
-    });
-    connect(ui.tbAct3HeadshotPlayStartSound, &QAbstractButton::clicked, this, [=]() {
-        PlaySound(globalData->act3HeadshotStartSound().toStdWString().c_str(),
-            nullptr, SND_FILENAME | SND_ASYNC);
-    });
-
-    ui.leAct3HeadshotStopSoundPath->setText(globalData->act3HeadshotStopSound());
-    connect(ui.tbAct3HeadshotStopSound, &QAbstractButton::clicked, this, [=]() {
-        QString fileName = getSoundFile(globalData->act3HeadshotStopSound());
-        if (!fileName.isEmpty()) {
-            ui.leAct3HeadshotStopSoundPath->setText(fileName);
-            globalData->setAct3HeadshotStopSound(fileName);
-        }
-    });
-    connect(ui.leAct3HeadshotStopSoundPath, &QLineEdit::textChanged, this, [=](const QString& text) {
-        globalData->setAct3HeadshotStopSound(text);
-    });
-    connect(ui.tbAct3HeadshotPlayStopSound, &QAbstractButton::clicked, this, [=]() {
-        PlaySound(globalData->act3HeadshotStopSound().toStdWString().c_str(),
-            nullptr, SND_FILENAME | SND_ASYNC);
-    });
+    initSoundWidgets(
+        globalData->act3HeadshotStartSound(),
+        ui.leAct3HeadshotStartSoundPath,
+        ui.tbAct3HeadshotPlayStartSound,
+        ui.tbAct3HeadshotStartSound,
+        [](const QString& fileName) { globalData->setAct3HeadshotStartSound(fileName); });
+    initSoundWidgets(
+        globalData->act3HeadshotStopSound(),
+        ui.leAct3HeadshotStopSoundPath,
+        ui.tbAct3HeadshotPlayStopSound,
+        ui.tbAct3HeadshotStopSound,
+        [](const QString& fileName) { globalData->setAct3HeadshotStopSound(fileName); });
 }
 
 void SettingDialog::initSuspendProcess()
 {
-    ui.keySeqSuspendProcess->setKeySequence(QKeySequence(globalData->suspendAndResumeHotkey()));
-    connect(ui.keySeqSuspendProcess, &QKeySequenceEdit::editingFinished, this, [=]() {
-        if (ui.keySeqSuspendProcess->keySequence().count() > 1) {
-            QKeyCombination value = ui.keySeqSuspendProcess->keySequence()[0];
-            QKeySequence shortcut(value);
-            ui.keySeqSuspendProcess->setKeySequence(shortcut);
-            globalData->setSuspendAndResumeHotkey(shortcut.toString());
-        } else {
-            globalData->setSuspendAndResumeHotkey(ui.keySeqSuspendProcess->keySequence().toString());
-        }
-    });
-
-    connect(ui.tbClearSuspendProcessEdit, &QAbstractButton::clicked, this, [=]() {
-        ui.keySeqSuspendProcess->clear();
-        globalData->setSuspendAndResumeHotkey("");
-    });
+    initHotkeyWidgets(
+        globalData->suspendAndResumeHotkey(),
+        ui.keySeqSuspendProcess,
+        ui.tbClearSuspendProcessEdit,
+        [](const QString& hotkey) { globalData->setSuspendAndResumeHotkey(hotkey); });
 
     ui.sbSuspendProcessDuration->setValue(globalData->suspendAndResumeDuration());
     connect(ui.sbSuspendProcessDuration, &QSpinBox::valueChanged, this, [=](int value) {
@@ -589,22 +551,11 @@ void SettingDialog::initSuspendProcess()
 
 void SettingDialog::initCloseGameImmediatelySettings()
 {
-    ui.keySeqCloseGameImmediately->setKeySequence(QKeySequence(globalData->closeGameImmediatelyHotkey()));
-    connect(ui.keySeqCloseGameImmediately, &QKeySequenceEdit::editingFinished, this, [=]() {
-        if (ui.keySeqCloseGameImmediately->keySequence().count() > 1) {
-            QKeyCombination value = ui.keySeqCloseGameImmediately->keySequence()[0];
-            QKeySequence shortcut(value);
-            ui.keySeqCloseGameImmediately->setKeySequence(shortcut);
-            globalData->setCloseGameImmediatelyHotkey(shortcut.toString());
-        } else {
-            globalData->setCloseGameImmediatelyHotkey(ui.keySeqCloseGameImmediately->keySequence().toString());
-        }
-    });
-
-    connect(ui.tbClearCloseGameImmediatelyHotkeyEdit, &QAbstractButton::clicked, this, [=]() {
-        ui.keySeqCloseGameImmediately->clear();
-        globalData->setCloseGameImmediatelyHotkey("");
-    });
+    initHotkeyWidgets(
+        globalData->closeGameImmediatelyHotkey(),
+        ui.keySeqCloseGameImmediately,
+        ui.tbClearCloseGameImmediatelyHotkeyEdit,
+        [](const QString& hotkey) { globalData->setCloseGameImmediatelyHotkey(hotkey); });
 }
 
 void SettingDialog::initSocialSettings()

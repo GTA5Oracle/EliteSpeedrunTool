@@ -41,6 +41,7 @@ set(PROJECT_SOURCES
         NumberUtil.h NumberUtil.cpp
         RpRecognizeUtil.h RpRecognizeUtil.cpp
         RtssUtil.h RtssUtil.cpp
+        NetworkAdapterUtil.h NetworkAdapterUtil.cpp
         resource.qrc
 )
 
@@ -102,17 +103,13 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../QHotkey ${CMAKE_CURRENT_BINARY_D
 include_directories(../QHotkey)
 target_link_libraries(EliteSpeedrunTool PRIVATE QHotkey)
 
-if (WIN32)
-    target_link_libraries(EliteSpeedrunTool PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/lib/WinMM.Lib
-    )
-endif()
+target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/WinMM.Lib)
+target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/setupapi.lib)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../DiscordGameSDK ${CMAKE_CURRENT_BINARY_DIR}/DiscordGameSDK)
 include_directories(../DiscordGameSDK)
 target_link_libraries(EliteSpeedrunTool PRIVATE DiscordGameSDK)
 
-set(RTSS_INDLUDE_PATH "C:/Program Files (x86)/RivaTuner Statistics Server/SDK/Include")
 target_include_directories(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../RTSS)
 
 # set(OpenCV_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../OpenCV)

@@ -28,6 +28,19 @@ protected:
 
     void checkUpdate();
 
+    void registerHotkey(
+        const QString& hotkeyString,
+        QHotkey*& hotkey,
+        std::function<void()> onActivated,
+        std::function<void()> registerFailed);
+
+    void registerHotkeyPair(
+        const QString& firstString, const QString& secondString,
+        QHotkey*& firstHotkey, QHotkey*& secondHotkey,
+        std::function<void()> toggle, std::function<void(bool)> check,
+        std::function<void(bool isFirst)> registerFailed,
+        bool canBeSame);
+
     void removeAllHotkeys();
 
     void removeHotkey(QHotkey*& h);
@@ -37,6 +50,7 @@ protected:
     void initMenu();
 
     void initFirewall();
+    void initNetworkAdapters();
 
     void initAct3Headshot();
 
@@ -92,6 +106,9 @@ private:
     QHotkey* startFirewallHotkey = nullptr;
     QHotkey* stopFirewallHotkey = nullptr;
 
+    QHotkey* disableNetworkAdapterHotkey = nullptr;
+    QHotkey* enableNetworkAdapterHotkey = nullptr;
+
     QHotkey* startTimerHotkey = nullptr;
     QHotkey* pauseTimerHotkey = nullptr;
     QHotkey* stopTimerHotkey = nullptr;
@@ -103,9 +120,9 @@ private:
 
     QHotkey* closeGameImmediatelyHotkey = nullptr;
 
-    QLabel* labCurrentHotkey;
-
-    QLabel* labState;
+    QLabel labCurrentHotkey = QLabel(this);
+    QLabel labFirewallState = QLabel(this);
+    QLabel labNetworkAdaptersState = QLabel(this);
 
     QTimer* topMostTimer = nullptr;
 

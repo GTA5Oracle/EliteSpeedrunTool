@@ -41,6 +41,19 @@ public:
 protected:
     void initGeneralSettings();
 
+    void initSoundWidgets(
+        const QString& soundPath,
+        QLineEdit* soundPathEdit,
+        QAbstractButton* playButton,
+        QAbstractButton* selectFileButton,
+        std::function<void(const QString&)> onUpdateSoundPath);
+
+    void initHotkeyWidgets(
+        const QString& hotkey,
+        QKeySequenceEdit* keySequenceEdit,
+        QAbstractButton* clearButton,
+        std::function<void(const QString&)> onUpdateHotkey);
+
     QString getSoundFile(QString dir = QString());
 
     int currentSubFunctionIndex = 0;
@@ -50,6 +63,7 @@ protected:
     DisplayInfoSubFunction currentRtssSubFunction = DisplayInfoSubFunction::Timer;
 
     void initFirewallSettings();
+    void initNetworkAdaptersSettings();
 
     void initTimerSettings();
 

@@ -46,7 +46,7 @@
       <enum>QFrame::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -72,8 +72,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>151</width>
-            <height>217</height>
+            <width>497</width>
+            <height>492</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -178,8 +178,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>270</width>
-                <height>485</height>
+                <width>479</width>
+                <height>478</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -519,8 +519,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>251</width>
-                <height>262</height>
+                <width>493</width>
+                <height>463</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -848,219 +848,184 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QScrollArea" name="scrollArea_3">
-         <property name="widgetResizable">
-          <bool>true</bool>
+        <widget class="QTabWidget" name="tabWidget_3">
+         <property name="currentIndex">
+          <number>0</number>
          </property>
-         <widget class="QWidget" name="scrollAreaWidgetContents_3">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>203</width>
-            <height>742</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_14">
+         <widget class="QWidget" name="tab_3">
+          <attribute name="title">
+           <string>防火墙规则</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_39">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QGroupBox" name="groupBox">
-             <property name="title">
-              <string>断网热键</string>
+            <widget class="QScrollArea" name="scrollArea_3">
+             <property name="widgetResizable">
+              <bool>true</bool>
              </property>
-             <layout class="QGridLayout" name="gridLayout">
-              <item row="2" column="1">
-               <widget class="QKeySequenceEdit" name="keySeqStopFirewall"/>
-              </item>
-              <item row="0" column="1">
-               <widget class="QKeySequenceEdit" name="keySeqStartFirewall"/>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_15">
-                <property name="text">
-                 <string>启动</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QToolButton" name="tbClearStartFirewallHotkeyEdit">
-                <property name="icon">
-                 <iconset resource="resource.qrc">
-                  <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_16">
-                <property name="text">
-                 <string>停止</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="2">
-               <widget class="QToolButton" name="tbClearStopFirewallHotkeyEdit">
-                <property name="icon">
-                 <iconset resource="resource.qrc">
-                  <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QGroupBox" name="groupBox_3">
-             <property name="title">
-              <string>音效</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_3">
-              <item row="2" column="2">
-               <widget class="QToolButton" name="tbFirewallPlayStopSound">
-                <property name="icon">
-                 <iconset resource="resource.qrc">
-                  <normaloff>:/image/ic_sound.ico</normaloff>:/image/ic_sound.ico</iconset>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="leFirewallStartSoundPath"/>
-              </item>
-              <item row="2" column="1">
-               <widget class="QLineEdit" name="leFirewallStopSoundPath"/>
-              </item>
-              <item row="3" column="2">
-               <widget class="QToolButton" name="tbFirewallPlayErrorSound">
-                <property name="icon">
-                 <iconset resource="resource.qrc">
-                  <normaloff>:/image/ic_sound.ico</normaloff>:/image/ic_sound.ico</iconset>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string>启动音效</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <widget class="QToolButton" name="tbFirewallSelectStartSound">
-                <property name="text">
-                 <string notr="true">...</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QToolButton" name="tbFirewallPlayStartSound">
-                <property name="icon">
-                 <iconset resource="resource.qrc">
-                  <normaloff>:/image/ic_sound.ico</normaloff>:/image/ic_sound.ico</iconset>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="3">
-               <widget class="QToolButton" name="tbFirewallSelectErrorSound">
-                <property name="text">
-                 <string notr="true">...</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_2">
-                <property name="text">
-                 <string>停止音效</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_3">
-                <property name="text">
-                 <string>操作失败音效</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QLineEdit" name="leFirewallErrorSoundPath"/>
-              </item>
-              <item row="2" column="3">
-               <widget class="QToolButton" name="tbFirewallSelectStopSound">
-                <property name="text">
-                 <string notr="true">...</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QGroupBox" name="groupBox_12">
-             <property name="title">
-              <string>防火墙规则方向</string>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_27">
-              <item>
-               <widget class="QComboBox" name="cbFirewallDirection"/>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_35">
-                <property name="text">
-                 <string>默认值为出站，设置将在下次启动防火墙时生效。</string>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QGroupBox" name="groupBox_7">
-             <property name="title">
-              <string>断网范围</string>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_13">
-              <item>
-               <layout class="QHBoxLayout" name="_18">
-                <item>
-                 <widget class="QLineEdit" name="leFirewallAppPath">
-                  <property name="placeholderText">
-                   <string>若您不了解断网原理，请留空！</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QToolButton" name="tbSelectFirewallApp">
-                  <property name="text">
-                   <string notr="true">...</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <widget class="QTabWidget" name="tabWidget_2">
-                <property name="currentIndex">
-                 <number>0</number>
-                </property>
-                <widget class="QWidget" name="tabWidget_2Page2">
-                 <attribute name="title">
-                  <string>说明</string>
-                 </attribute>
-                 <layout class="QVBoxLayout" name="verticalLayout_22">
-                  <item>
-                   <widget class="QLabel" name="label_28">
+             <widget class="QWidget" name="scrollAreaWidgetContents_3">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>479</width>
+                <height>588</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_14">
+               <item>
+                <widget class="QGroupBox" name="groupBox">
+                 <property name="title">
+                  <string>快捷键</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout">
+                  <item row="2" column="1">
+                   <widget class="QKeySequenceEdit" name="keySeqStopFirewall"/>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QKeySequenceEdit" name="keySeqStartFirewall"/>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_15">
                     <property name="text">
-                     <string>若您想断整个系统的网络，则留空（建议）；若您只想断 GTA 的网络，请选择 GTA5.exe 文件；若您想断加速器的网络，请选择加速器的应用程序文件。</string>
-                    </property>
-                    <property name="wordWrap">
-                     <bool>true</bool>
+                     <string>启动</string>
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <widget class="QLabel" name="label_27">
+                  <item row="0" column="2">
+                   <widget class="QToolButton" name="tbClearStartFirewallHotkeyEdit">
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_16">
                     <property name="text">
-                     <string>填写要断网程序的路径，留空表示断全部。设置将在下次启动防火墙时生效。</string>
+                     <string>停止</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QToolButton" name="tbClearStopFirewallHotkeyEdit">
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="groupBox_3">
+                 <property name="title">
+                  <string>音效</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_3">
+                  <item row="2" column="2">
+                   <widget class="QToolButton" name="tbFirewallPlayStopSound">
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/ic_sound.ico</normaloff>:/image/ic_sound.ico</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QLineEdit" name="leFirewallStartSoundPath"/>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QLineEdit" name="leFirewallStopSoundPath"/>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QToolButton" name="tbFirewallPlayErrorSound">
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/ic_sound.ico</normaloff>:/image/ic_sound.ico</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label">
+                    <property name="text">
+                     <string>启动</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="3">
+                   <widget class="QToolButton" name="tbFirewallSelectStartSound">
+                    <property name="text">
+                     <string notr="true">...</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QToolButton" name="tbFirewallPlayStartSound">
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/ic_sound.ico</normaloff>:/image/ic_sound.ico</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="3">
+                   <widget class="QToolButton" name="tbFirewallSelectErrorSound">
+                    <property name="text">
+                     <string notr="true">...</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_2">
+                    <property name="text">
+                     <string>停止</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_3">
+                    <property name="text">
+                     <string>操作失败</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QLineEdit" name="leFirewallErrorSoundPath"/>
+                  </item>
+                  <item row="2" column="3">
+                   <widget class="QToolButton" name="tbFirewallSelectStopSound">
+                    <property name="text">
+                     <string notr="true">...</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="groupBox_12">
+                 <property name="title">
+                  <string>防火墙规则方向</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_27">
+                  <item>
+                   <widget class="QComboBox" name="cbFirewallDirection"/>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_35">
+                    <property name="text">
+                     <string>默认值为出站，设置将在下次启动防火墙时生效。</string>
                     </property>
                     <property name="wordWrap">
                      <bool>true</bool>
@@ -1069,46 +1034,268 @@
                   </item>
                  </layout>
                 </widget>
-                <widget class="QWidget" name="tabWidget_2Page1">
-                 <attribute name="title">
-                  <string>加速器 (UU 用户必看)</string>
-                 </attribute>
-                 <layout class="QVBoxLayout" name="verticalLayout_20">
+               </item>
+               <item>
+                <widget class="QGroupBox" name="groupBox_7">
+                 <property name="title">
+                  <string>断网范围</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_13">
                   <item>
-                   <widget class="QLabel" name="label_30">
-                    <property name="text">
-                     <string>使用 UU 加速器的用户请填写 GTA5.exe 的完整路径，然后在 UU 内使用“路由模式”进行加速。
+                   <layout class="QHBoxLayout" name="_18">
+                    <item>
+                     <widget class="QLineEdit" name="leFirewallAppPath">
+                      <property name="placeholderText">
+                       <string>若您不了解断网原理，请留空！</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QToolButton" name="tbSelectFirewallApp">
+                      <property name="text">
+                       <string notr="true">...</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="QTabWidget" name="tabWidget_2">
+                    <property name="currentIndex">
+                     <number>0</number>
+                    </property>
+                    <widget class="QWidget" name="tabWidget_2Page2">
+                     <attribute name="title">
+                      <string>说明</string>
+                     </attribute>
+                     <layout class="QVBoxLayout" name="verticalLayout_22">
+                      <item>
+                       <widget class="QLabel" name="label_28">
+                        <property name="text">
+                         <string>若您想断整个系统的网络，则留空（建议）；若您只想断 GTA 的网络，请选择 GTA5.exe 文件；若您想断加速器的网络，请选择加速器的应用程序文件。</string>
+                        </property>
+                        <property name="wordWrap">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="label_27">
+                        <property name="text">
+                         <string>填写要断网程序的路径，留空表示断全部。设置将在下次启动防火墙时生效。</string>
+                        </property>
+                        <property name="wordWrap">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                    <widget class="QWidget" name="tabWidget_2Page1">
+                     <attribute name="title">
+                      <string>加速器 (UU 用户必看)</string>
+                     </attribute>
+                     <layout class="QVBoxLayout" name="verticalLayout_20">
+                      <item>
+                       <widget class="QLabel" name="label_30">
+                        <property name="text">
+                         <string>使用 UU 加速器的用户请填写 GTA5.exe 的完整路径，然后在 UU 内使用“路由模式”进行加速。
 GTA5.exe 的完整路径例如：
 F:\Epic Games\GTAV\GTA5.exe
 
 其他加速器用户可直接填写加速器可执行 EXE 文件的路径。
 加速器可执行 EXE 文件的路径例如：
 C:\Program Files (x86)\nn\nn.exe</string>
+                        </property>
+                        <property name="wordWrap">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <spacer name="spacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>1</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_4">
+          <attribute name="title">
+           <string>禁用网络适配器</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_40">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QScrollArea" name="scrollArea_13">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_13">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>493</width>
+                <height>463</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_41">
+               <item>
+                <widget class="QLabel" name="label_46">
+                 <property name="text">
+                  <string>勾选要禁用的网络适配器，下次禁用时生效</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QListWidget" name="lwNetworkAdapters">
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="groupBox_20">
+                 <property name="title">
+                  <string>快捷键</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_10">
+                  <item row="0" column="1">
+                   <widget class="QKeySequenceEdit" name="keySeqDisableNetworkAdapter"/>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_48">
+                    <property name="text">
+                     <string>启用</string>
                     </property>
-                    <property name="wordWrap">
-                     <bool>true</bool>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_47">
+                    <property name="text">
+                     <string>禁用</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QKeySequenceEdit" name="keySeqEnableNetworkAdapter"/>
+                  </item>
+                  <item row="3" column="2">
+                   <widget class="QToolButton" name="tbClearEnableNetworkAdapteHotkeyEdit">
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QToolButton" name="tbClearDisableNetworkAdapterHotkeyEdit">
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
                     </property>
                    </widget>
                   </item>
                  </layout>
                 </widget>
-               </widget>
-              </item>
-             </layout>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="groupBox_22">
+                 <property name="title">
+                  <string>音效</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_12">
+                  <item row="0" column="4">
+                   <widget class="QToolButton" name="tbPlayDisableNetworkAdapterSound">
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/ic_sound.ico</normaloff>:/image/ic_sound.ico</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QLineEdit" name="leDisableNetworkAdapterSoundPath"/>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_52">
+                    <property name="text">
+                     <string>禁用</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="4">
+                   <widget class="QToolButton" name="tbPlayEnableNetworkAdapterSound">
+                    <property name="icon">
+                     <iconset resource="resource.qrc">
+                      <normaloff>:/image/ic_sound.ico</normaloff>:/image/ic_sound.ico</iconset>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_53">
+                    <property name="text">
+                     <string>启用</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="2">
+                   <widget class="QLineEdit" name="leEnableNetworkAdapterSoundPath"/>
+                  </item>
+                  <item row="2" column="6">
+                   <widget class="QToolButton" name="tbSelectEnableNetworkAdapterSound">
+                    <property name="text">
+                     <string notr="true">...</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="6">
+                   <widget class="QToolButton" name="tbSelectDisableNetworkAdapterSound">
+                    <property name="text">
+                     <string notr="true">...</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
             </widget>
-           </item>
-           <item>
-            <spacer name="spacer_7">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>1</height>
-              </size>
-             </property>
-            </spacer>
            </item>
           </layout>
          </widget>
@@ -1140,8 +1327,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>177</width>
-            <height>530</height>
+            <width>497</width>
+            <height>492</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -1154,7 +1341,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
               <item>
                <widget class="QGroupBox" name="groupBox_2">
                 <property name="title">
-                 <string>计时器热键</string>
+                 <string>快捷键</string>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_2">
                  <item row="2" column="1">
@@ -1338,15 +1525,15 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>130</width>
-            <height>218</height>
+            <width>497</width>
+            <height>492</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_31">
            <item>
             <widget class="QGroupBox" name="groupBox_16">
              <property name="title">
-              <string>卡单热键</string>
+              <string>快捷键</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_7">
               <item row="0" column="1">
@@ -1459,15 +1646,15 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>179</width>
-            <height>218</height>
+            <width>497</width>
+            <height>492</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_24">
            <item>
             <widget class="QGroupBox" name="groupBox_17">
              <property name="title">
-              <string>末日降至爆头识别热键</string>
+              <string>快捷键</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_8">
               <item row="0" column="3">
@@ -1525,7 +1712,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
               <item row="0" column="0">
                <widget class="QLabel" name="label_32">
                 <property name="text">
-                 <string>启动音效</string>
+                 <string>进隧道前</string>
                 </property>
                </widget>
               </item>
@@ -1561,7 +1748,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
               <item row="2" column="0">
                <widget class="QLabel" name="label_42">
                 <property name="text">
-                 <string>停止音效</string>
+                 <string>出炮后 (重置)</string>
                 </property>
                </widget>
               </item>
@@ -1611,15 +1798,15 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>124</width>
-            <height>89</height>
+            <width>497</width>
+            <height>492</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_28">
            <item>
             <widget class="QGroupBox" name="groupBox_14">
              <property name="title">
-              <string>结束游戏热键</string>
+              <string>快捷键</string>
              </property>
              <layout class="QGridLayout" name="gridLayout_6">
               <item row="0" column="1">
@@ -1686,8 +1873,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>207</width>
-            <height>146</height>
+            <width>497</width>
+            <height>492</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -1775,8 +1962,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>87</height>
+            <width>497</width>
+            <height>492</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1836,8 +2023,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>46</height>
+            <width>497</width>
+            <height>492</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_34">

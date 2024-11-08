@@ -195,6 +195,27 @@ public:
     bool rtssOverlay() const;
     void setRtssOverlay(bool newRtssOverlay);
 
+    QList<QString> selectedNetworkAdapters() const;
+    void setSelectedNetworkAdapters(const QList<QString>& newSelectedNetworkAdapters);
+
+    QString networkAdaptersEnable() const;
+    void setNetworkAdaptersEnable(const QString& newNetworkAdaptersEnable);
+
+    QString networkAdaptersDisable() const;
+    void setNetworkAdaptersDisable(const QString& newNetworkAdaptersDisable);
+
+    QString networkAdaptersEnableHotkey() const;
+    void setNetworkAdaptersEnableHotkey(const QString& newNetworkAdaptersEnableHotkey);
+
+    QString networkAdaptersDisableHotkey() const;
+    void setNetworkAdaptersDisableHotkey(const QString& newNetworkAdaptersDisableHotkey);
+
+    QString networkAdaptersEnableSound() const;
+    void setNetworkAdaptersEnableSound(const QString& newNetworkAdaptersEnableSound);
+
+    QString networkAdaptersDisableSound() const;
+    void setNetworkAdaptersDisableSound(const QString& newNetworkAdaptersDisableSound);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -255,6 +276,16 @@ signals:
 
     void rtssOverlayChanged();
 
+    void selectedNetworkAdaptersChanged();
+
+    void networkAdaptersEnableHotkeyChanged();
+
+    void networkAdaptersDisableHotkeyChanged();
+
+    void networkAdaptersEnableSoundChanged();
+
+    void networkAdaptersDisableSoundChanged();
+
 private:
     bool mMinimizeToTray = false;
     QString mStyleName = "windowsvista";
@@ -290,6 +321,13 @@ private:
     bool mFirewallPlaySound = true;
     QString mFirewallAppPath = "";
     int mFirewallDirection = NET_FW_RULE_DIR_OUT;
+
+    // 网络适配器
+    QList<QString> mSelectedNetworkAdapters = {};
+    QString mNetworkAdaptersEnableHotkey = "Alt+Q";
+    QString mNetworkAdaptersDisableHotkey = "Alt+Q";
+    QString mNetworkAdaptersEnableSound = "./sound/uradaron.wav";
+    QString mNetworkAdaptersDisableSound = "./sound/uradarof.wav";
 
     // 任务数据
     int mMissionDataUpdateInterval = 50;
@@ -388,4 +426,9 @@ private:
     Q_PROPERTY(QString act3HeadshotStartSound READ act3HeadshotStartSound WRITE setAct3HeadshotStartSound NOTIFY act3HeadshotStartSoundChanged FINAL)
     Q_PROPERTY(QString act3HeadshotStopSound READ act3HeadshotStopSound WRITE setAct3HeadshotStopSound NOTIFY act3HeadshotStopSoundChanged FINAL)
     Q_PROPERTY(bool rtssOverlay READ rtssOverlay WRITE setRtssOverlay NOTIFY rtssOverlayChanged FINAL)
+    Q_PROPERTY(QList<QString> selectedNetworkAdapters READ selectedNetworkAdapters WRITE setSelectedNetworkAdapters NOTIFY selectedNetworkAdaptersChanged FINAL)
+    Q_PROPERTY(QString networkAdaptersEnableHotkey READ networkAdaptersEnableHotkey WRITE setNetworkAdaptersEnableHotkey NOTIFY networkAdaptersEnableHotkeyChanged FINAL)
+    Q_PROPERTY(QString networkAdaptersDisableHotkey READ networkAdaptersDisableHotkey WRITE setNetworkAdaptersDisableHotkey NOTIFY networkAdaptersDisableHotkeyChanged FINAL)
+    Q_PROPERTY(QString networkAdaptersEnableSound READ networkAdaptersEnableSound WRITE setNetworkAdaptersEnableSound NOTIFY networkAdaptersEnableSoundChanged FINAL)
+    Q_PROPERTY(QString networkAdaptersDisableSound READ networkAdaptersDisableSound WRITE setNetworkAdaptersDisableSound NOTIFY networkAdaptersDisableSoundChanged FINAL)
 };

@@ -6,6 +6,7 @@
 #include "GlobalData.h"
 #include "HttpServerUtil.h"
 #include "LogUtil.h"
+#include "NetworkAdapterUtil.h"
 #include "RegionSelectorDialog.h"
 #include "RpRecognizeUtil.h"
 #include "RtssUtil.h"
@@ -27,12 +28,10 @@
 #include <QState>
 #include <QUrl>
 
-const QString MainWindow::hotkeyStatePattern = "🧱: %1, %2  ⏱️: %3, %4, %5  👤: %6  ❌: %7";
+const QString MainWindow::hotkeyStatePattern = "🧱%1, %2  📶%3, %4  ⏱️%5, %6, %7  👤%8  ❌%9";
 
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
-    , labCurrentHotkey(new QLabel(this))
-    , labState(new QLabel(this))
 {
     ui.setupUi(this);
 
@@ -54,16 +53,12 @@ MainWindow::MainWindow(QWidget* parent)
 
     checkUpdate();
 
-    ui.statusbar->addPermanentWidget(labCurrentHotkey);
-
-    labState->setAutoFillBackground(true);
-    labState->setMinimumWidth(16);
-    QPalette palette = labState->palette();
-    palette.setColor(QPalette::Window, Qt::red);
-    labState->setPalette(palette);
-    ui.statusbar->addPermanentWidget(labState);
+    ui.statusbar->addPermanentWidget(&labCurrentHotkey);
+    ui.statusbar->addPermanentWidget(&labFirewallState);
+    ui.statusbar->addPermanentWidget(&labNetworkAdaptersState);
 
     initFirewall();
+    initNetworkAdapters();
 
     initTimerStateMachine();
 
@@ -141,10 +136,58 @@ void MainWindow::checkUpdate()
         [](int, QString) {});
 }
 
+void MainWindow::registerHotkey(
+    const QString& hotkeyString,
+    QHotkey*& hotkey,
+    std::function<void()> onActivated,
+    std::function<void()> registerFailed)
+{
+    if (!hotkeyString.isEmpty()) {
+        hotkey = new QHotkey(QKeySequence(hotkeyString), true, qApp);
+        if (hotkey->isRegistered()) {
+            connect(hotkey, &QHotkey::activated, qApp, [onActivated]() { onActivated(); });
+        } else {
+            registerFailed();
+        }
+    }
+}
+
+void MainWindow::registerHotkeyPair(
+    const QString& firstString, const QString& secondString,
+    QHotkey*& firstHotkey, QHotkey*& secondHotkey,
+    std::function<void()> toggle, std::function<void(bool)> check,
+    std::function<void(bool isFirst)> registerFailed,
+    bool canBeSame)
+{
+    if (canBeSame) {
+        if (!firstString.isEmpty() && !secondString.isEmpty()) {
+            bool sameHotkey = firstString == secondString;
+            firstHotkey = new QHotkey(QKeySequence(firstString), true, qApp);
+            if (firstHotkey->isRegistered()) {
+                connect(firstHotkey, &QHotkey::activated, qApp, [sameHotkey, toggle, check]() {
+                    sameHotkey ? toggle() : check(true);
+                });
+            } else {
+                registerFailed(true);
+            }
+            if (!sameHotkey) {
+                secondHotkey = new QHotkey(QKeySequence(secondString), true, qApp);
+                if (secondHotkey->isRegistered()) {
+                    connect(secondHotkey, &QHotkey::activated, qApp, [check]() { check(false); });
+                } else {
+                    registerFailed(false);
+                }
+            }
+        }
+    }
+}
+
 void MainWindow::removeAllHotkeys()
 {
     removeHotkey(startFirewallHotkey);
     removeHotkey(stopFirewallHotkey);
+    removeHotkey(disableNetworkAdapterHotkey);
+    removeHotkey(enableNetworkAdapterHotkey);
     removeHotkey(startTimerHotkey);
     removeHotkey(pauseTimerHotkey);
     removeHotkey(stopTimerHotkey);
@@ -166,9 +209,11 @@ void MainWindow::removeHotkey(QHotkey*& h)
 
 void MainWindow::setHotkey()
 {
-    labCurrentHotkey->setText(hotkeyStatePattern.arg(
+    labCurrentHotkey.setText(hotkeyStatePattern.arg(
         globalData->firewallStartHotkey(),
         globalData->firewallStopHotkey(),
+        globalData->networkAdaptersDisableHotkey(),
+        globalData->networkAdaptersEnableHotkey(),
         globalData->timerStartHotkey(),
         globalData->timerPauseHotkey(),
         globalData->timerStopHotkey(),
@@ -176,139 +221,110 @@ void MainWindow::setHotkey()
         globalData->closeGameImmediatelyHotkey()));
 
     // 防火墙
-    if (!globalData->firewallStartHotkey().isEmpty() && !globalData->firewallStopHotkey().isEmpty()) {
-        bool sameFirewallHotkey = globalData->firewallStartHotkey() == globalData->firewallStopHotkey();
-        startFirewallHotkey = new QHotkey(QKeySequence(globalData->firewallStartHotkey()), true, qApp);
-        if (startFirewallHotkey->isRegistered()) {
-            connect(startFirewallHotkey, &QHotkey::activated, qApp, [this, sameFirewallHotkey]() {
-                if (sameFirewallHotkey) {
-                    ui.btnStartFirewall->toggle();
-                } else {
-                    ui.btnStartFirewall->setChecked(true);
-                }
-            });
-        } else {
-            QMessageBox::critical(this, QString(), tr("注册启用防火墙热键失败！"));
-        }
-        if (!sameFirewallHotkey) {
-            stopFirewallHotkey = new QHotkey(QKeySequence(globalData->firewallStopHotkey()), true, qApp);
-            if (stopFirewallHotkey->isRegistered()) {
-                connect(stopFirewallHotkey, &QHotkey::activated, qApp, [this]() {
-                    ui.btnStartFirewall->setChecked(false);
-                });
-            } else {
-                QMessageBox::critical(this, QString(), tr("注册关闭防火墙热键失败！"));
-            }
-        }
-    }
+    registerHotkeyPair(
+        globalData->firewallStartHotkey(), globalData->firewallStopHotkey(),
+        startFirewallHotkey, stopFirewallHotkey,
+        [this]() { ui.btnStartFirewall->toggle(); },
+        [this](bool check) { ui.btnStartFirewall->setChecked(check); },
+        [this](bool registerFirst) {
+            QMessageBox::critical(this, QString(), registerFirst ? tr("注册启用防火墙快捷键失败！") : tr("注册关闭防火墙快捷键失败！"));
+        },
+        true);
+
+    // 网络适配器
+    registerHotkeyPair(
+        globalData->networkAdaptersDisableHotkey(), globalData->networkAdaptersEnableHotkey(),
+        disableNetworkAdapterHotkey, enableNetworkAdapterHotkey,
+        [this]() {
+            if (ui.pbDisableNetworkAdapters->isEnabled()) {
+                ui.pbDisableNetworkAdapters->toggle();
+            };
+        },
+        [this](bool check) {
+            if (ui.pbDisableNetworkAdapters->isEnabled()) {
+                ui.pbDisableNetworkAdapters->setChecked(check);
+            };
+        },
+        [this](bool registerFirst) {
+            QMessageBox::critical(this, QString(),
+                registerFirst ? tr("注册禁用网络适配器快捷键失败！") : tr("注册启用网络适配器快捷键失败！"));
+        },
+        true);
 
     // 计时器
-    if (!globalData->timerStartHotkey().isEmpty() && !globalData->timerStopHotkey().isEmpty()) {
-        bool sameTimerHotkey = globalData->timerStartHotkey() == globalData->timerStopHotkey();
-        startTimerHotkey = new QHotkey(QKeySequence(globalData->timerStartHotkey()), true, qApp);
-        if (startTimerHotkey->isRegistered()) {
-            connect(startTimerHotkey, &QHotkey::activated, qApp, [this, sameTimerHotkey]() {
-                if (sameTimerHotkey) {
-                    ui.btnStartTimer->click();
+    registerHotkeyPair(
+        globalData->timerStartHotkey(), globalData->timerStopHotkey(),
+        startTimerHotkey, stopTimerHotkey,
+        [this]() { ui.btnStartTimer->click(); },
+        [this](bool check) {
+            if (check) {
+                if (globalData->timerStopStrategy() == TimerStopStrategy::StopSecondZero) {
+                    // 在 stoppedState 时，按下开始快捷键要求不能开始，因此try尝试
+                    // 只有 stoppedAndZeroState 接受 tryToTimerRunningState 信号
+                    // 因此 TimerStopStrategy::StopSecondZero 且在 stoppedState 时按下开始快捷键也没有接收者
+                    emit tryToTimerRunningState();
                 } else {
-                    if (globalData->timerStopStrategy() == TimerStopStrategy::StopSecondZero) {
-                        // 在 stoppedState 时，按下开始热键要求不能开始，因此try尝试
-                        // 只有 stoppedAndZeroState 接受 tryToTimerRunningState 信号
-                        // 因此 TimerStopStrategy::StopSecondZero 且在 stoppedState 时按下开始热键也没有接收者
-                        emit tryToTimerRunningState();
-                    } else {
-                        emit toTimerRunningState();
-                    }
+                    emit toTimerRunningState();
                 }
-            });
-        } else {
-            QMessageBox::critical(nullptr, QString(), tr("注册启动计时器热键失败！"));
-        }
-        if (!sameTimerHotkey) {
-            stopTimerHotkey = new QHotkey(QKeySequence(globalData->timerStopHotkey()), true, qApp);
-            if (stopTimerHotkey->isRegistered()) {
-                connect(stopTimerHotkey, &QHotkey::activated, qApp, [=]() {
-                    if (globalData->timerStopStrategy() == TimerStopStrategy::OnlyStop
-                        || globalData->timerStopStrategy() == TimerStopStrategy::StopAndZero) {
-                        // 在 stoppedState 时，按下停止热键要求不能（再次）归零，因此try尝试
-                        // 只有 runningState 接受 tryToTimerStoppedOrStoppedAndZeroState 信号
-                        // 因此 (TimerStopStrategy::OnlyStop 或 TimerStopStrategy::StopAndZero) 且在 stoppedState 时按下停止热键也没有接收者
-                        emit tryToTimerStoppedOrStoppedAndZeroState();
-                    } else {
-                        emit toTimerStoppedOrStoppedAndZeroState();
-                    }
-                });
             } else {
-                QMessageBox::critical(this, QString(), tr("注册停止计时器热键失败！"));
+                if (globalData->timerStopStrategy() == TimerStopStrategy::OnlyStop
+                    || globalData->timerStopStrategy() == TimerStopStrategy::StopAndZero) {
+                    // 在 stoppedState 时，按下停止快捷键要求不能（再次）归零，因此try尝试
+                    // 只有 runningState 接受 tryToTimerStoppedOrStoppedAndZeroState 信号
+                    // 因此 (TimerStopStrategy::OnlyStop 或 TimerStopStrategy::StopAndZero) 且在 stoppedState 时按下停止快捷键也没有接收者
+                    emit tryToTimerStoppedOrStoppedAndZeroState();
+                } else {
+                    emit toTimerStoppedOrStoppedAndZeroState();
+                }
             }
-        }
+        },
+        [this](bool registerFirst) {
+            QMessageBox::critical(this, QString(),
+                registerFirst ? tr("注册启动计时器快捷键失败！") : tr("注册停止计时器快捷键失败！"));
+        },
+        true);
+    if (!globalData->timerStartHotkey().isEmpty() && !globalData->timerStopHotkey().isEmpty()) {
         if (globalData->timerPauseHotkey() == globalData->timerStartHotkey()
             || globalData->timerPauseHotkey() == globalData->timerStopHotkey()) {
-            QMessageBox::critical(this, QString(), tr("暂停计时器热键与启动/停止计时器热键相同，暂停计时器热键将会无效！"));
+            QMessageBox::critical(this, QString(), tr("暂停计时器快捷键与启动/停止计时器快捷键相同，暂停计时器快捷键将会无效！"));
         } else {
-            pauseTimerHotkey = new QHotkey(QKeySequence(globalData->timerPauseHotkey()), true, qApp);
-            if (pauseTimerHotkey->isRegistered()) {
-                connect(pauseTimerHotkey, &QHotkey::activated, qApp, [this]() {
+            registerHotkey(
+                globalData->timerPauseHotkey(),
+                pauseTimerHotkey,
+                [this]() {
                     if (ui.btnPauseTimer->isEnabled()) {
                         ui.btnPauseTimer->click();
-                    }
-                });
-            } else {
-                QMessageBox::critical(this, QString(), tr("注册暂停计时器热键失败！"));
-            }
+                    };
+                },
+                [this]() { QMessageBox::critical(this, QString(), tr("注册暂停计时器快捷键失败！")); });
         }
     }
 
     // 卡单
-    if (!globalData->suspendAndResumeHotkey().isEmpty()) {
-        suspendAndResumeHotkey = new QHotkey(QKeySequence(globalData->suspendAndResumeHotkey()), true, qApp);
-        if (suspendAndResumeHotkey->isRegistered()) {
-            connect(suspendAndResumeHotkey, &QHotkey::activated, qApp, [this]() {
-                ui.btnSuspendProcess->click();
-            });
-        } else {
-            QMessageBox::critical(this, QString(), tr("注册卡单热键失败！"));
-        }
-    }
+    registerHotkey(
+        globalData->suspendAndResumeHotkey(),
+        suspendAndResumeHotkey,
+        [this]() { ui.btnSuspendProcess->click(); },
+        [this]() { QMessageBox::critical(this, QString(), tr("注册卡单快捷键失败！")); });
 
     // 快速结束游戏
-    if (!globalData->closeGameImmediatelyHotkey().isEmpty()) {
-        closeGameImmediatelyHotkey = new QHotkey(QKeySequence(globalData->closeGameImmediatelyHotkey()), true, qApp);
-        if (closeGameImmediatelyHotkey->isRegistered()) {
-            connect(closeGameImmediatelyHotkey, &QHotkey::activated, qApp, [this]() {
-                closeGameImmediately();
-            });
-        } else {
-            QMessageBox::critical(this, QString(), tr("注册快速结束游戏热键失败！"));
-        }
-    }
+    registerHotkey(
+        globalData->closeGameImmediatelyHotkey(),
+        closeGameImmediatelyHotkey,
+        [this]() { closeGameImmediately(); },
+        [this]() { QMessageBox::critical(this, QString(), tr("注册快速结束游戏快捷键失败！")); });
 
     // 末日将至爆头识别
-    if (!globalData->act3HeadshotStartHotkey().isEmpty() && !globalData->act3HeadshotStopHotkey().isEmpty()) {
-        bool sameHotkey = globalData->act3HeadshotStartHotkey() == globalData->act3HeadshotStopHotkey();
-        act3HeadshotStartHotkey = new QHotkey(QKeySequence(globalData->act3HeadshotStartHotkey()), true, qApp);
-        if (act3HeadshotStartHotkey->isRegistered()) {
-            connect(act3HeadshotStartHotkey, &QHotkey::activated, qApp, [this, sameHotkey]() {
-                if (sameHotkey) {
-                    ui.btnRpOcr->toggle();
-                } else {
-                    ui.btnRpOcr->setChecked(true);
-                }
-            });
-        } else {
-            QMessageBox::critical(this, QString(), tr("注册末日将至爆头识别启动热键失败！"));
-        }
-        if (!sameHotkey) {
-            act3HeadshotStopHotkey = new QHotkey(QKeySequence(globalData->act3HeadshotStopHotkey()), true, qApp);
-            if (act3HeadshotStopHotkey->isRegistered()) {
-                connect(act3HeadshotStopHotkey, &QHotkey::activated, qApp, [this]() {
-                    ui.btnRpOcr->setChecked(false);
-                });
-            } else {
-                QMessageBox::critical(this, QString(), tr("注册末日将至爆头识别关闭热键失败！"));
-            }
-        }
-    }
+    registerHotkeyPair(
+        globalData->act3HeadshotStartHotkey(), globalData->act3HeadshotStopHotkey(),
+        act3HeadshotStartHotkey, act3HeadshotStopHotkey,
+        [this]() { ui.btnRpOcr->toggle(); },
+        [this](bool check) { ui.btnRpOcr->setChecked(check); },
+        [this](bool registerFirst) {
+            QMessageBox::critical(this, QString(),
+                registerFirst ? tr("注册末日将至爆头识别启动快捷键失败！") : tr("注册末日将至爆头识别关闭快捷键失败！"));
+        },
+        true);
 }
 
 void MainWindow::initMenu()
@@ -403,8 +419,8 @@ void MainWindow::initMenu()
     });
 
     connect(ui.actionSetting, &QAction::triggered, this, [this]() {
-        auto dialog = new SettingDialog(this);
         removeAllHotkeys();
+        auto dialog = new SettingDialog(this);
         dialog->exec();
         setHotkey();
     });
@@ -494,6 +510,11 @@ void MainWindow::initFirewall()
     });
 
     ui.btnStartFirewall->setText(tr("已关闭"));
+    labFirewallState.setAutoFillBackground(true);
+    labFirewallState.setMinimumWidth(16);
+    QPalette palette = labFirewallState.palette();
+    palette.setColor(QPalette::Window, Qt::red);
+    labFirewallState.setPalette(palette);
     connect(ui.btnStartFirewall, &QAbstractButton::toggled, this, [this](bool checked) {
         if (checked == FirewallUtil::getIsEnabled()) {
             return;
@@ -502,18 +523,18 @@ void MainWindow::initFirewall()
         if (succeed) {
             if (checked) {
                 ui.btnStartFirewall->setText(tr("已开启"));
-                QPalette palette = labState->palette();
+                QPalette palette = labFirewallState.palette();
                 palette.setColor(QPalette::Window, Qt::green);
-                labState->setPalette(palette);
+                labFirewallState.setPalette(palette);
                 if (globalData->firewallPlaySound()) {
                     PlaySound(globalData->firewallStartSound().toStdWString().c_str(),
                         nullptr, SND_FILENAME | SND_ASYNC);
                 }
             } else {
                 ui.btnStartFirewall->setText(tr("已关闭"));
-                QPalette palette = labState->palette();
+                QPalette palette = labFirewallState.palette();
                 palette.setColor(QPalette::Window, Qt::red);
-                labState->setPalette(palette);
+                labFirewallState.setPalette(palette);
                 if (globalData->firewallPlaySound()) {
                     PlaySound(globalData->firewallStopSound().toStdWString().c_str(),
                         nullptr, SND_FILENAME | SND_ASYNC);
@@ -529,6 +550,38 @@ void MainWindow::initFirewall()
     });
 
     ui.btnStartFirewall->setFocus();
+}
+
+void MainWindow::initNetworkAdapters()
+{
+    auto onSetLabelText = [this]() {
+        if (globalData->selectedNetworkAdapters().empty()) {
+            ui.labSelectedNetworkAdapters->setText(tr("请先在设置页面选择网络适配器！"));
+        } else {
+            ui.labSelectedNetworkAdapters->setText(
+                networkAdapterUtil->adapterNames(globalData->selectedNetworkAdapters()).join('\n'));
+        }
+    };
+    auto onSetButtonEnabled = [this]() {
+        ui.pbDisableNetworkAdapters->setEnabled(!globalData->selectedNetworkAdapters().empty());
+    };
+
+    onSetLabelText();
+    onSetButtonEnabled();
+    ui.pbDisableNetworkAdapters->setText(tr("未禁用"));
+    labNetworkAdaptersState.setText("🔗");
+
+    connect(globalData, &GlobalData::selectedNetworkAdaptersChanged, this, [onSetLabelText, onSetButtonEnabled]() {
+        onSetLabelText();
+        onSetButtonEnabled();
+    });
+    connect(ui.pbDisableNetworkAdapters, &QAbstractButton::toggled, this, [this](bool checked) {
+        networkAdapterUtil->setNetworkAdaptersEnabled(globalData->selectedNetworkAdapters(), !checked);
+        ui.pbDisableNetworkAdapters->setText(checked ? tr("已禁用") : tr("未禁用"));
+        labNetworkAdaptersState.setText(checked ? "⛓️‍💥" : "🔗");
+        auto sound = checked ? globalData->networkAdaptersDisableSound() : globalData->networkAdaptersEnableSound();
+        PlaySound(sound.toStdWString().c_str(), nullptr, SND_FILENAME | SND_ASYNC);
+    });
 }
 
 void MainWindow::initAct3Headshot()

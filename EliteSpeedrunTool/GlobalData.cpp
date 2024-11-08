@@ -176,6 +176,14 @@ void GlobalData::readSettings()
     setFirewallDirection(settings.value("FirewallDirection", mFirewallDirection).toInt());
     settings.endGroup();
 
+    settings.beginGroup("NetworkAdapter");
+    setSelectedNetworkAdapters(settings.value("SelectedNetworkAdapters", mSelectedNetworkAdapters).value<QList<QString>>());
+    setNetworkAdaptersDisableHotkey(settings.value("NetworkAdaptersDisableHotkey", mNetworkAdaptersDisableHotkey).toString());
+    setNetworkAdaptersEnableHotkey(settings.value("NetworkAdaptersEnableHotkey", mNetworkAdaptersEnableHotkey).toString());
+    setNetworkAdaptersDisableSound(settings.value("NetworkAdaptersDisableSound", mNetworkAdaptersDisableSound).toString());
+    setNetworkAdaptersEnableSound(settings.value("NetworkAdaptersEnableSound", mNetworkAdaptersEnableSound).toString());
+    settings.endGroup();
+
     settings.beginGroup("MissionData");
     setMissionDataUpdateInterval(settings.value("MissionDataUpdateInterval", mMissionDataUpdateInterval).toInt());
     setMissionDataName(MissionDataNameUtil::fromString(
@@ -257,6 +265,14 @@ void GlobalData::writeSettings()
     settings.setValue("FirewallPlaySound", mFirewallPlaySound);
     settings.setValue("FirewallAppPath", mFirewallAppPath);
     settings.setValue("FirewallDirection", mFirewallDirection);
+    settings.endGroup();
+
+    settings.beginGroup("NetworkAdapter");
+    settings.setValue("SelectedNetworkAdapters", mSelectedNetworkAdapters);
+    settings.setValue("NetworkAdaptersDisableHotkey", mNetworkAdaptersDisableHotkey);
+    settings.setValue("NetworkAdaptersEnableHotkey", mNetworkAdaptersEnableHotkey);
+    settings.setValue("NetworkAdaptersDisableSound", mNetworkAdaptersDisableSound);
+    settings.setValue("NetworkAdaptersEnableSound", mNetworkAdaptersEnableSound);
     settings.endGroup();
 
     settings.beginGroup("MissionData");
@@ -924,4 +940,69 @@ void GlobalData::setRtssOverlay(bool newRtssOverlay)
         return;
     mRtssOverlay = newRtssOverlay;
     emit rtssOverlayChanged();
+}
+
+QList<QString> GlobalData::selectedNetworkAdapters() const
+{
+    return mSelectedNetworkAdapters;
+}
+
+void GlobalData::setSelectedNetworkAdapters(const QList<QString>& newSelectedNetworkAdapters)
+{
+    if (mSelectedNetworkAdapters == newSelectedNetworkAdapters)
+        return;
+    mSelectedNetworkAdapters = newSelectedNetworkAdapters;
+    emit selectedNetworkAdaptersChanged();
+}
+
+QString GlobalData::networkAdaptersEnableHotkey() const
+{
+    return mNetworkAdaptersEnableHotkey;
+}
+
+void GlobalData::setNetworkAdaptersEnableHotkey(const QString& newNetworkAdaptersEnableHotkey)
+{
+    if (mNetworkAdaptersEnableHotkey == newNetworkAdaptersEnableHotkey)
+        return;
+    mNetworkAdaptersEnableHotkey = newNetworkAdaptersEnableHotkey;
+    emit networkAdaptersEnableHotkeyChanged();
+}
+
+QString GlobalData::networkAdaptersDisableHotkey() const
+{
+    return mNetworkAdaptersDisableHotkey;
+}
+
+void GlobalData::setNetworkAdaptersDisableHotkey(const QString& newNetworkAdaptersDisableHotkey)
+{
+    if (mNetworkAdaptersDisableHotkey == newNetworkAdaptersDisableHotkey)
+        return;
+    mNetworkAdaptersDisableHotkey = newNetworkAdaptersDisableHotkey;
+    emit networkAdaptersDisableHotkeyChanged();
+}
+
+QString GlobalData::networkAdaptersEnableSound() const
+{
+    return mNetworkAdaptersEnableSound;
+}
+
+void GlobalData::setNetworkAdaptersEnableSound(const QString& newNetworkAdaptersEnableSound)
+{
+    if (mNetworkAdaptersEnableSound == newNetworkAdaptersEnableSound)
+        return;
+    mNetworkAdaptersEnableSound = newNetworkAdaptersEnableSound;
+    emit networkAdaptersEnableSoundChanged();
+}
+
+QString GlobalData::networkAdaptersDisableSound() const
+{
+    return mNetworkAdaptersDisableSound;
+}
+
+void GlobalData::setNetworkAdaptersDisableSound(const QString& newNetworkAdaptersDisableSound)
+{
+    if (mNetworkAdaptersDisableSound == newNetworkAdaptersDisableSound)
+        return;
+    mNetworkAdaptersDisableSound = newNetworkAdaptersDisableSound;
+    emit networkAdaptersDisableSoundChanged();
 }
