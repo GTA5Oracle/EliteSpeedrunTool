@@ -5,6 +5,7 @@
 #include <QApplication>
 #include <QDataStream>
 #include <QFile>
+#include <QHttpHeaders>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkInterface>
@@ -37,30 +38,34 @@ void HttpServerUtil::startHttp()
     started = true;
     httpServer = new QHttpServer(this);
     webSocketServer = new QWebSocketServer("Elite Speedrun Tool", QWebSocketServer::NonSecureMode, this);
-    httpServer->route("/favicon.ico", [](QHttpServerResponder&& responder) {
+    httpServer->route("/favicon.ico", [](const QHttpServerRequest& request, QHttpServerResponder& responder) {
         auto favicon = new QFile("./html/favicon.ico");
         responder.write(favicon,
-            { qMakePair("Content-Type", "image/x-icon"),
-                qMakePair("Cache-Control", "max-age=7200") });
+            QHttpHeaders::fromListOfPairs({ qMakePair("Content-Type", "image/x-icon"),
+                qMakePair("Cache-Control", "max-age=7200") }));
     });
-    httpServer->route("/displayInfo", [](QHttpServerResponder&& responder) {
+    httpServer->route("/displayInfo", [](const QHttpServerRequest& request, QHttpServerResponder& responder) {
         auto htmlFile = new QFile("./html/DisplayInfo.html");
         responder.write(htmlFile, "text/html");
     });
-    httpServer->route("/reconnecting-websocket.min.js", [](QHttpServerResponder&& responder) {
+    httpServer->route("/reconnecting-websocket.min.js", [](const QHttpServerRequest& request, QHttpServerResponder& responder) {
         auto jsFile = new QFile("./html/reconnecting-websocket.min.js");
         responder.write(jsFile, "text/javascript");
     });
-    httpServer->route("/displayInfo.js", [](QHttpServerResponder&& responder) {
+    httpServer->route("/displayInfo.js", [](const QHttpServerRequest& request, QHttpServerResponder& responder) {
         auto jsFile = new QFile("./html/DisplayInfo.js");
         responder.write(jsFile, "text/javascript");
     });
-    httpServer->route("/displayInfo.css", [](QHttpServerResponder&& responder) {
+    httpServer->route("/displayInfo.css", [](const QHttpServerRequest& request, QHttpServerResponder& responder) {
         auto cssFile = new QFile("./html/DisplayInfo.css");
         responder.write(cssFile, "text/css");
     });
-    currentHttpPort = httpServer->listen(QHostAddress::Any, globalData->serverHttpPort());
-    qInfo("Http server listened on: %d", currentHttpPort);
+    if (!tcpserver->listen(QHostAddress::Any, globalData->serverHttpPort()) || !httpServer->bind(tcpserver)) {
+        qCritical("Http server listen failed");
+    } else {
+        currentHttpPort = tcpserver->serverPort();
+        qInfo("Http server listened on: %d", currentHttpPort);
+    }
     if (webSocketServer->listen(QHostAddress::Any, globalData->serverWebsocketPort())) {
         currentWebsocketPort = globalData->serverWebsocketPort();
         connect(webSocketServer, &QWebSocketServer::newConnection, this, &HttpServerUtil::onNewConnection);

@@ -3,6 +3,7 @@
 #include <QGlobalStatic>
 #include <QHttpServer>
 #include <QObject>
+#include <QTcpServer>
 #include <QWebSocketServer>
 
 class HttpServerUtil : public QObject {
@@ -91,6 +92,7 @@ private:
     static quint16 currentHttpPort;
     static quint16 currentWebsocketPort;
 
+    QTcpServer* tcpserver = new QTcpServer();
     QHttpServer* httpServer = nullptr;
 
     QWebSocketServer* webSocketServer = nullptr;

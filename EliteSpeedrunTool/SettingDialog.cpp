@@ -53,13 +53,13 @@ void SettingDialog::initGeneralSettings()
 {
     // 最小化到托盘
     ui.cbMinimizeToTray->setChecked(globalData->minimizeToTray());
-    connect(ui.cbMinimizeToTray, &QCheckBox::stateChanged, this, [=](int state) {
+    connect(ui.cbMinimizeToTray, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->setMinimizeToTray(state == Qt::Checked);
     });
 
     // 自动检测更新
     ui.cbAutoCheckUpdate->setChecked(globalData->autoCheckUpdate());
-    connect(ui.cbAutoCheckUpdate, &QCheckBox::stateChanged, this, [=](int state) {
+    connect(ui.cbAutoCheckUpdate, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->setAutoCheckUpdate(state == Qt::Checked);
     });
 
@@ -307,7 +307,7 @@ void SettingDialog::initDisplayInfoSettings()
     rect.bottom = GetSystemMetrics(SM_CYVIRTUALSCREEN) + rect.top;
     // Tool Window
     ui.cbDisplayInfoToolWindow->setChecked(globalData->displayInfoToolWindow());
-    connect(ui.cbDisplayInfoToolWindow, &QCheckBox::stateChanged, this, [=](int state) {
+    connect(ui.cbDisplayInfoToolWindow, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->setDisplayInfoToolWindow(state == Qt::Checked);
     });
     // XY
@@ -451,7 +451,7 @@ void SettingDialog::initDisplayInfoSettings()
         });
 
     // 在窗口展示
-    connect(ui.cbDisplayInfoFuncEnable, &QCheckBox::stateChanged, this, [=](int state) {
+    connect(ui.cbDisplayInfoFuncEnable, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->displayInfoSubFunctions()[currentSubFunction]->setDisplay(state == Qt::Checked);
     });
 
@@ -474,13 +474,13 @@ void SettingDialog::initRtssSettings()
 {
     ui.cbRtssOverlay->setChecked(globalData->rtssOverlay());
     ui.gbRtssSubFunction->setEnabled(globalData->rtssOverlay());
-    connect(ui.cbRtssOverlay, &QCheckBox::stateChanged, this, [=](int state) {
+    connect(ui.cbRtssOverlay, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->setRtssOverlay(state == Qt::Checked);
         ui.gbRtssSubFunction->setEnabled(state == Qt::Checked);
     });
 
     // 在OSD上展示
-    connect(ui.cbRtssSubFunctionOsd, &QCheckBox::stateChanged, this, [=](int state) {
+    connect(ui.cbRtssSubFunctionOsd, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->displayInfoSubFunctions()[currentRtssSubFunction]->setRtssDisplay(state == Qt::Checked);
     });
     // OSD文本
@@ -561,7 +561,7 @@ void SettingDialog::initCloseGameImmediatelySettings()
 void SettingDialog::initSocialSettings()
 {
     ui.cbDiscordShowRp->setChecked(globalData->discordShowRichPresence());
-    connect(ui.cbDiscordShowRp, &QCheckBox::stateChanged, this, [=](int state) {
+    connect(ui.cbDiscordShowRp, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         ui.cbDiscordShowRp->setEnabled(false);
         QTimer::singleShot(1000, this, [this]() {
             ui.cbDiscordShowRp->setEnabled(true);
@@ -592,7 +592,7 @@ void SettingDialog::initLanguageSettings()
 void SettingDialog::initDevelopOptionsSettings()
 {
     ui.cbDebugMode->setChecked(globalData->debugMode());
-    connect(ui.cbDebugMode, &QCheckBox::stateChanged, this, [=](int state) {
+    connect(ui.cbDebugMode, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->setDebugMode(state == Qt::Checked);
     });
 }

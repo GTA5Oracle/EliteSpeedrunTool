@@ -505,7 +505,7 @@ void MainWindow::initFirewall()
     ui.pbFirewallRefreshState->click();
 
     ui.cbSound->setChecked(globalData->firewallPlaySound());
-    connect(ui.cbSound, &QCheckBox::stateChanged, this, [](int state) {
+    connect(ui.cbSound, &QCheckBox::checkStateChanged, this, [](Qt::CheckState state) {
         globalData->setFirewallPlaySound(state);
     });
 

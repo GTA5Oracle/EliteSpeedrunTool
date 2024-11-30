@@ -197,7 +197,7 @@ void UpdateDialog::updateViewToSuccess()
         }
         ui.labResult->setText(tr("发现新版本：%1").arg(name));
         auto dateTime = QDateTime::fromString(githubRelease->publishedAt, Qt::ISODate);
-        dateTime.setTimeSpec(Qt::UTC);
+        dateTime.setTimeZone(QTimeZone::UTC);
         QLocale::Language language = LanguageUtil::getQLocaleLanguage(globalData->language());
         QLocale locale = QLocale(language);
         ui.labReleaseTime->setText(tr("发布时间：%1")

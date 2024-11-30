@@ -27,7 +27,7 @@
       </sizepolicy>
      </property>
      <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustToContents</enum>
+      <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
      </property>
      <property name="iconSize">
       <size>
@@ -40,13 +40,13 @@
    <item>
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="frameShape">
-      <enum>QFrame::Box</enum>
+      <enum>QFrame::Shape::Box</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Sunken</enum>
+      <enum>QFrame::Shadow::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -72,8 +72,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>497</width>
-            <height>492</height>
+            <width>529</width>
+            <height>498</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -116,7 +116,7 @@
            <item>
             <spacer name="spacer">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -178,8 +178,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>479</width>
-                <height>478</height>
+                <width>525</width>
+                <height>475</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -476,7 +476,7 @@
                <item>
                 <spacer name="spacer_6">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -519,8 +519,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>493</width>
-                <height>463</height>
+                <width>525</width>
+                <height>475</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -547,7 +547,7 @@
                  <item>
                   <widget class="QSlider" name="hsDisplayInfoX">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                   </widget>
                  </item>
@@ -565,7 +565,7 @@
                  <item>
                   <widget class="QSlider" name="hsDisplayInfoY">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                   </widget>
                  </item>
@@ -586,7 +586,7 @@
                  <item>
                   <widget class="QSlider" name="hsDisplayInfoWidth">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                   </widget>
                  </item>
@@ -604,7 +604,7 @@
                  <item>
                   <widget class="QSlider" name="hsDisplayInfoHeight">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                   </widget>
                  </item>
@@ -656,7 +656,7 @@
                  <item>
                   <widget class="QSlider" name="hsDisplayInfoAlpha">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                    <enum>Qt::Orientation::Horizontal</enum>
                    </property>
                   </widget>
                  </item>
@@ -668,7 +668,7 @@
                <item>
                 <spacer name="spacer_2">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -712,8 +712,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>497</width>
-            <height>492</height>
+            <width>167</width>
+            <height>508</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -817,7 +817,7 @@
            <item>
             <spacer name="verticalSpacer_5">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -879,8 +879,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>479</width>
-                <height>588</height>
+                <width>525</width>
+                <height>475</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -1122,7 +1122,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
                <item>
                 <spacer name="spacer_7">
                  <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
@@ -1165,8 +1165,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>493</width>
-                <height>463</height>
+                <width>119</width>
+                <height>400</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_41">
@@ -1327,8 +1327,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>497</width>
-            <height>492</height>
+            <width>529</width>
+            <height>498</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -1485,7 +1485,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <item>
             <spacer name="spacer_4">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -1525,8 +1525,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>497</width>
-            <height>492</height>
+            <width>529</width>
+            <height>498</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -1571,7 +1571,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
                    <number>2000</number>
                   </property>
                   <property name="maximum">
-                   <number>20000</number>
+                   <number>60000</number>
                   </property>
                  </widget>
                 </item>
@@ -1593,7 +1593,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
               <item>
                <widget class="QLabel" name="label_39">
                 <property name="text">
-                 <string>建议设置为 6000-13000 之间</string>
+                 <string>建议设置为 6000-20000 之间</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>
@@ -1606,7 +1606,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <item>
             <spacer name="verticalSpacer_3">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -1646,8 +1646,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>497</width>
-            <height>492</height>
+            <width>529</width>
+            <height>498</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -1758,7 +1758,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <item>
             <spacer name="verticalSpacer_4">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -1798,8 +1798,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>497</width>
-            <height>492</height>
+            <width>529</width>
+            <height>498</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -1833,7 +1833,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <item>
             <spacer name="verticalSpacer_2">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -1873,8 +1873,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>497</width>
-            <height>492</height>
+            <width>529</width>
+            <height>498</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -1922,7 +1922,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <item>
             <spacer name="verticalSpacer">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -1962,8 +1962,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>497</width>
-            <height>492</height>
+            <width>529</width>
+            <height>498</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -1983,7 +1983,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <item>
             <spacer name="spacer_5">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -2023,8 +2023,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>497</width>
-            <height>492</height>
+            <width>529</width>
+            <height>498</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_34">
@@ -2038,7 +2038,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <item>
             <spacer name="spacer_8">
              <property name="orientation">
-              <enum>Qt::Vertical</enum>
+              <enum>Qt::Orientation::Vertical</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
