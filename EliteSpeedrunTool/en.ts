@@ -219,7 +219,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+185"/>
-        <location filename="MainWindow.cpp" line="+827"/>
+        <location filename="MainWindow.cpp" line="+795"/>
         <location line="+22"/>
         <source>点击启动</source>
         <translation>Start counting</translation>
@@ -517,57 +517,12 @@ AdstarGod Firewall, easy to use
         <translation>Server is not running</translation>
     </message>
     <message>
-        <location line="-164"/>
-        <source>注册启用防火墙快捷键失败！</source>
-        <translation>Failed to register the enable firewall hotkey!</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>注册关闭防火墙快捷键失败！</source>
-        <translation>Failed to register the disable firewall hotkey!</translation>
-    </message>
-    <message>
-        <location line="+53"/>
-        <source>注册启动计时器快捷键失败！</source>
-        <translation>Failed to register the start timer hotkey!</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>注册停止计时器快捷键失败！</source>
-        <translation>Failed to register the stop timer hotkey!</translation>
-    </message>
-    <message>
-        <location line="+6"/>
+        <location line="-98"/>
         <source>暂停计时器快捷键与启动/停止计时器快捷键相同，暂停计时器快捷键将会无效！</source>
         <translation>The pause timer hotkey is the same as the start/stop timer hotkey, so the pause timer hotkey will be invalid!</translation>
     </message>
     <message>
-        <location line="+10"/>
-        <source>注册暂停计时器快捷键失败！</source>
-        <translation>Failed to register the pause timer hotkey!</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>注册卡单快捷键失败！</source>
-        <translation>Failed to register the suspend game hotkey!</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>注册快速结束游戏快捷键失败！</source>
-        <translation>Failed to register the termnate game hotkey!</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>注册末日将至爆头识别启动快捷键失败！</source>
-        <translation>Failed to register the start ACT3 Hs OCR hotkey!</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>注册末日将至爆头识别关闭快捷键失败！</source>
-        <translation>Failed to register the stop ACT3 Hs OCR hotkey!</translation>
-    </message>
-    <message>
-        <location line="+80"/>
+        <location line="+109"/>
         <location line="+10"/>
         <source>获取服务器地址失败！</source>
         <translation>Failed to get the server address!</translation>
@@ -609,22 +564,12 @@ AdstarGod Firewall, easy to use
         <translation>Click to continue</translation>
     </message>
     <message>
-        <location line="-618"/>
-        <source>注册禁用网络适配器快捷键失败！</source>
-        <translation>Failed to register the disable net adapters hotkey!</translation>
-    </message>
-    <message>
-        <location line="+0"/>
-        <source>注册启用网络适配器快捷键失败！</source>
-        <translation>Failed to register the enable net adapters hotkey!</translation>
-    </message>
-    <message>
-        <location line="+212"/>
+        <location line="-406"/>
         <source>支付宝收款二维码 谢谢喵！</source>
         <translation>Alipay payment QR code. Thank you!</translation>
     </message>
     <message>
-        <location filename="MainWindow.h" line="+147"/>
+        <location filename="MainWindow.h" line="+145"/>
         <source>加入 Telegram 群组一起划水~</source>
         <translation>Join Telegram group~</translation>
     </message>

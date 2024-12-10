@@ -1,9 +1,9 @@
 #pragma once
 
 #include "DisplayInfoDialog.h"
+#include "HotkeyUtil.h"
 #include "ui_MainWindow.h"
 #include <QDateTime>
-#include <QHotkey>
 #include <QLabel>
 #include <QMainWindow>
 #include <QStateMachine>
@@ -31,14 +31,12 @@ protected:
     void registerHotkey(
         const QString& hotkeyString,
         QHotkey*& hotkey,
-        std::function<void()> onActivated,
-        std::function<void()> registerFailed);
+        std::function<void()> onActivated);
 
     void registerHotkeyPair(
         const QString& firstString, const QString& secondString,
         QHotkey*& firstHotkey, QHotkey*& secondHotkey,
         std::function<void()> toggle, std::function<void(bool)> check,
-        std::function<void(bool isFirst)> registerFailed,
         bool canBeSame);
 
     void removeAllHotkeys();

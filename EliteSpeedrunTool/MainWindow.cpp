@@ -22,7 +22,6 @@
 #include <QDateTime>
 #include <QDesktopServices>
 #include <QFile>
-#include <QHotkey>
 #include <QMessageBox>
 #include <QPalette>
 #include <QState>
@@ -139,16 +138,11 @@ void MainWindow::checkUpdate()
 void MainWindow::registerHotkey(
     const QString& hotkeyString,
     QHotkey*& hotkey,
-    std::function<void()> onActivated,
-    std::function<void()> registerFailed)
+    std::function<void()> onActivated)
 {
     if (!hotkeyString.isEmpty()) {
         hotkey = new QHotkey(QKeySequence(hotkeyString), true, qApp);
-        if (hotkey->isRegistered()) {
-            connect(hotkey, &QHotkey::activated, qApp, [onActivated]() { onActivated(); });
-        } else {
-            registerFailed();
-        }
+        connect(hotkey, &QHotkey::activated, qApp, [onActivated]() { onActivated(); });
     }
 }
 
@@ -156,27 +150,19 @@ void MainWindow::registerHotkeyPair(
     const QString& firstString, const QString& secondString,
     QHotkey*& firstHotkey, QHotkey*& secondHotkey,
     std::function<void()> toggle, std::function<void(bool)> check,
-    std::function<void(bool isFirst)> registerFailed,
     bool canBeSame)
 {
     if (canBeSame) {
         if (!firstString.isEmpty() && !secondString.isEmpty()) {
             bool sameHotkey = firstString == secondString;
             firstHotkey = new QHotkey(QKeySequence(firstString), true, qApp);
-            if (firstHotkey->isRegistered()) {
-                connect(firstHotkey, &QHotkey::activated, qApp, [sameHotkey, toggle, check]() {
-                    sameHotkey ? toggle() : check(true);
-                });
-            } else {
-                registerFailed(true);
-            }
+            connect(firstHotkey, &QHotkey::activated, qApp, [sameHotkey, toggle, check]() {
+                sameHotkey ? toggle() : check(true);
+            });
+
             if (!sameHotkey) {
                 secondHotkey = new QHotkey(QKeySequence(secondString), true, qApp);
-                if (secondHotkey->isRegistered()) {
-                    connect(secondHotkey, &QHotkey::activated, qApp, [check]() { check(false); });
-                } else {
-                    registerFailed(false);
-                }
+                connect(secondHotkey, &QHotkey::activated, qApp, [check]() { check(false); });
             }
         }
     }
@@ -226,9 +212,6 @@ void MainWindow::setHotkey()
         startFirewallHotkey, stopFirewallHotkey,
         [this]() { ui.btnStartFirewall->toggle(); },
         [this](bool check) { ui.btnStartFirewall->setChecked(check); },
-        [this](bool registerFirst) {
-            QMessageBox::critical(this, QString(), registerFirst ? tr("注册启用防火墙快捷键失败！") : tr("注册关闭防火墙快捷键失败！"));
-        },
         true);
 
     // 网络适配器
@@ -244,10 +227,6 @@ void MainWindow::setHotkey()
             if (ui.pbDisableNetworkAdapters->isEnabled()) {
                 ui.pbDisableNetworkAdapters->setChecked(check);
             };
-        },
-        [this](bool registerFirst) {
-            QMessageBox::critical(this, QString(),
-                registerFirst ? tr("注册禁用网络适配器快捷键失败！") : tr("注册启用网络适配器快捷键失败！"));
         },
         true);
 
@@ -278,10 +257,6 @@ void MainWindow::setHotkey()
                 }
             }
         },
-        [this](bool registerFirst) {
-            QMessageBox::critical(this, QString(),
-                registerFirst ? tr("注册启动计时器快捷键失败！") : tr("注册停止计时器快捷键失败！"));
-        },
         true);
     if (!globalData->timerStartHotkey().isEmpty() && !globalData->timerStopHotkey().isEmpty()) {
         if (globalData->timerPauseHotkey() == globalData->timerStartHotkey()
@@ -295,8 +270,7 @@ void MainWindow::setHotkey()
                     if (ui.btnPauseTimer->isEnabled()) {
                         ui.btnPauseTimer->click();
                     };
-                },
-                [this]() { QMessageBox::critical(this, QString(), tr("注册暂停计时器快捷键失败！")); });
+                });
         }
     }
 
@@ -304,15 +278,13 @@ void MainWindow::setHotkey()
     registerHotkey(
         globalData->suspendAndResumeHotkey(),
         suspendAndResumeHotkey,
-        [this]() { ui.btnSuspendProcess->click(); },
-        [this]() { QMessageBox::critical(this, QString(), tr("注册卡单快捷键失败！")); });
+        [this]() { ui.btnSuspendProcess->click(); });
 
     // 快速结束游戏
     registerHotkey(
         globalData->closeGameImmediatelyHotkey(),
         closeGameImmediatelyHotkey,
-        [this]() { closeGameImmediately(); },
-        [this]() { QMessageBox::critical(this, QString(), tr("注册快速结束游戏快捷键失败！")); });
+        [this]() { closeGameImmediately(); });
 
     // 末日将至爆头识别
     registerHotkeyPair(
@@ -320,10 +292,6 @@ void MainWindow::setHotkey()
         act3HeadshotStartHotkey, act3HeadshotStopHotkey,
         [this]() { ui.btnRpOcr->toggle(); },
         [this](bool check) { ui.btnRpOcr->setChecked(check); },
-        [this](bool registerFirst) {
-            QMessageBox::critical(this, QString(),
-                registerFirst ? tr("注册末日将至爆头识别启动快捷键失败！") : tr("注册末日将至爆头识别关闭快捷键失败！"));
-        },
         true);
 }
 

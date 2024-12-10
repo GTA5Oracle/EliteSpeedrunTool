@@ -42,6 +42,7 @@ set(PROJECT_SOURCES
         RpRecognizeUtil.h RpRecognizeUtil.cpp
         RtssUtil.h RtssUtil.cpp
         NetworkAdapterUtil.h NetworkAdapterUtil.cpp
+        HotkeyUtil.h HotkeyUtil.cpp
         resource.qrc
 )
 
@@ -98,10 +99,6 @@ install(TARGETS EliteSpeedrunTool
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(EliteSpeedrunTool)
 endif()
-
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../QHotkey ${CMAKE_CURRENT_BINARY_DIR}/QHotkey)
-include_directories(../QHotkey)
-target_link_libraries(EliteSpeedrunTool PRIVATE QHotkey)
 
 target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/WinMM.Lib)
 target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/setupapi.lib)
