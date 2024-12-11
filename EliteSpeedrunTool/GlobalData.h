@@ -288,7 +288,7 @@ signals:
 
 private:
     bool mMinimizeToTray = false;
-    QString mStyleName = "windowsvista";
+    QString mStyleName = "windows11";
     // 版本
     bool mAutoCheckUpdate = true;
     QString mVersion = "0.0";

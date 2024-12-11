@@ -218,7 +218,7 @@ AdstarGod Firewall, easy to use
         <translation>Windows Firewall is not enabled, and the network disconnection feature cannot be used!</translation>
     </message>
     <message>
-        <location line="+185"/>
+        <location line="+188"/>
         <location filename="MainWindow.cpp" line="+795"/>
         <location line="+22"/>
         <source>点击启动</source>
@@ -278,7 +278,7 @@ AdstarGod Firewall, easy to use
         <translation>Alipay...</translation>
     </message>
     <message>
-        <location line="-916"/>
+        <location line="-919"/>
         <source>代言人</source>
         <translation>Spokesperson</translation>
     </message>
@@ -309,7 +309,7 @@ AdstarGod Firewall, easy to use
         <translation>Note: The public type firewall is not turned on, please test whether the disconnection is effective</translation>
     </message>
     <message>
-        <location line="+165"/>
+        <location line="+168"/>
         <source>计时</source>
         <translation>Manual timing</translation>
     </message>
@@ -362,7 +362,7 @@ AdstarGod Firewall, easy to use
         <translation>About Qt...</translation>
     </message>
     <message>
-        <location line="-833"/>
+        <location line="-836"/>
         <source>防火墙</source>
         <translation>Firewall</translation>
     </message>
@@ -393,7 +393,7 @@ AdstarGod Firewall, easy to use
         <translation>Selected net adapters</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+36"/>
         <source>注意：禁用网卡存在延迟，请勿用于时间敏感的操作！</source>
         <translation>Note: Disabling net adapters may have a delay, don&apos;t use it for time-sensitive operations!</translation>
     </message>
@@ -596,8 +596,9 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+3"/>
-        <source>加入 QQ 群：431228020</source>
-        <translation>Join QQ Group: 431228020</translation>
+        <source>加入 QQ 群：827680900</source>
+        <oldsource>加入 QQ 群：431228020</oldsource>
+        <translation type="unfinished">Join QQ Group: 827680900</translation>
     </message>
 </context>
 <context>

@@ -2,7 +2,7 @@
 
 #include <QKeySequence>
 #include <QList>
-#include <QObject>
+#include <QWidget >
 #include <windows.h>
 
 #define hotkeyUtil (HotkeyUtil::instance())
@@ -25,12 +25,10 @@ signals:
     void activated();
 };
 
-class HotkeyUtil : public QObject {
+class HotkeyUtil : public QWidget {
     Q_OBJECT
 public:
-    explicit HotkeyUtil(QObject* parent = nullptr);
-
-    ~HotkeyUtil();
+    explicit HotkeyUtil(QWidget* parent = nullptr);
 
     static HotkeyUtil* instance();
 
@@ -40,14 +38,18 @@ public:
     void keyDown(DWORD key);
     void keyUp(DWORD key);
 
+    bool registerRawInputDevice();
+    void processRawInput(LPARAM lParam);
+
     quint32 nativeKeycode(Qt::Key keycode, bool& ok);
     quint32 nativeModifiers(Qt::KeyboardModifiers modifiers);
-    quint32 vkToMod(DWORD key);
+    quint32 modifierVkToMod(DWORD key);
     DWORD escapeNumPad(DWORD key);
 
-private:
-    HHOOK hhkKeyboard = nullptr;
+protected:
+    bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 
+private:
     int modifiers;
 
     QList<QHotkey*> hotkeys;

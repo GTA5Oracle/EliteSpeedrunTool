@@ -16,8 +16,8 @@ int main(int argc, char* argv[])
     qInstallMessageHandler(myMessageHandler);
 
     QApplication a(argc, argv);
-    globalData->init();
 
+    globalData->init();
     LanguageUtil::applyLanguage();
 
     // 必须设置为 false。否则在没有顶层窗口或者隐藏主窗口后，如果有子窗口弹出等，若关闭该弹出的子窗口，就会导致主窗口也被关闭
@@ -25,8 +25,8 @@ int main(int argc, char* argv[])
     QApplication::setWindowIcon(QIcon("://image/ic_icon.png"));
     QApplication::setOrganizationName("SkyD666");
     QApplication::setApplicationName(QObject::tr("精英速通工具"));
-    QApplication::setApplicationVersion("11.0.1.70-alpha03");
-    qputenv("ApplicationVersionCode", "20241210");
+    QApplication::setApplicationVersion("11.0.1.70");
+    qputenv("ApplicationVersionCode", "20241212");
 
     qApp->setStyle(globalData->styleName());
 

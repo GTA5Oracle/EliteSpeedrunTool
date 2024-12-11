@@ -1,9 +1,8 @@
 #include "HotkeyUtil.h"
 #include <QDebug>
+#include <hidusage.h>
 
 Q_GLOBAL_STATIC(HotkeyUtil, hotkeyUtilInstance)
-
-LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
 
 QHotkey::QHotkey(QKeySequence keySeq, bool autoRegister, QObject* parent)
     : keySeq { keySeq }
@@ -13,7 +12,7 @@ QHotkey::QHotkey(QKeySequence keySeq, bool autoRegister, QObject* parent)
         hotkeyUtil->registerHotkey(this);
     }
     auto hotkey = keySeq[0];
-    nativeKeycode = hotkeyUtil->nativeKeycode(hotkey.key(), nativeKeycodeOk);
+    nativeKeycode = hotkeyUtil->escapeNumPad(hotkeyUtil->nativeKeycode(hotkey.key(), nativeKeycodeOk));
     nativeModifiers = hotkeyUtil->nativeModifiers(hotkey.keyboardModifiers());
 }
 
@@ -36,18 +35,11 @@ void QHotkey::emitSignal()
     emit activated();
 }
 
-HotkeyUtil::HotkeyUtil(QObject* parent)
-    : QObject { parent }
+HotkeyUtil::HotkeyUtil(QWidget* parent)
+    : QWidget { parent }
 {
-    hhkKeyboard = SetWindowsHookEx(WH_KEYBOARD_LL, keyboardProc, 0, 0);
-}
-
-HotkeyUtil::~HotkeyUtil()
-{
-    if (hhkKeyboard) {
-        UnhookWindowsHookEx(hhkKeyboard);
-        hhkKeyboard = nullptr;
-    }
+    qInfo() << "HotkeyUtil initializing...";
+    registerRawInputDevice();
 }
 
 HotkeyUtil* HotkeyUtil::instance()
@@ -70,12 +62,12 @@ void HotkeyUtil::unregisterHotkey(QHotkey* key)
 void HotkeyUtil::keyDown(DWORD key)
 {
     if (isModifier(key)) {
-        modifiers |= vkToMod(key);
+        modifiers |= modifierVkToMod(key);
         return;
     }
     key = escapeNumPad(key);
     for (const auto& hotkeySeq : hotkeys) {
-        qDebug() << hotkeySeq->nativeModifiers << modifiers << hotkeySeq->nativeKeycodeOk << hotkeySeq->nativeKeycode << key;
+        // qDebug() << hotkeySeq->nativeModifiers << modifiers << hotkeySeq->nativeKeycodeOk << hotkeySeq->nativeKeycode << key;
         if (hotkeySeq->nativeModifiers != modifiers || !hotkeySeq->nativeKeycodeOk || hotkeySeq->nativeKeycode != key) {
             continue;
         }
@@ -86,39 +78,74 @@ void HotkeyUtil::keyDown(DWORD key)
 void HotkeyUtil::keyUp(DWORD key)
 {
     if (isModifier(key)) {
-        modifiers &= ~vkToMod(key);
+        modifiers &= ~modifierVkToMod(key);
         return;
     }
-    key = escapeNumPad(key);
+    // key = escapeNumPad(key);
 }
 
-LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
+bool HotkeyUtil::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
 {
-    if (nCode == HC_ACTION) {
-        switch (wParam) {
-        case WM_SYSKEYDOWN:
-        case WM_KEYDOWN:
-            // qDebug() << PKBDLLHOOKSTRUCT(lParam)->vkCode;
-            hotkeyUtil->keyDown(PKBDLLHOOKSTRUCT(lParam)->vkCode);
-            break;
-        case WM_SYSKEYUP:
-        case WM_KEYUP:
-            hotkeyUtil->keyUp(PKBDLLHOOKSTRUCT(lParam)->vkCode);
-            break;
+    if (eventType == "windows_generic_MSG" || eventType == "windows_dispatcher_MSG") {
+        MSG* msg = static_cast<MSG*>(message);
+
+        if (msg->message == WM_INPUT) {
+            processRawInput(msg->lParam);
         }
     }
-    return CallNextHookEx(NULL, nCode, wParam, lParam);
+    return QWidget::nativeEvent(eventType, message, result);
+}
+
+bool HotkeyUtil::registerRawInputDevice()
+{
+    // https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-rawinputdevice
+    RAWINPUTDEVICE rid;
+    rid.usUsagePage = HID_USAGE_PAGE_GENERIC; // Generic Desktop Controls
+    rid.usUsage = HID_USAGE_GENERIC_KEYBOARD; // Keyboard
+    rid.dwFlags = RIDEV_INPUTSINK; // Enables the caller to receive the input even when the caller is not in the foreground
+    rid.hwndTarget = reinterpret_cast<HWND>(winId()); // Window hwnd
+
+    return RegisterRawInputDevices(&rid, 1, sizeof(rid));
+}
+
+void HotkeyUtil::processRawInput(LPARAM lParam)
+{
+    UINT dwSize = 0;
+    // Get the input data size
+    GetRawInputData((HRAWINPUT)lParam, RID_INPUT, nullptr, &dwSize, sizeof(RAWINPUTHEADER));
+
+    // Allocate buffer
+    LPBYTE lpb = new BYTE[dwSize];
+    if (!lpb) {
+        return;
+    }
+
+    // Get the input data
+    if (GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER)) != dwSize) {
+        qCritical() << "GetRawInputData does not return correct size!";
+    }
+
+    // Parse RAWINPUT
+    RAWINPUT* raw = (RAWINPUT*)lpb;
+    if (raw->header.dwType == RIM_TYPEKEYBOARD) {
+        RAWKEYBOARD keyboard = raw->data.keyboard;
+        UINT vKey = keyboard.VKey; // Virtual key code
+        // UINT scanCode = keyboard.MakeCode; // Scan code
+        UINT flags = keyboard.Flags; // Key Down / Key Up
+
+        if (flags & RI_KEY_BREAK) {
+            keyUp(vKey);
+        } else {
+            keyDown(vKey);
+        }
+    }
+
+    delete[] lpb;
 }
 
 quint32 HotkeyUtil::nativeKeycode(Qt::Key keycode, bool& ok)
 {
     ok = true;
-    if (keycode <= 0xFFFF) { // Try to obtain the key from it's "character"
-        const SHORT vKey = VkKeyScanW(static_cast<WCHAR>(keycode));
-        if (vKey > -1)
-            return LOBYTE(vKey);
-    }
-
     // find key from switch/case --> Only finds a very small subset of keys
     switch (keycode) {
     case Qt::Key_Escape:
@@ -247,6 +274,14 @@ quint32 HotkeyUtil::nativeKeycode(Qt::Key keycode, bool& ok)
         return VK_PLAY;
     case Qt::Key_Cancel:
         return VK_CANCEL;
+    case Qt::Key_Plus:
+        return VK_ADD;
+    case Qt::Key_Minus:
+        return VK_SUBTRACT;
+    case Qt::Key_Slash:
+        return VK_DIVIDE;
+    case Qt::Key_Asterisk:
+        return VK_MULTIPLY;
 
     case Qt::Key_Forward:
         return VK_BROWSER_FORWARD;
@@ -276,9 +311,14 @@ quint32 HotkeyUtil::nativeKeycode(Qt::Key keycode, bool& ok)
         return VK_OEM_FJ_TOUROKU;
 
     default:
-        if (keycode <= 0xFFFF)
-            return static_cast<BYTE>(keycode);
-        else {
+        if (keycode <= 0xFFFF) { // Try to obtain the key from it's "character"
+            const SHORT vKey = VkKeyScanW(static_cast<WCHAR>(keycode));
+            if (vKey > -1) {
+                return LOBYTE(vKey);
+            } else {
+                return static_cast<BYTE>(keycode);
+            }
+        } else {
             ok = false;
             return 0;
         }
@@ -299,7 +339,7 @@ quint32 HotkeyUtil::nativeModifiers(Qt::KeyboardModifiers modifiers)
     return nMods;
 }
 
-quint32 HotkeyUtil::vkToMod(DWORD key)
+quint32 HotkeyUtil::modifierVkToMod(DWORD key)
 {
     switch (key) {
     case VK_LMENU:
@@ -310,6 +350,8 @@ quint32 HotkeyUtil::vkToMod(DWORD key)
     case VK_RCONTROL:
     case VK_CONTROL:
         return MOD_CONTROL;
+    case VK_LSHIFT:
+    case VK_RSHIFT:
     case VK_SHIFT:
         return MOD_SHIFT;
     case VK_LWIN:
@@ -324,21 +366,12 @@ DWORD HotkeyUtil::escapeNumPad(DWORD key)
     if (key >= VK_NUMPAD0 && key <= VK_NUMPAD9) {
         return key - (VK_NUMPAD0 - 0x30); // 0x30 == 1
     }
-    if (key == VK_OEM_PLUS) {
-        return '+';
-    }
     return key;
 }
 
 bool HotkeyUtil::isModifier(DWORD key)
 {
-    return key == VK_LMENU
-        || key == VK_RMENU
-        || key == VK_MENU
-        || key == VK_LCONTROL
-        || key == VK_RCONTROL
-        || key == VK_CONTROL
-        || key == VK_SHIFT
-        || key == VK_LWIN
-        || key == VK_RWIN;
+    return key >= VK_LSHIFT && key <= VK_RMENU
+        || key >= VK_SHIFT && key <= VK_MENU
+        || key >= VK_LWIN && key <= VK_RWIN;
 }

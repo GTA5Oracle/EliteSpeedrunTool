@@ -141,7 +141,7 @@ private:
         + tr("游戏逆向：Zerkalo2147")
         + "</p>"
         + "<p>"
-        + tr("加入 QQ 群：431228020") + "<br>"
+        + tr("加入 QQ 群：827680900") + "<br>"
         + "<a href='https://t.me/SkyD666Chat'>" + tr("加入 Telegram 群组一起划水~") + "</a><br>"
         + "<a href='https://discord.gg/pEWEjeJTa3'>" + tr("加入 Discord 一起划水~") + "</a>"
         + "</p>"

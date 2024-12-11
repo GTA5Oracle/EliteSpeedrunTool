@@ -68,5 +68,6 @@ private:
         "巨大糖丸🐷",
         "GodfatherCDW",
         "9527_SSR",
+        "Capucino_ovo",
     };
 };
