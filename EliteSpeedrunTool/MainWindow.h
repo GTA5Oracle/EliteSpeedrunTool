@@ -80,6 +80,8 @@ protected:
 
     void closeGameImmediately();
 
+    void topMostWindow(bool isTop, bool fromHotkey);
+
 signals:
     void toTimerStoppedAndZeroState();
     void toTimerStoppedOrStoppedAndZeroState();
@@ -100,6 +102,8 @@ private:
     // 保证多线程原子性，不过现在用的是QTimer，并没有涉及到多线程
     std::atomic<bool> displayInfoDialogIsShowing = false;
     DisplayInfoDialog* displayInfoDialog = nullptr;
+
+    QHotkey* topMostWindowHotkey = nullptr;
 
     QHotkey* startFirewallHotkey = nullptr;
     QHotkey* stopFirewallHotkey = nullptr;
@@ -135,9 +139,12 @@ private:
 
     QString license = "<h3>" + QApplication::applicationDisplayName()
         + " v" + QApplication::applicationVersion() + "</h3>"
-        + tr("<p>一个 GTAOL 精英、速通工具，支持快速启动防火墙、计时、结束游戏等。</p>")
         + "<p>"
-        + tr("程序开发：SkyD666") + "<br>"
+        + tr("一个 GTAOL 精英、速通工具，支持断网、计时、卡单、结束游戏、屏幕准星等。")
+        + "</p>"
+        + "<p>"
+        + tr("程序开发：SkyD666")
+        + "<br>"
         + tr("游戏逆向：Zerkalo2147")
         + "</p>"
         + "<p>"

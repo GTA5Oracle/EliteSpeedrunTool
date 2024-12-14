@@ -2,6 +2,7 @@
 #define RTSSUTIL_H
 
 #include "DisplayInfoSubFunction.h"
+#include <QApplication>
 #include <QMap>
 
 #define rtssUtil (RtssUtil::instance())
@@ -15,20 +16,27 @@ public:
 
     void initOverlay();
     void releaseOverlay();
+    void releaseOverlay(QString osdOwner);
 
+    void refreshAll();
     bool updateTimer(unsigned long long deltaTime);
-
     bool updateAct3Headshot(int headshot);
 
 private:
+    void initDisplayInfo();
+    void initCrosshair();
+
     bool check();
 
-    bool updateOsd();
-    bool updateOsd(QString text);
+    bool updateDisplayInfo();
+    bool updateCrosshair();
+    bool updateOsd(QString text, QString osdOwner);
 
     QString getTimeString(unsigned long long deltaTime);
 
     const int rtssSignature = 'S' | 'S' << 8 | 'T' << 16 | 'R' << 24;
+    QString displayInfoOsdOwner = qAppName() + "-DisplayInfo";
+    QString crosshairOsdOwner = qAppName() + "-Crosshair";
 
     bool overlayInited = false;
 

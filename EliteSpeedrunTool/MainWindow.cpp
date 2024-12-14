@@ -170,6 +170,7 @@ void MainWindow::registerHotkeyPair(
 
 void MainWindow::removeAllHotkeys()
 {
+    removeHotkey(topMostWindowHotkey);
     removeHotkey(startFirewallHotkey);
     removeHotkey(stopFirewallHotkey);
     removeHotkey(disableNetworkAdapterHotkey);
@@ -205,6 +206,12 @@ void MainWindow::setHotkey()
         globalData->timerStopHotkey(),
         globalData->suspendAndResumeHotkey(),
         globalData->closeGameImmediatelyHotkey()));
+
+    // 置顶工具
+    registerHotkey(
+        globalData->topMostWindowHotkey(),
+        topMostWindowHotkey,
+        [this]() { topMostWindow(!ui.actionTopMost->isChecked(), true); });
 
     // 防火墙
     registerHotkeyPair(
@@ -349,6 +356,15 @@ void MainWindow::initMenu()
         }
     });
     ui.actionDisplayInfoTouchable->setChecked(globalData->displayInfoTouchable());
+
+    // Refresh RTSS
+    connect(ui.actionRefreshRtss, &QAction::toggled, this, [this]() {
+        rtssUtil->refreshAll();
+    });
+    // Top most
+    connect(ui.actionTopMost, &QAction::toggled, this, [this](bool checked) {
+        topMostWindow(checked, false);
+    });
 
     // 启动服务器
     auto enableServerLambda = [=](bool checked) {
@@ -848,6 +864,22 @@ void MainWindow::closeGameImmediately()
 {
     system("taskkill /f /t /im GTA5.exe");
     qInfo("Using taskkill command to terminate GTA5.exe");
+}
+
+void MainWindow::topMostWindow(bool isTop, bool fromHotkey)
+{
+    ui.actionTopMost->setChecked(isTop);
+    HWND hwnd = reinterpret_cast<HWND>(winId());
+    if (isTop) {
+        SetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+        show();
+        setWindowState((windowState() & ~Qt::WindowMinimized) | Qt::WindowActive);
+    } else {
+        SetWindowPos(hwnd, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+        if (fromHotkey) {
+            setWindowState(windowState() | Qt::WindowMinimized);
+        }
+    }
 }
 
 void MainWindow::initSystemTray()

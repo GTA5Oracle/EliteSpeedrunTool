@@ -43,6 +43,7 @@ SettingDialog::SettingDialog(QWidget* parent)
 
     initDisplayInfoSettings();
     initRtssSettings();
+    initRtssCrosshairSettings();
 }
 
 SettingDialog::~SettingDialog()
@@ -62,6 +63,13 @@ void SettingDialog::initGeneralSettings()
     connect(ui.cbAutoCheckUpdate, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->setAutoCheckUpdate(state == Qt::Checked);
     });
+
+    // Top most
+    initHotkeyWidgets(
+        globalData->topMostWindowHotkey(),
+        ui.keySeqTopMostWindow,
+        ui.tbClearTopMostWindowEdit,
+        [](const QString& hotkey) { globalData->setTopMostWindowHotkey(hotkey); });
 
     // 样式
     for (auto&& k : QStyleFactory::keys()) {
@@ -505,6 +513,50 @@ void SettingDialog::initRtssSettings()
         });
     setRtssSubFunctionSettings(currentRtssSubFunction);
     ui.cbRtssSubFunction->setCurrentIndex(currentRtssSubFunctionIndex);
+}
+
+void SettingDialog::initRtssCrosshairSettings()
+{
+    ui.cbRtssCrosshair->setChecked(globalData->rtssCrosshair());
+    connect(ui.cbRtssCrosshair, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
+        globalData->setRtssCrosshair(state == Qt::Checked);
+    });
+
+    // Text
+    ui.leRtssCrosshairText->setText(globalData->rtssCrosshairText());
+    connect(ui.leRtssCrosshairText, &QLineEdit::textChanged, this, [=](const QString& text) {
+        globalData->setRtssCrosshairText(text);
+    });
+
+    // XY
+    ui.sbRtssCrosshairX->setValue(globalData->rtssCrosshairX());
+    connect(ui.sbRtssCrosshairX, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setRtssCrosshairX(value);
+    });
+    ui.sbRtssCrosshairY->setValue(globalData->rtssCrosshairY());
+    connect(ui.sbRtssCrosshairY, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setRtssCrosshairY(value);
+    });
+
+    // Size
+    ui.sbRtssCrosshairSize->setValue(globalData->rtssCrosshairSize());
+    connect(ui.sbRtssCrosshairSize, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setRtssCrosshairSize(value);
+    });
+
+    // Color
+    ui.labRtssCrosshairColor->setAutoFillBackground(true);
+    QPalette paletteBackground = ui.labRtssCrosshairColor->palette();
+    paletteBackground.setColor(QPalette::Window, globalData->rtssCrosshairColor().rgb());
+    ui.labRtssCrosshairColor->setPalette(paletteBackground);
+    connect(ui.tbRtssCrosshairColor, &QAbstractButton::clicked, this, [=]() {
+        QColorDialog dialog(globalData->rtssCrosshairColor());
+        if (dialog.exec() == QDialog::Accepted) {
+            auto color = dialog.selectedColor();
+            globalData->setRtssCrosshairColor(color);
+            ui.labRtssCrosshairColor->setStyleSheet(QString("background-color: %1;").arg(color.name()));
+        }
+    });
 }
 
 void SettingDialog::initAct3Headshot()

@@ -216,6 +216,27 @@ public:
     QString networkAdaptersDisableSound() const;
     void setNetworkAdaptersDisableSound(const QString& newNetworkAdaptersDisableSound);
 
+    bool rtssCrosshair() const;
+    void setRtssCrosshair(bool newRtssCrosshair);
+
+    QString rtssCrosshairText() const;
+    void setRtssCrosshairText(const QString& newRtssCrosshairText);
+
+    int rtssCrosshairX() const;
+    void setRtssCrosshairX(int newRtssCrosshairX);
+
+    int rtssCrosshairY() const;
+    void setRtssCrosshairY(int newRtssCrosshairY);
+
+    int rtssCrosshairSize() const;
+    void setRtssCrosshairSize(int newRtssCrosshairSize);
+
+    QColor rtssCrosshairColor() const;
+    void setRtssCrosshairColor(QColor newRtssCrosshairColor);
+
+    QString topMostWindowHotkey() const;
+    void setTopMostWindowHotkey(const QString& newShowToolHotkey);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -286,8 +307,23 @@ signals:
 
     void networkAdaptersDisableSoundChanged();
 
+    void rtssCrosshairChanged();
+
+    void rtssCrosshairTextChanged();
+
+    void rtssCrosshairXChanged();
+
+    void rtssCrosshairYChanged();
+
+    void rtssCrosshairSizeChanged();
+
+    void rtssCrosshairColorChanged();
+
+    void topMostWindowHotkeyChanged();
+
 private:
     bool mMinimizeToTray = false;
+    QString mTopMostWindowHotkey = "";
     QString mStyleName = "windows11";
     // 版本
     bool mAutoCheckUpdate = true;
@@ -311,6 +347,12 @@ private:
 
     // RTSS
     bool mRtssOverlay = true;
+    bool mRtssCrosshair = false;
+    QString mRtssCrosshairText = "*";
+    int mRtssCrosshairX = 200;
+    int mRtssCrosshairY = 200;
+    int mRtssCrosshairSize = 80;
+    QColor mRtssCrosshairColor = Qt::yellow;
 
     // 防火墙
     QString mFirewallStartHotkey = "F9";
@@ -431,4 +473,11 @@ private:
     Q_PROPERTY(QString networkAdaptersDisableHotkey READ networkAdaptersDisableHotkey WRITE setNetworkAdaptersDisableHotkey NOTIFY networkAdaptersDisableHotkeyChanged FINAL)
     Q_PROPERTY(QString networkAdaptersEnableSound READ networkAdaptersEnableSound WRITE setNetworkAdaptersEnableSound NOTIFY networkAdaptersEnableSoundChanged FINAL)
     Q_PROPERTY(QString networkAdaptersDisableSound READ networkAdaptersDisableSound WRITE setNetworkAdaptersDisableSound NOTIFY networkAdaptersDisableSoundChanged FINAL)
+    Q_PROPERTY(bool rtssCrosshair READ rtssCrosshair WRITE setRtssCrosshair NOTIFY rtssCrosshairChanged FINAL)
+    Q_PROPERTY(QString rtssCrosshairText READ rtssCrosshairText WRITE setRtssCrosshairText NOTIFY rtssCrosshairTextChanged FINAL)
+    Q_PROPERTY(int rtssCrosshairX READ rtssCrosshairX WRITE setRtssCrosshairX NOTIFY rtssCrosshairXChanged FINAL)
+    Q_PROPERTY(int rtssCrosshairY READ rtssCrosshairY WRITE setRtssCrosshairY NOTIFY rtssCrosshairYChanged FINAL)
+    Q_PROPERTY(int rtssCrosshairSize READ rtssCrosshairSize WRITE setRtssCrosshairSize NOTIFY rtssCrosshairSizeChanged FINAL)
+    Q_PROPERTY(QColor rtssCrosshairColor READ rtssCrosshairColor WRITE setRtssCrosshairColor NOTIFY rtssCrosshairColorChanged FINAL)
+    Q_PROPERTY(QString topMostWindowHotkey READ topMostWindowHotkey WRITE setTopMostWindowHotkey NOTIFY topMostWindowHotkeyChanged FINAL)
 };

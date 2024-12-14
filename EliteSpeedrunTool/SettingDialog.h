@@ -71,6 +71,8 @@ protected:
 
     void initRtssSettings();
 
+    void initRtssCrosshairSettings();
+
     void initAct3Headshot();
 
     void initSuspendProcess();

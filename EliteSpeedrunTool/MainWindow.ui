@@ -875,6 +875,8 @@
      <addaction name="menuServer"/>
     </widget>
     <addaction name="menuDisplayInfo"/>
+    <addaction name="actionRefreshRtss"/>
+    <addaction name="actionTopMost"/>
    </widget>
    <widget class="QMenu" name="menuSponsor">
     <property name="title">
@@ -1032,6 +1034,19 @@
   <action name="actionAcknowledgement">
    <property name="text">
     <string>致谢...</string>
+   </property>
+  </action>
+  <action name="actionTopMost">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>置顶窗口</string>
+   </property>
+  </action>
+  <action name="actionRefreshRtss">
+   <property name="text">
+    <string>刷新 RTSS 显示</string>
    </property>
   </action>
  </widget>

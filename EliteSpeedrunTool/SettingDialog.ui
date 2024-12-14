@@ -46,7 +46,7 @@
       <enum>QFrame::Shadow::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -72,8 +72,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>246</width>
+            <height>219</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -89,6 +89,40 @@
              <property name="text">
               <string>启动时自动检查更新</string>
              </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_23">
+             <property name="title">
+              <string>置顶窗口快捷键</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_46">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <item>
+                 <widget class="QKeySequenceEdit" name="keySeqTopMostWindow"/>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="tbClearTopMostWindowEdit">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="resource.qrc">
+                    <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_56">
+                <property name="text">
+                 <string>第一次按下后可以置顶工具窗口，再次按下后取消置顶</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
            <item>
@@ -178,8 +212,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>204</width>
+                <height>391</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -519,8 +553,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>187</width>
+                <height>196</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -703,129 +737,356 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="QScrollArea" name="scrollArea_12">
-         <property name="widgetResizable">
-          <bool>true</bool>
+        <widget class="QTabWidget" name="tabWidget_4">
+         <property name="currentIndex">
+          <number>0</number>
          </property>
-         <widget class="QWidget" name="scrollAreaWidgetContents_12">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>0</y>
-            <width>167</width>
-            <height>508</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_33">
+         <widget class="QWidget" name="tab_5">
+          <attribute name="title">
+           <string>信息展示</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_42">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QCheckBox" name="cbRtssOverlay">
-             <property name="text">
-              <string>连接到 RTSS</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_45">
-             <property name="text">
-              <string>注意：此功能需要启动 RivaTuner Statistics Server</string>
-             </property>
-             <property name="wordWrap">
+            <widget class="QScrollArea" name="scrollArea_12">
+             <property name="widgetResizable">
               <bool>true</bool>
              </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_12">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>525</width>
+                <height>475</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_33">
+               <item>
+                <widget class="QCheckBox" name="cbRtssOverlay">
+                 <property name="text">
+                  <string>连接到 RTSS</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_45">
+                 <property name="text">
+                  <string>注意：此功能需要启动 RivaTuner Statistics Server</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="gbRtssSubFunction">
+                 <property name="title">
+                  <string>子项</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_37">
+                  <item>
+                   <widget class="QComboBox" name="cbRtssSubFunction">
+                    <property name="font">
+                     <font>
+                      <pointsize>16</pointsize>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_44">
+                    <property name="font">
+                     <font>
+                      <bold>true</bold>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>注：该组内的设置仅针对所选的功能</string>
+                    </property>
+                    <property name="wordWrap">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QCheckBox" name="cbRtssSubFunctionOsd">
+                    <property name="text">
+                     <string>在 RTSS 上显示该项</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QGroupBox" name="groupBox_19">
+                    <property name="title">
+                     <string>OSD 文本格式</string>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_38">
+                     <item>
+                      <widget class="QPlainTextEdit" name="teRtssSubFunctionOsdText"/>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_5">
+                       <item>
+                        <widget class="QLabel" name="label_43">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="text">
+                          <string>OSD 文本格式在下次更新数据时生效</string>
+                         </property>
+                         <property name="wordWrap">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QToolButton" name="tbRtssSubFunctionResetOsdText">
+                         <property name="text">
+                          <string>重置 OSD 文本格式</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>1</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
             </widget>
            </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_6">
+          <attribute name="title">
+           <string>准星</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_43">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QGroupBox" name="gbRtssSubFunction">
-             <property name="title">
-              <string>子项</string>
+            <widget class="QScrollArea" name="scrollArea_14">
+             <property name="widgetResizable">
+              <bool>true</bool>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_37">
-              <item>
-               <widget class="QComboBox" name="cbRtssSubFunction">
-                <property name="font">
-                 <font>
-                  <pointsize>16</pointsize>
-                  <bold>true</bold>
-                 </font>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_44">
-                <property name="font">
-                 <font>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>注：该组内的设置仅针对所选的功能</string>
-                </property>
-                <property name="wordWrap">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QCheckBox" name="cbRtssSubFunctionOsd">
-                <property name="text">
-                 <string>在 RTSS 上显示该项</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QGroupBox" name="groupBox_19">
-                <property name="title">
-                 <string>OSD 文本格式</string>
-                </property>
-                <layout class="QVBoxLayout" name="verticalLayout_38">
+             <widget class="QWidget" name="scrollAreaWidgetContents_14">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>525</width>
+                <height>475</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_44">
+               <item>
+                <widget class="QCheckBox" name="cbRtssCrosshair">
+                 <property name="text">
+                  <string>显示游戏准星</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
                  <item>
-                  <widget class="QPlainTextEdit" name="teRtssSubFunctionOsdText"/>
+                  <widget class="QLabel" name="label_51">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>准星文本</string>
+                   </property>
+                  </widget>
                  </item>
                  <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_5">
-                   <item>
-                    <widget class="QLabel" name="label_43">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="text">
-                      <string>OSD 文本格式在下次更新数据时生效</string>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QToolButton" name="tbRtssSubFunctionResetOsdText">
-                     <property name="text">
-                      <string>重置 OSD 文本格式</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+                  <widget class="QLineEdit" name="leRtssCrosshairText"/>
                  </item>
                 </layout>
-               </widget>
-              </item>
-             </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <item>
+                  <widget class="QLabel" name="label_49">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>水平位置</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="sbRtssCrosshairX">
+                   <property name="minimum">
+                    <number>0</number>
+                   </property>
+                   <property name="maximum">
+                    <number>2147483647</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_50">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>垂直位置</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="sbRtssCrosshairY">
+                   <property name="maximum">
+                    <number>2147483647</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QLabel" name="label_54">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>大小</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="sbRtssCrosshairSize">
+                   <property name="maximum">
+                    <number>500</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_9">
+                 <item>
+                  <widget class="QLabel" name="label_55">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>颜色</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="labRtssCrosshairColor"/>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="tbRtssCrosshairColor">
+                   <property name="text">
+                    <string notr="true">...</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QGroupBox" name="groupBox_21">
+                 <property name="title">
+                  <string>提示</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_45">
+                  <item>
+                   <widget class="QLabel" name="label_57">
+                    <property name="text">
+                     <string>由于 RTSS 限制，此功能不支持自动居中显示，需要用户手动调整准星位置。
+
+使用流程：
+1. 启动游戏并调整窗口至理想大小（全屏下无法调节）
+2. 使用菜单选项或快捷键来置顶工具窗口
+3. 在此页面调节准星属性
+4. 再次使用菜单选项或快捷键取消窗口置顶</string>
+                    </property>
+                    <property name="wordWrap">
+                     <bool>true</bool>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>1</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
             </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer_5">
-             <property name="orientation">
-              <enum>Qt::Orientation::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>1</height>
-              </size>
-             </property>
-            </spacer>
            </item>
           </layout>
          </widget>
@@ -879,8 +1140,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>149</width>
+                <height>585</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -1327,8 +1588,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>134</width>
+            <height>416</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -1525,8 +1786,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>98</width>
+            <height>170</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -1646,8 +1907,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>155</width>
+            <height>180</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -1798,8 +2059,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>98</width>
+            <height>70</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -1873,8 +2134,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>155</width>
+            <height>110</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -1962,8 +2223,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>98</width>
+            <height>67</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_19">
@@ -2023,8 +2284,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>98</width>
+            <height>34</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_34">
@@ -2058,6 +2319,111 @@ C:\Program Files (x86)\nn\nn.exe</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lwPage</tabstop>
+  <tabstop>scrollArea_7</tabstop>
+  <tabstop>cbMinimizeToTray</tabstop>
+  <tabstop>cbAutoCheckUpdate</tabstop>
+  <tabstop>cbStyle</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>scrollArea_2</tabstop>
+  <tabstop>cbDisplayInfoFunction</tabstop>
+  <tabstop>cbDisplayInfoFuncEnable</tabstop>
+  <tabstop>fcbDisplayInfoFont</tabstop>
+  <tabstop>sbDisplayInfoTextSize</tabstop>
+  <tabstop>tbSelectDisplayInfoTextColor</tabstop>
+  <tabstop>sbDisplayInfoTextShadowBlurRadius</tabstop>
+  <tabstop>sbDisplayInfoTextShadowOffsetX</tabstop>
+  <tabstop>sbDisplayInfoTextShadowOffsetY</tabstop>
+  <tabstop>tbSelectDisplayInfoTextShadowColor</tabstop>
+  <tabstop>cbDisplayInfoTextHAlign</tabstop>
+  <tabstop>cbDisplayInfoTextVAlign</tabstop>
+  <tabstop>tabWidget_4</tabstop>
+  <tabstop>hsDisplayInfoWidth</tabstop>
+  <tabstop>scrollArea_12</tabstop>
+  <tabstop>cbRtssOverlay</tabstop>
+  <tabstop>cbRtssSubFunction</tabstop>
+  <tabstop>cbRtssSubFunctionOsd</tabstop>
+  <tabstop>teRtssSubFunctionOsdText</tabstop>
+  <tabstop>tbRtssSubFunctionResetOsdText</tabstop>
+  <tabstop>leRtssCrosshairText</tabstop>
+  <tabstop>sbRtssCrosshairX</tabstop>
+  <tabstop>sbRtssCrosshairY</tabstop>
+  <tabstop>sbRtssCrosshairSize</tabstop>
+  <tabstop>tbRtssCrosshairColor</tabstop>
+  <tabstop>tabWidget_3</tabstop>
+  <tabstop>scrollArea_3</tabstop>
+  <tabstop>keySeqStartFirewall</tabstop>
+  <tabstop>tbClearStartFirewallHotkeyEdit</tabstop>
+  <tabstop>keySeqStopFirewall</tabstop>
+  <tabstop>tbClearStopFirewallHotkeyEdit</tabstop>
+  <tabstop>leFirewallStartSoundPath</tabstop>
+  <tabstop>tbFirewallPlayStartSound</tabstop>
+  <tabstop>tbFirewallSelectStartSound</tabstop>
+  <tabstop>leFirewallStopSoundPath</tabstop>
+  <tabstop>tbFirewallPlayStopSound</tabstop>
+  <tabstop>tbFirewallSelectStopSound</tabstop>
+  <tabstop>leFirewallErrorSoundPath</tabstop>
+  <tabstop>tbFirewallPlayErrorSound</tabstop>
+  <tabstop>tbFirewallSelectErrorSound</tabstop>
+  <tabstop>cbFirewallDirection</tabstop>
+  <tabstop>leFirewallAppPath</tabstop>
+  <tabstop>tbSelectFirewallApp</tabstop>
+  <tabstop>tabWidget_2</tabstop>
+  <tabstop>scrollArea_13</tabstop>
+  <tabstop>lwNetworkAdapters</tabstop>
+  <tabstop>keySeqDisableNetworkAdapter</tabstop>
+  <tabstop>tbClearDisableNetworkAdapterHotkeyEdit</tabstop>
+  <tabstop>keySeqEnableNetworkAdapter</tabstop>
+  <tabstop>tbClearEnableNetworkAdapteHotkeyEdit</tabstop>
+  <tabstop>leDisableNetworkAdapterSoundPath</tabstop>
+  <tabstop>tbPlayDisableNetworkAdapterSound</tabstop>
+  <tabstop>tbSelectDisableNetworkAdapterSound</tabstop>
+  <tabstop>leEnableNetworkAdapterSoundPath</tabstop>
+  <tabstop>tbPlayEnableNetworkAdapterSound</tabstop>
+  <tabstop>tbSelectEnableNetworkAdapterSound</tabstop>
+  <tabstop>scrollArea_5</tabstop>
+  <tabstop>keySeqStartTimer</tabstop>
+  <tabstop>tbClearStartTimerHotkeyEdit</tabstop>
+  <tabstop>keySeqPauseTimer</tabstop>
+  <tabstop>tbClearPauseTimerHotkeyEdit</tabstop>
+  <tabstop>keySeqStopTimer</tabstop>
+  <tabstop>tbClearStopTimerHotkeyEdit</tabstop>
+  <tabstop>sbTimerUpdateInterval</tabstop>
+  <tabstop>cbTimerStopStrategy</tabstop>
+  <tabstop>scrollArea_11</tabstop>
+  <tabstop>keySeqSuspendProcess</tabstop>
+  <tabstop>tbClearSuspendProcessEdit</tabstop>
+  <tabstop>sbSuspendProcessDuration</tabstop>
+  <tabstop>scrollArea_4</tabstop>
+  <tabstop>keySeqAct3HeadshotStart</tabstop>
+  <tabstop>tbClearAct3HeadshotStart</tabstop>
+  <tabstop>keySeqAct3HeadshotStop</tabstop>
+  <tabstop>tbClearAct3HeadshotStop</tabstop>
+  <tabstop>leAct3HeadshotStartSoundPath</tabstop>
+  <tabstop>tbAct3HeadshotPlayStartSound</tabstop>
+  <tabstop>tbAct3HeadshotStartSound</tabstop>
+  <tabstop>leAct3HeadshotStopSoundPath</tabstop>
+  <tabstop>tbAct3HeadshotPlayStopSound</tabstop>
+  <tabstop>tbAct3HeadshotStopSound</tabstop>
+  <tabstop>scrollArea_9</tabstop>
+  <tabstop>keySeqCloseGameImmediately</tabstop>
+  <tabstop>tbClearCloseGameImmediatelyHotkeyEdit</tabstop>
+  <tabstop>scrollArea_8</tabstop>
+  <tabstop>cbDiscordShowRp</tabstop>
+  <tabstop>tbDiscordRpHelp</tabstop>
+  <tabstop>scrollArea_6</tabstop>
+  <tabstop>cbLanguage</tabstop>
+  <tabstop>hsDisplayInfoHeight</tabstop>
+  <tabstop>scrollArea_10</tabstop>
+  <tabstop>cbDebugMode</tabstop>
+  <tabstop>hsDisplayInfoX</tabstop>
+  <tabstop>hsDisplayInfoY</tabstop>
+  <tabstop>tbSelectDisplayInfoBackground</tabstop>
+  <tabstop>hsDisplayInfoAlpha</tabstop>
+  <tabstop>cbDisplayInfoToolWindow</tabstop>
+  <tabstop>scrollArea</tabstop>
+ </tabstops>
  <resources>
   <include location="resource.qrc"/>
  </resources>

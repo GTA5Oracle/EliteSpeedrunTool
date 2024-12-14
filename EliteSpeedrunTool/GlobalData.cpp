@@ -139,6 +139,7 @@ void GlobalData::readSettings()
     setVersion(settings.value("Version", mVersion).toString());
     setIgnoredNewVersion(settings.value("IgnoredNewVersion", mIgnoredNewVersion).toString());
     setMinimizeToTray(settings.value("MinimizeToTray", mMinimizeToTray).toBool());
+    setTopMostWindowHotkey(settings.value("TopMostWindowHotkey", mTopMostWindowHotkey).toString());
     settings.endGroup();
 
     settings.beginGroup("DisplayInfo");
@@ -163,6 +164,12 @@ void GlobalData::readSettings()
 
     settings.beginGroup("Rtss");
     setRtssOverlay(settings.value("RtssOverlay", mRtssOverlay).toBool());
+    setRtssCrosshair(settings.value("RtssCrosshair", mRtssCrosshair).toBool());
+    setRtssCrosshairText(settings.value("RtssCrosshairText", mRtssCrosshairText).toString());
+    setRtssCrosshairX(settings.value("RtssCrosshairX", mRtssCrosshairX).toInt());
+    setRtssCrosshairY(settings.value("RtssCrosshairY", mRtssCrosshairY).toInt());
+    setRtssCrosshairSize(settings.value("RtssCrosshairSize", mRtssCrosshairSize).toInt());
+    setRtssCrosshairColor(settings.value("RtssCrosshairColor", mRtssCrosshairColor).value<QColor>());
     settings.endGroup();
 
     settings.beginGroup("Firewall");
@@ -237,6 +244,7 @@ void GlobalData::writeSettings()
     settings.setValue("Version", QApplication::applicationVersion());
     settings.setValue("IgnoredNewVersion", mIgnoredNewVersion);
     settings.setValue("MinimizeToTray", mMinimizeToTray);
+    settings.setValue("TopMostWindowHotkey", mTopMostWindowHotkey);
     settings.endGroup();
 
     settings.beginGroup("DisplayInfo");
@@ -254,6 +262,12 @@ void GlobalData::writeSettings()
 
     settings.beginGroup("Rtss");
     settings.setValue("RtssOverlay", mRtssOverlay);
+    settings.setValue("RtssCrosshair", mRtssCrosshair);
+    settings.setValue("RtssCrosshairText", mRtssCrosshairText);
+    settings.setValue("RtssCrosshairX", mRtssCrosshairX);
+    settings.setValue("RtssCrosshairY", mRtssCrosshairY);
+    settings.setValue("RtssCrosshairSize", mRtssCrosshairSize);
+    settings.setValue("RtssCrosshairColor", mRtssCrosshairColor);
     settings.endGroup();
 
     settings.beginGroup("Firewall");
@@ -1005,4 +1019,95 @@ void GlobalData::setNetworkAdaptersDisableSound(const QString& newNetworkAdapter
         return;
     mNetworkAdaptersDisableSound = newNetworkAdaptersDisableSound;
     emit networkAdaptersDisableSoundChanged();
+}
+
+bool GlobalData::rtssCrosshair() const
+{
+    return mRtssCrosshair;
+}
+
+void GlobalData::setRtssCrosshair(bool newRtssCrosshair)
+{
+    if (mRtssCrosshair == newRtssCrosshair)
+        return;
+    mRtssCrosshair = newRtssCrosshair;
+    emit rtssCrosshairChanged();
+}
+
+QString GlobalData::rtssCrosshairText() const
+{
+    return mRtssCrosshairText;
+}
+
+void GlobalData::setRtssCrosshairText(const QString& newRtssCrosshairText)
+{
+    if (mRtssCrosshairText == newRtssCrosshairText)
+        return;
+    mRtssCrosshairText = newRtssCrosshairText;
+    emit rtssCrosshairTextChanged();
+}
+
+int GlobalData::rtssCrosshairX() const
+{
+    return mRtssCrosshairX;
+}
+
+void GlobalData::setRtssCrosshairX(int newRtssCrosshairX)
+{
+    if (mRtssCrosshairX == newRtssCrosshairX)
+        return;
+    mRtssCrosshairX = newRtssCrosshairX;
+    emit rtssCrosshairXChanged();
+}
+
+int GlobalData::rtssCrosshairY() const
+{
+    return mRtssCrosshairY;
+}
+
+void GlobalData::setRtssCrosshairY(int newRtssCrosshairY)
+{
+    if (mRtssCrosshairY == newRtssCrosshairY)
+        return;
+    mRtssCrosshairY = newRtssCrosshairY;
+    emit rtssCrosshairYChanged();
+}
+
+int GlobalData::rtssCrosshairSize() const
+{
+    return mRtssCrosshairSize;
+}
+
+void GlobalData::setRtssCrosshairSize(int newRtssCrosshairSize)
+{
+    if (mRtssCrosshairSize == newRtssCrosshairSize)
+        return;
+    mRtssCrosshairSize = newRtssCrosshairSize;
+    emit rtssCrosshairSizeChanged();
+}
+
+QColor GlobalData::rtssCrosshairColor() const
+{
+    return mRtssCrosshairColor;
+}
+
+void GlobalData::setRtssCrosshairColor(QColor newRtssCrosshairColor)
+{
+    if (mRtssCrosshairColor == newRtssCrosshairColor)
+        return;
+    mRtssCrosshairColor = newRtssCrosshairColor;
+    emit rtssCrosshairColorChanged();
+}
+
+QString GlobalData::topMostWindowHotkey() const
+{
+    return mTopMostWindowHotkey;
+}
+
+void GlobalData::setTopMostWindowHotkey(const QString& newShowToolHotkey)
+{
+    if (mTopMostWindowHotkey == newShowToolHotkey)
+        return;
+    mTopMostWindowHotkey = newShowToolHotkey;
+    emit topMostWindowHotkeyChanged();
 }

@@ -219,7 +219,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+188"/>
-        <location filename="MainWindow.cpp" line="+795"/>
+        <location filename="MainWindow.cpp" line="+811"/>
         <location line="+22"/>
         <source>点击启动</source>
         <translation>Start counting</translation>
@@ -263,7 +263,7 @@ AdstarGod Firewall, easy to use
         <translation>Multi-platform display</translation>
     </message>
     <message>
-        <location line="+163"/>
+        <location line="+165"/>
         <source>爱发电...</source>
         <translation>Ai Fa Dian...</translation>
     </message>
@@ -278,7 +278,7 @@ AdstarGod Firewall, easy to use
         <translation>Alipay...</translation>
     </message>
     <message>
-        <location line="-919"/>
+        <location line="-921"/>
         <source>代言人</source>
         <translation>Spokesperson</translation>
     </message>
@@ -335,7 +335,7 @@ AdstarGod Firewall, easy to use
         <translation>Screenshot</translation>
     </message>
     <message>
-        <location line="+83"/>
+        <location line="+85"/>
         <source>赞助(&amp;S)</source>
         <translation>&amp;Sponsor</translation>
     </message>
@@ -362,7 +362,7 @@ AdstarGod Firewall, easy to use
         <translation>About Qt...</translation>
     </message>
     <message>
-        <location line="-836"/>
+        <location line="-838"/>
         <source>防火墙</source>
         <translation>Firewall</translation>
     </message>
@@ -429,7 +429,7 @@ AdstarGod Firewall, easy to use
         <translation>Take the first screenshot before the tunnel cutscene and the second after the orbital cannon to get the Hs count before the silo. You should subtract missed shots.</translation>
     </message>
     <message>
-        <location line="+165"/>
+        <location line="+167"/>
         <source>关于本软件...</source>
         <translation>About...</translation>
     </message>
@@ -486,7 +486,17 @@ AdstarGod Firewall, easy to use
         <translation>&amp;Display...</translation>
     </message>
     <message>
-        <location line="-53"/>
+        <location line="+42"/>
+        <source>置顶窗口</source>
+        <translation>Top most</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>刷新 RTSS 显示</source>
+        <translation>Refresh RTSS</translation>
+    </message>
+    <message>
+        <location line="-100"/>
         <source>显示...</source>
         <translation>Show...</translation>
     </message>
@@ -517,12 +527,12 @@ AdstarGod Firewall, easy to use
         <translation>Server is not running</translation>
     </message>
     <message>
-        <location line="-98"/>
+        <location line="-107"/>
         <source>暂停计时器快捷键与启动/停止计时器快捷键相同，暂停计时器快捷键将会无效！</source>
         <translation>The pause timer hotkey is the same as the start/stop timer hotkey, so the pause timer hotkey will be invalid!</translation>
     </message>
     <message>
-        <location line="+109"/>
+        <location line="+118"/>
         <location line="+10"/>
         <source>获取服务器地址失败！</source>
         <translation>Failed to get the server address!</translation>
@@ -569,7 +579,7 @@ AdstarGod Firewall, easy to use
         <translation>Alipay payment QR code. Thank you!</translation>
     </message>
     <message>
-        <location filename="MainWindow.h" line="+145"/>
+        <location filename="MainWindow.h" line="+152"/>
         <source>加入 Telegram 群组一起划水~</source>
         <translation>Join Telegram group~</translation>
     </message>
@@ -579,18 +589,17 @@ AdstarGod Firewall, easy to use
         <translation>Join Discord server~</translation>
     </message>
     <message>
-        <location line="-8"/>
-        <source>&lt;p&gt;一个 GTAOL 精英、速通工具，支持快速启动防火墙、计时、结束游戏等。&lt;/p&gt;</source>
-        <oldsource>&lt;p&gt;一个 GTAOL 精英、速通工具，支持快速启动防火墙、自动统计任务数据、计时等。本工具仅读取内存，不会修改任何内存。&lt;/p&gt;</oldsource>
-        <translation>&lt;p&gt;A GTA Online elite and speedrun tool that supports quick firewall activation, timing, terminate game, etc.&lt;/p&gt;</translation>
+        <location line="-10"/>
+        <source>一个 GTAOL 精英、速通工具，支持断网、计时、卡单、结束游戏、屏幕准星等。</source>
+        <translation>A GTAOL elite, speedrun tool that supports disconnecting the net, timing, suspending and terminating the game, screen crosshair, and more.</translation>
     </message>
     <message>
-        <location line="+2"/>
+        <location line="+3"/>
         <source>程序开发：SkyD666</source>
         <translation>Program Development: SkyD666</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>游戏逆向：Zerkalo2147</source>
         <translation>Game Reverse Engineering: Zerkalo2147</translation>
     </message>
@@ -598,7 +607,7 @@ AdstarGod Firewall, easy to use
         <location line="+3"/>
         <source>加入 QQ 群：827680900</source>
         <oldsource>加入 QQ 群：431228020</oldsource>
-        <translation type="unfinished">Join QQ Group: 827680900</translation>
+        <translation>Join QQ Group: 827680900</translation>
     </message>
 </context>
 <context>
@@ -683,12 +692,12 @@ AdstarGod Firewall, easy to use
         <translation>Settings</translation>
     </message>
     <message>
-        <location line="+92"/>
+        <location line="+126"/>
         <source>windowsvista 样式不支持深色模式，其他样式支持深色模式跟随系统</source>
         <translation>windowsvista style does not support dark mode, while other styles support dark mode following the system</translation>
     </message>
     <message>
-        <location line="+796"/>
+        <location line="+1023"/>
         <location line="+61"/>
         <location line="+393"/>
         <source>启动</source>
@@ -761,7 +770,7 @@ AdstarGod Firewall, easy to use
         <translation>Refresh data interval</translation>
     </message>
     <message>
-        <location line="-910"/>
+        <location line="-1137"/>
         <source>窗口</source>
         <translation>Window</translation>
     </message>
@@ -789,11 +798,12 @@ AdstarGod Firewall, easy to use
         <location line="-296"/>
         <location line="+106"/>
         <location line="+217"/>
+        <location line="+372"/>
         <source>颜色</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="-347"/>
         <source>透明度</source>
         <translation>Alpha</translation>
     </message>
@@ -803,7 +813,7 @@ AdstarGod Firewall, easy to use
         <translation>Content</translation>
     </message>
     <message>
-        <location line="-73"/>
+        <location line="-107"/>
         <source>最小化到托盘</source>
         <translation>Minimize to the system tray</translation>
     </message>
@@ -813,7 +823,7 @@ AdstarGod Firewall, easy to use
         <translation>Automatically check for update on application startup</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+41"/>
         <source>外观样式</source>
         <oldsource>样式</oldsource>
         <translation>Style</translation>
@@ -856,7 +866,7 @@ AdstarGod Firewall, easy to use
         <translation>Text alignment</translation>
     </message>
     <message>
-        <location line="+285"/>
+        <location line="+307"/>
         <source>连接到 RTSS</source>
         <translation>Connect to RTSS</translation>
     </message>
@@ -888,17 +898,88 @@ AdstarGod Firewall, easy to use
         <translation>OSD text format</translation>
     </message>
     <message>
-        <location line="+79"/>
+        <location line="+60"/>
+        <source>准星</source>
+        <oldsource>游戏准星</oldsource>
+        <translation>Crosshair</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>显示游戏准星</source>
+        <translation>Show crosshair</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>准星文本</source>
+        <translation>Crosshair text</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>水平位置</source>
+        <translation>Horizontal pos</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>垂直位置</source>
+        <translation>Vertical pos</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>大小</source>
+        <translation>Size</translation>
+    </message>
+    <message>
+        <location line="+43"/>
+        <source>提示</source>
+        <translation>Tips</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>由于 RTSS 限制，此功能不支持自动居中显示，需要用户手动调整准星位置。
+
+使用流程：
+1. 启动游戏并调整窗口至理想大小（全屏下无法调节）
+2. 使用菜单选项或快捷键来置顶工具窗口
+3. 在此页面调节准星属性
+4. 再次使用菜单选项或快捷键取消窗口置顶</source>
+        <oldsource>由于 RTSS 限制，此功能不支持自动居中显示，需要用户手动调整准星位置。
+
+使用流程：
+1. 启动游戏并调整窗口至理想大小（全屏下无法调节）
+2. 使用“设置-常规”页面下的快捷键来置顶工具窗口
+3. 在此页面调节准星属性
+4. 再次使用快捷键取消窗口置顶</oldsource>
+        <translation>Due to RTSS limitation, this function doesn&apos;t support auto-centering, users need to adjust the crosshair position manually.
+
+Usage:
+1. Launch the game and adjust the game window to the desired size (NOT full screen mode)
+2. Use menu options or shortcut key to top the tool window
+3. Adjust the crosshair properties on this page
+4. Use the menu option or shortcut key again to cancel the window topping</translation>
+    </message>
+    <message>
+        <location line="+60"/>
         <source>防火墙规则</source>
         <translation>Firewall rules</translation>
     </message>
     <message>
-        <location line="-511"/>
+        <location line="-738"/>
         <source>模糊半径</source>
         <translation>Blur radius</translation>
     </message>
     <message>
-        <location line="+27"/>
+        <location line="-283"/>
+        <source>置顶窗口快捷键</source>
+        <oldsource>置顶工具快捷键</oldsource>
+        <translation>Top most hotkey</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>第一次按下后可以置顶工具窗口，再次按下后取消置顶</source>
+        <translation>First press to top the tool window, press again to un-top it</translation>
+    </message>
+    <message>
+        <location line="+286"/>
         <source>偏移</source>
         <translation>Offset</translation>
     </message>
@@ -918,7 +999,7 @@ AdstarGod Firewall, easy to use
         <translation>Tool window (WS_EX_TOOLWINDOW)</translation>
     </message>
     <message>
-        <location line="+263"/>
+        <location line="+285"/>
         <source>OSD 文本格式在下次更新数据时生效</source>
         <oldsource>OSD 文本格式在下次更新时生效</oldsource>
         <translation>OSD text format will take effect with the next data update</translation>
@@ -929,7 +1010,7 @@ AdstarGod Firewall, easy to use
         <translation>Reset OSD text format</translation>
     </message>
     <message>
-        <location line="+194"/>
+        <location line="+399"/>
         <source>操作失败</source>
         <oldsource>操作失败音效</oldsource>
         <translation>Operation failed</translation>
@@ -1075,18 +1156,19 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Debug mode</translation>
     </message>
     <message>
+        <location line="-1549"/>
         <location filename="SettingDialog.h" line="+16"/>
         <source>信息展示</source>
         <oldsource>全局热键</oldsource>
         <translation>Display info</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location filename="SettingDialog.h" line="+8"/>
         <source>语言</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="SettingDialog.cpp" line="+126"/>
+        <location filename="SettingDialog.cpp" line="+134"/>
         <source>WAV 文件 (*.wav)</source>
         <translation>WAV file (*.wav)</translation>
     </message>
@@ -1162,7 +1244,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Developer options</translation>
     </message>
     <message>
-        <location line="+70"/>
+        <location line="+72"/>
         <source>左对齐</source>
         <translation>Left alignment</translation>
     </message>
