@@ -3,6 +3,7 @@
 #include <QKeySequence>
 #include <QList>
 #include <QWidget >
+#include <dinput.h>
 #include <windows.h>
 
 #define hotkeyUtil (HotkeyUtil::instance())

@@ -168,7 +168,7 @@ bool RtssUtil::updateCrosshair()
         qInfo() << "RTSS crosshair is disabled";
         return false;
     }
-    return updateOsd(QString("<P=%1,%2><S=%3><C0=%4><C0>%5")
+    return updateOsd(QString("<P=%1,%2><S1=%3><C1=%4><S1><C1>%5<C><S>")
                          .arg(QString::number(globalData->rtssCrosshairX()))
                          .arg(QString::number(globalData->rtssCrosshairY()))
                          .arg(QString::number(globalData->rtssCrosshairSize()))

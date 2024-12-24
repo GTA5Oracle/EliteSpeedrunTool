@@ -237,6 +237,9 @@ public:
     QString topMostWindowHotkey() const;
     void setTopMostWindowHotkey(const QString& newShowToolHotkey);
 
+    int firewallProtocol() const;
+    void setFirewallProtocol(int newFirewallProtocol);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -321,6 +324,8 @@ signals:
 
     void topMostWindowHotkeyChanged();
 
+    void firewallProtocolChanged();
+
 private:
     bool mMinimizeToTray = false;
     QString mTopMostWindowHotkey = "";
@@ -363,6 +368,7 @@ private:
     bool mFirewallPlaySound = true;
     QString mFirewallAppPath = "";
     int mFirewallDirection = NET_FW_RULE_DIR_OUT;
+    int mFirewallProtocol = -1;
 
     // 网络适配器
     QList<QString> mSelectedNetworkAdapters = {};
@@ -480,4 +486,5 @@ private:
     Q_PROPERTY(int rtssCrosshairSize READ rtssCrosshairSize WRITE setRtssCrosshairSize NOTIFY rtssCrosshairSizeChanged FINAL)
     Q_PROPERTY(QColor rtssCrosshairColor READ rtssCrosshairColor WRITE setRtssCrosshairColor NOTIFY rtssCrosshairColorChanged FINAL)
     Q_PROPERTY(QString topMostWindowHotkey READ topMostWindowHotkey WRITE setTopMostWindowHotkey NOTIFY topMostWindowHotkeyChanged FINAL)
+    Q_PROPERTY(int firewallProtocol READ firewallProtocol WRITE setFirewallProtocol NOTIFY firewallProtocolChanged FINAL)
 };

@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget* parent)
 
     discordUtil->initDiscord();
 
-    FirewallUtil::init();
+    firewallUtil->init();
 
     setHotkey();
 
@@ -72,7 +72,7 @@ MainWindow::MainWindow(QWidget* parent)
 
 MainWindow::~MainWindow()
 {
-    FirewallUtil::release();
+    firewallUtil->release();
 }
 
 void MainWindow::closeEvent(QCloseEvent* event)
@@ -466,7 +466,7 @@ void MainWindow::initFirewall()
 {
     connect(ui.pbFirewallRefreshState, &QAbstractButton::clicked, this, [=]() {
         long enabledTypes = 0;
-        bool firewallIsEnabled = FirewallUtil::firewallIsEnabled(enabledTypes);
+        bool firewallIsEnabled = firewallUtil->firewallIsEnabled(enabledTypes);
         QPair<NET_FW_PROFILE_TYPE2, QLabel*> types[] = {
             qMakePair(NET_FW_PROFILE2_DOMAIN, ui.labFirewallDomainState),
             qMakePair(NET_FW_PROFILE2_PRIVATE, ui.labFirewallPrivateState),
@@ -500,10 +500,10 @@ void MainWindow::initFirewall()
     palette.setColor(QPalette::Window, Qt::red);
     labFirewallState.setPalette(palette);
     connect(ui.btnStartFirewall, &QAbstractButton::toggled, this, [this](bool checked) {
-        if (checked == FirewallUtil::getIsEnabled()) {
+        if (checked == firewallUtil->getIsEnabled()) {
             return;
         }
-        bool succeed = FirewallUtil::setNetFwRuleEnabled(checked);
+        bool succeed = firewallUtil->setNetFwRuleEnabled(checked);
         if (succeed) {
             if (checked) {
                 ui.btnStartFirewall->setText(tr("已开启"));

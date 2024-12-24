@@ -1,4 +1,5 @@
 #include "HotkeyUtil.h"
+#include "GlobalData.h"
 #include <QDebug>
 #include <hidusage.h>
 
@@ -67,7 +68,13 @@ void HotkeyUtil::keyDown(DWORD key)
     }
     key = escapeNumPad(key);
     for (const auto& hotkeySeq : hotkeys) {
-        // qDebug() << hotkeySeq->nativeModifiers << modifiers << hotkeySeq->nativeKeycodeOk << hotkeySeq->nativeKeycode << key;
+        if (globalData->debugMode()) {
+            qInfo() << "hotkeySeq->nativeModifiers: " << hotkeySeq->nativeModifiers
+                    << "modifiers: " << modifiers
+                    << "hotkeySeq->nativeKeycodeOk: " << hotkeySeq->nativeKeycodeOk
+                    << "hotkeySeq->nativeKeycode" << hotkeySeq->nativeKeycode
+                    << "key: " << key;
+        }
         if (hotkeySeq->nativeModifiers != modifiers || !hotkeySeq->nativeKeycodeOk || hotkeySeq->nativeKeycode != key) {
             continue;
         }
@@ -86,12 +93,9 @@ void HotkeyUtil::keyUp(DWORD key)
 
 bool HotkeyUtil::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
 {
-    if (eventType == "windows_generic_MSG" || eventType == "windows_dispatcher_MSG") {
-        MSG* msg = static_cast<MSG*>(message);
-
-        if (msg->message == WM_INPUT) {
-            processRawInput(msg->lParam);
-        }
+    MSG* msg = static_cast<MSG*>(message);
+    if (msg->message == WM_INPUT) {
+        processRawInput(msg->lParam);
     }
     return QWidget::nativeEvent(eventType, message, result);
 }
@@ -110,25 +114,13 @@ bool HotkeyUtil::registerRawInputDevice()
 
 void HotkeyUtil::processRawInput(LPARAM lParam)
 {
-    UINT dwSize = 0;
-    // Get the input data size
-    GetRawInputData((HRAWINPUT)lParam, RID_INPUT, nullptr, &dwSize, sizeof(RAWINPUTHEADER));
-
-    // Allocate buffer
-    LPBYTE lpb = new BYTE[dwSize];
-    if (!lpb) {
-        return;
-    }
-
-    // Get the input data
-    if (GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER)) != dwSize) {
-        qCritical() << "GetRawInputData does not return correct size!";
-    }
+    RAWINPUT inputBuffer;
+    UINT rawInputSize = sizeof(inputBuffer);
+    GetRawInputData((HRAWINPUT)(lParam), RID_INPUT, &inputBuffer, &rawInputSize, sizeof(RAWINPUTHEADER));
 
     // Parse RAWINPUT
-    RAWINPUT* raw = (RAWINPUT*)lpb;
-    if (raw->header.dwType == RIM_TYPEKEYBOARD) {
-        RAWKEYBOARD keyboard = raw->data.keyboard;
+    if (inputBuffer.header.dwType == RIM_TYPEKEYBOARD) {
+        RAWKEYBOARD keyboard = inputBuffer.data.keyboard;
         UINT vKey = keyboard.VKey; // Virtual key code
         // UINT scanCode = keyboard.MakeCode; // Scan code
         UINT flags = keyboard.Flags; // Key Down / Key Up
@@ -139,8 +131,6 @@ void HotkeyUtil::processRawInput(LPARAM lParam)
             keyDown(vKey);
         }
     }
-
-    delete[] lpb;
 }
 
 quint32 HotkeyUtil::nativeKeycode(Qt::Key keycode, bool& ok)
@@ -334,8 +324,6 @@ quint32 HotkeyUtil::nativeModifiers(Qt::KeyboardModifiers modifiers)
         nMods |= MOD_CONTROL;
     if (modifiers & Qt::AltModifier)
         nMods |= MOD_ALT;
-    if (modifiers & Qt::MetaModifier)
-        nMods |= MOD_WIN;
     return nMods;
 }
 
@@ -354,9 +342,6 @@ quint32 HotkeyUtil::modifierVkToMod(DWORD key)
     case VK_RSHIFT:
     case VK_SHIFT:
         return MOD_SHIFT;
-    case VK_LWIN:
-    case VK_RWIN:
-        return MOD_ALT;
     }
     return 0;
 }
@@ -371,7 +356,5 @@ DWORD HotkeyUtil::escapeNumPad(DWORD key)
 
 bool HotkeyUtil::isModifier(DWORD key)
 {
-    return key >= VK_LSHIFT && key <= VK_RMENU
-        || key >= VK_SHIFT && key <= VK_MENU
-        || key >= VK_LWIN && key <= VK_RWIN;
+    return key >= VK_LSHIFT && key <= VK_RMENU || key >= VK_SHIFT && key <= VK_MENU;
 }

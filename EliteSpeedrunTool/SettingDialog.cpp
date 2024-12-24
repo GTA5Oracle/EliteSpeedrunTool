@@ -204,6 +204,15 @@ void SettingDialog::initFirewallSettings()
             });
         ui.cbFirewallDirection->setCurrentIndex(currentIndex);
     }
+
+    // 防火墙规则协议
+    ui.sbFirewallProtocol->setValue(globalData->firewallProtocol());
+    connect(ui.sbFirewallProtocol, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setFirewallProtocol(value);
+    });
+    connect(ui.tbFirewallProtocolWiki, &QAbstractButton::clicked, this, [=]() {
+        QDesktopServices::openUrl(QUrl("https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml"));
+    });
 }
 
 void SettingDialog::initNetworkAdaptersSettings()

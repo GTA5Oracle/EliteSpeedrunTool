@@ -181,6 +181,7 @@ void GlobalData::readSettings()
     setFirewallPlaySound(settings.value("FirewallPlaySound", mFirewallPlaySound).toBool());
     setFirewallAppPath(settings.value("FirewallAppPath", mFirewallAppPath).toString());
     setFirewallDirection(settings.value("FirewallDirection", mFirewallDirection).toInt());
+    setFirewallProtocol(settings.value("FirewallProtocol", mFirewallProtocol).toInt());
     settings.endGroup();
 
     settings.beginGroup("NetworkAdapter");
@@ -279,6 +280,7 @@ void GlobalData::writeSettings()
     settings.setValue("FirewallPlaySound", mFirewallPlaySound);
     settings.setValue("FirewallAppPath", mFirewallAppPath);
     settings.setValue("FirewallDirection", mFirewallDirection);
+    settings.setValue("FirewallProtocol", mFirewallProtocol);
     settings.endGroup();
 
     settings.beginGroup("NetworkAdapter");
@@ -1110,4 +1112,17 @@ void GlobalData::setTopMostWindowHotkey(const QString& newShowToolHotkey)
         return;
     mTopMostWindowHotkey = newShowToolHotkey;
     emit topMostWindowHotkeyChanged();
+}
+
+int GlobalData::firewallProtocol() const
+{
+    return mFirewallProtocol;
+}
+
+void GlobalData::setFirewallProtocol(int newFirewallProtocol)
+{
+    if (mFirewallProtocol == newFirewallProtocol || newFirewallProtocol > 255 || newFirewallProtocol < -1)
+        return;
+    mFirewallProtocol = newFirewallProtocol;
+    emit firewallProtocolChanged();
 }

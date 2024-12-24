@@ -46,7 +46,7 @@
       <enum>QFrame::Shadow::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -768,8 +768,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>167</width>
+                <height>508</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -916,8 +916,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>244</width>
+                <height>286</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_44">
@@ -1140,8 +1140,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>149</width>
-                <height>585</height>
+                <width>515</width>
+                <height>547</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -1297,6 +1297,53 @@
                 </widget>
                </item>
                <item>
+                <widget class="QGroupBox" name="groupBox_24">
+                 <property name="title">
+                  <string>协议号</string>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_47">
+                  <item>
+                   <widget class="QSpinBox" name="sbFirewallProtocol">
+                    <property name="minimum">
+                     <number>-1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>255</number>
+                    </property>
+                    <property name="value">
+                     <number>-1</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_11">
+                    <item>
+                     <widget class="QLabel" name="label_58">
+                      <property name="text">
+                       <string>所有协议为 -1，TCP 为 6，UDP 为 17</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QToolButton" name="tbFirewallProtocolWiki">
+                      <property name="text">
+                       <string>所有协议...</string>
+                      </property>
+                      <property name="icon">
+                       <iconset resource="resource.qrc">
+                        <normaloff>:/image/ic_question.ico</normaloff>:/image/ic_question.ico</iconset>
+                      </property>
+                      <property name="toolButtonStyle">
+                       <enum>Qt::ToolButtonStyle::ToolButtonTextBesideIcon</enum>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
                 <widget class="QGroupBox" name="groupBox_7">
                  <property name="title">
                   <string>断网范围</string>
@@ -1426,8 +1473,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>119</width>
-                <height>400</height>
+                <width>525</width>
+                <height>475</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_41">

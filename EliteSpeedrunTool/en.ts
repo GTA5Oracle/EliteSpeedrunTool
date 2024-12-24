@@ -699,31 +699,31 @@ AdstarGod Firewall, easy to use
     <message>
         <location line="+1023"/>
         <location line="+61"/>
-        <location line="+393"/>
+        <location line="+440"/>
         <source>启动</source>
         <translation>Enable</translation>
     </message>
     <message>
-        <location line="-439"/>
+        <location line="-486"/>
         <location line="+75"/>
-        <location line="+379"/>
+        <location line="+426"/>
         <source>停止</source>
         <translation>Disable</translation>
     </message>
     <message>
-        <location line="-436"/>
-        <location line="+305"/>
+        <location line="-483"/>
+        <location line="+352"/>
         <location line="+462"/>
         <source>音效</source>
         <translation>Sound</translation>
     </message>
     <message>
-        <location line="-674"/>
+        <location line="-721"/>
         <source>默认值为出站，设置将在下次启动防火墙时生效。</source>
         <translation>The default value is outbound. The settings will take effect the next time the firewall is started.</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="+60"/>
         <source>断网范围</source>
         <translation>Firewall scope</translation>
     </message>
@@ -744,13 +744,13 @@ AdstarGod Firewall, easy to use
         <translation>Game network agent</translation>
     </message>
     <message>
-        <location line="-77"/>
+        <location line="-124"/>
         <source>防火墙规则方向</source>
         <translation>Firewall rule direction</translation>
     </message>
     <message>
         <location line="-129"/>
-        <location line="+305"/>
+        <location line="+352"/>
         <location line="+149"/>
         <location line="+192"/>
         <location line="+121"/>
@@ -770,7 +770,7 @@ AdstarGod Firewall, easy to use
         <translation>Refresh data interval</translation>
     </message>
     <message>
-        <location line="-1137"/>
+        <location line="-1184"/>
         <source>窗口</source>
         <translation>Window</translation>
     </message>
@@ -1016,7 +1016,17 @@ Usage:
         <translation>Operation failed</translation>
     </message>
     <message>
-        <location line="+50"/>
+        <location line="+42"/>
+        <source>协议号</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>所有协议...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+27"/>
         <source>若您不了解断网原理，请留空！</source>
         <translation>If you don&apos;t understand the principle, please leave it empty!</translation>
     </message>
@@ -1085,7 +1095,12 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Manual timing</translation>
     </message>
     <message>
-        <location line="+115"/>
+        <location line="-323"/>
+        <source>所有协议为 -1，TCP 为 6，UDP 为 17</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+438"/>
         <source>停止策略</source>
         <translation>Stop strategy</translation>
     </message>
@@ -1156,7 +1171,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Debug mode</translation>
     </message>
     <message>
-        <location line="-1549"/>
+        <location line="-1596"/>
         <location filename="SettingDialog.h" line="+16"/>
         <source>信息展示</source>
         <oldsource>全局热键</oldsource>

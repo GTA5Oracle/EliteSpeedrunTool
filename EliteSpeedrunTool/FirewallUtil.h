@@ -4,44 +4,50 @@
 #include <netfw.h>
 #include <windows.h>
 
+#define firewallUtil (FirewallUtil::instance())
+
 class FirewallUtil {
 public:
     FirewallUtil();
 
-    static bool firewallIsEnabled(long& enabledTypes);
+    static FirewallUtil* instance();
 
-    static QList<INetFwRule*> getNetFwRule();
+    bool firewallIsEnabled(long& enabledTypes);
 
-    static bool setNetFwRuleEnabled(bool enabled);
+    QList<INetFwRule*> getNetFwRule();
 
-    static void init();
+    bool setNetFwRuleEnabled(bool enabled);
 
-    static void release();
+    void init();
+    void release();
 
-    static bool getIsEnabled();
-
-private:
-    static INetFwRule* getNetFwRule(NET_FW_RULE_DIRECTION direction);
-
-    static bool setNetFwRuleEnabled(bool enabled, NET_FW_RULE_DIRECTION direction);
+    bool getIsEnabled();
 
 private:
-    static bool inited;
+    HRESULT initINetFwPolicy2(INetFwPolicy2** ppNetFwPolicy2);
 
-    static bool isEnabled;
+    INetFwRule* getNetFwRule(NET_FW_RULE_DIRECTION direction);
+    INetFwRule* getCachedNetFwRule(NET_FW_RULE_DIRECTION direction);
 
-    static HRESULT hrComInit;
+    bool setNetFwRuleEnabled(bool enabled, NET_FW_RULE_DIRECTION direction);
 
-    static INetFwPolicy2* pNetFwPolicy2;
+private:
+    bool inited = false;
 
-    static long CurrentProfilesBitMask;
+    bool isEnabled = false;
 
-    static INetFwRules* pFwRules;
+    HRESULT hrComInit = S_OK;
 
-    static BSTR bstrRuleInName;
-    static BSTR bstrRuleOutName;
+    INetFwPolicy2* pNetFwPolicy2 = nullptr;
 
-    static BSTR bstrRuleLPorts;
+    long currentProfilesBitMask = 0;
 
-    static BSTR bstrRuleGroup;
+    INetFwRules* pFwRules = nullptr;
+
+    BSTR bstrRuleInName;
+    BSTR bstrRuleOutName;
+
+    BSTR bstrRuleLPorts;
+
+    BSTR bstrRuleGroup;
 };
