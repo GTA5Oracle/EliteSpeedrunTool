@@ -1,5 +1,4 @@
-#ifndef REGIONSELECTORRECT_H
-#define REGIONSELECTORRECT_H
+#pragma once
 
 #include <QFrame>
 
@@ -15,5 +14,3 @@ public:
 protected:
     void mouseMoveEvent(QMouseEvent* event);
 };
-
-#endif // REGIONSELECTORRECT_H

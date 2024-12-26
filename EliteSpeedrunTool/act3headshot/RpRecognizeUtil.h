@@ -1,5 +1,4 @@
-#ifndef RPRECOGNIZEUTIL_H
-#define RPRECOGNIZEUTIL_H
+#pragma once
 
 #include <QObject>
 #include <QPair>
@@ -25,5 +24,3 @@ public:
 
 signals:
 };
-
-#endif // RPRECOGNIZEUTIL_H

@@ -26,13 +26,13 @@
     <string notr="true"/>
    </property>
    <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
+    <enum>QFrame::Shape::NoFrame</enum>
    </property>
    <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
+    <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
    </property>
    <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
+    <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
    </property>
   </widget>
   <widget class="QWidget" name="widgetTopPoint" native="true">
@@ -418,13 +418,13 @@ QLabel {
          </size>
         </property>
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::Shape::StyledPanel</enum>
         </property>
         <property name="text">
          <string/>
         </property>
         <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
         </property>
        </widget>
       </item>
@@ -1341,10 +1341,10 @@ QLabel {
     <string notr="true"/>
    </property>
    <property name="frameShape">
-    <enum>QFrame::NoFrame</enum>
+    <enum>QFrame::Shape::NoFrame</enum>
    </property>
    <property name="frameShadow">
-    <enum>QFrame::Plain</enum>
+    <enum>QFrame::Shadow::Plain</enum>
    </property>
    <property name="lineWidth">
     <number>1</number>
@@ -1444,13 +1444,13 @@ QLabel {
   <customwidget>
    <class>RegionSelectorRect</class>
    <extends>QFrame</extends>
-   <header>RegionSelectorRect.h</header>
+   <header>act3headshot/RegionSelectorRect.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>RegionSelectorGraphicsView</class>
    <extends>QGraphicsView</extends>
-   <header>RegionSelectorGraphicsView.h</header>
+   <header>act3headshot/RegionSelectorGraphicsView.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

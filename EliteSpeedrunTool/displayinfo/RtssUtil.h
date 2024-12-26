@@ -1,5 +1,4 @@
-#ifndef RTSSUTIL_H
-#define RTSSUTIL_H
+#pragma once
 
 #include "DisplayInfoSubFunction.h"
 #include <QApplication>
@@ -46,5 +45,3 @@ private:
     };
 signals:
 };
-
-#endif // RTSSUTIL_H

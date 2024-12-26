@@ -1,5 +1,4 @@
-#ifndef REGIONSELECTORGRAPHICSVIEW_H
-#define REGIONSELECTORGRAPHICSVIEW_H
+#pragma once
 
 #include <QGraphicsView>
 
@@ -18,5 +17,3 @@ protected:
     void mouseReleaseEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
 };
-
-#endif // REGIONSELECTORGRAPHICSVIEW_H

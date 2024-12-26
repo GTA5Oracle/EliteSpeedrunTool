@@ -20,29 +20,31 @@ find_package(Qt6 REQUIRED COMPONENTS StateMachine)
 set(PROJECT_SOURCES
         main.cpp
         MainWindow.cpp MainWindow.h MainWindow.ui
-        FirewallUtil.h FirewallUtil.cpp
         GlobalData.h GlobalData.cpp
         SettingDialog.h SettingDialog.cpp SettingDialog.ui
-        DisplayInfoDialog.h DisplayInfoDialog.cpp DisplayInfoDialog.ui
         UpdateDialog.h UpdateDialog.cpp UpdateDialog.ui
         DescriptionDialog.h DescriptionDialog.cpp DescriptionDialog.ui
         AcknowledgementDialog.h AcknowledgementDialog.cpp AcknowledgementDialog.ui
-        RegionSelectorRect.h RegionSelectorRect.cpp
-        RegionSelectorGraphicsView.h RegionSelectorGraphicsView.cpp
-        RegionSelectorDialog.h RegionSelectorDialog.cpp RegionSelectorDialog.ui
-        memoryutil/MemoryUtil.h memoryutil/MemoryUtil.cpp
+        act3headshot/RegionSelectorRect.h act3headshot/RegionSelectorRect.cpp
+        act3headshot/RegionSelectorGraphicsView.h act3headshot/RegionSelectorGraphicsView.cpp
+        act3headshot/RegionSelectorDialog.h act3headshot/RegionSelectorDialog.cpp act3headshot/RegionSelectorDialog.ui
+        act3headshot/RpRecognizeUtil.h act3headshot/RpRecognizeUtil.cpp
+        MemoryUtil.h MemoryUtil.cpp
         LogUtil.h LogUtil.cpp
         LanguageUtil.h LanguageUtil.cpp
-        HttpServerUtil.h HttpServerUtil.cpp
-        DisplayInfoSubFunction.h DisplayInfoSubFunction.cpp
+        net/FirewallUtil.h net/FirewallUtil.cpp
+        net/HttpServerUtil.h net/HttpServerUtil.cpp
+        net/NetworkAdapterUtil.h net/NetworkAdapterUtil.cpp
+        displayinfo/DisplayInfoDialog.h displayinfo/DisplayInfoDialog.cpp displayinfo/DisplayInfoDialog.ui
+        displayinfo/DisplayInfoSubFunction.h displayinfo/DisplayInfoSubFunction.cpp
+        displayinfo/RtssUtil.h displayinfo/RtssUtil.cpp
         DiscordUtil.h DiscordUtil.cpp
         TimeUtil.h TimeUtil.cpp
         SuspendUtil.h SuspendUtil.cpp
         NumberUtil.h NumberUtil.cpp
-        RpRecognizeUtil.h RpRecognizeUtil.cpp
-        RtssUtil.h RtssUtil.cpp
-        NetworkAdapterUtil.h NetworkAdapterUtil.cpp
-        HotkeyUtil.h HotkeyUtil.cpp
+        hotkey/HotkeyRedirector.h hotkey/HotkeyRedirector.cpp hotkey/HotkeyRedirector.ui
+        hotkey/HotkeyUtil.h hotkey/HotkeyUtil.cpp
+        hotkey/KeySequenceTableWidget.h hotkey/KeySequenceTableWidget.cpp
         resource.qrc
 )
 

@@ -1,9 +1,9 @@
+#pragma once
+
 #include <QLocale>
 #include <QObject>
 #include <QString>
 #include <QTranslator>
-
-#pragma once
 
 struct Language {
     Language(const QString name, const QString fileName)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DisplayInfoSubFunction.h"
+#include "displayinfo/DisplayInfoSubFunction.h"
 #include <QColor>
 #include <QMetaType>
 #include <QPoint>
@@ -240,6 +240,9 @@ public:
     int firewallProtocol() const;
     void setFirewallProtocol(int newFirewallProtocol);
 
+    QList<QString> hotkeyMaps() const;
+    void setHotkeyMaps(const QList<QString>& newHotkeyMaps);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -325,6 +328,8 @@ signals:
     void topMostWindowHotkeyChanged();
 
     void firewallProtocolChanged();
+
+    void hotkeyMapsChanged();
 
 private:
     bool mMinimizeToTray = false;
@@ -422,6 +427,9 @@ private:
     // 结束游戏
     QString mCloseGameImmediatelyHotkey = "Ctrl+`";
 
+    // 快捷键映射
+    QList<QString> mHotkeyMaps = {};
+
     // 开发者选项
     bool mDebugMode = false;
 
@@ -487,4 +495,5 @@ private:
     Q_PROPERTY(QColor rtssCrosshairColor READ rtssCrosshairColor WRITE setRtssCrosshairColor NOTIFY rtssCrosshairColorChanged FINAL)
     Q_PROPERTY(QString topMostWindowHotkey READ topMostWindowHotkey WRITE setTopMostWindowHotkey NOTIFY topMostWindowHotkeyChanged FINAL)
     Q_PROPERTY(int firewallProtocol READ firewallProtocol WRITE setFirewallProtocol NOTIFY firewallProtocolChanged FINAL)
+    Q_PROPERTY(QList<QString> hotkeyMaps READ hotkeyMaps WRITE setHotkeyMaps NOTIFY hotkeyMapsChanged FINAL)
 };

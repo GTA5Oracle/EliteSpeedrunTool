@@ -46,7 +46,7 @@
       <enum>QFrame::Shadow::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>8</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -1140,8 +1140,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>515</width>
-                <height>547</height>
+                <width>248</width>
+                <height>571</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -1286,7 +1286,7 @@
                   <item>
                    <widget class="QLabel" name="label_35">
                     <property name="text">
-                     <string>默认值为出站，设置将在下次启动防火墙时生效。</string>
+                     <string>默认值为出站，设置将在下次启动防火墙时生效</string>
                     </property>
                     <property name="wordWrap">
                      <bool>true</bool>
@@ -1473,8 +1473,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>119</width>
+                <height>400</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_41">
@@ -2157,6 +2157,114 @@ C:\Program Files (x86)\nn\nn.exe</string>
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="page_3">
+      <layout class="QVBoxLayout" name="verticalLayout_48">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QScrollArea" name="scrollArea_15">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_15">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>529</width>
+            <height>498</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_49">
+           <item>
+            <widget class="KeySequenceTableWidget" name="twHotkeyMap"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_12">
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QToolButton" name="tbHotkeyMapAdd">
+               <property name="text">
+                <string>添加快捷键</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_25">
+             <property name="title">
+              <string>提示</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_50">
+              <item>
+               <widget class="QLabel" name="label_60">
+                <property name="text">
+                 <string>添加快捷键时，请确保该快捷键没有被注册（对应的应用没有启动），否则工具获取不到按键</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_62">
+                <property name="text">
+                 <string>该页面中的快捷键优先级高于工具内的快捷键</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="Line" name="line">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_61">
+                <property name="text">
+                 <string>该功能的初始想法来自&lt;a href=&quot;https://www.mageangela.cn/&quot;&gt;安琪拉&lt;/a&gt;</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+                <property name="openExternalLinks">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="pageSocial">
       <layout class="QVBoxLayout" name="verticalLayout_8">
        <property name="leftMargin">
@@ -2366,6 +2474,13 @@ C:\Program Files (x86)\nn\nn.exe</string>
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KeySequenceTableWidget</class>
+   <extends>QTableWidget</extends>
+   <header>hotkey/KeySequenceTableWidget.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>lwPage</tabstop>
   <tabstop>scrollArea_7</tabstop>

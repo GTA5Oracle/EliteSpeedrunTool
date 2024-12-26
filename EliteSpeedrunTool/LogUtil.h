@@ -1,10 +1,10 @@
+#pragma once
+
 #include <QFile>
 #include <QMutex>
 #include <QString>
 #include <QThread>
 #include <QtLogging>
-
-#pragma once
 
 void myMessageHandler(QtMsgType type, const QMessageLogContext& context, const QString& msg);
 

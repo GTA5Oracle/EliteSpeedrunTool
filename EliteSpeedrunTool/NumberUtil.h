@@ -1,5 +1,4 @@
-#ifndef NUMBERUTIL_H
-#define NUMBERUTIL_H
+#pragma once
 
 class NumberUtil {
 public:
@@ -7,5 +6,3 @@ public:
 
     static int bitCount(int value);
 };
-
-#endif // NUMBERUTIL_H

@@ -1,5 +1,4 @@
-#ifndef REGIONSELECTORDIALOG_H
-#define REGIONSELECTORDIALOG_H
+#pragma once
 
 #include <QDialog>
 #include <QGraphicsItem>
@@ -73,5 +72,3 @@ protected:
     void refreshGrayArea(); // 更新灰色区域
     void refreshPreviewArea(QPointF mousePos); // 更新预览区域
 };
-
-#endif // REGIONSELECTORDIALOG_H

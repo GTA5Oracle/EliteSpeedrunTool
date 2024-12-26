@@ -1,4 +1,5 @@
 #pragma once
+
 #include "discord.h"
 #include <QEventLoop>
 #include <QMutex>

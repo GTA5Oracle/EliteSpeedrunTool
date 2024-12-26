@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DisplayInfoSubFunction.h"
+#include "displayinfo/DisplayInfoSubFunction.h"
 #include "ui_SettingDialog.h"
 #include <QDialog>
 
@@ -11,7 +11,7 @@ public:
     explicit SettingDialog(QWidget* parent = nullptr);
     ~SettingDialog();
 
-    QString pageName[11] = {
+    QString pageName[12] = {
         tr("常规"),
         tr("信息展示"),
         "RTSS",
@@ -20,11 +20,12 @@ public:
         tr("卡单"),
         tr("末日将至爆头"),
         tr("结束游戏"),
+        tr("快捷键映射"),
         tr("社交"),
         tr("语言"),
         tr("开发者选项"),
     };
-    QString pageIcon[11] = {
+    QString pageIcon[12] = {
         "://image/ic_setting.ico",
         "://image/ic_lighton.ico",
         "://image/ic_monitor_blue_grad.ico",
@@ -33,6 +34,7 @@ public:
         "://image/ic_user.ico",
         "://image/ic_file_eye.ico",
         "://image/ic_plug.ico",
+        "://image/ic_keyboard_toggle.ico",
         "://image/ic_users.ico",
         "://image/ic_language.ico",
         "://image/ic_doctor_watson.ico",
@@ -78,6 +80,8 @@ protected:
     void initSuspendProcess();
 
     void initCloseGameImmediatelySettings();
+
+    void initHotkeyMapSettings();
 
     void initSocialSettings();
 

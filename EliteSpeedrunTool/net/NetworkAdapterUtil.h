@@ -1,5 +1,4 @@
-#ifndef NETWORKADAPTERUTIL_H
-#define NETWORKADAPTERUTIL_H
+#pragma once
 
 #include <QObject>
 #include <windows.h>
@@ -35,5 +34,3 @@ private:
 
 signals:
 };
-
-#endif // NETWORKADAPTERUTIL_H

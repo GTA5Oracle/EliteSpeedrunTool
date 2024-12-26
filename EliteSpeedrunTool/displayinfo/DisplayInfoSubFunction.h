@@ -1,9 +1,9 @@
+#pragma once
+
 #include <QColor>
 #include <QFont>
 #include <QObject>
 #include <QPointF>
-
-#pragma once
 
 enum DisplayInfoSubFunction {
     Firewall = 1,

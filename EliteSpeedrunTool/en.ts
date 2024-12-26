@@ -175,9 +175,22 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
 <context>
     <name>DisplayInfoDialog</name>
     <message>
-        <location filename="DisplayInfoDialog.ui" line="+20"/>
+        <location filename="displayinfo/DisplayInfoDialog.ui" line="+20"/>
         <source>信息展示</source>
         <translation>Display Info</translation>
+    </message>
+</context>
+<context>
+    <name>KeySequenceTableWidget</name>
+    <message>
+        <location filename="hotkey/KeySequenceTableWidget.cpp" line="+10"/>
+        <source>快捷键</source>
+        <translation>Hotkeys</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>操作</source>
+        <translation>Opers</translation>
     </message>
 </context>
 <context>
@@ -219,7 +232,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+188"/>
-        <location filename="MainWindow.cpp" line="+811"/>
+        <location filename="MainWindow.cpp" line="+814"/>
         <location line="+22"/>
         <source>点击启动</source>
         <translation>Start counting</translation>
@@ -460,7 +473,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+30"/>
-        <location filename="MainWindow.cpp" line="-474"/>
+        <location filename="MainWindow.cpp" line="-476"/>
         <source>复制地址</source>
         <translation>Copy link</translation>
     </message>
@@ -511,7 +524,7 @@ AdstarGod Firewall, easy to use
         <translation>Help us translate...</translation>
     </message>
     <message>
-        <location filename="MainWindow.cpp" line="+121"/>
+        <location filename="MainWindow.cpp" line="+123"/>
         <location line="+22"/>
         <source>已关闭</source>
         <translation>Stopped</translation>
@@ -522,7 +535,7 @@ AdstarGod Firewall, easy to use
         <translation>Running</translation>
     </message>
     <message>
-        <location line="-131"/>
+        <location line="-133"/>
         <source>服务器未运行</source>
         <translation>Server is not running</translation>
     </message>
@@ -543,7 +556,7 @@ AdstarGod Firewall, easy to use
         <translation>Server address has been copied!</translation>
     </message>
     <message>
-        <location line="+151"/>
+        <location line="+153"/>
         <source>请先在设置页面选择网络适配器！</source>
         <translation>Please select net adapters on the settings page first!</translation>
     </message>
@@ -624,7 +637,7 @@ AdstarGod Firewall, easy to use
         <translation>*** The application version has changed, please check carefully if the configurations (hotkeys, appearance, sounds, etc.) need to be reset! ***</translation>
     </message>
     <message>
-        <location filename="DisplayInfoSubFunction.cpp" line="+13"/>
+        <location filename="displayinfo/DisplayInfoSubFunction.cpp" line="+13"/>
         <source>断网</source>
         <translation>Firewall</translation>
     </message>
@@ -674,7 +687,7 @@ AdstarGod Firewall, easy to use
 <context>
     <name>RegionSelectorDialog</name>
     <message>
-        <location filename="RegionSelectorDialog.ui" line="+14"/>
+        <location filename="act3headshot/RegionSelectorDialog.ui" line="+14"/>
         <source>区域选择</source>
         <translation>Region Selector</translation>
     </message>
@@ -719,8 +732,9 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="-721"/>
-        <source>默认值为出站，设置将在下次启动防火墙时生效。</source>
-        <translation>The default value is outbound. The settings will take effect the next time the firewall is started.</translation>
+        <source>默认值为出站，设置将在下次启动防火墙时生效</source>
+        <oldsource>默认值为出站，设置将在下次启动防火墙时生效。</oldsource>
+        <translation>The default value is outbound. The settings will take effect the next time the firewall is started</translation>
     </message>
     <message>
         <location line="+60"/>
@@ -930,11 +944,12 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+43"/>
+        <location line="+1167"/>
         <source>提示</source>
         <translation>Tips</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="-1161"/>
         <source>由于 RTSS 限制，此功能不支持自动居中显示，需要用户手动调整准星位置。
 
 使用流程：
@@ -963,7 +978,18 @@ Usage:
         <translation>Firewall rules</translation>
     </message>
     <message>
-        <location line="-738"/>
+        <location line="+1117"/>
+        <source>该页面中的快捷键优先级高于工具内的快捷键</source>
+        <translation>The hotkeys on this page take priority over those in the tool</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>该功能的初始想法来自&lt;a href=&quot;https://www.mageangela.cn/&quot;&gt;安琪拉&lt;/a&gt;</source>
+        <oldsource>该功能的初始思路来自&lt;a href=&quot;https://www.mageangela.cn/&quot;&gt;安琪拉&lt;/a&gt;</oldsource>
+        <translation>The initial idea for this feature came from &lt;a href=&quot;https://www.mageangela.cn/&quot;&gt;MageAngela&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location line="-1869"/>
         <source>模糊半径</source>
         <translation>Blur radius</translation>
     </message>
@@ -1018,12 +1044,12 @@ Usage:
     <message>
         <location line="+42"/>
         <source>协议号</source>
-        <translation type="unfinished"></translation>
+        <translation>Protocol number</translation>
     </message>
     <message>
         <location line="+28"/>
         <source>所有协议...</source>
-        <translation type="unfinished"></translation>
+        <translation>All protocols...</translation>
     </message>
     <message>
         <location line="+27"/>
@@ -1097,7 +1123,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location line="-323"/>
         <source>所有协议为 -1，TCP 为 6，UDP 为 17</source>
-        <translation type="unfinished"></translation>
+        <translation>All protocols are -1, TCP is 6, UDP is 17</translation>
     </message>
     <message>
         <location line="+438"/>
@@ -1146,7 +1172,18 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>After orbital cannon (Reset)</translation>
     </message>
     <message>
-        <location line="+133"/>
+        <location line="+151"/>
+        <source>添加快捷键</source>
+        <translation>Add hotkey</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>添加快捷键时，请确保该快捷键没有被注册（对应的应用没有启动），否则工具获取不到按键</source>
+        <oldsource>添加快捷键时，请确保该快捷键没有被注册（对应的应用没有启动），否则工具获取不到按键。</oldsource>
+        <translation>When adding a hotkey, ensure it&apos;s not registered (the corresponding app isn&apos;t running), or the tool won&apos;t capture the hotkey</translation>
+    </message>
+    <message>
+        <location line="+75"/>
         <source>Discord</source>
         <translation>Discord</translation>
     </message>
@@ -1171,19 +1208,19 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Debug mode</translation>
     </message>
     <message>
-        <location line="-1596"/>
+        <location line="-1704"/>
         <location filename="SettingDialog.h" line="+16"/>
         <source>信息展示</source>
         <oldsource>全局热键</oldsource>
         <translation>Display info</translation>
     </message>
     <message>
-        <location filename="SettingDialog.h" line="+8"/>
+        <location filename="SettingDialog.h" line="+9"/>
         <source>语言</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="SettingDialog.cpp" line="+134"/>
+        <location filename="SettingDialog.cpp" line="+135"/>
         <source>WAV 文件 (*.wav)</source>
         <translation>WAV file (*.wav)</translation>
     </message>
@@ -1218,7 +1255,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Outbound</translation>
     </message>
     <message>
-        <location filename="SettingDialog.h" line="-6"/>
+        <location filename="SettingDialog.h" line="-7"/>
         <source>断网</source>
         <translation>Net</translation>
     </message>
@@ -1233,12 +1270,12 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>General</translation>
     </message>
     <message>
-        <location line="+8"/>
+        <location line="+9"/>
         <source>社交</source>
         <translation>Social</translation>
     </message>
     <message>
-        <location line="-1"/>
+        <location line="-2"/>
         <source>结束游戏</source>
         <translation>Terminate game</translation>
     </message>
@@ -1254,12 +1291,17 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>ACT3 Hs</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+2"/>
+        <source>快捷键映射</source>
+        <translation>Hotkey map</translation>
+    </message>
+    <message>
+        <location line="+3"/>
         <source>开发者选项</source>
         <translation>Developer options</translation>
     </message>
     <message>
-        <location line="+72"/>
+        <location line="+75"/>
         <source>左对齐</source>
         <translation>Left alignment</translation>
     </message>

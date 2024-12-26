@@ -1,7 +1,7 @@
 #pragma once
 
-#include "DisplayInfoDialog.h"
-#include "HotkeyUtil.h"
+#include "displayinfo/DisplayInfoDialog.h"
+#include "hotkey/HotkeyUtil.h"
 #include "ui_MainWindow.h"
 #include <QDateTime>
 #include <QLabel>

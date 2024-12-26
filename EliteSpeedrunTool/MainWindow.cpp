@@ -2,18 +2,18 @@
 #include "AcknowledgementDialog.h"
 #include "DescriptionDialog.h"
 #include "DiscordUtil.h"
-#include "FirewallUtil.h"
 #include "GlobalData.h"
-#include "HttpServerUtil.h"
 #include "LogUtil.h"
-#include "NetworkAdapterUtil.h"
-#include "RegionSelectorDialog.h"
-#include "RpRecognizeUtil.h"
-#include "RtssUtil.h"
 #include "SettingDialog.h"
 #include "SuspendUtil.h"
 #include "TimeUtil.h"
 #include "UpdateDialog.h"
+#include "act3headshot/RegionSelectorDialog.h"
+#include "act3headshot/RpRecognizeUtil.h"
+#include "displayinfo/RtssUtil.h"
+#include "net/FirewallUtil.h"
+#include "net/HttpServerUtil.h"
+#include "net/NetworkAdapterUtil.h"
 #include <MMSystem.h>
 #include <QBoxLayout>
 #include <QClipboard>
@@ -52,7 +52,8 @@ MainWindow::MainWindow(QWidget* parent)
 
     checkUpdate();
 
-    ui.statusbar->addPermanentWidget(&labCurrentHotkey);
+    labCurrentHotkey.setWordWrap(true);
+    ui.statusbar->addPermanentWidget(&labCurrentHotkey, 1);
     ui.statusbar->addPermanentWidget(&labFirewallState);
     ui.statusbar->addPermanentWidget(&labNetworkAdaptersState);
 
@@ -404,8 +405,10 @@ void MainWindow::initMenu()
 
     connect(ui.actionSetting, &QAction::triggered, this, [this]() {
         removeAllHotkeys();
+        hotkeyUtil->setHotkeyMapEnabled(false);
         auto dialog = new SettingDialog(this);
         dialog->exec();
+        hotkeyUtil->setHotkeyMapEnabled(true);
         setHotkey();
     });
 

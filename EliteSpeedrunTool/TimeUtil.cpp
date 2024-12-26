@@ -44,7 +44,7 @@ void TimeUtil::delay(long long ms)
     // 创建一个定时器，在ms后触发停止事件循环
     QTimer::singleShot(ms, &loop, &QEventLoop::quit);
 
-    // 进入事件循环，等待3秒后定时器触发
+    // 进入事件循环，等待ms后定时器触发
     qDebug() << "Waiting for " << ms << " ms...";
     loop.exec(); // 事件循环会阻塞，直到 quit() 被调用
     qDebug() << "Finished waiting.";

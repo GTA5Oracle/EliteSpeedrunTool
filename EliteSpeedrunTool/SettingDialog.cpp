@@ -1,7 +1,7 @@
 #include "SettingDialog.h"
 #include "GlobalData.h"
 #include "LanguageUtil.h"
-#include "NetworkAdapterUtil.h"
+#include "net/NetworkAdapterUtil.h"
 #include <QColorDialog>
 #include <QDesktopServices>
 #include <QFileDialog>
@@ -37,6 +37,7 @@ SettingDialog::SettingDialog(QWidget* parent)
     initAct3Headshot();
     initSuspendProcess();
     initCloseGameImmediatelySettings();
+    initHotkeyMapSettings();
     initSocialSettings();
     initLanguageSettings();
     initDevelopOptionsSettings();
@@ -617,6 +618,39 @@ void SettingDialog::initCloseGameImmediatelySettings()
         ui.keySeqCloseGameImmediately,
         ui.tbClearCloseGameImmediatelyHotkeyEdit,
         [](const QString& hotkey) { globalData->setCloseGameImmediatelyHotkey(hotkey); });
+}
+
+void SettingDialog::initHotkeyMapSettings()
+{
+    for (auto& key : globalData->hotkeyMaps()) {
+        ui.twHotkeyMap->addNewRow(key);
+    }
+    connect(ui.twHotkeyMap, &KeySequenceTableWidget::onAdd, this, [](QKeySequence keySeq) {
+        QString keyStr = keySeq.toString();
+        auto newList = QList(globalData->hotkeyMaps());
+        if (!newList.contains(keyStr)) {
+            globalData->setHotkeyMaps(newList << keyStr);
+        }
+    });
+    connect(ui.twHotkeyMap, &KeySequenceTableWidget::onDelete, this, [](QKeySequence keySeq) {
+        QString keyStr = keySeq.toString();
+        auto newList = QList(globalData->hotkeyMaps());
+        newList.removeAll(keyStr);
+        globalData->setHotkeyMaps(newList);
+    });
+    connect(ui.twHotkeyMap, &KeySequenceTableWidget::onChanged, this, [](QKeySequence oldKeySeq, QKeySequence newKeySeq) {
+        QString oldKeyStr = oldKeySeq.toString();
+        QString newKeyStr = newKeySeq.toString();
+        auto newList = QList(globalData->hotkeyMaps());
+        newList.removeAll(oldKeyStr);
+        if (!newList.contains(newKeyStr)) {
+            globalData->setHotkeyMaps(newList << newKeyStr);
+        }
+        globalData->setHotkeyMaps(newList);
+    });
+    connect(ui.tbHotkeyMapAdd, &QAbstractButton::clicked, this, [this]() {
+        ui.twHotkeyMap->addNewRow(QKeySequence());
+    });
 }
 
 void SettingDialog::initSocialSettings()

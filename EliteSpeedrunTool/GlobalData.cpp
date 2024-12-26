@@ -226,6 +226,10 @@ void GlobalData::readSettings()
     setCloseGameImmediatelyHotkey(settings.value("CloseGameImmediatelyHotkey", mCloseGameImmediatelyHotkey).toString());
     settings.endGroup();
 
+    settings.beginGroup("HotkeyMap");
+    setHotkeyMaps(settings.value("HotkeyMaps", mHotkeyMaps).value<QList<QString>>());
+    settings.endGroup();
+
     settings.beginGroup("Language");
     setLanguage(settings.value("Language", mLanguage).toString());
     settings.endGroup();
@@ -321,6 +325,10 @@ void GlobalData::writeSettings()
 
     settings.beginGroup("CloseGame");
     settings.setValue("CloseGameImmediatelyHotkey", mCloseGameImmediatelyHotkey);
+    settings.endGroup();
+
+    settings.beginGroup("HotkeyMap");
+    settings.setValue("HotkeyMaps", mHotkeyMaps);
     settings.endGroup();
 
     settings.beginGroup("Language");
@@ -1125,4 +1133,17 @@ void GlobalData::setFirewallProtocol(int newFirewallProtocol)
         return;
     mFirewallProtocol = newFirewallProtocol;
     emit firewallProtocolChanged();
+}
+
+QList<QString> GlobalData::hotkeyMaps() const
+{
+    return mHotkeyMaps;
+}
+
+void GlobalData::setHotkeyMaps(const QList<QString>& newHotkeyMaps)
+{
+    if (mHotkeyMaps == newHotkeyMaps)
+        return;
+    mHotkeyMaps = newHotkeyMaps;
+    emit hotkeyMapsChanged();
 }

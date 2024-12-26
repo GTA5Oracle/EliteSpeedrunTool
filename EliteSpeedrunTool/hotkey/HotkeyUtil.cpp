@@ -1,5 +1,6 @@
 #include "HotkeyUtil.h"
 #include "GlobalData.h"
+#include "MemoryUtil.h"
 #include <QDebug>
 #include <hidusage.h>
 
@@ -13,8 +14,8 @@ QHotkey::QHotkey(QKeySequence keySeq, bool autoRegister, QObject* parent)
         hotkeyUtil->registerHotkey(this);
     }
     auto hotkey = keySeq[0];
-    nativeKeycode = hotkeyUtil->escapeNumPad(hotkeyUtil->nativeKeycode(hotkey.key(), nativeKeycodeOk));
-    nativeModifiers = hotkeyUtil->nativeModifiers(hotkey.keyboardModifiers());
+    nativeKeycode = HotkeyUtil::escapeNumPad(HotkeyUtil::nativeKeycode(hotkey.key(), nativeKeycodeOk));
+    nativeModifiers = HotkeyUtil::nativeModifiers(hotkey.keyboardModifiers());
 }
 
 QHotkey::~QHotkey()
@@ -36,11 +37,56 @@ void QHotkey::emitSignal()
     emit activated();
 }
 
+// -------------------------------
+QHotkeyMap::QHotkeyMap(QKeySequence keySeq, QObject* parent)
+    : QHotkey { keySeq, false, parent }
+{
+    auto qModifiers = keySeq[0].keyboardModifiers();
+    if (qModifiers & Qt::ControlModifier)
+        nativeModifiers << VK_CONTROL;
+    if (qModifiers & Qt::ShiftModifier)
+        nativeModifiers << VK_SHIFT;
+    if (qModifiers & Qt::AltModifier)
+        nativeModifiers << VK_MENU;
+
+    ZeroMemory(&downInput, sizeof(INPUT));
+    downInput.type = INPUT_KEYBOARD;
+    downInput.ki.wVk = nativeKeycode;
+    downInput.ki.wScan = MapVirtualKey(nativeKeycode, MAPVK_VK_TO_VSC);
+
+    ZeroMemory(&upInput, sizeof(INPUT));
+    upInput.type = INPUT_KEYBOARD;
+    upInput.ki.wVk = nativeKeycode;
+    upInput.ki.wScan = MapVirtualKey(nativeKeycode, MAPVK_VK_TO_VSC);
+    upInput.ki.dwFlags = KEYEVENTF_KEYUP;
+}
+
+void QHotkeyMap::sendInput()
+{
+    // if (globalData->debugMode()) {
+    //     qInfo() << "QHotkeyMap::sendInput" << keySeq.toString();
+    // }
+    // // 模拟按下第一个键
+    // keybd_event(0, 0, KEYEVENTF_SCANCODE, 0); // 先按下不松开
+    // keybd_event(VK_F5, 0, 0, 0); // 按下第一个键
+    // // 模拟松开所有按键
+    // keybd_event(0, 0, KEYEVENTF_SCANCODE, KEYEVENTF_KEYUP);
+
+    SendInput(1, &downInput, sizeof(INPUT));
+    SendInput(1, &upInput, sizeof(INPUT));
+}
+
+// -------------------------------
 HotkeyUtil::HotkeyUtil(QWidget* parent)
     : QWidget { parent }
 {
     qInfo() << "HotkeyUtil initializing...";
     registerRawInputDevice();
+
+    connect(globalData, &GlobalData::hotkeyMapsChanged, this, [this]() {
+        initHotkeyMaps();
+    });
+    initHotkeyMaps();
 }
 
 HotkeyUtil* HotkeyUtil::instance()
@@ -63,10 +109,48 @@ void HotkeyUtil::unregisterHotkey(QHotkey* key)
 void HotkeyUtil::keyDown(DWORD key)
 {
     if (isModifier(key)) {
+        if (globalData->debugMode()) {
+            qDebug() << "isModifier" << key;
+        }
         modifiers |= modifierVkToMod(key);
         return;
     }
+
     key = escapeNumPad(key);
+    HWND hwnd = reinterpret_cast<HWND>(hotkeyRedirector->winId());
+    HWND gtaHwnd = memoryUtil->getWindowHwnd();
+    auto foregroundWindow = GetForegroundWindow();
+    if (globalData->debugMode()) {
+        qDebug() << "key" << key << "foregroundWindow" << foregroundWindow << "HWND" << hwnd << "GTAHWND" << gtaHwnd;
+    }
+    if (hotkeyMapEnabled && foregroundWindow == gtaHwnd) {
+        for (const auto& hotkeySeqMap : hotkeyMaps) {
+            QHotkey* hotkey = hotkeySeqMap;
+            // if (globalData->debugMode()) {
+            //     qDebug() << "nativeModifiers" << hotkey->nativeModifiers
+            //              << "modifiers" << modifiers
+            //              << "nativeKeycodeOk" << hotkeySeqMap->nativeKeycodeOk
+            //              << "nativeKeycode" << hotkeySeqMap->nativeKeycode;
+            // }
+            if (hotkey->nativeModifiers != modifiers
+                || !hotkeySeqMap->nativeKeycodeOk
+                || hotkeySeqMap->nativeKeycode != key) {
+                continue;
+            }
+            if (isRegisteredInSystem(hotkey->keySeq[0])) {
+                SetParent(hwnd, gtaHwnd);
+                hotkeyRedirector->show();
+                SetForegroundWindow(hwnd);
+                hotkeySeqMap->sendInput();
+                SetForegroundWindow(gtaHwnd);
+                hotkeyRedirector->hide();
+                return;
+            } else {
+                qInfo() << "keyDown: This hotkey is not registered in the system!";
+            }
+        }
+    }
+
     for (const auto& hotkeySeq : hotkeys) {
         if (globalData->debugMode()) {
             qInfo() << "hotkeySeq->nativeModifiers: " << hotkeySeq->nativeModifiers
@@ -75,10 +159,17 @@ void HotkeyUtil::keyDown(DWORD key)
                     << "hotkeySeq->nativeKeycode" << hotkeySeq->nativeKeycode
                     << "key: " << key;
         }
-        if (hotkeySeq->nativeModifiers != modifiers || !hotkeySeq->nativeKeycodeOk || hotkeySeq->nativeKeycode != key) {
+        if (hotkeySeq->nativeModifiers != modifiers
+            || !hotkeySeq->nativeKeycodeOk
+            || hotkeySeq->nativeKeycode != key) {
             continue;
         }
-        hotkeySeq->emitSignal();
+        if (!hotkeySeq->isPressed) {
+            hotkeySeq->isPressed = true;
+            hotkeySeq->emitSignal();
+        } else {
+            break;
+        }
     }
 }
 
@@ -87,6 +178,16 @@ void HotkeyUtil::keyUp(DWORD key)
     if (isModifier(key)) {
         modifiers &= ~modifierVkToMod(key);
         return;
+    }
+
+    for (const auto& hotkeySeq : hotkeys) {
+        if (!hotkeySeq->isPressed
+            || hotkeySeq->nativeModifiers != modifiers
+            || !hotkeySeq->nativeKeycodeOk
+            || hotkeySeq->nativeKeycode != key) {
+            continue;
+        }
+        hotkeySeq->isPressed = false;
     }
     // key = escapeNumPad(key);
 }
@@ -98,6 +199,43 @@ bool HotkeyUtil::nativeEvent(const QByteArray& eventType, void* message, qintptr
         processRawInput(msg->lParam);
     }
     return QWidget::nativeEvent(eventType, message, result);
+}
+
+void HotkeyUtil::closeEvent(QCloseEvent* event)
+{
+    if (hotkeyRedirector->close()) {
+        hotkeyRedirector->deleteLater();
+    }
+    QWidget::closeEvent(event);
+}
+
+void HotkeyUtil::initHotkeyMaps()
+{
+    qDebug() << "initHotkeyMaps";
+    for (auto hotkeySeqMap : hotkeyMaps) {
+        delete hotkeySeqMap;
+    }
+    hotkeyMaps.clear();
+    for (const auto& hotkeySeqMap : globalData->hotkeyMaps()) {
+        hotkeyMaps << new QHotkeyMap(QKeySequence(hotkeySeqMap));
+    }
+}
+
+void HotkeyUtil::setHotkeyMapEnabled(bool newHotkeyMapEnabled)
+{
+    hotkeyMapEnabled = newHotkeyMapEnabled;
+}
+
+bool HotkeyUtil::isRegisteredInSystem(QKeyCombination key)
+{
+    auto hwnd = reinterpret_cast<HWND>(winId());
+    bool nativeKeycodeOk;
+    if (RegisterHotKey(hwnd, 0, nativeModifiers(key.keyboardModifiers()), nativeKeycode(key.key(), nativeKeycodeOk))) {
+        UnregisterHotKey(hwnd, 0);
+        return false;
+    } else {
+        return true;
+    }
 }
 
 bool HotkeyUtil::registerRawInputDevice()

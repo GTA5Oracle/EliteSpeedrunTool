@@ -1,11 +1,9 @@
 #include "RegionSelectorDialog.h"
+#include "MemoryUtil.h"
 #include "ui_RegionSelectorDialog.h"
-
 #include <QMouseEvent>
 #include <QPainter>
 #include <windows.h>
-
-#include "memoryutil/MemoryUtil.h"
 
 RegionSelectorDialog::RegionSelectorDialog(QRect rect, QWidget* parent)
     : QDialog(parent)
