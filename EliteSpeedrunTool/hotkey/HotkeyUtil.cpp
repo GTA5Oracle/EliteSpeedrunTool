@@ -87,6 +87,9 @@ HotkeyUtil::HotkeyUtil(QWidget* parent)
         initHotkeyMaps();
     });
     initHotkeyMaps();
+
+    hotkeyRedirector->show();
+    hotkeyRedirector->hide();
 }
 
 HotkeyUtil* HotkeyUtil::instance()
@@ -259,19 +262,15 @@ void HotkeyUtil::processRawInput(LPARAM lParam)
     // Parse RAWINPUT
     if (inputBuffer.header.dwType == RIM_TYPEKEYBOARD) {
         RAWKEYBOARD keyboard = inputBuffer.data.keyboard;
-        UINT vKey = keyboard.VKey; // Virtual key code
-        // UINT scanCode = keyboard.MakeCode; // Scan code
-        UINT flags = keyboard.Flags; // Key Down / Key Up
-
-        if (flags & RI_KEY_BREAK) {
-            keyUp(vKey);
+        if (keyboard.Flags & RI_KEY_BREAK) { // Key Down / Key Up
+            keyUp(keyboard.VKey);
         } else {
-            keyDown(vKey);
+            keyDown(keyboard.VKey);
         }
     }
 }
 
-quint32 HotkeyUtil::nativeKeycode(Qt::Key keycode, bool& ok)
+short HotkeyUtil::nativeKeycode(Qt::Key keycode, bool& ok)
 {
     ok = true;
     // find key from switch/case --> Only finds a very small subset of keys
@@ -453,9 +452,9 @@ quint32 HotkeyUtil::nativeKeycode(Qt::Key keycode, bool& ok)
     }
 }
 
-quint32 HotkeyUtil::nativeModifiers(Qt::KeyboardModifiers modifiers)
+short HotkeyUtil::nativeModifiers(Qt::KeyboardModifiers modifiers)
 {
-    quint32 nMods = 0;
+    short nMods = 0;
     if (modifiers & Qt::ShiftModifier)
         nMods |= MOD_SHIFT;
     if (modifiers & Qt::ControlModifier)
@@ -465,7 +464,7 @@ quint32 HotkeyUtil::nativeModifiers(Qt::KeyboardModifiers modifiers)
     return nMods;
 }
 
-quint32 HotkeyUtil::modifierVkToMod(DWORD key)
+short HotkeyUtil::modifierVkToMod(DWORD key)
 {
     switch (key) {
     case VK_LMENU:

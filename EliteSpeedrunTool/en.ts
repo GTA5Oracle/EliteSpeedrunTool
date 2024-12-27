@@ -1292,7 +1292,8 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>快捷键映射</source>
+        <source>快捷键穿透</source>
+        <oldsource>快捷键映射</oldsource>
         <translation>Hotkey map</translation>
     </message>
     <message>

@@ -20,8 +20,8 @@ public:
 
     void emitSignal();
 
-    int nativeKeycode;
-    int nativeModifiers;
+    short nativeKeycode;
+    short nativeModifiers;
     bool nativeKeycodeOk = false;
     bool isPressed = false;
 signals:
@@ -56,9 +56,9 @@ public:
     bool registerRawInputDevice();
     void processRawInput(LPARAM lParam);
 
-    static quint32 nativeKeycode(Qt::Key keycode, bool& ok);
-    static quint32 nativeModifiers(Qt::KeyboardModifiers modifiers);
-    static quint32 modifierVkToMod(DWORD key);
+    static short nativeKeycode(Qt::Key keycode, bool& ok);
+    static short nativeModifiers(Qt::KeyboardModifiers modifiers);
+    static short modifierVkToMod(DWORD key);
     static DWORD escapeNumPad(DWORD key);
 
     void setHotkeyMapEnabled(bool newHotkeyMapEnabled);
@@ -72,7 +72,7 @@ protected:
     void initHotkeyMaps();
 
 private:
-    int modifiers;
+    short modifiers;
 
     QList<QHotkey*> hotkeys;
 
