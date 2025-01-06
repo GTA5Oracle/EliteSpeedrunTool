@@ -42,6 +42,7 @@ set(PROJECT_SOURCES
         TimeUtil.h TimeUtil.cpp
         SuspendUtil.h SuspendUtil.cpp
         NumberUtil.h NumberUtil.cpp
+        SubFuncsData.h SubFuncsData.cpp
         hotkey/HotkeyRedirector.h hotkey/HotkeyRedirector.cpp hotkey/HotkeyRedirector.ui
         hotkey/HotkeyUtil.h hotkey/HotkeyUtil.cpp
         hotkey/KeySequenceTableWidget.h hotkey/KeySequenceTableWidget.cpp

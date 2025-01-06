@@ -2,6 +2,7 @@
 #include "GlobalData.h"
 #include "ui_DisplayInfoDialog.h"
 
+#include "SubFuncsData.h"
 #include <QGraphicsDropShadowEffect>
 #include <QMouseEvent>
 #include <QTimer>
@@ -34,9 +35,12 @@ DisplayInfoDialog::DisplayInfoDialog(QWidget* parent)
     setFont();
     setTextStyle();
 
-    setTime(0, 0, 0);
-
     initGlobalDataConnects();
+
+    initDisplayData();
+    connect(subFuncsData, &SubFuncsData::elementChanged, this, [this](const DisplayInfoSubFunction& key, const QVariant& value) {
+        subFuncs[key](value);
+    });
 }
 
 DisplayInfoDialog::~DisplayInfoDialog()
@@ -70,11 +74,10 @@ void DisplayInfoDialog::setFont()
     ui->labTimer->setFont(
         QFont(displayInfoSubFunctions[DisplayInfoSubFunction::Timer]->fontFamily(),
             displayInfoSubFunctions[DisplayInfoSubFunction::Timer]->textSize()));
-    setTime(0, 0, 0); // 更新字体大小
     ui->labAct3Headshot->setFont(
         QFont(displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot]->fontFamily(),
             displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot]->textSize()));
-    ui->labTimer->setText("0"); // 更新字体大小
+    initDisplayData(); // 更新字体大小
 }
 
 void DisplayInfoDialog::setTextStyle()
@@ -126,6 +129,15 @@ void DisplayInfoDialog::setChildrenTransparentForMouseEvents(bool transparent)
     ui->labAct3Headshot->setAttribute(Qt::WA_TransparentForMouseEvents, transparent);
 }
 
+void DisplayInfoDialog::initDisplayData()
+{
+    subFuncsData->forEach([this](const DisplayInfoSubFunction& key, const QVariant& value) {
+        if (subFuncs.contains(key)) {
+            subFuncs[key](value);
+        }
+    });
+}
+
 void DisplayInfoDialog::addWidget(QWidget* widget)
 {
     ui->mainLayout->addWidget(widget);
@@ -161,8 +173,12 @@ int DisplayInfoDialog::widgetCount()
     return ui->mainLayout->count();
 }
 
-void DisplayInfoDialog::setTime(unsigned int m, unsigned int s, unsigned int ms)
+void DisplayInfoDialog::setTime(QVariant v)
 {
+    auto deltaTime = v.toULongLong();
+    int m = deltaTime / 1000 / 60;
+    int s = (deltaTime / 1000) % 60;
+    int ms = (deltaTime % 1000) / 10;
     auto textSize = globalData->displayInfoSubFunctions()[DisplayInfoSubFunction::Timer]->textSize();
     ui->labTimer->setText(timePattern
                               .arg(QString::number(textSize))
@@ -172,9 +188,9 @@ void DisplayInfoDialog::setTime(unsigned int m, unsigned int s, unsigned int ms)
                               .arg(ms, 2, 10, QLatin1Char('0')));
 }
 
-void DisplayInfoDialog::setAct3Headshot(int headshot)
+void DisplayInfoDialog::setAct3Headshot(QVariant v)
 {
-    ui->labAct3Headshot->setText(QString::number(headshot));
+    ui->labAct3Headshot->setText(QString::number(v.toInt()));
 }
 
 void DisplayInfoDialog::initGlobalDataConnects()

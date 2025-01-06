@@ -18,8 +18,6 @@ public:
     void releaseOverlay(QString osdOwner);
 
     void refreshAll();
-    bool updateTimer(unsigned long long deltaTime);
-    bool updateAct3Headshot(int headshot);
 
 private:
     void initDisplayInfo();
@@ -31,7 +29,8 @@ private:
     bool updateCrosshair();
     bool updateOsd(QString text, QString osdOwner);
 
-    QString getTimeString(unsigned long long deltaTime);
+    QString getTimeString(QVariant v);
+    QString getAct3Headshot(QVariant v);
 
     const int rtssSignature = 'S' | 'S' << 8 | 'T' << 16 | 'R' << 24;
     QString displayInfoOsdOwner = qAppName() + "-DisplayInfo";
@@ -39,9 +38,9 @@ private:
 
     bool overlayInited = false;
 
-    QMap<DisplayInfoSubFunction, QString> subFunctionTextMap = {
-        { DisplayInfoSubFunction::Timer, "" },
-        { DisplayInfoSubFunction::Act3Headshot, "" }
+    QMap<DisplayInfoSubFunction, std::function<QString(QVariant)>> subFuncs = {
+        qMakePair(DisplayInfoSubFunction::Timer, [this](QVariant v) { return getTimeString(v); }),
+        qMakePair(DisplayInfoSubFunction::Act3Headshot, [this](QVariant v) { return getAct3Headshot(v); })
     };
 signals:
 };

@@ -185,7 +185,8 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
     <message>
         <location filename="hotkey/KeySequenceTableWidget.cpp" line="+10"/>
         <source>快捷键</source>
-        <translation>Hotkeys</translation>
+        <oldsource>按键</oldsource>
+        <translation type="unfinished">Hotkeys</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -232,7 +233,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+188"/>
-        <location filename="MainWindow.cpp" line="+814"/>
+        <location filename="MainWindow.cpp" line="+807"/>
         <location line="+22"/>
         <source>点击启动</source>
         <translation>Start counting</translation>
@@ -473,7 +474,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+30"/>
-        <location filename="MainWindow.cpp" line="-476"/>
+        <location filename="MainWindow.cpp" line="-466"/>
         <source>复制地址</source>
         <translation>Copy link</translation>
     </message>
@@ -572,7 +573,7 @@ AdstarGod Firewall, easy to use
         <translation>Disabled</translation>
     </message>
     <message>
-        <location line="+277"/>
+        <location line="+267"/>
         <source>点击归零</source>
         <translation>Click to Zero</translation>
     </message>
@@ -587,7 +588,7 @@ AdstarGod Firewall, easy to use
         <translation>Click to continue</translation>
     </message>
     <message>
-        <location line="-406"/>
+        <location line="-396"/>
         <source>支付宝收款二维码 谢谢喵！</source>
         <translation>Alipay payment QR code. Thank you!</translation>
     </message>
@@ -710,7 +711,7 @@ AdstarGod Firewall, easy to use
         <translation>windowsvista style does not support dark mode, while other styles support dark mode following the system</translation>
     </message>
     <message>
-        <location line="+1023"/>
+        <location line="+1020"/>
         <location line="+61"/>
         <location line="+440"/>
         <source>启动</source>
@@ -784,7 +785,7 @@ AdstarGod Firewall, easy to use
         <translation>Refresh data interval</translation>
     </message>
     <message>
-        <location line="-1184"/>
+        <location line="-1181"/>
         <source>窗口</source>
         <translation>Window</translation>
     </message>
@@ -812,12 +813,12 @@ AdstarGod Firewall, easy to use
         <location line="-296"/>
         <location line="+106"/>
         <location line="+217"/>
-        <location line="+372"/>
+        <location line="+369"/>
         <source>颜色</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location line="-347"/>
+        <location line="-344"/>
         <source>透明度</source>
         <translation>Alpha</translation>
     </message>
@@ -912,7 +913,7 @@ AdstarGod Firewall, easy to use
         <translation>OSD text format</translation>
     </message>
     <message>
-        <location line="+60"/>
+        <location line="+57"/>
         <source>准星</source>
         <oldsource>游戏准星</oldsource>
         <translation>Crosshair</translation>
@@ -989,7 +990,7 @@ Usage:
         <translation>The initial idea for this feature came from &lt;a href=&quot;https://www.mageangela.cn/&quot;&gt;MageAngela&lt;/a&gt;</translation>
     </message>
     <message>
-        <location line="-1869"/>
+        <location line="-1866"/>
         <source>模糊半径</source>
         <translation>Blur radius</translation>
     </message>
@@ -1025,13 +1026,7 @@ Usage:
         <translation>Tool window (WS_EX_TOOLWINDOW)</translation>
     </message>
     <message>
-        <location line="+285"/>
-        <source>OSD 文本格式在下次更新数据时生效</source>
-        <oldsource>OSD 文本格式在下次更新时生效</oldsource>
-        <translation>OSD text format will take effect with the next data update</translation>
-    </message>
-    <message>
-        <location line="+10"/>
+        <location line="+292"/>
         <source>重置 OSD 文本格式</source>
         <translation>Reset OSD text format</translation>
     </message>
@@ -1208,7 +1203,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Debug mode</translation>
     </message>
     <message>
-        <location line="-1704"/>
+        <location line="-1701"/>
         <location filename="SettingDialog.h" line="+16"/>
         <source>信息展示</source>
         <oldsource>全局热键</oldsource>

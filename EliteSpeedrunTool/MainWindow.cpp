@@ -5,6 +5,7 @@
 #include "GlobalData.h"
 #include "LogUtil.h"
 #include "SettingDialog.h"
+#include "SubFuncsData.h"
 #include "SuspendUtil.h"
 #include "TimeUtil.h"
 #include "UpdateDialog.h"
@@ -69,6 +70,8 @@ MainWindow::MainWindow(QWidget* parent)
     initGlobalDataConnects();
 
     initAct3Headshot();
+
+    rtssUtil;
 }
 
 MainWindow::~MainWindow()
@@ -359,7 +362,7 @@ void MainWindow::initMenu()
     ui.actionDisplayInfoTouchable->setChecked(globalData->displayInfoTouchable());
 
     // Refresh RTSS
-    connect(ui.actionRefreshRtss, &QAction::toggled, this, [this]() {
+    connect(ui.actionRefreshRtss, &QAction::triggered, this, [this]() {
         rtssUtil->refreshAll();
     });
     // Top most
@@ -604,10 +607,7 @@ void MainWindow::initAct3Headshot()
             int count = RpRecognizeUtil::stop(this, ui.cbAct3HeadshotHost->isChecked(), image, stopRp);
             ui.labAct3Headshot->setText(QString::number(count));
             ui.labAct3HeadshotRp->setText(QString::number(stopRp));
-            if (displayInfoDialogIsShowing && displayInfoDialog) {
-                displayInfoDialog->setAct3Headshot(count);
-            }
-            rtssUtil->updateAct3Headshot(count);
+            subFuncsData->insert(DisplayInfoSubFunction::Act3Headshot, count);
         }
         if (!image.isNull()) {
             ui.labAct3HeadshotImg->setPixmap(image);
@@ -726,10 +726,7 @@ void MainWindow::stopTimer()
 
 void MainWindow::zeroTimer()
 {
-    if (displayInfoDialogIsShowing && displayInfoDialog) {
-        displayInfoDialog->setTime(0, 0, 0);
-    }
-    rtssUtil->updateTimer(0);
+    subFuncsData->insert(DisplayInfoSubFunction::Timer, 0ull);
     ui.labTimer->setText(DisplayInfoDialog::timePattern.arg("26", "00", "00", "16", "00"));
     HttpServerController::instance()->zeroTimer();
 }
@@ -753,15 +750,11 @@ QString MainWindow::getFormattedTime(
 
 void MainWindow::updateTimerString(qint64 currentDateTime)
 {
-    unsigned long long deltaTime = static_cast<unsigned long long>(
-        currentDateTime - timerTime);
+    unsigned long long deltaTime = static_cast<unsigned long long>(currentDateTime - timerTime);
     unsigned int m, s, ms;
     QString t = getFormattedTime(deltaTime, &m, &s, &ms);
     ui.labTimer->setText(t);
-    if (displayInfoDialogIsShowing && displayInfoDialog) {
-        displayInfoDialog->setTime(m, s, ms);
-    }
-    rtssUtil->updateTimer(deltaTime);
+    subFuncsData->insert(DisplayInfoSubFunction::Timer, deltaTime);
 }
 
 void MainWindow::initTimerStateMachine()

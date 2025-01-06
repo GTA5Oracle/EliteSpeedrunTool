@@ -171,6 +171,7 @@ void HotkeyUtil::keyDown(DWORD key)
             hotkeySeq->isPressed = true;
             hotkeySeq->emitSignal();
         } else {
+            qInfo() << "This key already pressed, just skip";
             break;
         }
     }
@@ -180,19 +181,24 @@ void HotkeyUtil::keyUp(DWORD key)
 {
     if (isModifier(key)) {
         modifiers &= ~modifierVkToMod(key);
+        for (const auto& hotkeySeq : hotkeys) {
+            if (hotkeySeq->nativeModifiers != modifiers) {
+                continue;
+            }
+            hotkeySeq->isPressed = false;
+        }
         return;
     }
 
+    key = escapeNumPad(key);
     for (const auto& hotkeySeq : hotkeys) {
         if (!hotkeySeq->isPressed
-            || hotkeySeq->nativeModifiers != modifiers
             || !hotkeySeq->nativeKeycodeOk
             || hotkeySeq->nativeKeycode != key) {
             continue;
         }
         hotkeySeq->isPressed = false;
     }
-    // key = escapeNumPad(key);
 }
 
 bool HotkeyUtil::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)

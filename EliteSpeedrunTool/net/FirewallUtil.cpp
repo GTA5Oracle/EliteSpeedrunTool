@@ -186,6 +186,8 @@ INetFwRule* FirewallUtil::getCachedNetFwRule(NET_FW_RULE_DIRECTION direction)
     int protocol = globalData->firewallProtocol();
     if (protocol >= 0 && protocol <= 255) {
         hr = pFwRule->put_Protocol(protocol);
+    } else {
+        hr = pFwRule->put_Protocol(256);
     }
     if (!SUCCEEDED(hr)) {
         qCritical("put_Protocol failed! (%ld)", hr);

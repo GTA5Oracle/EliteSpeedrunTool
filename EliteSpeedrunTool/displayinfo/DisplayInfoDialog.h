@@ -31,10 +31,6 @@ public:
         qreal textShadowBlurRadius,
         const QPointF& textShadowOffset);
 
-    void setTime(unsigned int m, unsigned int s, unsigned int ms);
-
-    void setAct3Headshot(int headshot);
-
     static const QString timePattern;
 
     static const QString textQssPattern;
@@ -57,6 +53,15 @@ private:
     Ui::DisplayInfoDialog* ui;
 
     QPointF mousePressedPos;
+
+    QMap<DisplayInfoSubFunction, std::function<void(QVariant)>> subFuncs = {
+        qMakePair(DisplayInfoSubFunction::Timer, [this](QVariant v) { return setTime(v); }),
+        qMakePair(DisplayInfoSubFunction::Act3Headshot, [this](QVariant v) { return setAct3Headshot(v); })
+    };
+
+    void initDisplayData();
+    void setTime(QVariant v);
+    void setAct3Headshot(QVariant v);
 
 protected:
     void mousePressEvent(QMouseEvent* event) override;

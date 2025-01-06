@@ -1,6 +1,8 @@
 #include "RtssUtil.h"
+#include "DisplayInfoSubFunction.h"
 #include "GlobalData.h"
 #include "RTSSSharedMemory.h"
+#include "SubFuncsData.h"
 #include <QDebug>
 #include <windows.h>
 
@@ -13,15 +15,21 @@ RtssUtil::RtssUtil(QObject* parent)
         connect(globalData->displayInfoSubFunctions()[f],
             &DisplayInfoSubFunctionItem::rtssDisplayChanged, this,
             static_cast<bool (RtssUtil::*)(void)>(&RtssUtil::updateDisplayInfo));
+        connect(globalData->displayInfoSubFunctions()[f],
+            &DisplayInfoSubFunctionItem::rtssOsdTextChanged, this,
+            static_cast<bool (RtssUtil::*)(void)>(&RtssUtil::updateDisplayInfo));
     }
 
-    updateTimer(0);
-    updateAct3Headshot(0);
+    updateDisplayInfo();
 
     initOverlay();
 
     connect(qApp, &QCoreApplication::aboutToQuit, this, [this]() {
         releaseOverlay();
+    });
+
+    connect(subFuncsData, &SubFuncsData::elementChanged, this, [this](const DisplayInfoSubFunction& key, const QVariant& value) {
+        updateDisplayInfo();
     });
 }
 
@@ -82,28 +90,6 @@ void RtssUtil::refreshAll()
     updateCrosshair();
 }
 
-bool RtssUtil::updateTimer(unsigned long long deltaTime)
-{
-    auto subFunction = DisplayInfoSubFunction::Timer;
-    subFunctionTextMap[subFunction] = getTimeString(deltaTime);
-    if (!globalData->displayInfoSubFunctions()[subFunction]->rtssDisplay()) {
-        return false;
-    }
-    return updateDisplayInfo();
-}
-
-bool RtssUtil::updateAct3Headshot(int headshot)
-{
-    auto subFunction = DisplayInfoSubFunction::Act3Headshot;
-    subFunctionTextMap[subFunction] = globalData->displayInfoSubFunctions()[subFunction]
-                                          ->rtssOsdText()
-                                          .arg(headshot, 0);
-    if (!globalData->displayInfoSubFunctions()[subFunction]->rtssDisplay()) {
-        return false;
-    }
-    return updateDisplayInfo();
-}
-
 void RtssUtil::initDisplayInfo()
 {
     if (globalData->rtssOverlay()) {
@@ -154,9 +140,9 @@ bool RtssUtil::updateDisplayInfo()
         return false;
     }
     QStringList stringList;
-    for (auto i = subFunctionTextMap.constBegin(); i != subFunctionTextMap.constEnd(); i++) {
+    for (auto i = subFuncs.constBegin(); i != subFuncs.constEnd(); i++) {
         if (globalData->displayInfoSubFunctions()[i.key()]->rtssDisplay()) {
-            stringList << i.value();
+            stringList << i.value()(subFuncsData->value(i.key()));
         }
     }
     return updateOsd(stringList.join('\n'), displayInfoOsdOwner);
@@ -248,8 +234,9 @@ bool RtssUtil::updateOsd(QString text, QString osdOwner)
     return bResult;
 }
 
-QString RtssUtil::getTimeString(unsigned long long deltaTime)
+QString RtssUtil::getTimeString(QVariant v)
 {
+    unsigned long long deltaTime = v.toULongLong();
     int m = deltaTime / 1000 / 60;
     int s = (deltaTime / 1000) % 60;
     int ms = (deltaTime % 1000) / 10;
@@ -258,4 +245,11 @@ QString RtssUtil::getTimeString(unsigned long long deltaTime)
         .arg(m, 2, 10, QLatin1Char('0'))
         .arg(s, 2, 10, QLatin1Char('0'))
         .arg(ms, 2, 10, QLatin1Char('0'));
+}
+
+QString RtssUtil::getAct3Headshot(QVariant v)
+{
+    return globalData->displayInfoSubFunctions()[DisplayInfoSubFunction::Act3Headshot]
+        ->rtssOsdText()
+        .arg(v.toInt(), 0);
 }
