@@ -46,6 +46,14 @@ set(PROJECT_SOURCES
         hotkey/HotkeyRedirector.h hotkey/HotkeyRedirector.cpp hotkey/HotkeyRedirector.ui
         hotkey/HotkeyUtil.h hotkey/HotkeyUtil.cpp
         hotkey/KeySequenceTableWidget.h hotkey/KeySequenceTableWidget.cpp
+        event/EventBus.h event/EventBus.cpp
+        event/Event.h
+        event/CmdEventHelper.h event/CmdEventHelper.cpp
+        event/observer/CmdObserver.h event/observer/CmdObserver.cpp
+        event/cmd/CmdSequenceWizard.h event/cmd/CmdSequenceWizard.cpp
+        event/cmd/DelayCmdWizard.h event/cmd/DelayCmdWizard.cpp
+        event/cmd/ShutdownCmdWizard.h event/cmd/ShutdownCmdWizard.cpp
+        event/cmd/RunExeCmdWizard.h event/cmd/RunExeCmdWizard.cpp
         resource.qrc
 )
 

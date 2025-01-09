@@ -1,12 +1,15 @@
 #include "SettingDialog.h"
 #include "GlobalData.h"
 #include "LanguageUtil.h"
+#include "event/CmdEventHelper.h"
+#include "event/cmd/CmdSequenceWizard.h"
 #include "net/NetworkAdapterUtil.h"
 #include <QColorDialog>
 #include <QDesktopServices>
 #include <QFileDialog>
 #include <QFont>
 #include <QFontComboBox>
+#include <QMenu>
 #include <QPair>
 #include <QScreen>
 #include <QStyleFactory>
@@ -38,6 +41,7 @@ SettingDialog::SettingDialog(QWidget* parent)
     initSuspendProcess();
     initCloseGameImmediatelySettings();
     initHotkeyMapSettings();
+    initEventCmdSettings();
     initSocialSettings();
     initLanguageSettings();
     initDevelopOptionsSettings();
@@ -515,12 +519,11 @@ void SettingDialog::initRtssSettings()
         ui.cbRtssSubFunction->addItem(DisplayInfoSubFunctionUtil::toDisplayString(f), f);
     }
     ui.cbRtssSubFunction->removeItem(0); // 暂时不显示防火墙
-    connect(ui.cbRtssSubFunction, QOverload<int>::of(&QComboBox::currentIndexChanged),
-        this, [=](int index) {
-            currentRtssSubFunctionIndex = index;
-            currentRtssSubFunction = ui.cbRtssSubFunction->itemData(index).value<DisplayInfoSubFunction>();
-            setRtssSubFunctionSettings(currentRtssSubFunction);
-        });
+    connect(ui.cbRtssSubFunction, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
+        currentRtssSubFunctionIndex = index;
+        currentRtssSubFunction = ui.cbRtssSubFunction->itemData(index).value<DisplayInfoSubFunction>();
+        setRtssSubFunctionSettings(currentRtssSubFunction);
+    });
     setRtssSubFunctionSettings(currentRtssSubFunction);
     ui.cbRtssSubFunction->setCurrentIndex(currentRtssSubFunctionIndex);
 }
@@ -653,6 +656,41 @@ void SettingDialog::initHotkeyMapSettings()
     });
 }
 
+void SettingDialog::initEventCmdSettings()
+{
+    connect(ui.teEventCmd, &QPlainTextEdit::textChanged, this, [=]() {
+        const auto& name = ui.cbEventCmd->itemData(currentEventCmdIndex).toString();
+        globalData->eventCmdMap()[name] = ui.teEventCmd->toPlainText();
+    });
+
+    connect(ui.tbEventCmdWizard, &QAbstractButton::clicked, this, [this]() {
+        CmdSequenceWizard wizard(ui.cbEventCmd->currentText());
+        if (wizard.exec() == QDialog::Accepted) {
+            if (wizard.insertModeReplace) {
+                ui.teEventCmd->setPlainText(wizard.cmdSequence() + "\n");
+            } else {
+                auto old = ui.teEventCmd->toPlainText();
+                if (old.endsWith("\n")) {
+                    ui.teEventCmd->setPlainText(old + wizard.cmdSequence() + "\n");
+                } else {
+                    ui.teEventCmd->setPlainText(old + "\n" + wizard.cmdSequence() + "\n");
+                }
+            }
+        }
+    });
+
+    const auto& eventNameMap = cmdEventHelper->getEventNameMap();
+    for (auto i = eventNameMap.constBegin(); i != eventNameMap.constEnd(); i++) {
+        ui.cbEventCmd->addItem(i.value(), i.key());
+    }
+    connect(ui.cbEventCmd, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
+        currentEventCmdIndex = index;
+        auto name = ui.cbEventCmd->itemData(index).toString();
+        setEventCmdSubSettings(name);
+    });
+    setEventCmdSubSettings(ui.cbEventCmd->itemData(currentEventCmdIndex).toString());
+}
+
 void SettingDialog::initSocialSettings()
 {
     ui.cbDiscordShowRp->setChecked(globalData->discordShowRichPresence());
@@ -722,4 +760,9 @@ void SettingDialog::setRtssSubFunctionSettings(DisplayInfoSubFunction f)
     auto currentSetting = globalData->displayInfoSubFunctions()[f];
     ui.cbRtssSubFunctionOsd->setChecked(currentSetting->rtssDisplay());
     ui.teRtssSubFunctionOsdText->setPlainText(currentSetting->rtssOsdText());
+}
+
+void SettingDialog::setEventCmdSubSettings(QString name)
+{
+    ui.teEventCmd->setPlainText(globalData->eventCmdMap()[name]);
 }

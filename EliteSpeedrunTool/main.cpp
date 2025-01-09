@@ -2,6 +2,8 @@
 #include "LanguageUtil.h"
 #include "LogUtil.h"
 #include "MainWindow.h"
+#include "event/EventBus.h"
+#include "event/observer/CmdObserver.h"
 
 #include <QApplication>
 #include <QIcon>
@@ -25,14 +27,17 @@ int main(int argc, char* argv[])
     QApplication::setWindowIcon(QIcon("://image/ic_icon.png"));
     QApplication::setOrganizationName("SkyD666");
     QApplication::setApplicationName(QObject::tr("精英速通工具"));
-    QApplication::setApplicationVersion("11.4.1.70-beta01");
-    qputenv("ApplicationVersionCode", "20250105");
+    QApplication::setApplicationVersion("11.4.1.70-beta03");
+    qputenv("ApplicationVersionCode", "20250109");
 
     qApp->setStyle(globalData->styleName());
 
     if (QApplication::applicationVersion() != globalData->version()) {
         QMessageBox::warning(nullptr, QString(), QObject::tr("*** 应用版本变更，请认真检查各项配置（热键、外观、提示音等）是否需要重新设置！***"));
     }
+
+    CmdObserver o;
+    eventBus->addObserver(&o);
 
     MainWindow w;
     w.show();

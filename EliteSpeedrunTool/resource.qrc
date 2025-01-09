@@ -26,5 +26,6 @@
         <file>image/ic_file_eye.ico</file>
         <file>image/ic_monitor_blue_grad.ico</file>
         <file>image/ic_keyboard_toggle.ico</file>
+        <file>image/ic_console.ico</file>
     </qresource>
 </RCC>

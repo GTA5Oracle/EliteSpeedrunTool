@@ -41,6 +41,117 @@
     </message>
 </context>
 <context>
+    <name>CmdEventHelper</name>
+    <message>
+        <location filename="event/CmdEventHelper.h" line="+25"/>
+        <source>启动</source>
+        <translation type="unfinished">Enable</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>退出</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>结束游戏</source>
+        <translation type="unfinished">Terminate game</translation>
+    </message>
+</context>
+<context>
+    <name>CmdListPage</name>
+    <message>
+        <location filename="event/cmd/CmdSequenceWizard.cpp" line="+75"/>
+        <source>命令序列</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>命令</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <source>添加一行命令</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+62"/>
+        <source>直接输入命令...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>通过 Steam 启动 GTA5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>通过 Epic 启动 GTA5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>启动 MSI Afterburner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>延时...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>执行应用程序...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>关机...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>取消存在的关机计划</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event/cmd/CmdSequenceWizard.h" line="+49"/>
+        <source>下方列表显示了要执行的命令序列，系统将从上往下依次执行命令，请点击下方按钮来添加每行命令。</source>
+        <oldsource>下方列表显示了要执行的命令序列，系统将从上往下依次执行命令，请点击下方按钮来添加每条命令。</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CmdSequenceWizard</name>
+    <message>
+        <location filename="event/cmd/CmdSequenceWizard.cpp" line="-198"/>
+        <source>创建命令序列向导</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DelayCmdWizard</name>
+    <message>
+        <location filename="event/cmd/DelayCmdWizard.cpp" line="+8"/>
+        <source>创建延时命令</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DelaySecondPage</name>
+    <message>
+        <location filename="event/cmd/DelayCmdWizard.h" line="+23"/>
+        <source>请在下方输入要延时的毫秒数。</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event/cmd/DelayCmdWizard.cpp" line="+21"/>
+        <source>延时时间</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DescriptionDialog</name>
     <message>
         <location filename="DescriptionDialog.ui" line="+14"/>
@@ -181,6 +292,48 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
     </message>
 </context>
 <context>
+    <name>InsertModePage</name>
+    <message>
+        <location filename="event/cmd/CmdSequenceWizard.h" line="+22"/>
+        <source>是否使用新命令覆盖已有的命令？</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>替换已有命令</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>在已有命令后面追加</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event/cmd/CmdSequenceWizard.cpp" line="+229"/>
+        <source>命令插入方式</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IntroPage</name>
+    <message>
+        <location line="-206"/>
+        <source>介绍</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>您将为“%1”事件创建命令</source>
+        <oldsource>您将为 %1 事件创建命令</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event/cmd/CmdSequenceWizard.h" line="-40"/>
+        <source>本向导将帮助您创建命令序列，请先确认您选择了正确的事件。</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>KeySequenceTableWidget</name>
     <message>
         <location filename="hotkey/KeySequenceTableWidget.cpp" line="+10"/>
@@ -233,7 +386,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+188"/>
-        <location filename="MainWindow.cpp" line="+807"/>
+        <location filename="MainWindow.cpp" line="+814"/>
         <location line="+22"/>
         <source>点击启动</source>
         <translation>Start counting</translation>
@@ -627,7 +780,7 @@ AdstarGod Firewall, easy to use
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="+27"/>
+        <location filename="main.cpp" line="+29"/>
         <source>精英速通工具</source>
         <oldsource>末日三速通工具</oldsource>
         <translation>Elite Speedrun Tool</translation>
@@ -696,6 +849,33 @@ AdstarGod Firewall, easy to use
         <location line="+1300"/>
         <source>请仅框选经验数值，不要选中等级</source>
         <translation>Please only box the RP value, do not include the rank</translation>
+    </message>
+</context>
+<context>
+    <name>RunExeCmdWizard</name>
+    <message>
+        <location filename="event/cmd/RunExeCmdWizard.cpp" line="+9"/>
+        <source>创建运行应用程序命令</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SelectExePage</name>
+    <message>
+        <location filename="event/cmd/RunExeCmdWizard.h" line="+25"/>
+        <source>请在下方选择可执行文件或直接输入可执行文件的路径。</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event/cmd/RunExeCmdWizard.cpp" line="+24"/>
+        <location line="+4"/>
+        <source>选择应用程序</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>应用程序 (*.exe)</source>
+        <translation type="unfinished">Executable file (*.exe)</translation>
     </message>
 </context>
 <context>
@@ -990,7 +1170,24 @@ Usage:
         <translation>The initial idea for this feature came from &lt;a href=&quot;https://www.mageangela.cn/&quot;&gt;MageAngela&lt;/a&gt;</translation>
     </message>
     <message>
-        <location line="-1866"/>
+        <location line="+99"/>
+        <source>启动创建命令向导...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>该功能的用处是在事件触发后执行对应的命令。例如，可以在工具启动后自动执行运行 GTA5 的命令</source>
+        <oldsource>该功能的用处是在事件触发后执行对应的命令。例如，可以在工具启动后自动执行运行 GTA5 的命令。</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>工具将使用 PowerShell 执行命令，而留空表示对应的事件不执行任何命令</source>
+        <oldsource>留空表示对应的事件不执行任何命令。</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-1984"/>
         <source>模糊半径</source>
         <translation>Blur radius</translation>
     </message>
@@ -1178,7 +1375,17 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>When adding a hotkey, ensure it&apos;s not registered (the corresponding app isn&apos;t running), or the tool won&apos;t capture the hotkey</translation>
     </message>
     <message>
-        <location line="+75"/>
+        <location line="+83"/>
+        <source>当前事件</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>事件发生后执行的命令</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+92"/>
         <source>Discord</source>
         <translation>Discord</translation>
     </message>
@@ -1203,19 +1410,19 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Debug mode</translation>
     </message>
     <message>
-        <location line="-1701"/>
+        <location line="-1813"/>
         <location filename="SettingDialog.h" line="+16"/>
         <source>信息展示</source>
         <oldsource>全局热键</oldsource>
         <translation>Display info</translation>
     </message>
     <message>
-        <location filename="SettingDialog.h" line="+9"/>
+        <location filename="SettingDialog.h" line="+10"/>
         <source>语言</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="SettingDialog.cpp" line="+135"/>
+        <location filename="SettingDialog.cpp" line="+139"/>
         <source>WAV 文件 (*.wav)</source>
         <translation>WAV file (*.wav)</translation>
     </message>
@@ -1250,7 +1457,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Outbound</translation>
     </message>
     <message>
-        <location filename="SettingDialog.h" line="-7"/>
+        <location filename="SettingDialog.h" line="-8"/>
         <source>断网</source>
         <translation>Net</translation>
     </message>
@@ -1265,12 +1472,12 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>General</translation>
     </message>
     <message>
-        <location line="+9"/>
+        <location line="+10"/>
         <source>社交</source>
         <translation>Social</translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="-3"/>
         <source>结束游戏</source>
         <translation>Terminate game</translation>
     </message>
@@ -1292,12 +1499,17 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Hotkey map</translation>
     </message>
     <message>
+        <location line="+1"/>
+        <source>事件命令</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location line="+3"/>
         <source>开发者选项</source>
         <translation>Developer options</translation>
     </message>
     <message>
-        <location line="+75"/>
+        <location line="+82"/>
         <source>左对齐</source>
         <translation>Left alignment</translation>
     </message>
@@ -1321,6 +1533,27 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <location line="+2"/>
         <source>下对齐</source>
         <translation>Bottom alignment</translation>
+    </message>
+</context>
+<context>
+    <name>ShutdownCmdWizard</name>
+    <message>
+        <location filename="event/cmd/ShutdownCmdWizard.cpp" line="+8"/>
+        <source>创建关机命令</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ShutdownDelaySecondPage</name>
+    <message>
+        <location filename="event/cmd/ShutdownCmdWizard.h" line="+23"/>
+        <source>请在下方输入关机前要等待的秒数。</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="event/cmd/ShutdownCmdWizard.cpp" line="+21"/>
+        <source>等待时间</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

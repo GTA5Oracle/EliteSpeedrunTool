@@ -46,7 +46,7 @@
       <enum>QFrame::Shadow::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>9</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -768,8 +768,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>147</width>
+                <height>432</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -913,8 +913,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>244</width>
+                <height>286</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_44">
@@ -1137,8 +1137,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>515</width>
-                <height>547</height>
+                <width>248</width>
+                <height>571</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -1632,8 +1632,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>134</width>
+            <height>416</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -1830,8 +1830,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>98</width>
+            <height>170</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -1951,8 +1951,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>155</width>
+            <height>180</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -2103,8 +2103,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>98</width>
+            <height>70</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -2178,8 +2178,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>210</width>
+            <height>341</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_49">
@@ -2254,6 +2254,118 @@ C:\Program Files (x86)\nn\nn.exe</string>
                </widget>
               </item>
              </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_4">
+      <layout class="QVBoxLayout" name="verticalLayout_53">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QScrollArea" name="scrollArea_16">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_16">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>529</width>
+            <height>498</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_51">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_14">
+             <item>
+              <widget class="QLabel" name="label_43">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>当前事件</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cbEventCmd"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_59">
+             <property name="text">
+              <string>事件发生后执行的命令</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPlainTextEdit" name="teEventCmd"/>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_13">
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QToolButton" name="tbEventCmdWizard">
+               <property name="text">
+                <string>启动创建命令向导...</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_63">
+             <property name="text">
+              <string>该功能的用处是在事件触发后执行对应的命令。例如，可以在工具启动后自动执行运行 GTA5 的命令</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_64">
+             <property name="text">
+              <string>工具将使用 PowerShell 执行命令，而留空表示对应的事件不执行任何命令</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
           </layout>
@@ -2375,7 +2487,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>88</width>
+            <width>98</width>
             <height>67</height>
            </rect>
           </property>
@@ -2436,7 +2548,7 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>88</width>
+            <width>98</width>
             <height>34</height>
            </rect>
           </property>

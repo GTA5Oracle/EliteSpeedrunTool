@@ -243,6 +243,9 @@ public:
     QList<QString> hotkeyMaps() const;
     void setHotkeyMaps(const QList<QString>& newHotkeyMaps);
 
+    QMap<QString, QString>& eventCmdMap();
+    void setEventCmdMap(const QMap<QString, QString>& newEventCmdMap);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -330,6 +333,8 @@ signals:
     void firewallProtocolChanged();
 
     void hotkeyMapsChanged();
+
+    void eventCmdMapChanged();
 
 private:
     bool mMinimizeToTray = false;
@@ -430,6 +435,9 @@ private:
     // 快捷键映射
     QList<QString> mHotkeyMaps = {};
 
+    // 事件命令
+    QMap<QString, QString> mEventCmdMap = {};
+
     // 开发者选项
     bool mDebugMode = false;
 
@@ -496,4 +504,5 @@ private:
     Q_PROPERTY(QString topMostWindowHotkey READ topMostWindowHotkey WRITE setTopMostWindowHotkey NOTIFY topMostWindowHotkeyChanged FINAL)
     Q_PROPERTY(int firewallProtocol READ firewallProtocol WRITE setFirewallProtocol NOTIFY firewallProtocolChanged FINAL)
     Q_PROPERTY(QList<QString> hotkeyMaps READ hotkeyMaps WRITE setHotkeyMaps NOTIFY hotkeyMapsChanged FINAL)
+    Q_PROPERTY(QMap<QString, QString> eventCmdMap READ eventCmdMap WRITE setEventCmdMap NOTIFY eventCmdMapChanged FINAL)
 };

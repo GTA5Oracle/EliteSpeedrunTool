@@ -12,6 +12,7 @@
 #include "act3headshot/RegionSelectorDialog.h"
 #include "act3headshot/RpRecognizeUtil.h"
 #include "displayinfo/RtssUtil.h"
+#include "event/EventBus.h"
 #include "net/FirewallUtil.h"
 #include "net/HttpServerUtil.h"
 #include "net/NetworkAdapterUtil.h"
@@ -27,6 +28,7 @@
 #include <QPalette>
 #include <QState>
 #include <QUrl>
+#include <event/Event.h>
 
 const QString MainWindow::hotkeyStatePattern = "🧱%1, %2  📶%3, %4  ⏱️%5, %6, %7  👤%8  ❌%9";
 
@@ -36,6 +38,8 @@ MainWindow::MainWindow(QWidget* parent)
     ui.setupUi(this);
 
     connect(qApp, &QCoreApplication::aboutToQuit, this, [=]() {
+        QuitEvent quitEvent;
+        eventBus->send(&quitEvent);
         HttpServerController::instance()->stop();
         qInfo("Exiting...");
         globalData->destory();
@@ -72,6 +76,9 @@ MainWindow::MainWindow(QWidget* parent)
     initAct3Headshot();
 
     rtssUtil;
+
+    StartEvent startEvent;
+    eventBus->send(&startEvent);
 }
 
 MainWindow::~MainWindow()
@@ -860,6 +867,8 @@ void MainWindow::closeGameImmediately()
 {
     system("taskkill /f /t /im GTA5.exe");
     qInfo("Using taskkill command to terminate GTA5.exe");
+    CloseGameEvent event;
+    eventBus->send(&event);
 }
 
 void MainWindow::topMostWindow(bool isTop, bool fromHotkey)

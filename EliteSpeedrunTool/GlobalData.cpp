@@ -230,6 +230,18 @@ void GlobalData::readSettings()
     setHotkeyMaps(settings.value("HotkeyMaps", mHotkeyMaps).value<QList<QString>>());
     settings.endGroup();
 
+    settings.beginGroup("Event");
+    {
+        settings.beginGroup("EventCmdMap");
+        QMap<QString, QString> m;
+        for (const auto& key : settings.allKeys()) {
+            m[key] = settings.value(key).toString();
+        }
+        setEventCmdMap(m);
+        settings.endGroup();
+    }
+    settings.endGroup();
+
     settings.beginGroup("Language");
     setLanguage(settings.value("Language", mLanguage).toString());
     settings.endGroup();
@@ -329,6 +341,16 @@ void GlobalData::writeSettings()
 
     settings.beginGroup("HotkeyMap");
     settings.setValue("HotkeyMaps", mHotkeyMaps);
+    settings.endGroup();
+
+    settings.beginGroup("Event");
+    {
+        settings.beginGroup("EventCmdMap");
+        for (auto i = mEventCmdMap.constBegin(); i != mEventCmdMap.constEnd(); i++) {
+            settings.setValue(i.key(), i.value());
+        }
+        settings.endGroup();
+    }
     settings.endGroup();
 
     settings.beginGroup("Language");
@@ -1146,4 +1168,17 @@ void GlobalData::setHotkeyMaps(const QList<QString>& newHotkeyMaps)
         return;
     mHotkeyMaps = newHotkeyMaps;
     emit hotkeyMapsChanged();
+}
+
+QMap<QString, QString>& GlobalData::eventCmdMap()
+{
+    return mEventCmdMap;
+}
+
+void GlobalData::setEventCmdMap(const QMap<QString, QString>& newEventCmdMap)
+{
+    if (mEventCmdMap == newEventCmdMap)
+        return;
+    mEventCmdMap = newEventCmdMap;
+    emit eventCmdMapChanged();
 }
