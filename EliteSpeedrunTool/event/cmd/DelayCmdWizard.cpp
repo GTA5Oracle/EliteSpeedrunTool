@@ -12,14 +12,18 @@ DelayCmdWizard::DelayCmdWizard(QWidget* parent)
 
 QString DelayCmdWizard::cmd()
 {
-    return QString("Start-Sleep -Milliseconds " + QString::number(field("value").toInt()) + ";");
+    return "Start-Sleep -Milliseconds " + QString::number(field("value").toInt()) + ";";
+}
+
+QString DelayCmdWizard::description()
+{
+    return tr("延时 %1 毫秒").arg(QString::number(field("value").toInt()));
 }
 
 DelaySecondPage::DelaySecondPage(QWidget* parent)
     : QWizardPage { parent }
 {
     QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget(topLabel);
     layout->addWidget(timeSpinBox);
     setLayout(layout);
 }
@@ -27,7 +31,7 @@ DelaySecondPage::DelaySecondPage(QWidget* parent)
 void DelaySecondPage::initializePage()
 {
     setTitle(tr("延时时间"));
-    topLabel->setWordWrap(true);
+    setSubTitle(tr("请在下方输入要延时的毫秒数。"));
     registerField("value", timeSpinBox);
     timeSpinBox->setMaximum(100000);
     timeSpinBox->setMinimum(1);

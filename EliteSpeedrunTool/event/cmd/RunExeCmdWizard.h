@@ -1,6 +1,5 @@
 #pragma once
 
-#include <QLabel>
 #include <QLineEdit>
 #include <QSpinBox>
 #include <QToolButton>
@@ -11,6 +10,7 @@ class RunExeCmdWizard : public QWizard {
 public:
     RunExeCmdWizard(QWidget* parent = nullptr);
     QString cmd();
+    QString description();
 };
 
 class SelectExePage : public QWizardPage {
@@ -22,7 +22,6 @@ public:
 
 private:
     int initValue = 10000;
-    QLabel* topLabel = new QLabel(tr("请在下方选择可执行文件或直接输入可执行文件的路径。"));
     QLineEdit* pathLineEdit = new QLineEdit;
     QToolButton* selectExeButton = new QToolButton;
 };

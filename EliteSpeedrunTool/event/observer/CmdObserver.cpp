@@ -14,7 +14,7 @@ void CmdObserver::onEvent(Event* event)
         auto cmd = map[className];
         if (!cmd.isEmpty()) {
             QString realCmd = "powershell \"" + cmd.replace("\"", "\\\"") + "\"";
-            int ret = WinExec(realCmd.toStdString().c_str(), SW_HIDE);
+            int ret = WinExec(realCmd.toLocal8Bit().toStdString().c_str(), SW_HIDE);
             qInfo() << "Command" << cmd << "ret: " << ret;
         }
     }

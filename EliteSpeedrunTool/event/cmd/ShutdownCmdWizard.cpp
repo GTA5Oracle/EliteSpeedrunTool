@@ -12,14 +12,18 @@ ShutdownCmdWizard::ShutdownCmdWizard(QWidget* parent)
 
 QString ShutdownCmdWizard::cmd()
 {
-    return QString("shutdown -s -t " + QString::number(field("value").toInt()) + ";");
+    return "shutdown -s -t " + QString::number(field("value").toInt()) + ";";
+}
+
+QString ShutdownCmdWizard::description()
+{
+    return tr("%1 秒后关机").arg(QString::number(field("value").toInt()));
 }
 
 ShutdownDelaySecondPage::ShutdownDelaySecondPage(QWidget* parent)
     : QWizardPage { parent }
 {
     QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget(topLabel);
     layout->addWidget(timeSpinBox);
     setLayout(layout);
 }
@@ -27,7 +31,7 @@ ShutdownDelaySecondPage::ShutdownDelaySecondPage(QWidget* parent)
 void ShutdownDelaySecondPage::initializePage()
 {
     setTitle(tr("等待时间"));
-    topLabel->setWordWrap(true);
+    setSubTitle(tr("请在下方输入关机前要等待的秒数。"));
     registerField("value", timeSpinBox);
     timeSpinBox->setMaximum(600);
     timeSpinBox->setMinimum(0);

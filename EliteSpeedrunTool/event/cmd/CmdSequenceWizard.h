@@ -30,7 +30,6 @@ public:
     void initializePage();
 
 private:
-    QLabel* topLabel = new QLabel(tr("本向导将帮助您创建命令序列，请先确认您选择了正确的事件。"));
     QLabel* currentEventLabel = new QLabel;
 };
 
@@ -46,14 +45,13 @@ public:
     QStringList cmdList();
 
 private:
-    QLabel* topLabel = new QLabel(tr("下方列表显示了要执行的命令序列，系统将从上往下依次执行命令，请点击下方按钮来添加每行命令。"));
-    QTableWidget* cmdTable = new QTableWidget(0, 1);
+    QTableWidget* cmdTable = new QTableWidget(0, 2);
     QToolButton* removeLineToolButton = new QToolButton;
     QToolButton* upLineToolButton = new QToolButton;
     QToolButton* downLineToolButton = new QToolButton;
     QToolButton* addCmdButton = new QToolButton;
 
-    void addLineToTable(QString cmd);
+    void addLineToTable(QString cmd, QString description);
     bool upTableLine(int row);
     void updateToolButtonState(QTableWidgetItem* current);
     void initAddCmdMenu();
@@ -68,7 +66,6 @@ public:
     void initializePage();
 
 private:
-    QLabel* topLabel = new QLabel(tr("是否使用新命令覆盖已有的命令？"));
     QRadioButton* replaceRadioButton = new QRadioButton(tr("替换已有命令"));
     QRadioButton* appendRadioButton = new QRadioButton(tr("在已有命令后面追加"));
 };

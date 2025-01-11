@@ -29,7 +29,6 @@ QString CmdSequenceWizard::cmdSequence()
 IntroPage::IntroPage(QWidget* parent)
 {
     QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget(topLabel);
     layout->addWidget(currentEventLabel);
     setLayout(layout);
 }
@@ -37,7 +36,8 @@ IntroPage::IntroPage(QWidget* parent)
 void IntroPage::initializePage()
 {
     setTitle(tr("介绍"));
-    topLabel->setWordWrap(true);
+    setSubTitle(tr("本向导将帮助您创建命令序列，请先确认您选择了正确的事件。"));
+
     currentEventLabel->setWordWrap(true);
 
     auto w = dynamic_cast<CmdSequenceWizard*>(wizard());
@@ -51,8 +51,6 @@ void IntroPage::initializePage()
 CmdListPage::CmdListPage(QWidget* parent)
 {
     QVBoxLayout* vLayout = new QVBoxLayout;
-    vLayout->addWidget(topLabel);
-
     QHBoxLayout* hLayout = new QHBoxLayout;
     vLayout->addLayout(hLayout);
     QVBoxLayout* vLayoutLeft = new QVBoxLayout;
@@ -73,10 +71,9 @@ CmdListPage::CmdListPage(QWidget* parent)
 void CmdListPage::initializePage()
 {
     setTitle(tr("命令序列"));
+    setSubTitle(tr("下方列表显示了要执行的命令序列，系统将从上往下依次执行命令，请点击下方按钮来添加每行命令。"));
 
-    topLabel->setWordWrap(true);
-
-    cmdTable->setHorizontalHeaderLabels({ tr("命令") });
+    cmdTable->setHorizontalHeaderLabels({ tr("命令"), tr("备注") });
     cmdTable->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
 
     removeLineToolButton->setIcon(QIcon("://image/ic_cancel.ico"));
@@ -148,22 +145,29 @@ QStringList CmdListPage::cmdList()
 {
     QStringList list;
     for (int i = 0; i < cmdTable->rowCount(); i++) {
-        list << cmdTable->item(i, 0)->text();
+        QString cmd = cmdTable->item(i, 0)->text();
+        QString comment = cmdTable->item(i, 1)->text();
+        if (comment.isEmpty()) {
+            list << cmd;
+        } else {
+            list << cmd + " <# " + comment + " #>";
+        }
     }
     return list;
 }
 
-void CmdListPage::addLineToTable(QString cmd)
+void CmdListPage::addLineToTable(QString cmd, QString description)
 {
     if (cmd.isEmpty()) {
         return;
     }
     int row = cmdTable->currentRow() + 1;
+    int column = cmdTable->currentColumn();
     cmdTable->insertRow(row);
-    auto item = new QTableWidgetItem(cmd);
-    cmdTable->setItem(row, 0, item);
+    cmdTable->setItem(row, 0, new QTableWidgetItem(cmd));
+    cmdTable->setItem(row, 1, new QTableWidgetItem(description));
     if (row == cmdTable->rowCount() - 1) {
-        cmdTable->setCurrentItem(item);
+        cmdTable->setCurrentItem(cmdTable->item(row, column == -1 ? 0 : column));
     }
 }
 
@@ -190,35 +194,41 @@ void CmdListPage::updateToolButtonState(QTableWidgetItem* current)
 
 void CmdListPage::initAddCmdMenu()
 {
-    QList<QPair<QString, std::function<QString()>>> actionList = {
+    QList<QPair<QString, std::function<QPair<QString, QString>()>>> actionList = {
         qMakePair(tr("直接输入命令..."), []() {
             bool ok;
             QString text = QInputDialog::getText(nullptr, "", "请输入一行命令", QLineEdit::Normal, "", &ok);
-            return ok ? text : QString("");
+            return ok ? qMakePair(text, "") : qMakePair("", "");
         }),
-        qMakePair(tr("通过 Steam 启动 GTA5"), []() { return "start \"steam://rungameid/271590\";"; }),
-        qMakePair(tr("通过 Epic 启动 GTA5"), []() { return "start \"com.epicgames.launcher://apps/0584d2013f0149a791e7b9bad0eec102%3A6e563a2c0f5f46e3b4e88b5f4ed50cca%3A9d2d0eb64d5c44529cece33fe2a46482?action=launch&silent=true\";"; }),
-        qMakePair(tr("启动 MSI Afterburner"), []() { return "start \"${env:ProgramFiles(x86)}/MSI Afterburner/MSIAfterburner.exe\";"; }),
+        qMakePair(tr("通过 Steam 启动 GTA5"), []() { return qMakePair("start \"steam://rungameid/271590\";", tr("通过 Steam 启动 GTA5")); }),
+        qMakePair(tr("通过 Epic 启动 GTA5"), []() { return qMakePair("start \"com.epicgames.launcher://apps/0584d2013f0149a791e7b9bad0eec102%3A6e563a2c0f5f46e3b4e88b5f4ed50cca%3A9d2d0eb64d5c44529cece33fe2a46482?action=launch&silent=true\";", tr("通过 Epic 启动 GTA5")); }),
+        qMakePair(tr("启动 MSI Afterburner"), []() { return qMakePair("start \"${env:ProgramFiles(x86)}/MSI Afterburner/MSIAfterburner.exe\";", tr("启动 MSI Afterburner")); }),
         qMakePair(tr("延时..."), []() {
             DelayCmdWizard w;
-            return w.exec() == QDialog::Accepted ? w.cmd() : QString("");
+            return w.exec() == QDialog::Accepted ? qMakePair(w.cmd(), w.description()) : qMakePair("", "");
         }),
         qMakePair(tr("执行应用程序..."), []() {
             RunExeCmdWizard w;
-            return w.exec() == QDialog::Accepted ? w.cmd() : QString("");
+            return w.exec() == QDialog::Accepted ? qMakePair(w.cmd(), w.description()) : qMakePair("", "");
         }),
         qMakePair(tr("关机..."), []() {
             ShutdownCmdWizard w;
-            return w.exec() == QDialog::Accepted ? w.cmd() : QString("");
+            return w.exec() == QDialog::Accepted ? qMakePair(w.cmd(), w.description()) : qMakePair("", "");
         }),
-        qMakePair(tr("取消存在的关机计划"), []() { return "shutdown -a;"; }),
+        qMakePair(tr("取消存在的关机计划"), []() { return qMakePair("shutdown -a;", tr("取消存在的关机计划")); }),
     };
 
     QMenu* menu = new QMenu(this);
     for (auto i = actionList.constBegin(); i != actionList.constEnd(); i++) {
         QAction* action = menu->addAction(i->first);
         auto func = i->second;
-        connect(action, &QAction::triggered, this, [this, func]() { addLineToTable(func()); });
+        connect(action, &QAction::triggered, this, [this, func]() {
+            auto p = func();
+            QString cmd = p.first, description = p.second;
+            if (!p.first.isEmpty()) {
+                addLineToTable(cmd, description);
+            }
+        });
     }
     addCmdButton->setMenu(menu);
     addCmdButton->setPopupMode(QToolButton::ToolButtonPopupMode::InstantPopup);
@@ -234,7 +244,6 @@ void CmdListPage::updateWizardNextButtonEnabled(bool enabled)
 InsertModePage::InsertModePage(QWidget* parent)
 {
     QVBoxLayout* layout = new QVBoxLayout;
-    layout->addWidget(topLabel);
     layout->addWidget(replaceRadioButton);
     layout->addWidget(appendRadioButton);
     setLayout(layout);
@@ -243,7 +252,7 @@ InsertModePage::InsertModePage(QWidget* parent)
 void InsertModePage::initializePage()
 {
     setTitle(tr("命令插入方式"));
-    topLabel->setWordWrap(true);
+    setSubTitle(tr("是否使用新命令覆盖已有的命令？"));
     CmdSequenceWizard* w = dynamic_cast<CmdSequenceWizard*>(wizard());
     replaceRadioButton->setChecked(w->insertModeReplace);
     appendRadioButton->setChecked(!w->insertModeReplace);

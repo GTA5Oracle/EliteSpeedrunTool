@@ -45,89 +45,94 @@
     <message>
         <location filename="event/CmdEventHelper.h" line="+25"/>
         <source>启动</source>
-        <translation type="unfinished">Enable</translation>
+        <translation>Start</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>退出</source>
-        <translation type="unfinished"></translation>
+        <translation>Exit</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>结束游戏</source>
-        <translation type="unfinished">Terminate game</translation>
+        <translation>Terminate game</translation>
     </message>
 </context>
 <context>
     <name>CmdListPage</name>
     <message>
-        <location filename="event/cmd/CmdSequenceWizard.cpp" line="+75"/>
+        <location filename="event/cmd/CmdSequenceWizard.cpp" line="+73"/>
         <source>命令序列</source>
-        <translation type="unfinished"></translation>
+        <translation>Cmd sequence</translation>
     </message>
     <message>
-        <location line="+4"/>
+        <location line="+3"/>
         <source>命令</source>
-        <translation type="unfinished"></translation>
+        <translation>Command</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>备注</source>
+        <translation>Comment</translation>
     </message>
     <message>
         <location line="+53"/>
         <source>添加一行命令</source>
-        <translation type="unfinished"></translation>
+        <translation>Add a line of command</translation>
     </message>
     <message>
-        <location line="+62"/>
+        <location line="+69"/>
         <source>直接输入命令...</source>
-        <translation type="unfinished"></translation>
+        <translation>Input the command directly...</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>通过 Steam 启动 GTA5</source>
-        <translation type="unfinished"></translation>
+        <translation>Launch GTA5 through Steam</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>通过 Epic 启动 GTA5</source>
-        <translation type="unfinished"></translation>
+        <translation>Launch GTA5 through Epic</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>启动 MSI Afterburner</source>
-        <translation type="unfinished"></translation>
+        <translation>Launch MSI Afterburner</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>延时...</source>
-        <translation type="unfinished"></translation>
+        <translation>Delay...</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>执行应用程序...</source>
-        <translation type="unfinished"></translation>
+        <translation>Run an application...</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>关机...</source>
-        <translation type="unfinished"></translation>
+        <translation>Shutdown...</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>取消存在的关机计划</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancel existing shutdown plan</translation>
     </message>
     <message>
-        <location filename="event/cmd/CmdSequenceWizard.h" line="+49"/>
+        <location line="-144"/>
         <source>下方列表显示了要执行的命令序列，系统将从上往下依次执行命令，请点击下方按钮来添加每行命令。</source>
         <oldsource>下方列表显示了要执行的命令序列，系统将从上往下依次执行命令，请点击下方按钮来添加每条命令。</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>The list below shows the command sequence to be executed. Click the button below to add each command.</translation>
     </message>
 </context>
 <context>
     <name>CmdSequenceWizard</name>
     <message>
-        <location filename="event/cmd/CmdSequenceWizard.cpp" line="-198"/>
+        <location line="-58"/>
         <source>创建命令序列向导</source>
-        <translation type="unfinished"></translation>
+        <translation>Wizard to create command sequence</translation>
     </message>
 </context>
 <context>
@@ -135,20 +140,25 @@
     <message>
         <location filename="event/cmd/DelayCmdWizard.cpp" line="+8"/>
         <source>创建延时命令</source>
-        <translation type="unfinished"></translation>
+        <translation>Create a delay command</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>延时 %1 毫秒</source>
+        <translation>Delay %1 ms</translation>
     </message>
 </context>
 <context>
     <name>DelaySecondPage</name>
     <message>
-        <location filename="event/cmd/DelayCmdWizard.h" line="+23"/>
+        <location line="+14"/>
         <source>请在下方输入要延时的毫秒数。</source>
-        <translation type="unfinished"></translation>
+        <translation>Input the number of ms to be delayed below.</translation>
     </message>
     <message>
-        <location filename="event/cmd/DelayCmdWizard.cpp" line="+21"/>
+        <location line="-1"/>
         <source>延时时间</source>
-        <translation type="unfinished"></translation>
+        <translation>Delay time</translation>
     </message>
 </context>
 <context>
@@ -294,43 +304,43 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
 <context>
     <name>InsertModePage</name>
     <message>
-        <location filename="event/cmd/CmdSequenceWizard.h" line="+22"/>
+        <location filename="event/cmd/CmdSequenceWizard.cpp" line="+239"/>
         <source>是否使用新命令覆盖已有的命令？</source>
-        <translation type="unfinished"></translation>
+        <translation>Overwrite existing commands with new commands?</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location filename="event/cmd/CmdSequenceWizard.h" line="+69"/>
         <source>替换已有命令</source>
-        <translation type="unfinished"></translation>
+        <translation>Replace existing commands</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>在已有命令后面追加</source>
-        <translation type="unfinished"></translation>
+        <translation>Append to existing commands</translation>
     </message>
     <message>
-        <location filename="event/cmd/CmdSequenceWizard.cpp" line="+229"/>
+        <location filename="event/cmd/CmdSequenceWizard.cpp" line="-1"/>
         <source>命令插入方式</source>
-        <translation type="unfinished"></translation>
+        <translation>Command insert mode</translation>
     </message>
 </context>
 <context>
     <name>IntroPage</name>
     <message>
-        <location line="-206"/>
+        <location line="-216"/>
         <source>介绍</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduction</translation>
     </message>
     <message>
-        <location line="+5"/>
+        <location line="+6"/>
         <source>您将为“%1”事件创建命令</source>
         <oldsource>您将为 %1 事件创建命令</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>You will create commands for &quot;%1&quot; event</translation>
     </message>
     <message>
-        <location filename="event/cmd/CmdSequenceWizard.h" line="-40"/>
+        <location line="-5"/>
         <source>本向导将帮助您创建命令序列，请先确认您选择了正确的事件。</source>
-        <translation type="unfinished"></translation>
+        <translation>This wizard helps create a command sequence. Please confirm the correct event first.</translation>
     </message>
 </context>
 <context>
@@ -339,7 +349,7 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
         <location filename="hotkey/KeySequenceTableWidget.cpp" line="+10"/>
         <source>快捷键</source>
         <oldsource>按键</oldsource>
-        <translation type="unfinished">Hotkeys</translation>
+        <translation>Hotkeys</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -856,26 +866,31 @@ AdstarGod Firewall, easy to use
     <message>
         <location filename="event/cmd/RunExeCmdWizard.cpp" line="+9"/>
         <source>创建运行应用程序命令</source>
-        <translation type="unfinished"></translation>
+        <translation>Create a run application command</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>运行 %1</source>
+        <translation>Run %1</translation>
     </message>
 </context>
 <context>
     <name>SelectExePage</name>
     <message>
-        <location filename="event/cmd/RunExeCmdWizard.h" line="+25"/>
+        <location line="+17"/>
         <source>请在下方选择可执行文件或直接输入可执行文件的路径。</source>
-        <translation type="unfinished"></translation>
+        <translation>Select or enter the executable file path.</translation>
     </message>
     <message>
-        <location filename="event/cmd/RunExeCmdWizard.cpp" line="+24"/>
+        <location line="-1"/>
         <location line="+4"/>
         <source>选择应用程序</source>
-        <translation type="unfinished"></translation>
+        <translation>Select an application</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>应用程序 (*.exe)</source>
-        <translation type="unfinished">Executable file (*.exe)</translation>
+        <translation>Executable file (*.exe)</translation>
     </message>
 </context>
 <context>
@@ -1172,19 +1187,19 @@ Usage:
     <message>
         <location line="+99"/>
         <source>启动创建命令向导...</source>
-        <translation type="unfinished"></translation>
+        <translation>Launch create cmd wizard...</translation>
     </message>
     <message>
         <location line="+9"/>
         <source>该功能的用处是在事件触发后执行对应的命令。例如，可以在工具启动后自动执行运行 GTA5 的命令</source>
         <oldsource>该功能的用处是在事件触发后执行对应的命令。例如，可以在工具启动后自动执行运行 GTA5 的命令。</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>This feature runs a command after an event triggers, such as launching GTA5 when the tool starts</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>工具将使用 PowerShell 执行命令，而留空表示对应的事件不执行任何命令</source>
         <oldsource>留空表示对应的事件不执行任何命令。</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>The tool uses PowerShell to execute commands. Leaving it blank means no command will be executed</translation>
     </message>
     <message>
         <location line="-1984"/>
@@ -1377,12 +1392,12 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location line="+83"/>
         <source>当前事件</source>
-        <translation type="unfinished"></translation>
+        <translation>Current event</translation>
     </message>
     <message>
         <location line="+12"/>
         <source>事件发生后执行的命令</source>
-        <translation type="unfinished"></translation>
+        <translation>Command to execute after the event</translation>
     </message>
     <message>
         <location line="+92"/>
@@ -1501,7 +1516,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location line="+1"/>
         <source>事件命令</source>
-        <translation type="unfinished"></translation>
+        <translation>Event cmd</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1540,20 +1555,25 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location filename="event/cmd/ShutdownCmdWizard.cpp" line="+8"/>
         <source>创建关机命令</source>
-        <translation type="unfinished"></translation>
+        <translation>Create a shutdown command</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>%1 秒后关机</source>
+        <translation>Shutdown after %1 seconds</translation>
     </message>
 </context>
 <context>
     <name>ShutdownDelaySecondPage</name>
     <message>
-        <location filename="event/cmd/ShutdownCmdWizard.h" line="+23"/>
+        <location line="+14"/>
         <source>请在下方输入关机前要等待的秒数。</source>
-        <translation type="unfinished"></translation>
+        <translation>Enter the wait time in seconds before shutdown.</translation>
     </message>
     <message>
-        <location filename="event/cmd/ShutdownCmdWizard.cpp" line="+21"/>
+        <location line="-1"/>
         <source>等待时间</source>
-        <translation type="unfinished"></translation>
+        <translation>Wait time</translation>
     </message>
 </context>
 <context>

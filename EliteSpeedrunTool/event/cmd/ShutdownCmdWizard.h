@@ -1,6 +1,5 @@
 #pragma once
 
-#include <QLabel>
 #include <QSpinBox>
 #include <QWizard>
 
@@ -9,6 +8,7 @@ class ShutdownCmdWizard : public QWizard {
 public:
     ShutdownCmdWizard(QWidget* parent = nullptr);
     QString cmd();
+    QString description();
 };
 
 class ShutdownDelaySecondPage : public QWizardPage {
@@ -20,6 +20,5 @@ public:
 
 private:
     int initValue = 60000;
-    QLabel* topLabel = new QLabel(tr("请在下方输入关机前要等待的秒数。"));
     QSpinBox* timeSpinBox = new QSpinBox;
 };

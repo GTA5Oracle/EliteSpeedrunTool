@@ -13,7 +13,13 @@ RunExeCmdWizard::RunExeCmdWizard(QWidget* parent)
 
 QString RunExeCmdWizard::cmd()
 {
-    return QString("start \"" + field("text").toString() + "\";");
+    return "start \"" + field("text").toString() + "\";";
+}
+
+QString RunExeCmdWizard::description()
+{
+    QFile file(field("text").toString());
+    return tr("运行 %1").arg(QFileInfo(file.fileName()).fileName());
 }
 
 SelectExePage::SelectExePage(QWidget* parent)
@@ -21,7 +27,6 @@ SelectExePage::SelectExePage(QWidget* parent)
 {
     QVBoxLayout* layout = new QVBoxLayout;
     QHBoxLayout* hPathlayout = new QHBoxLayout;
-    layout->addWidget(topLabel);
     hPathlayout->addWidget(pathLineEdit);
     hPathlayout->addWidget(selectExeButton);
     layout->addLayout(hPathlayout);
@@ -31,7 +36,7 @@ SelectExePage::SelectExePage(QWidget* parent)
 void SelectExePage::initializePage()
 {
     setTitle(tr("选择应用程序"));
-    topLabel->setWordWrap(true);
+    setSubTitle(tr("请在下方选择可执行文件或直接输入可执行文件的路径。"));
     selectExeButton->setText("...");
     connect(selectExeButton, &QAbstractButton::clicked, this, [this]() {
         QString fileName = QFileDialog::getOpenFileName(this, tr("选择应用程序"),
