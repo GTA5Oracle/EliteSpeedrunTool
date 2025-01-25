@@ -7,7 +7,6 @@
         <file>image/ic_lighton.ico</file>
         <file>image/ic_network.ico</file>
         <file>image/ic_language.ico</file>
-        <file>image/ic_spy.ico</file>
         <file>image/ic_browser.ico</file>
         <file>image/ic_cancel.ico</file>
         <file>image/ic_note_2.ico</file>
@@ -27,5 +26,7 @@
         <file>image/ic_monitor_blue_grad.ico</file>
         <file>image/ic_keyboard_toggle.ico</file>
         <file>image/ic_console.ico</file>
+        <file>image/ic_crosshair.svg</file>
+        <file>image/ic_crosshair.ico</file>
     </qresource>
 </RCC>

@@ -162,6 +162,16 @@ void GlobalData::readSettings()
     settings.endGroup();
     readSubFuncSettingsMap(settings);
 
+    settings.beginGroup("Crosshair");
+    setCrosshairShow(settings.value("CrosshairShow", mCrosshairShow).toBool());
+    setCrosshairImage(settings.value("CrosshairImage", mCrosshairImage).toString());
+    setCrosshairOffset(settings.value("CrosshairOffset", mCrosshairOffset).toPoint());
+    setCrosshairSize(settings.value("CrosshairSize", mCrosshairSize).toSize());
+    setCrosshairShadowColor(settings.value("CrosshairShadowColor", mCrosshairShadowColor).value<QColor>());
+    setCrosshairShadowBlurRadius(settings.value("CrosshairShadowBlurRadius", mCrosshairShadowBlurRadius).toInt());
+    setCrosshairShadowOffset(settings.value("CrosshairShadowOffset", mCrosshairShadowOffset).value<QPointF>());
+    settings.endGroup();
+
     settings.beginGroup("Rtss");
     setRtssOverlay(settings.value("RtssOverlay", mRtssOverlay).toBool());
     setRtssCrosshair(settings.value("RtssCrosshair", mRtssCrosshair).toBool());
@@ -276,6 +286,16 @@ void GlobalData::writeSettings()
     settings.setValue("DisplayInfoBackground", mDisplayInfoBackground.rgba());
     settings.endGroup();
     writeSubFuncSettingsMap(settings);
+
+    settings.beginGroup("Crosshair");
+    settings.setValue("CrosshairShow", mCrosshairShow);
+    settings.setValue("CrosshairImage", mCrosshairImage);
+    settings.setValue("CrosshairOffset", mCrosshairOffset);
+    settings.setValue("CrosshairSize", mCrosshairSize);
+    settings.setValue("CrosshairShadowColor", mCrosshairShadowColor);
+    settings.setValue("CrosshairShadowBlurRadius", mCrosshairShadowBlurRadius);
+    settings.setValue("CrosshairShadowOffset", mCrosshairShadowOffset);
+    settings.endGroup();
 
     settings.beginGroup("Rtss");
     settings.setValue("RtssOverlay", mRtssOverlay);
@@ -1181,4 +1201,95 @@ void GlobalData::setEventCmdMap(const QMap<QString, QString>& newEventCmdMap)
         return;
     mEventCmdMap = newEventCmdMap;
     emit eventCmdMapChanged();
+}
+
+QPoint GlobalData::crosshairOffset() const
+{
+    return mCrosshairOffset;
+}
+
+void GlobalData::setCrosshairOffset(QPoint newCrosshairOffset)
+{
+    if (mCrosshairOffset == newCrosshairOffset)
+        return;
+    mCrosshairOffset = newCrosshairOffset;
+    emit crosshairOffsetChanged();
+}
+
+QSize GlobalData::crosshairSize() const
+{
+    return mCrosshairSize;
+}
+
+void GlobalData::setCrosshairSize(const QSize& newCrosshairSize)
+{
+    if (mCrosshairSize == newCrosshairSize)
+        return;
+    mCrosshairSize = newCrosshairSize;
+    emit crosshairSizeChanged();
+}
+
+QString GlobalData::crosshairImage() const
+{
+    return mCrosshairImage;
+}
+
+void GlobalData::setCrosshairImage(const QString& newCrosshairImage)
+{
+    if (mCrosshairImage == newCrosshairImage)
+        return;
+    mCrosshairImage = newCrosshairImage;
+    emit crosshairImageChanged();
+}
+
+bool GlobalData::crosshairShow() const
+{
+    return mCrosshairShow;
+}
+
+void GlobalData::setCrosshairShow(bool newCrosshairShow)
+{
+    if (mCrosshairShow == newCrosshairShow)
+        return;
+    mCrosshairShow = newCrosshairShow;
+    emit crosshairShowChanged();
+}
+
+QColor GlobalData::crosshairShadowColor() const
+{
+    return mCrosshairShadowColor;
+}
+
+void GlobalData::setCrosshairShadowColor(const QColor& newCrosshairShadowColor)
+{
+    if (mCrosshairShadowColor == newCrosshairShadowColor)
+        return;
+    mCrosshairShadowColor = newCrosshairShadowColor;
+    emit crosshairShadowColorChanged();
+}
+
+int GlobalData::crosshairShadowBlurRadius() const
+{
+    return mCrosshairShadowBlurRadius;
+}
+
+void GlobalData::setCrosshairShadowBlurRadius(int newCrosshairShadowBlurRadius)
+{
+    if (mCrosshairShadowBlurRadius == newCrosshairShadowBlurRadius)
+        return;
+    mCrosshairShadowBlurRadius = newCrosshairShadowBlurRadius;
+    emit crosshairShadowBlurRadiusChanged();
+}
+
+QPointF GlobalData::crosshairShadowOffset() const
+{
+    return mCrosshairShadowOffset;
+}
+
+void GlobalData::setCrosshairShadowOffset(QPointF newCrosshairShadowOffset)
+{
+    if (mCrosshairShadowOffset == newCrosshairShadowOffset)
+        return;
+    mCrosshairShadowOffset = newCrosshairShadowOffset;
+    emit crosshairShadowOffsetChanged();
 }

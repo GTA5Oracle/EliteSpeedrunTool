@@ -2,6 +2,7 @@
 #include "LanguageUtil.h"
 #include "LogUtil.h"
 #include "MainWindow.h"
+#include "UiAccessUtil.h"
 #include "event/EventBus.h"
 #include "event/observer/CmdObserver.h"
 
@@ -19,6 +20,12 @@ int main(int argc, char* argv[])
 
     QApplication a(argc, argv);
 
+#ifndef QT_DEBUG
+    if (ERROR_SUCCESS != uiAccessUtil->prepareForUIAccess()) {
+        QMessageBox::critical(nullptr, QString(), QObject::tr("获取 UIAccess 权限失败，无法在全屏的游戏上显示内容！"));
+    }
+#endif
+
     globalData->init();
     LanguageUtil::applyLanguage();
 
@@ -27,8 +34,8 @@ int main(int argc, char* argv[])
     QApplication::setWindowIcon(QIcon("://image/ic_icon.png"));
     QApplication::setOrganizationName("SkyD666");
     QApplication::setApplicationName(QObject::tr("精英速通工具"));
-    QApplication::setApplicationVersion("11.4.1.70");
-    qputenv("ApplicationVersionCode", "20250111");
+    QApplication::setApplicationVersion("11.5.1.70");
+    qputenv("ApplicationVersionCode", "20250125");
 
     qApp->setStyle(globalData->styleName());
 

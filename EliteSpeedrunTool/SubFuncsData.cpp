@@ -1,5 +1,3 @@
-#pragma once
-
 #include "SubFuncsData.h"
 
 Q_GLOBAL_STATIC(SubFuncsData, subFuncsDataInstance)
@@ -8,8 +6,9 @@ SubFuncsData::SubFuncsData()
     : QObject(nullptr)
 {
     map = {
-        qMakePair(DisplayInfoSubFunction::Timer, QVariant(0ull)),
-        qMakePair(DisplayInfoSubFunction::Act3Headshot, QVariant(0)),
+        qMakePair(DisplayInfoSubFunction::Timer, 0ull),
+        qMakePair(DisplayInfoSubFunction::Firewall, false),
+        qMakePair(DisplayInfoSubFunction::Act3Headshot, 0),
     };
 }
 

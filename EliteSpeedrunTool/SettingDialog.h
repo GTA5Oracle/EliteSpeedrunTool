@@ -11,7 +11,7 @@ public:
     explicit SettingDialog(QWidget* parent = nullptr);
     ~SettingDialog();
 
-    QString pageName[13] = {
+    QString pageName[14] = {
         tr("常规"),
         tr("信息展示"),
         "RTSS",
@@ -20,13 +20,14 @@ public:
         tr("卡单"),
         tr("末日将至爆头"),
         tr("结束游戏"),
+        tr("准星"),
         tr("快捷键穿透"),
         tr("事件命令"),
         tr("社交"),
         tr("语言"),
         tr("开发者选项"),
     };
-    QString pageIcon[13] = {
+    QString pageIcon[14] = {
         "://image/ic_setting.ico",
         "://image/ic_lighton.ico",
         "://image/ic_monitor_blue_grad.ico",
@@ -35,6 +36,7 @@ public:
         "://image/ic_user.ico",
         "://image/ic_file_eye.ico",
         "://image/ic_plug.ico",
+        "://image/ic_crosshair.ico",
         "://image/ic_keyboard_toggle.ico",
         "://image/ic_console.ico",
         "://image/ic_users.ico",
@@ -61,10 +63,10 @@ protected:
     QString getSoundFile(QString dir = QString());
 
     int currentSubFunctionIndex = 0;
-    DisplayInfoSubFunction currentSubFunction = DisplayInfoSubFunction::Timer;
+    DisplayInfoSubFunction currentSubFunction;
 
     int currentRtssSubFunctionIndex = 0;
-    DisplayInfoSubFunction currentRtssSubFunction = DisplayInfoSubFunction::Timer;
+    DisplayInfoSubFunction currentRtssSubFunction;
 
     int currentEventCmdIndex = 0;
 
@@ -84,6 +86,8 @@ protected:
     void initSuspendProcess();
 
     void initCloseGameImmediatelySettings();
+
+    void initCrosshairSettings();
 
     void initHotkeyMapSettings();
 

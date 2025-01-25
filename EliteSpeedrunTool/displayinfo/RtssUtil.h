@@ -30,6 +30,7 @@ private:
     bool updateOsd(QString text, QString osdOwner);
 
     QString getTimeString(QVariant v);
+    QString getFirewallString(QVariant v);
     QString getAct3Headshot(QVariant v);
 
     const int rtssSignature = 'S' | 'S' << 8 | 'T' << 16 | 'R' << 24;
@@ -40,6 +41,7 @@ private:
 
     QMap<DisplayInfoSubFunction, std::function<QString(QVariant)>> subFuncs = {
         qMakePair(DisplayInfoSubFunction::Timer, [this](QVariant v) { return getTimeString(v); }),
+        qMakePair(DisplayInfoSubFunction::Firewall, [this](QVariant v) { return getFirewallString(v); }),
         qMakePair(DisplayInfoSubFunction::Act3Headshot, [this](QVariant v) { return getAct3Headshot(v); })
     };
 signals:

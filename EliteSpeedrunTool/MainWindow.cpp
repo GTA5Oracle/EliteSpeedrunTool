@@ -4,6 +4,7 @@
 #include "DiscordUtil.h"
 #include "GlobalData.h"
 #include "LogUtil.h"
+#include "MemoryUtil.h"
 #include "SettingDialog.h"
 #include "SubFuncsData.h"
 #include "SuspendUtil.h"
@@ -11,6 +12,7 @@
 #include "UpdateDialog.h"
 #include "act3headshot/RegionSelectorDialog.h"
 #include "act3headshot/RpRecognizeUtil.h"
+#include "displayInfo/CrosshairDialog.h"
 #include "displayinfo/RtssUtil.h"
 #include "event/EventBus.h"
 #include "net/FirewallUtil.h"
@@ -23,6 +25,7 @@
 #include <QCoreApplication>
 #include <QDateTime>
 #include <QDesktopServices>
+#include <QDir>
 #include <QFile>
 #include <QMessageBox>
 #include <QPalette>
@@ -75,6 +78,10 @@ MainWindow::MainWindow(QWidget* parent)
 
     initAct3Headshot();
 
+    initCrosshair();
+
+    initMusic();
+
     rtssUtil;
 
     StartEvent startEvent;
@@ -101,6 +108,7 @@ void MainWindow::closeEvent(QCloseEvent* event)
     }
 
     if (event->isAccepted()) {
+        BASS_Free();
         qApp->exit();
     }
 }
@@ -518,24 +526,17 @@ void MainWindow::initFirewall()
         }
         bool succeed = firewallUtil->setNetFwRuleEnabled(checked);
         if (succeed) {
-            if (checked) {
-                ui.btnStartFirewall->setText(tr("已开启"));
-                QPalette palette = labFirewallState.palette();
-                palette.setColor(QPalette::Window, Qt::green);
-                labFirewallState.setPalette(palette);
-                if (globalData->firewallPlaySound()) {
-                    PlaySound(globalData->firewallStartSound().toStdWString().c_str(),
-                        nullptr, SND_FILENAME | SND_ASYNC);
-                }
-            } else {
-                ui.btnStartFirewall->setText(tr("已关闭"));
-                QPalette palette = labFirewallState.palette();
-                palette.setColor(QPalette::Window, Qt::red);
-                labFirewallState.setPalette(palette);
-                if (globalData->firewallPlaySound()) {
-                    PlaySound(globalData->firewallStopSound().toStdWString().c_str(),
-                        nullptr, SND_FILENAME | SND_ASYNC);
-                }
+            auto event = FirewallEvent(checked);
+            eventBus->send(&event);
+            subFuncsData->insert(DisplayInfoSubFunction::Firewall, checked);
+
+            ui.btnStartFirewall->setText(checked ? tr("已开启") : tr("已关闭"));
+            QPalette palette = labFirewallState.palette();
+            palette.setColor(QPalette::Window, checked ? Qt::green : Qt::red);
+            labFirewallState.setPalette(palette);
+            if (globalData->firewallPlaySound()) {
+                PlaySound((checked ? globalData->firewallStartSound() : globalData->firewallStopSound()).toStdWString().c_str(),
+                    nullptr, SND_FILENAME | SND_ASYNC);
             }
         } else {
             if (globalData->firewallPlaySound()) {
@@ -676,7 +677,7 @@ void MainWindow::showDisplayInfo()
             //            HttpServerController::instance()->sendNewData(QTime::currentTime().second());
         }
     });
-    topMostTimer->start(5000);
+    topMostTimer->start(10000);
 }
 
 void MainWindow::hideDisplayInfo()
@@ -686,6 +687,19 @@ void MainWindow::hideDisplayInfo()
         delete topMostTimer;
         topMostTimer = nullptr;
     }
+}
+
+void MainWindow::initCrosshair()
+{
+    auto callback = []() {
+        if (globalData->crosshairShow()) {
+            CrosshairDialog::showCrosshair();
+        } else {
+            CrosshairDialog::closeCrosshair();
+        }
+    };
+    connect(globalData, &GlobalData::crosshairShowChanged, this, callback);
+    callback();
 }
 
 void MainWindow::startTimer(bool isContinue)
@@ -865,8 +879,16 @@ void MainWindow::initTimerStateMachine()
 
 void MainWindow::closeGameImmediately()
 {
-    system("taskkill /f /t /im GTA5.exe");
-    qInfo("Using taskkill command to terminate GTA5.exe");
+    DWORD p;
+    const auto game = memoryUtil->getProcessHandle(&p, PROCESS_TERMINATE);
+    if (!TerminateProcess(game, 1)) {
+        // Return 0, execute TerminateProcess fails
+        WinExec("taskkill /f /t /im GTA5.exe", SW_HIDE);
+        qWarning("Execute TerminateProcess fails, using taskkill command to terminate GTA5.exe");
+    } else {
+        qInfo("Execute TerminateProcess API succeeds");
+    }
+    CloseHandle(game);
     CloseGameEvent event;
     eventBus->send(&event);
 }
@@ -885,6 +907,28 @@ void MainWindow::topMostWindow(bool isTop, bool fromHotkey)
             setWindowState(windowState() | Qt::WindowMinimized);
         }
     }
+}
+
+void MainWindow::initMusic()
+{
+    BASS_Init(-1, 44100, 0, reinterpret_cast<HWND>(winId()), nullptr);
+    tbMusic.setText("🎵");
+    ui.tabWidget->setCornerWidget(&tbMusic, Qt::TopRightCorner);
+    connect(&tbMusic, &QAbstractButton::clicked, this, [this]() {
+        if (music) {
+            BASS_MusicFree(music);
+            music = 0;
+        } else {
+            QFile xmFile = QDir("./sound").absolutePath() + QDir::separator() + "nice music.it";
+            music = BASS_MusicLoad(FALSE, xmFile.fileName().replace("/", "\\").toLocal8Bit().toStdString().c_str(),
+                0, 0, BASS_MUSIC_POSRESET | BASS_SAMPLE_LOOP | BASS_SAMPLE_FLOAT, 1);
+            if (music) {
+                BASS_ChannelPlay(music, FALSE);
+            } else {
+                qWarning() << "Play music error: " << BASS_ErrorGetCode();
+            }
+        }
+    });
 }
 
 void MainWindow::initSystemTray()

@@ -13,7 +13,11 @@ public:
 
     static MemoryUtil* instance();
 
-    virtual HWND getWindowHwnd();
+    HWND getWindowHwnd();
+
+    DWORD getPid();
+
+    HANDLE getProcessHandle(DWORD* pid, DWORD dwDesiredAccess);
 
 private:
     static MemoryUtil* utilInstance;

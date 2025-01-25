@@ -54,12 +54,16 @@ private:
 
     QPointF mousePressedPos;
 
+    QList<QPair<DisplayInfoSubFunctionItem*, QLabel*>> items;
+
     QMap<DisplayInfoSubFunction, std::function<void(QVariant)>> subFuncs = {
+        qMakePair(DisplayInfoSubFunction::Firewall, [this](QVariant v) { return setFirewall(v); }),
         qMakePair(DisplayInfoSubFunction::Timer, [this](QVariant v) { return setTime(v); }),
         qMakePair(DisplayInfoSubFunction::Act3Headshot, [this](QVariant v) { return setAct3Headshot(v); })
     };
 
     void initDisplayData();
+    void setFirewall(QVariant v);
     void setTime(QVariant v);
     void setAct3Headshot(QVariant v);
 

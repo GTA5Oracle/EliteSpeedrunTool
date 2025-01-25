@@ -10,7 +10,7 @@ QString toDisplayString(DisplayInfoSubFunction f)
 {
     switch (f) {
     case Firewall:
-        return QObject::tr("断网");
+        return QObject::tr("防火墙");
         break;
     case Timer:
         return QObject::tr("计时");
@@ -44,13 +44,13 @@ QString defaultRtssOsdText(DisplayInfoSubFunction f)
 {
     switch (f) {
     case Firewall:
-        return "<P=0,70><C0=FFFF00><C0>%1<C>";
+        return "<P=0,70><C0=FFFF00><C0>Fw %1<C>";
         break;
     case Timer:
         return "<P=0,100><C0=FFFF00><S0=170><S1=-100><C0><S0>%1:%2.<S><S1>%3<S><C>";
         break;
     case Act3Headshot:
-        return "<C0=FFFF00><S0=170><C0><S0>%1<S><C>";
+        return "<P=0,130><C0=FFFF00><S0=170><C0><S0>%1<S><C>";
         break;
     default:
         return "%1";

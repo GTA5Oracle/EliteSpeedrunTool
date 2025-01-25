@@ -247,6 +247,13 @@ QString RtssUtil::getTimeString(QVariant v)
         .arg(ms, 2, 10, QLatin1Char('0'));
 }
 
+QString RtssUtil::getFirewallString(QVariant v)
+{
+    return globalData->displayInfoSubFunctions()[DisplayInfoSubFunction::Firewall]
+        ->rtssOsdText()
+        .arg(v.toBool() ? "On" : "Off");
+}
+
 QString RtssUtil::getAct3Headshot(QVariant v)
 {
     return globalData->displayInfoSubFunctions()[DisplayInfoSubFunction::Act3Headshot]

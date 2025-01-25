@@ -20,6 +20,13 @@ DisplayInfoDialog::DisplayInfoDialog(QWidget* parent)
 
     setCursor(Qt::OpenHandCursor);
 
+    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
+    items = {
+        qMakePair(displayInfoSubFunctions[DisplayInfoSubFunction::Firewall], ui->labFirewall),
+        qMakePair(displayInfoSubFunctions[DisplayInfoSubFunction::Timer], ui->labTimer),
+        qMakePair(displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot], ui->labAct3Headshot),
+    };
+
     setTouchable();
     setChildrenTransparentForMouseEvents();
     setDisplay();
@@ -56,48 +63,44 @@ void DisplayInfoDialog::setDialogBackground(QColor color)
 
 void DisplayInfoDialog::setDisplay()
 {
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    ui->labTimer->setVisible(displayInfoSubFunctions[DisplayInfoSubFunction::Timer]->display());
-    ui->labAct3Headshot->setVisible(displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot]->display());
+    for (auto& item : items) {
+        DisplayInfoSubFunctionItem* displayInfoSubFunctionItem = item.first;
+        QLabel* label = item.second;
+        label->setVisible(displayInfoSubFunctionItem->display());
+    }
 }
 
 void DisplayInfoDialog::setTextAlignment()
 {
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    ui->labTimer->setAlignment(displayInfoSubFunctions[DisplayInfoSubFunction::Timer]->textAlignment());
-    ui->labAct3Headshot->setAlignment(displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot]->textAlignment());
+    for (auto& item : items) {
+        DisplayInfoSubFunctionItem* displayInfoSubFunctionItem = item.first;
+        QLabel* label = item.second;
+        label->setAlignment(displayInfoSubFunctionItem->textAlignment());
+    }
 }
 
 void DisplayInfoDialog::setFont()
 {
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    ui->labTimer->setFont(
-        QFont(displayInfoSubFunctions[DisplayInfoSubFunction::Timer]->fontFamily(),
-            displayInfoSubFunctions[DisplayInfoSubFunction::Timer]->textSize()));
-    ui->labAct3Headshot->setFont(
-        QFont(displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot]->fontFamily(),
-            displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot]->textSize()));
+    for (auto& item : items) {
+        DisplayInfoSubFunctionItem* displayInfoSubFunctionItem = item.first;
+        QLabel* label = item.second;
+        label->setFont(QFont(displayInfoSubFunctionItem->fontFamily(), displayInfoSubFunctionItem->textSize()));
+    }
     initDisplayData(); // 更新字体大小
 }
 
 void DisplayInfoDialog::setTextStyle()
 {
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    auto timerItem = displayInfoSubFunctions[DisplayInfoSubFunction::Timer];
-    auto act3HeadshotItem = displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot];
-
-    setTextStyle(
-        ui->labTimer,
-        timerItem->textColor(),
-        timerItem->textShadowColor(),
-        timerItem->textShadowBlurRadius(),
-        timerItem->textShadowOffset());
-    setTextStyle(
-        ui->labAct3Headshot,
-        act3HeadshotItem->textColor(),
-        act3HeadshotItem->textShadowColor(),
-        act3HeadshotItem->textShadowBlurRadius(),
-        act3HeadshotItem->textShadowOffset());
+    for (auto& item : items) {
+        DisplayInfoSubFunctionItem* displayInfoSubFunctionItem = item.first;
+        QLabel* label = item.second;
+        setTextStyle(
+            label,
+            displayInfoSubFunctionItem->textColor(),
+            displayInfoSubFunctionItem->textShadowColor(),
+            displayInfoSubFunctionItem->textShadowBlurRadius(),
+            displayInfoSubFunctionItem->textShadowOffset());
+    }
 }
 
 void DisplayInfoDialog::setTextStyle(
@@ -107,14 +110,13 @@ void DisplayInfoDialog::setTextStyle(
     qreal textShadowBlurRadius,
     const QPointF& textShadowOffset)
 {
-    label->setStyleSheet(
-        textQssPattern.arg(textColor.name()));
+    label->setStyleSheet(textQssPattern.arg(textColor.name()));
 
-    QGraphicsDropShadowEffect* timerEffect = new QGraphicsDropShadowEffect(this);
-    timerEffect->setColor(textShadowColor);
-    timerEffect->setBlurRadius(textShadowBlurRadius);
-    timerEffect->setOffset(textShadowOffset);
-    label->setGraphicsEffect(timerEffect);
+    QGraphicsDropShadowEffect* textEffect = new QGraphicsDropShadowEffect(this);
+    textEffect->setColor(textShadowColor);
+    textEffect->setBlurRadius(textShadowBlurRadius);
+    textEffect->setOffset(textShadowOffset);
+    label->setGraphicsEffect(textEffect);
 }
 
 void DisplayInfoDialog::setTouchable(bool touchable)
@@ -125,8 +127,10 @@ void DisplayInfoDialog::setTouchable(bool touchable)
 void DisplayInfoDialog::setChildrenTransparentForMouseEvents(bool transparent)
 {
     ui->widget->setAttribute(Qt::WA_TransparentForMouseEvents, transparent);
-    ui->labTimer->setAttribute(Qt::WA_TransparentForMouseEvents, transparent);
-    ui->labAct3Headshot->setAttribute(Qt::WA_TransparentForMouseEvents, transparent);
+    for (auto& item : items) {
+        QLabel* label = item.second;
+        label->setAttribute(Qt::WA_TransparentForMouseEvents, transparent);
+    }
 }
 
 void DisplayInfoDialog::initDisplayData()
@@ -173,6 +177,11 @@ int DisplayInfoDialog::widgetCount()
     return ui->mainLayout->count();
 }
 
+void DisplayInfoDialog::setFirewall(QVariant v)
+{
+    ui->labFirewall->setText(tr("防火墙%1").arg(v.toBool() ? tr("开") : tr("关")));
+}
+
 void DisplayInfoDialog::setTime(QVariant v)
 {
     auto deltaTime = v.toULongLong();
@@ -195,14 +204,6 @@ void DisplayInfoDialog::setAct3Headshot(QVariant v)
 
 void DisplayInfoDialog::initGlobalDataConnects()
 {
-    auto displayInfoSubFunctions = globalData->displayInfoSubFunctions();
-    auto timerItem = displayInfoSubFunctions[DisplayInfoSubFunction::Timer];
-    auto act3HeadshotItem = displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot];
-    QList<QPair<DisplayInfoSubFunctionItem*, QLabel*>> items = {
-        qMakePair(timerItem, ui->labTimer),
-        qMakePair(act3HeadshotItem, ui->labAct3Headshot),
-    };
-
     for (auto& item : items) {
         DisplayInfoSubFunctionItem* displayInfoSubFunctionItem = item.first;
         QLabel* label = item.second;

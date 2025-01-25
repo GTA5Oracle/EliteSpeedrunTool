@@ -1,5 +1,6 @@
 #pragma once
 
+#include "bass.h"
 #include "displayinfo/DisplayInfoDialog.h"
 #include "hotkey/HotkeyUtil.h"
 #include "ui_MainWindow.h"
@@ -60,6 +61,8 @@ protected:
 
     void hideDisplayInfo();
 
+    void initCrosshair();
+
     void startTimer(bool isContinue = false);
 
     void pauseTimer();
@@ -81,6 +84,8 @@ protected:
     void closeGameImmediately();
 
     void topMostWindow(bool isTop, bool fromHotkey);
+
+    void initMusic();
 
 signals:
     void toTimerStoppedAndZeroState();
@@ -125,6 +130,9 @@ private:
     QLabel labCurrentHotkey = QLabel(this);
     QLabel labFirewallState = QLabel(this);
     QLabel labNetworkAdaptersState = QLabel(this);
+
+    QToolButton tbMusic = QToolButton(this);
+    HMUSIC music = 0;
 
     QTimer* topMostTimer = nullptr;
 

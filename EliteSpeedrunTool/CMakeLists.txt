@@ -16,6 +16,7 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
 find_package(Qt6 REQUIRED COMPONENTS HttpServer)
 find_package(Qt6 REQUIRED COMPONENTS StateMachine)
+find_package(Qt6 REQUIRED COMPONENTS Svg)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -38,11 +39,13 @@ set(PROJECT_SOURCES
         displayinfo/DisplayInfoDialog.h displayinfo/DisplayInfoDialog.cpp displayinfo/DisplayInfoDialog.ui
         displayinfo/DisplayInfoSubFunction.h displayinfo/DisplayInfoSubFunction.cpp
         displayinfo/RtssUtil.h displayinfo/RtssUtil.cpp
+        displayinfo/CrosshairDialog.h displayinfo/CrosshairDialog.cpp displayinfo/CrosshairDialog.ui
         DiscordUtil.h DiscordUtil.cpp
         TimeUtil.h TimeUtil.cpp
         SuspendUtil.h SuspendUtil.cpp
         NumberUtil.h NumberUtil.cpp
         SubFuncsData.h SubFuncsData.cpp
+        UiAccessUtil.h UiAccessUtil.cpp
         hotkey/HotkeyRedirector.h hotkey/HotkeyRedirector.cpp hotkey/HotkeyRedirector.ui
         hotkey/HotkeyUtil.h hotkey/HotkeyUtil.cpp
         hotkey/KeySequenceTableWidget.h hotkey/KeySequenceTableWidget.cpp
@@ -89,11 +92,10 @@ file(GLOB TS_FILES "${PROJECT_SOURCE_DIR}/*.ts")
 qt_add_lupdate(EliteSpeedrunTool TS_FILES en.ts OPTIONS "-no-obsolete")
 install(FILES ${qm_files} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
 
-
 target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::Widgets)
 target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::HttpServer)
 target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::StateMachine)
-
+target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::Svg)
 
 set_target_properties(EliteSpeedrunTool PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER https://github.com/SkyD666
@@ -120,7 +122,5 @@ target_link_libraries(EliteSpeedrunTool PRIVATE DiscordGameSDK)
 
 target_include_directories(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../RTSS)
 
-# set(OpenCV_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../OpenCV)
-# find_package(OpenCV REQUIRED)
-# include_directories(${OpenCV_INCLUDE_DIRS})
-# target_link_libraries(EliteSpeedrunTool PRIVATE ${OpenCV_LIBS})
+target_include_directories(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../Bass)
+target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../Bass/bass.lib)

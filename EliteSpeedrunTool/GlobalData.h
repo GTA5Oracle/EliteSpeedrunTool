@@ -246,6 +246,27 @@ public:
     QMap<QString, QString>& eventCmdMap();
     void setEventCmdMap(const QMap<QString, QString>& newEventCmdMap);
 
+    QPoint crosshairOffset() const;
+    void setCrosshairOffset(QPoint newCrosshairOffset);
+
+    QSize crosshairSize() const;
+    void setCrosshairSize(const QSize& newCrosshairSize);
+
+    QString crosshairImage() const;
+    void setCrosshairImage(const QString& newCrosshairImage);
+
+    bool crosshairShow() const;
+    void setCrosshairShow(bool newCrosshairShow);
+
+    QColor crosshairShadowColor() const;
+    void setCrosshairShadowColor(const QColor &newCrosshairShadowColor);
+
+    int crosshairShadowBlurRadius() const;
+    void setCrosshairShadowBlurRadius(int newCrosshairShadowBlurRadius);
+
+    QPointF crosshairShadowOffset() const;
+    void setCrosshairShadowOffset(QPointF newCrosshairShadowOffset);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -336,6 +357,20 @@ signals:
 
     void eventCmdMapChanged();
 
+    void crosshairOffsetChanged();
+
+    void crosshairSizeChanged();
+
+    void crosshairImageChanged();
+
+    void crosshairShowChanged();
+
+    void crosshairShadowColorChanged();
+
+    void crosshairShadowBlurRadiusChanged();
+
+    void crosshairShadowOffsetChanged();
+
 private:
     bool mMinimizeToTray = false;
     QString mTopMostWindowHotkey = "";
@@ -359,6 +394,15 @@ private:
     QPoint mDisplayInfoPos = { 20, 20 };
     QSize mDisplayInfoSize = { 300, 100 };
     QColor mDisplayInfoBackground = Qt::transparent;
+
+    // Crosshair
+    bool mCrosshairShow = true;
+    QString mCrosshairImage = "";
+    QPoint mCrosshairOffset = { 0, 0 };
+    QSize mCrosshairSize = { 4, 4 };
+    QColor mCrosshairShadowColor = Qt::black;
+    int mCrosshairShadowBlurRadius = 7;
+    QPointF mCrosshairShadowOffset = { 0, 0 };
 
     // RTSS
     bool mRtssOverlay = true;
@@ -505,4 +549,11 @@ private:
     Q_PROPERTY(int firewallProtocol READ firewallProtocol WRITE setFirewallProtocol NOTIFY firewallProtocolChanged FINAL)
     Q_PROPERTY(QList<QString> hotkeyMaps READ hotkeyMaps WRITE setHotkeyMaps NOTIFY hotkeyMapsChanged FINAL)
     Q_PROPERTY(QMap<QString, QString> eventCmdMap READ eventCmdMap WRITE setEventCmdMap NOTIFY eventCmdMapChanged FINAL)
+    Q_PROPERTY(QPoint crosshairOffset READ crosshairOffset WRITE setCrosshairOffset NOTIFY crosshairOffsetChanged FINAL)
+    Q_PROPERTY(QSize crosshairSize READ crosshairSize WRITE setCrosshairSize NOTIFY crosshairSizeChanged FINAL)
+    Q_PROPERTY(QString crosshairImage READ crosshairImage WRITE setCrosshairImage NOTIFY crosshairImageChanged FINAL)
+    Q_PROPERTY(bool crosshairShow READ crosshairShow WRITE setCrosshairShow NOTIFY crosshairShowChanged FINAL)
+    Q_PROPERTY(QColor crosshairShadowColor READ crosshairShadowColor WRITE setCrosshairShadowColor NOTIFY crosshairShadowColorChanged FINAL)
+    Q_PROPERTY(int crosshairShadowBlurRadius READ crosshairShadowBlurRadius WRITE setCrosshairShadowBlurRadius NOTIFY crosshairShadowBlurRadiusChanged FINAL)
+    Q_PROPERTY(QPointF crosshairShadowOffset READ crosshairShadowOffset WRITE setCrosshairShadowOffset NOTIFY crosshairShadowOffsetChanged FINAL)
 };

@@ -13,3 +13,11 @@ class QuitEvent : public Event {
 class CloseGameEvent : public Event {
     Q_OBJECT
 };
+
+class FirewallEvent : public Event {
+    Q_OBJECT
+public:
+    FirewallEvent(bool enabled)
+        : enabled { enabled } {};
+    bool enabled = false;
+};

@@ -40,6 +40,7 @@ SettingDialog::SettingDialog(QWidget* parent)
     initAct3Headshot();
     initSuspendProcess();
     initCloseGameImmediatelySettings();
+    initCrosshairSettings();
     initHotkeyMapSettings();
     initEventCmdSettings();
     initSocialSettings();
@@ -481,13 +482,13 @@ void SettingDialog::initDisplayInfoSettings()
     for (auto f : globalData->funcs()) {
         ui.cbDisplayInfoFunction->addItem(DisplayInfoSubFunctionUtil::toDisplayString(f), f);
     }
-    ui.cbDisplayInfoFunction->removeItem(0); // 暂时不显示防火墙
     connect(ui.cbDisplayInfoFunction, QOverload<int>::of(&QComboBox::currentIndexChanged),
         this, [=](int index) {
             currentSubFunctionIndex = index;
             currentSubFunction = ui.cbDisplayInfoFunction->itemData(index).value<DisplayInfoSubFunction>();
             setDisplayInfoSubFunctionSettings(currentSubFunction);
         });
+    currentSubFunction = ui.cbDisplayInfoFunction->currentData().value<DisplayInfoSubFunction>();
     setDisplayInfoSubFunctionSettings(currentSubFunction);
     ui.cbDisplayInfoFunction->setCurrentIndex(currentSubFunctionIndex);
 }
@@ -518,12 +519,12 @@ void SettingDialog::initRtssSettings()
     for (auto f : globalData->funcs()) {
         ui.cbRtssSubFunction->addItem(DisplayInfoSubFunctionUtil::toDisplayString(f), f);
     }
-    ui.cbRtssSubFunction->removeItem(0); // 暂时不显示防火墙
     connect(ui.cbRtssSubFunction, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
         currentRtssSubFunctionIndex = index;
         currentRtssSubFunction = ui.cbRtssSubFunction->itemData(index).value<DisplayInfoSubFunction>();
         setRtssSubFunctionSettings(currentRtssSubFunction);
     });
+    currentRtssSubFunction = ui.cbRtssSubFunction->currentData().value<DisplayInfoSubFunction>();
     setRtssSubFunctionSettings(currentRtssSubFunction);
     ui.cbRtssSubFunction->setCurrentIndex(currentRtssSubFunctionIndex);
 }
@@ -621,6 +622,67 @@ void SettingDialog::initCloseGameImmediatelySettings()
         ui.keySeqCloseGameImmediately,
         ui.tbClearCloseGameImmediatelyHotkeyEdit,
         [](const QString& hotkey) { globalData->setCloseGameImmediatelyHotkey(hotkey); });
+}
+
+void SettingDialog::initCrosshairSettings()
+{
+    ui.cbCrosshairShow->setChecked(globalData->crosshairShow());
+    connect(ui.cbCrosshairShow, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
+        globalData->setCrosshairShow(state == Qt::Checked);
+    });
+
+    ui.sbCrosshairOffsetX->setValue(globalData->crosshairOffset().x());
+    connect(ui.sbCrosshairOffsetX, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setCrosshairOffset(QPoint(value, globalData->crosshairOffset().y()));
+    });
+    ui.sbCrosshairOffsetY->setValue(globalData->crosshairOffset().y());
+    connect(ui.sbCrosshairOffsetY, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setCrosshairOffset(QPoint(globalData->crosshairOffset().x(), value));
+    });
+
+    ui.sbCrosshairWidth->setValue(globalData->crosshairSize().width());
+    connect(ui.sbCrosshairWidth, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setCrosshairSize(QSize(value, globalData->crosshairSize().height()));
+    });
+    ui.sbCrosshairHeight->setValue(globalData->crosshairSize().height());
+    connect(ui.sbCrosshairHeight, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setCrosshairSize(QSize(globalData->crosshairSize().width(), value));
+    });
+
+    ui.leCorsshairImagePath->setText(globalData->crosshairImage());
+    connect(ui.tbCrosshairSelectImage, &QAbstractButton::clicked, this, [=]() {
+        QString fileName = QFileDialog::getOpenFileName(this, tr("选择图片"), globalData->crosshairImage(), tr("图片") + " (*.png *.jpg *.jpeg *.bmp *.gif *.svg *.ico *.icon)");
+        if (!fileName.isEmpty()) {
+            ui.leCorsshairImagePath->setText(fileName);
+            globalData->setCrosshairImage(fileName);
+        }
+    });
+    connect(ui.leCorsshairImagePath, &QLineEdit::textChanged, this, [](const QString& text) {
+        globalData->setCrosshairImage(text);
+    });
+
+    ui.sbCrosshairShadowBlurRadius->setValue(globalData->crosshairShadowBlurRadius());
+    connect(ui.sbCrosshairShadowBlurRadius, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setCrosshairShadowBlurRadius(value);
+    });
+    ui.sbCrosshairShadowOffsetX->setValue(globalData->crosshairShadowOffset().x());
+    connect(ui.sbCrosshairShadowOffsetX, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setCrosshairShadowOffset({ (float)value, globalData->crosshairShadowOffset().y() });
+    });
+    ui.sbCrosshairShadowOffsetY->setValue(globalData->crosshairShadowOffset().y());
+    connect(ui.sbCrosshairShadowOffsetY, &QSpinBox::valueChanged, this, [=](int value) {
+        globalData->setCrosshairShadowOffset({ globalData->crosshairShadowOffset().x(), (float)value });
+    });
+    ui.labCrosshairShadowColor->setStyleSheet(QString("background-color: %1;").arg(globalData->crosshairShadowColor().name()));
+    connect(ui.tbSelectCrosshairShadowColor, &QAbstractButton::clicked, this, [=]() {
+        QColorDialog dialog(globalData->crosshairShadowColor());
+        if (dialog.exec() == QDialog::Accepted) {
+            auto color = dialog.selectedColor();
+            globalData->setCrosshairShadowColor(color);
+            ui.labCrosshairShadowColor->setStyleSheet(
+                QString("background-color: %1;").arg(color.name()));
+        }
+    });
 }
 
 void SettingDialog::initHotkeyMapSettings()

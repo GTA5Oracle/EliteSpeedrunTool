@@ -1,5 +1,7 @@
 #include "AcknowledgementDialog.h"
 
+#include <QDir>
+
 AcknowledgementDialog::AcknowledgementDialog(QWidget* parent)
     : QDialog(parent)
 {
