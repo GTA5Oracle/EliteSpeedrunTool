@@ -309,7 +309,7 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
         <translation>Display Info</translation>
     </message>
     <message>
-        <location filename="displayinfo/DisplayInfoDialog.cpp" line="+182"/>
+        <location filename="displayinfo/DisplayInfoDialog.cpp" line="+183"/>
         <source>防火墙%1</source>
         <oldsource>防火墙：%1</oldsource>
         <translation>Firewall %1</translation>
@@ -420,7 +420,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+188"/>
-        <location filename="MainWindow.cpp" line="+828"/>
+        <location filename="MainWindow.cpp" line="+838"/>
         <location line="+22"/>
         <source>点击启动</source>
         <translation>Start counting</translation>
@@ -595,7 +595,8 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+36"/>
-        <source>注意：禁用网卡存在延迟，请勿用于时间敏感的操作！</source>
+        <source>注意：禁用网卡存在延迟，请勿用于时间敏感的操作，否则可能会留红失败！</source>
+        <oldsource>注意：禁用网卡存在延迟，请勿用于时间敏感的操作！</oldsource>
         <translation>Note: Disabling net adapters may have a delay, don&apos;t use it for time-sensitive operations!</translation>
     </message>
     <message>
@@ -780,7 +781,7 @@ AdstarGod Firewall, easy to use
         <translation>Alipay payment QR code. Thank you!</translation>
     </message>
     <message>
-        <location filename="MainWindow.h" line="+160"/>
+        <location filename="MainWindow.h" line="+163"/>
         <source>加入 Telegram 群组一起划水~</source>
         <translation>Join Telegram group~</translation>
     </message>
@@ -816,7 +817,7 @@ AdstarGod Firewall, easy to use
     <message>
         <location filename="main.cpp" line="+25"/>
         <source>获取 UIAccess 权限失败，无法在全屏的游戏上显示内容！</source>
-        <translation>Failed to fetch UIAccess permission to display content on a full-screen game!</translation>
+        <translation>Failed to obtain UIAccess permission. Cannot display content over fullscreen games!</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -930,33 +931,33 @@ AdstarGod Firewall, easy to use
         <translation>Settings</translation>
     </message>
     <message>
-        <location line="+126"/>
+        <location line="+133"/>
         <source>windowsvista 样式不支持深色模式，其他样式支持深色模式跟随系统</source>
         <translation>windowsvista style does not support dark mode, while other styles support dark mode following the system</translation>
     </message>
     <message>
-        <location line="+1020"/>
+        <location line="+1012"/>
         <location line="+61"/>
-        <location line="+440"/>
+        <location line="+455"/>
         <source>启动</source>
         <translation>Enable</translation>
     </message>
     <message>
-        <location line="-486"/>
+        <location line="-501"/>
         <location line="+75"/>
-        <location line="+426"/>
+        <location line="+441"/>
         <source>停止</source>
         <translation>Disable</translation>
     </message>
     <message>
-        <location line="-483"/>
-        <location line="+352"/>
+        <location line="-498"/>
+        <location line="+367"/>
         <location line="+462"/>
         <source>音效</source>
         <translation>Sound</translation>
     </message>
     <message>
-        <location line="-721"/>
+        <location line="-736"/>
         <source>默认值为出站，设置将在下次启动防火墙时生效</source>
         <oldsource>默认值为出站，设置将在下次启动防火墙时生效。</oldsource>
         <translation>The default value is outbound. The settings will take effect the next time the firewall is started</translation>
@@ -989,7 +990,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="-129"/>
-        <location line="+352"/>
+        <location line="+367"/>
         <location line="+149"/>
         <location line="+192"/>
         <location line="+121"/>
@@ -1009,7 +1010,7 @@ AdstarGod Firewall, easy to use
         <translation>Refresh data interval</translation>
     </message>
     <message>
-        <location line="-1181"/>
+        <location line="-1196"/>
         <source>窗口</source>
         <translation>Window</translation>
     </message>
@@ -1034,26 +1035,28 @@ AdstarGod Firewall, easy to use
         <translation>Height</translation>
     </message>
     <message>
-        <location line="-296"/>
-        <location line="+106"/>
-        <location line="+217"/>
+        <location line="-292"/>
+        <location line="+42"/>
+        <location line="+277"/>
         <location line="+369"/>
-        <location line="+1384"/>
+        <location line="+1363"/>
+        <location line="+84"/>
         <source>颜色</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location line="-1728"/>
+        <location line="-1791"/>
+        <location line="+1742"/>
         <source>透明度</source>
         <translation>Alpha</translation>
     </message>
     <message>
-        <location line="-496"/>
+        <location line="-2230"/>
         <source>内容</source>
         <translation>Content</translation>
     </message>
     <message>
-        <location line="-107"/>
+        <location line="-114"/>
         <source>最小化到托盘</source>
         <translation>Minimize to the system tray</translation>
     </message>
@@ -1061,6 +1064,11 @@ AdstarGod Firewall, easy to use
         <location line="+7"/>
         <source>启动时自动检查更新</source>
         <translation>Automatically check for update on application startup</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>禁止其他应用截屏或录屏工具窗口</source>
+        <translation>Prevent other apps from capturing or recording tool&apos;s windows</translation>
     </message>
     <message>
         <location line="+41"/>
@@ -1096,14 +1104,14 @@ AdstarGod Firewall, easy to use
         <translation>Size</translation>
     </message>
     <message>
-        <location line="+55"/>
-        <location line="+1970"/>
+        <location line="+51"/>
+        <location line="+2093"/>
         <source>阴影</source>
         <oldsource>文字阴影</oldsource>
         <translation>Shadow</translation>
     </message>
     <message>
-        <location line="-1864"/>
+        <location line="-1991"/>
         <source>文字对齐</source>
         <translation>Text alignment</translation>
     </message>
@@ -1168,18 +1176,18 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+24"/>
-        <location line="+1245"/>
+        <location line="+1287"/>
         <source>大小</source>
         <translation>Size</translation>
     </message>
     <message>
-        <location line="-1202"/>
-        <location line="+1462"/>
+        <location line="-1244"/>
+        <location line="+1670"/>
         <source>提示</source>
         <translation>Tips</translation>
     </message>
     <message>
-        <location line="-1456"/>
+        <location line="-1664"/>
         <source>由于 RTSS 限制，此功能不支持自动居中显示，需要用户手动调整准星位置。
 
 使用流程：
@@ -1208,7 +1216,17 @@ Usage:
         <translation>Firewall rules</translation>
     </message>
     <message>
-        <location line="+1081"/>
+        <location line="+371"/>
+        <source>注意：禁用网卡存在延迟，请勿用于时间敏感的操作，否则可能会留红失败！</source>
+        <translation>Note: Disabling net adapters may have a delay, don&apos;t use it for time-sensitive operations!</translation>
+    </message>
+    <message>
+        <location line="+725"/>
+        <source>显示隐藏快捷键</source>
+        <translation>Show/Hide hotkey</translation>
+    </message>
+    <message>
+        <location line="+27"/>
         <source>位置偏移</source>
         <translation>Position offset</translation>
     </message>
@@ -1238,12 +1256,42 @@ Usage:
         <translation>Crosshair image</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+11"/>
+        <source>使用内置准星</source>
+        <translation>Use built-in crosshair</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>使用外部图片</source>
+        <translation>Use external image</translation>
+    </message>
+    <message>
+        <location line="+14"/>
         <source>留空表示使用默认准星图片</source>
         <translation>Empty to use the default crosshair image</translation>
     </message>
     <message>
-        <location line="+207"/>
+        <location line="+185"/>
+        <source>依附的窗口</source>
+        <translation>Attached window</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>窗口标题</source>
+        <translation>Window title</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>恢复默认</source>
+        <translation>Reset</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>一个准星制作网址</source>
+        <translation>A crosshair creation website</translation>
+    </message>
+    <message>
+        <location line="+110"/>
         <source>该页面中的快捷键优先级高于工具内的快捷键</source>
         <translation>The hotkeys on this page take priority over those in the tool</translation>
     </message>
@@ -1271,13 +1319,13 @@ Usage:
         <translation>The tool uses PowerShell to execute commands. Leaving it blank means no command will be executed</translation>
     </message>
     <message>
-        <location line="-2279"/>
-        <location line="+1970"/>
+        <location line="-2460"/>
+        <location line="+2093"/>
         <source>模糊半径</source>
         <translation>Blur radius</translation>
     </message>
     <message>
-        <location line="-2253"/>
+        <location line="-2395"/>
         <source>置顶窗口快捷键</source>
         <oldsource>置顶工具快捷键</oldsource>
         <translation>Top most hotkey</translation>
@@ -1288,23 +1336,23 @@ Usage:
         <translation>First press to top the tool window, press again to un-top it</translation>
     </message>
     <message>
-        <location line="+286"/>
-        <location line="+1970"/>
+        <location line="+305"/>
+        <location line="+2093"/>
         <source>偏移</source>
         <translation>Offset</translation>
     </message>
     <message>
-        <location line="-1893"/>
+        <location line="-2027"/>
         <source>水平</source>
         <translation>Horizontal</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="-16"/>
         <source>垂直</source>
         <translation>Vertical</translation>
     </message>
     <message>
-        <location line="+63"/>
+        <location line="+82"/>
         <source>工具窗口（WS_EX_TOOLWINDOW）</source>
         <translation>Tool window (WS_EX_TOOLWINDOW)</translation>
     </message>
@@ -1370,7 +1418,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Disable net adapters</translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+48"/>
         <source>勾选要禁用的网络适配器，下次禁用时生效</source>
         <oldsource>勾选要禁用的网络适配器</oldsource>
         <translation>Select the net adapters to disable, it will take effect next time</translation>
@@ -1399,12 +1447,12 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Manual timing</translation>
     </message>
     <message>
-        <location line="-323"/>
+        <location line="-338"/>
         <source>所有协议为 -1，TCP 为 6，UDP 为 17</source>
         <translation>All protocols are -1, TCP is 6, UDP is 17</translation>
     </message>
     <message>
-        <location line="+438"/>
+        <location line="+453"/>
         <source>停止策略</source>
         <translation>Stop strategy</translation>
     </message>
@@ -1451,11 +1499,23 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     </message>
     <message>
         <location line="+133"/>
-        <source>显示准星（仅当 GTA 窗口位于前台时才会显示）</source>
-        <translation>Show crosshair (only when the GTA window is in the foreground)</translation>
+        <source>显示准星（仅当所依附的窗口位于前台时才会显示）</source>
+        <oldsource>显示准星（仅当 GTA 窗口位于前台时才会显示）</oldsource>
+        <translation>Show crosshair (only when the attached window is in the foreground)</translation>
     </message>
     <message>
-        <location line="+313"/>
+        <location line="+243"/>
+        <source>注：图片中颜色越深的区域着色越深，白色无法被着色</source>
+        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;注：色彩越深着色越深，白色无法被着色&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
+        <translation>Note: Darker areas are shaded more, while white cannot be colored</translation>
+    </message>
+    <message>
+        <location line="+148"/>
+        <source>按住此按钮并将其拖动到目标窗口上，然后松开鼠标来选择窗口</source>
+        <translation>Hold this button, drag it to the target window, then release to select</translation>
+    </message>
+    <message>
+        <location line="+115"/>
         <source>添加快捷键</source>
         <translation>Add hotkey</translation>
     </message>
@@ -1501,7 +1561,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Debug mode</translation>
     </message>
     <message>
-        <location line="-2108"/>
+        <location line="-2316"/>
         <location filename="SettingDialog.h" line="-7"/>
         <source>信息展示</source>
         <oldsource>全局热键</oldsource>
@@ -1513,7 +1573,12 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="SettingDialog.cpp" line="+140"/>
+        <location filename="SettingDialog.cpp" line="+159"/>
+        <source>未指定</source>
+        <translation>Unspecified</translation>
+    </message>
+    <message>
+        <location line="+24"/>
         <source>WAV 文件 (*.wav)</source>
         <translation>WAV file (*.wav)</translation>
     </message>
@@ -1548,7 +1613,49 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Outbound</translation>
     </message>
     <message>
-        <location line="+457"/>
+        <location line="+462"/>
+        <source>实心圆</source>
+        <translation>Solid circle</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>空心圆 1</source>
+        <oldsource>空心圆</oldsource>
+        <translation>Hollow circle 1</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>空心圆 2</source>
+        <translation>Hollow circle 2</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>空心圆 3</source>
+        <translation>Hollow circle 3</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>空心圆 4</source>
+        <translation>Hollow circle 4</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>空心十字</source>
+        <oldsource>十字</oldsource>
+        <translation>Hollow cross</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>一字</source>
+        <translation>Line</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>星野爱</source>
+        <translation>Hoshino Ai</translation>
+    </message>
+    <message>
+        <location line="+41"/>
         <source>选择图片</source>
         <translation>Select image</translation>
     </message>
@@ -1610,7 +1717,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Developer options</translation>
     </message>
     <message>
-        <location line="+85"/>
+        <location line="+92"/>
         <source>左对齐</source>
         <translation>Left alignment</translation>
     </message>

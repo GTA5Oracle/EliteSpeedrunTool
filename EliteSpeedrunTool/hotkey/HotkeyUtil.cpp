@@ -121,7 +121,7 @@ void HotkeyUtil::keyDown(DWORD key)
 
     key = escapeNumPad(key);
     HWND hwnd = reinterpret_cast<HWND>(hotkeyRedirector->winId());
-    HWND gtaHwnd = memoryUtil->getWindowHwnd();
+    HWND gtaHwnd = memoryUtil->getGtaWindowHwnd();
     auto foregroundWindow = GetForegroundWindow();
     if (globalData->debugMode()) {
         qDebug() << "key" << key << "foregroundWindow" << foregroundWindow << "HWND" << hwnd << "GTAHWND" << gtaHwnd;

@@ -13,23 +13,42 @@
   <property name="windowTitle">
    <string>Crosshair</string>
   </property>
-  <widget class="QLabel" name="labImage">
+  <widget class="CrosshairGraphicsView" name="graphicsView">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>150</y>
-     <width>40</width>
-     <height>12</height>
+     <x>0</x>
+     <y>0</y>
+     <width>256</width>
+     <height>192</height>
     </rect>
    </property>
-   <property name="text">
-    <string/>
+   <property name="frameShape">
+    <enum>QFrame::Shape::NoFrame</enum>
    </property>
-   <property name="scaledContents">
-    <bool>true</bool>
+   <property name="lineWidth">
+    <number>0</number>
+   </property>
+   <property name="verticalScrollBarPolicy">
+    <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="horizontalScrollBarPolicy">
+    <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+   </property>
+   <property name="interactive">
+    <bool>false</bool>
+   </property>
+   <property name="resizeAnchor">
+    <enum>QGraphicsView::ViewportAnchor::AnchorViewCenter</enum>
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CrosshairGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header location="global">displayinfo/CrosshairGraphicsView.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

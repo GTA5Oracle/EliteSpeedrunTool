@@ -1,4 +1,5 @@
 #include "HotkeyRedirector.h"
+#include <windows.h>
 
 HotkeyRedirector::HotkeyRedirector(QWidget* parent)
     : QWidget(parent)
@@ -10,7 +11,13 @@ HotkeyRedirector::HotkeyRedirector(QWidget* parent)
 
 bool HotkeyRedirector::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
 {
-    // MSG* msg = static_cast<MSG*>(message);
-    // qInfo() << "HotkeyRedirector nativeEvent: message: " << msg->message << " wParam: " << msg->wParam;
+    MSG* msg = static_cast<MSG*>(message);
+    switch (msg->message) {
+    case WM_PARENTNOTIFY:
+        if (LOWORD(msg->wParam) == WM_DESTROY) {
+            SetParent(reinterpret_cast<HWND>(winId()), nullptr);
+        }
+        break;
+    }
     return QWidget::nativeEvent(eventType, message, result);
 }

@@ -3,6 +3,7 @@
 #include "ui_CrosshairDialog.h"
 #include <QDialog>
 #include <QGraphicsDropShadowEffect>
+#include <QGraphicsScene>
 #include <QTimer>
 #include <windows.h>
 
@@ -20,26 +21,29 @@ protected:
     explicit CrosshairDialog(QWidget* parent = nullptr);
     static CrosshairDialog* inst;
 
-    DWORD gtaPid = 0;
-    RECT gtaRect = { 0, 0, 0, 0 };
+    DWORD pid = 0;
+    RECT windowRect = { 0, 0, 0, 0 };
     QTimer timer;
 
     void closeEvent(QCloseEvent* event);
     void init();
-    void initGtaWindowProp();
-    void hookGtaProcessEvent();
-    void unhookGtaProcessEvent();
+    void initWindowProp();
+    void hookProcessEvent();
+    void unhookProcessEvent();
     bool scaledClientRect(RECT& rect);
     void setWindowSize();
     void setCrosshairOffset();
     void setCrosshairSize();
     void setCrosshairImage();
     void setCrosshairShadow();
+    void setCrosshairColor();
+    void setCrosshairOpacity();
 
-    void loadSvgImage(QString path, QPixmap& pixmap);
+    void loadImage(QString path);
 
 private:
     Ui::CrosshairDialog ui;
+    QGraphicsScene scene;
     HWINEVENTHOOK locationChangeEventHook;
     QGraphicsDropShadowEffect* imageShadow = new QGraphicsDropShadowEffect(this);
 };

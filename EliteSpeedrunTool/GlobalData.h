@@ -259,13 +259,28 @@ public:
     void setCrosshairShow(bool newCrosshairShow);
 
     QColor crosshairShadowColor() const;
-    void setCrosshairShadowColor(const QColor &newCrosshairShadowColor);
+    void setCrosshairShadowColor(const QColor& newCrosshairShadowColor);
 
     int crosshairShadowBlurRadius() const;
     void setCrosshairShadowBlurRadius(int newCrosshairShadowBlurRadius);
 
     QPointF crosshairShadowOffset() const;
     void setCrosshairShadowOffset(QPointF newCrosshairShadowOffset);
+
+    bool excludeFromCapture() const;
+    void setExcludeFromCapture(bool newExcludeFromCapture);
+
+    QString crosshairShowHotkey() const;
+    void setCrosshairShowHotkey(const QString& newCrosshairShowHotkey);
+
+    QColor crosshairColor() const;
+    void setCrosshairColor(const QColor& newCrosshairColor);
+
+    double crosshairOpacity() const;
+    void setCrosshairOpacity(double newCrosshairOpacity);
+
+    QString crosshairAttachWindowTitle() const;
+    void setCrosshairAttachWindowTitle(const QString& newCrosshairAttachWindowTitle);
 
 signals:
     void minimizeToTrayChanged();
@@ -328,25 +343,16 @@ signals:
     void rtssOverlayChanged();
 
     void selectedNetworkAdaptersChanged();
-
     void networkAdaptersEnableHotkeyChanged();
-
     void networkAdaptersDisableHotkeyChanged();
-
     void networkAdaptersEnableSoundChanged();
-
     void networkAdaptersDisableSoundChanged();
 
     void rtssCrosshairChanged();
-
     void rtssCrosshairTextChanged();
-
     void rtssCrosshairXChanged();
-
     void rtssCrosshairYChanged();
-
     void rtssCrosshairSizeChanged();
-
     void rtssCrosshairColorChanged();
 
     void topMostWindowHotkeyChanged();
@@ -358,23 +364,25 @@ signals:
     void eventCmdMapChanged();
 
     void crosshairOffsetChanged();
-
     void crosshairSizeChanged();
-
     void crosshairImageChanged();
-
     void crosshairShowChanged();
-
     void crosshairShadowColorChanged();
-
     void crosshairShadowBlurRadiusChanged();
-
     void crosshairShadowOffsetChanged();
+    void crosshairShowHotkeyChanged();
+    void crosshairColorChanged();
+    void crosshairOpacityChanged();
+
+    void excludeFromCaptureChanged();
+
+    void crosshairAttachWindowTitleChanged();
 
 private:
     bool mMinimizeToTray = false;
     QString mTopMostWindowHotkey = "";
     QString mStyleName = "windows11";
+    bool mExcludeFromCapture = false;
     // 版本
     bool mAutoCheckUpdate = true;
     QString mVersion = "0.0";
@@ -397,12 +405,16 @@ private:
 
     // Crosshair
     bool mCrosshairShow = true;
+    QString mCrosshairShowHotkey = "";
     QString mCrosshairImage = "";
     QPoint mCrosshairOffset = { 0, 0 };
     QSize mCrosshairSize = { 4, 4 };
+    QColor mCrosshairColor = QColor();
+    double mCrosshairOpacity = 1.0;
     QColor mCrosshairShadowColor = Qt::black;
     int mCrosshairShadowBlurRadius = 7;
     QPointF mCrosshairShadowOffset = { 0, 0 };
+    QString mCrosshairAttachWindowTitle = "Grand Theft Auto V";
 
     // RTSS
     bool mRtssOverlay = true;
@@ -556,4 +568,9 @@ private:
     Q_PROPERTY(QColor crosshairShadowColor READ crosshairShadowColor WRITE setCrosshairShadowColor NOTIFY crosshairShadowColorChanged FINAL)
     Q_PROPERTY(int crosshairShadowBlurRadius READ crosshairShadowBlurRadius WRITE setCrosshairShadowBlurRadius NOTIFY crosshairShadowBlurRadiusChanged FINAL)
     Q_PROPERTY(QPointF crosshairShadowOffset READ crosshairShadowOffset WRITE setCrosshairShadowOffset NOTIFY crosshairShadowOffsetChanged FINAL)
+    Q_PROPERTY(bool excludeFromCapture READ excludeFromCapture WRITE setExcludeFromCapture NOTIFY excludeFromCaptureChanged FINAL)
+    Q_PROPERTY(QString crosshairShowHotkey READ crosshairShowHotkey WRITE setCrosshairShowHotkey NOTIFY crosshairShowHotkeyChanged FINAL)
+    Q_PROPERTY(QColor crosshairColor READ crosshairColor WRITE setCrosshairColor NOTIFY crosshairColorChanged FINAL)
+    Q_PROPERTY(double crosshairOpacity READ crosshairOpacity WRITE setCrosshairOpacity NOTIFY crosshairOpacityChanged FINAL)
+    Q_PROPERTY(QString crosshairAttachWindowTitle READ crosshairAttachWindowTitle WRITE setCrosshairAttachWindowTitle NOTIFY crosshairAttachWindowTitleChanged FINAL)
 };

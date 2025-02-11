@@ -1,5 +1,6 @@
 #include "DisplayInfoDialog.h"
 #include "GlobalData.h"
+#include "MemoryUtil.h"
 #include "ui_DisplayInfoDialog.h"
 
 #include "SubFuncsData.h"

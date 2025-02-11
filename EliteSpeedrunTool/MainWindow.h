@@ -22,6 +22,8 @@ public:
     void initSystemTray();
     void closeSystemTray();
 
+    bool eventFilter(QObject* watched, QEvent* event) override;
+
 protected:
     void closeEvent(QCloseEvent* event) override;
 
@@ -81,9 +83,9 @@ protected:
 
     void initTimerStateMachine();
 
-    void closeGameImmediately();
-
     void topMostWindow(bool isTop, bool fromHotkey);
+
+    void initExcludeFromCapture();
 
     void initMusic();
 
@@ -109,6 +111,7 @@ private:
     DisplayInfoDialog* displayInfoDialog = nullptr;
 
     QHotkey* topMostWindowHotkey = nullptr;
+    QHotkey* crosshairShowHotkey = nullptr;
 
     QHotkey* startFirewallHotkey = nullptr;
     QHotkey* stopFirewallHotkey = nullptr;

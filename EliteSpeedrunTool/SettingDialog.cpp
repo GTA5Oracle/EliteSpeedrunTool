@@ -1,5 +1,6 @@
 #include "SettingDialog.h"
 #include "GlobalData.h"
+#include "ImageUtil.h"
 #include "LanguageUtil.h"
 #include "event/CmdEventHelper.h"
 #include "event/cmd/CmdSequenceWizard.h"
@@ -58,13 +59,13 @@ SettingDialog::~SettingDialog()
 
 void SettingDialog::initGeneralSettings()
 {
-    // 最小化到托盘
+    // Minimize to tray
     ui.cbMinimizeToTray->setChecked(globalData->minimizeToTray());
     connect(ui.cbMinimizeToTray, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->setMinimizeToTray(state == Qt::Checked);
     });
 
-    // 自动检测更新
+    // Auto check update
     ui.cbAutoCheckUpdate->setChecked(globalData->autoCheckUpdate());
     connect(ui.cbAutoCheckUpdate, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->setAutoCheckUpdate(state == Qt::Checked);
@@ -77,7 +78,7 @@ void SettingDialog::initGeneralSettings()
         ui.tbClearTopMostWindowEdit,
         [](const QString& hotkey) { globalData->setTopMostWindowHotkey(hotkey); });
 
-    // 样式
+    // Style
     for (auto&& k : QStyleFactory::keys()) {
         ui.cbStyle->addItem(k, k);
         if (k == globalData->styleName()) {
@@ -86,6 +87,12 @@ void SettingDialog::initGeneralSettings()
     }
     connect(ui.cbStyle, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
         globalData->setStyleName(ui.cbStyle->itemData(index).toString());
+    });
+
+    // Exclude from capture
+    ui.cbExcludeFromCapture->setChecked(globalData->excludeFromCapture());
+    connect(ui.cbExcludeFromCapture, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
+        globalData->setExcludeFromCapture(state == Qt::Checked);
     });
 }
 
@@ -133,6 +140,42 @@ void SettingDialog::initHotkeyWidgets(
         keySequenceEdit->clear();
         onUpdateHotkey("");
     });
+}
+
+void SettingDialog::initColorWidgets(const QColor& color,
+    QLabel* label,
+    QAbstractButton* selectButton,
+    QAbstractButton* clearButton,
+    std::function<void(const QColor&)> onUpdateColor)
+{
+    auto updateLabel = [label](const QColor& color) {
+        if (color.isValid()) {
+            label->setText("");
+            label->setAutoFillBackground(true);
+            QPalette paletteBackground = label->palette();
+            paletteBackground.setColor(QPalette::Window, color);
+            label->setPalette(paletteBackground);
+        } else {
+            label->setText(tr("未指定"));
+            label->setPalette(QLabel().palette());
+        }
+    };
+    updateLabel(color);
+    connect(selectButton, &QAbstractButton::clicked, this, [label, color, onUpdateColor, updateLabel]() {
+        QColorDialog dialog = color.isValid() ? QColorDialog(color) : QColorDialog();
+        if (dialog.exec() == QDialog::Accepted) {
+            auto color = dialog.selectedColor();
+            onUpdateColor(color);
+            updateLabel(color);
+        }
+    });
+
+    if (clearButton) {
+        connect(clearButton, &QAbstractButton::clicked, this, [onUpdateColor, updateLabel]() {
+            onUpdateColor(QColor());
+            updateLabel(QColor());
+        });
+    }
 }
 
 QString SettingDialog::getSoundFile(QString dir)
@@ -630,6 +673,11 @@ void SettingDialog::initCrosshairSettings()
     connect(ui.cbCrosshairShow, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->setCrosshairShow(state == Qt::Checked);
     });
+    initHotkeyWidgets(
+        globalData->crosshairShowHotkey(),
+        ui.keySeqCrosshairShow,
+        ui.tbClearCrosshairShowHotkeyEdit,
+        [](const QString& hotkey) { globalData->setCrosshairShowHotkey(hotkey); });
 
     ui.sbCrosshairOffsetX->setValue(globalData->crosshairOffset().x());
     connect(ui.sbCrosshairOffsetX, &QSpinBox::valueChanged, this, [=](int value) {
@@ -649,7 +697,55 @@ void SettingDialog::initCrosshairSettings()
         globalData->setCrosshairSize(QSize(globalData->crosshairSize().width(), value));
     });
 
-    ui.leCorsshairImagePath->setText(globalData->crosshairImage());
+    // Crosshair image ===============================
+    QList<QPair<QString, QString>> buildInCrosshairs = {
+        qMakePair(":/image/ic_crosshair_1.png", tr("实心圆")),
+        qMakePair(":/image/ic_crosshair_2.png", tr("空心圆 1")),
+        qMakePair(":/image/ic_crosshair_3.png", tr("空心圆 2")),
+        qMakePair(":/image/ic_crosshair_4.png", tr("空心圆 3")),
+        qMakePair(":/image/ic_crosshair_5.png", tr("空心圆 4")),
+        qMakePair(":/image/ic_crosshair_6.png", tr("空心十字")),
+        qMakePair(":/image/ic_crosshair_7.png", tr("一字")),
+        qMakePair(":/image/ic_crosshair_hoshino_ai.png", tr("星野爱")),
+    };
+    for (auto& c : buildInCrosshairs) {
+        ui.cbCrosshairBuildIn->addItem(QIcon(c.first), c.second, c.first);
+    }
+    connect(ui.cbCrosshairBuildIn, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
+        if (index >= 0) {
+            globalData->setCrosshairImage(ui.cbCrosshairBuildIn->itemData(index).toString());
+        }
+    });
+    // Crosshair radiobuttons
+    connect(ui.rbCrosshairBuildIn, &QAbstractButton::toggled, this, [=](bool checked) {
+        ui.cbCrosshairBuildIn->setVisible(checked);
+        if (checked) {
+            globalData->setCrosshairImage(ui.cbCrosshairBuildIn->currentData().toString());
+        }
+    });
+    connect(ui.rbCrosshairExternal, &QAbstractButton::toggled, this, [=](bool checked) {
+        ui.leCorsshairImagePath->setVisible(checked);
+        ui.tbCrosshairSelectImage->setVisible(checked);
+        if (checked) {
+            globalData->setCrosshairImage(ui.leCorsshairImagePath->text());
+        }
+    });
+    // init crosshair image state
+    bool isBuildInCrosshair = globalData->crosshairImage().startsWith(":/");
+    if (isBuildInCrosshair) {
+        int index = ui.cbCrosshairBuildIn->findData(globalData->crosshairImage());
+        if (index != -1) {
+            ui.cbCrosshairBuildIn->setCurrentIndex(index);
+        }
+    } else {
+        ui.leCorsshairImagePath->setText(globalData->crosshairImage());
+    }
+    ui.cbCrosshairBuildIn->setVisible(isBuildInCrosshair);
+    ui.leCorsshairImagePath->setVisible(!isBuildInCrosshair);
+    ui.tbCrosshairSelectImage->setVisible(!isBuildInCrosshair);
+    ui.rbCrosshairBuildIn->setChecked(isBuildInCrosshair);
+    ui.rbCrosshairExternal->setChecked(!isBuildInCrosshair);
+    // External crosshair
     connect(ui.tbCrosshairSelectImage, &QAbstractButton::clicked, this, [=]() {
         QString fileName = QFileDialog::getOpenFileName(this, tr("选择图片"), globalData->crosshairImage(), tr("图片") + " (*.png *.jpg *.jpeg *.bmp *.gif *.svg *.ico *.icon)");
         if (!fileName.isEmpty()) {
@@ -661,6 +757,19 @@ void SettingDialog::initCrosshairSettings()
         globalData->setCrosshairImage(text);
     });
 
+    // Color
+    initColorWidgets(
+        globalData->crosshairColor(),
+        ui.labCrosshairColor,
+        ui.tbSelectCrosshairColor,
+        ui.tbClearCrosshairColor,
+        [](const QColor& color) { globalData->setCrosshairColor(color); });
+    ui.sbCrosshairOpacity->setValue(globalData->crosshairOpacity());
+    connect(ui.sbCrosshairOpacity, &QDoubleSpinBox::valueChanged, this, [=](double value) {
+        globalData->setCrosshairOpacity(value);
+    });
+
+    // Shadow
     ui.sbCrosshairShadowBlurRadius->setValue(globalData->crosshairShadowBlurRadius());
     connect(ui.sbCrosshairShadowBlurRadius, &QSpinBox::valueChanged, this, [=](int value) {
         globalData->setCrosshairShadowBlurRadius(value);
@@ -682,6 +791,31 @@ void SettingDialog::initCrosshairSettings()
             ui.labCrosshairShadowColor->setStyleSheet(
                 QString("background-color: %1;").arg(color.name()));
         }
+    });
+
+    // Attach window title
+    ui.leCrosshairAttachWindowTitle->setText(globalData->crosshairAttachWindowTitle());
+    connect(ui.leCrosshairAttachWindowTitle, &QLineEdit::textChanged, this, [](const QString& text) {
+        globalData->setCrosshairAttachWindowTitle(text);
+    });
+    connect(ui.tbResetCrosshairAttachWindowTitle, &QAbstractButton::clicked, this, [=]() {
+        ui.leCrosshairAttachWindowTitle->setText("Grand Theft Auto V");
+    });
+    connect(ui.tbSelectCrosshairAttachWindowTitle, &QAbstractButton::pressed, this, [=]() {
+        setCursor(imageUtil->cursorFromCurFile(":/image/ic_select.cur"));
+    });
+    connect(ui.tbSelectCrosshairAttachWindowTitle, &CursorSelectorButton::realReleased, this, [=]() {
+        POINT ptCursor;
+        GetCursorPos(&ptCursor);
+        HWND hwnd = WindowFromPoint(ptCursor);
+        if (hwnd) {
+            hwnd = GetAncestor(hwnd, GA_ROOT);
+            TCHAR szTitle[MAX_PATH];
+            GetWindowText(hwnd, szTitle, MAX_PATH);
+            auto title = QString::fromStdWString(szTitle);
+            ui.leCrosshairAttachWindowTitle->setText(title);
+        }
+        setCursor(QToolButton().cursor());
     });
 }
 

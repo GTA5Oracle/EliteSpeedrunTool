@@ -140,6 +140,7 @@ void GlobalData::readSettings()
     setIgnoredNewVersion(settings.value("IgnoredNewVersion", mIgnoredNewVersion).toString());
     setMinimizeToTray(settings.value("MinimizeToTray", mMinimizeToTray).toBool());
     setTopMostWindowHotkey(settings.value("TopMostWindowHotkey", mTopMostWindowHotkey).toString());
+    setExcludeFromCapture(settings.value("ExcludeFromCapture", mExcludeFromCapture).toBool());
     settings.endGroup();
 
     settings.beginGroup("DisplayInfo");
@@ -164,12 +165,16 @@ void GlobalData::readSettings()
 
     settings.beginGroup("Crosshair");
     setCrosshairShow(settings.value("CrosshairShow", mCrosshairShow).toBool());
+    setCrosshairShowHotkey(settings.value("CrosshairShowHotkey", mCrosshairShowHotkey).toString());
     setCrosshairImage(settings.value("CrosshairImage", mCrosshairImage).toString());
     setCrosshairOffset(settings.value("CrosshairOffset", mCrosshairOffset).toPoint());
     setCrosshairSize(settings.value("CrosshairSize", mCrosshairSize).toSize());
+    setCrosshairColor(settings.value("CrosshairColor", mCrosshairColor).value<QColor>());
+    setCrosshairOpacity(settings.value("CrosshairOpacity", mCrosshairOpacity).toDouble());
     setCrosshairShadowColor(settings.value("CrosshairShadowColor", mCrosshairShadowColor).value<QColor>());
     setCrosshairShadowBlurRadius(settings.value("CrosshairShadowBlurRadius", mCrosshairShadowBlurRadius).toInt());
     setCrosshairShadowOffset(settings.value("CrosshairShadowOffset", mCrosshairShadowOffset).value<QPointF>());
+    setCrosshairAttachWindowTitle(settings.value("CrosshairAttachWindowTitle", mCrosshairAttachWindowTitle).toString());
     settings.endGroup();
 
     settings.beginGroup("Rtss");
@@ -272,6 +277,7 @@ void GlobalData::writeSettings()
     settings.setValue("IgnoredNewVersion", mIgnoredNewVersion);
     settings.setValue("MinimizeToTray", mMinimizeToTray);
     settings.setValue("TopMostWindowHotkey", mTopMostWindowHotkey);
+    settings.setValue("ExcludeFromCapture", mExcludeFromCapture);
     settings.endGroup();
 
     settings.beginGroup("DisplayInfo");
@@ -289,12 +295,16 @@ void GlobalData::writeSettings()
 
     settings.beginGroup("Crosshair");
     settings.setValue("CrosshairShow", mCrosshairShow);
+    settings.setValue("CrosshairShowHotkey", mCrosshairShowHotkey);
     settings.setValue("CrosshairImage", mCrosshairImage);
     settings.setValue("CrosshairOffset", mCrosshairOffset);
     settings.setValue("CrosshairSize", mCrosshairSize);
+    settings.setValue("CrosshairColor", mCrosshairColor);
+    settings.setValue("CrosshairOpacity", mCrosshairOpacity);
     settings.setValue("CrosshairShadowColor", mCrosshairShadowColor);
     settings.setValue("CrosshairShadowBlurRadius", mCrosshairShadowBlurRadius);
     settings.setValue("CrosshairShadowOffset", mCrosshairShadowOffset);
+    settings.setValue("CrosshairAttachWindowTitle", mCrosshairAttachWindowTitle);
     settings.endGroup();
 
     settings.beginGroup("Rtss");
@@ -1292,4 +1302,69 @@ void GlobalData::setCrosshairShadowOffset(QPointF newCrosshairShadowOffset)
         return;
     mCrosshairShadowOffset = newCrosshairShadowOffset;
     emit crosshairShadowOffsetChanged();
+}
+
+bool GlobalData::excludeFromCapture() const
+{
+    return mExcludeFromCapture;
+}
+
+void GlobalData::setExcludeFromCapture(bool newExcludeFromCapture)
+{
+    if (mExcludeFromCapture == newExcludeFromCapture)
+        return;
+    mExcludeFromCapture = newExcludeFromCapture;
+    emit excludeFromCaptureChanged();
+}
+
+QString GlobalData::crosshairShowHotkey() const
+{
+    return mCrosshairShowHotkey;
+}
+
+void GlobalData::setCrosshairShowHotkey(const QString& newCrosshairShowHotkey)
+{
+    if (mCrosshairShowHotkey == newCrosshairShowHotkey)
+        return;
+    mCrosshairShowHotkey = newCrosshairShowHotkey;
+    emit crosshairShowHotkeyChanged();
+}
+
+QColor GlobalData::crosshairColor() const
+{
+    return mCrosshairColor;
+}
+
+void GlobalData::setCrosshairColor(const QColor& newCrosshairColor)
+{
+    if (mCrosshairColor == newCrosshairColor)
+        return;
+    mCrosshairColor = newCrosshairColor;
+    emit crosshairColorChanged();
+}
+
+double GlobalData::crosshairOpacity() const
+{
+    return mCrosshairOpacity;
+}
+
+void GlobalData::setCrosshairOpacity(double newCrosshairOpacity)
+{
+    if (qFuzzyCompare(mCrosshairOpacity, newCrosshairOpacity))
+        return;
+    mCrosshairOpacity = newCrosshairOpacity;
+    emit crosshairOpacityChanged();
+}
+
+QString GlobalData::crosshairAttachWindowTitle() const
+{
+    return mCrosshairAttachWindowTitle;
+}
+
+void GlobalData::setCrosshairAttachWindowTitle(const QString& newCrosshairAttachWindowTitle)
+{
+    if (mCrosshairAttachWindowTitle == newCrosshairAttachWindowTitle)
+        return;
+    mCrosshairAttachWindowTitle = newCrosshairAttachWindowTitle;
+    emit crosshairAttachWindowTitleChanged();
 }

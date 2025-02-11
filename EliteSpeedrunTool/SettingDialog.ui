@@ -46,7 +46,7 @@
       <enum>QFrame::Shadow::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>8</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -73,7 +73,7 @@
             <x>0</x>
             <y>0</y>
             <width>246</width>
-            <height>219</height>
+            <height>241</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -88,6 +88,13 @@
             <widget class="QCheckBox" name="cbAutoCheckUpdate">
              <property name="text">
               <string>启动时自动检查更新</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbExcludeFromCapture">
+             <property name="text">
+              <string>禁止其他应用截屏或录屏工具窗口</string>
              </property>
             </widget>
            </item>
@@ -212,8 +219,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>204</width>
+                <height>315</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -322,10 +329,6 @@
                       </property>
                      </widget>
                     </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <layout class="QHBoxLayout" name="_4">
                     <item>
                      <widget class="QLabel" name="label_8">
                       <property name="sizePolicy">
@@ -368,6 +371,29 @@
                  <layout class="QVBoxLayout" name="verticalLayout_9">
                   <item>
                    <layout class="QHBoxLayout" name="_5">
+                    <item>
+                     <widget class="QLabel" name="label_21">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="text">
+                       <string>颜色</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="labDisplayInfoTextShadowColor"/>
+                    </item>
+                    <item>
+                     <widget class="QToolButton" name="tbSelectDisplayInfoTextShadowColor">
+                      <property name="text">
+                       <string notr="true">...</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item>
                      <widget class="QLabel" name="label_20">
                       <property name="sizePolicy">
@@ -430,33 +456,6 @@
                     </item>
                    </layout>
                   </item>
-                  <item>
-                   <layout class="QHBoxLayout" name="_7">
-                    <item>
-                     <widget class="QLabel" name="label_21">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="text">
-                       <string>颜色</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="labDisplayInfoTextShadowColor"/>
-                    </item>
-                    <item>
-                     <widget class="QToolButton" name="tbSelectDisplayInfoTextShadowColor">
-                      <property name="text">
-                       <string notr="true">...</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
                  </layout>
                 </widget>
                </item>
@@ -471,8 +470,24 @@
                  <property name="title">
                   <string>文字对齐</string>
                  </property>
-                 <layout class="QGridLayout" name="gridLayout_4">
-                  <item row="0" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_19">
+                  <item>
+                   <widget class="QLabel" name="label_14">
+                    <property name="sizePolicy">
+                     <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                      <horstretch>0</horstretch>
+                      <verstretch>0</verstretch>
+                     </sizepolicy>
+                    </property>
+                    <property name="text">
+                     <string>垂直</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="cbDisplayInfoTextVAlign"/>
+                  </item>
+                  <item>
                    <widget class="QLabel" name="label_13">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -485,24 +500,8 @@
                     </property>
                    </widget>
                   </item>
-                  <item row="0" column="2">
+                  <item>
                    <widget class="QComboBox" name="cbDisplayInfoTextHAlign"/>
-                  </item>
-                  <item row="2" column="2">
-                   <widget class="QComboBox" name="cbDisplayInfoTextVAlign"/>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_14">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="text">
-                     <string>垂直</string>
-                    </property>
-                   </widget>
                   </item>
                  </layout>
                 </widget>
@@ -553,8 +552,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>187</width>
+                <height>196</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -768,8 +767,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>147</width>
+                <height>432</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_33">
@@ -913,8 +912,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>244</width>
+                <height>286</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_44">
@@ -1137,8 +1136,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>515</width>
-                <height>547</height>
+                <width>248</width>
+                <height>571</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -1471,10 +1470,25 @@ C:\Program Files (x86)\nn\nn.exe</string>
                 <x>0</x>
                 <y>0</y>
                 <width>119</width>
-                <height>400</height>
+                <height>452</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_41">
+               <item>
+                <widget class="QLabel" name="label_73">
+                 <property name="font">
+                  <font>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>注意：禁用网卡存在延迟，请勿用于时间敏感的操作，否则可能会留红失败！</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
                <item>
                 <widget class="QLabel" name="label_46">
                  <property name="text">
@@ -1632,8 +1646,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>134</width>
+            <height>416</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -1830,8 +1844,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>98</width>
+            <height>170</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_31">
@@ -1951,8 +1965,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>155</width>
+            <height>180</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -2103,8 +2117,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>98</width>
+            <height>70</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_28">
@@ -2177,17 +2191,44 @@ C:\Program Files (x86)\nn\nn.exe</string>
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <y>-105</y>
+            <width>519</width>
+            <height>603</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_52">
            <item>
             <widget class="QCheckBox" name="cbCrosshairShow">
              <property name="text">
-              <string>显示准星（仅当 GTA 窗口位于前台时才会显示）</string>
+              <string>显示准星（仅当所依附的窗口位于前台时才会显示）</string>
              </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_31">
+             <property name="title">
+              <string>显示隐藏快捷键</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_57">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_18">
+                <item>
+                 <widget class="QKeySequenceEdit" name="keySeqCrosshairShow"/>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="tbClearCrosshairShowHotkeyEdit">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="resource.qrc">
+                    <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
             </widget>
            </item>
            <item>
@@ -2299,11 +2340,39 @@ C:\Program Files (x86)\nn\nn.exe</string>
              <property name="title">
               <string>准星图片</string>
              </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
              <layout class="QVBoxLayout" name="verticalLayout_55">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_20">
+                <item>
+                 <widget class="QRadioButton" name="rbCrosshairBuildIn">
+                  <property name="text">
+                   <string>使用内置准星</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QRadioButton" name="rbCrosshairExternal">
+                  <property name="text">
+                   <string>使用外部图片</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cbCrosshairBuildIn"/>
+              </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_16">
                 <item>
-                 <widget class="QLineEdit" name="leCorsshairImagePath"/>
+                 <widget class="QLineEdit" name="leCorsshairImagePath">
+                  <property name="placeholderText">
+                   <string>留空表示使用默认准星图片</string>
+                  </property>
+                 </widget>
                 </item>
                 <item>
                  <widget class="QToolButton" name="tbCrosshairSelectImage">
@@ -2314,10 +2383,67 @@ C:\Program Files (x86)\nn\nn.exe</string>
                 </item>
                </layout>
               </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_29">
+             <property name="title">
+              <string>颜色</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_58">
               <item>
-               <widget class="QLabel" name="label_69">
+               <layout class="QHBoxLayout" name="_16">
+                <item>
+                 <widget class="QLabel" name="labCrosshairColor"/>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="tbSelectCrosshairColor">
+                  <property name="text">
+                   <string notr="true">...</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="tbClearCrosshairColor">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="resource.qrc">
+                    <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_77">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>透明度</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="sbCrosshairOpacity">
+                  <property name="maximum">
+                   <double>1.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.010000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_76">
                 <property name="text">
-                 <string>留空表示使用默认准星图片</string>
+                 <string>注：图片中颜色越深的区域着色越深，白色无法被着色</string>
                 </property>
                </widget>
               </item>
@@ -2338,6 +2464,29 @@ C:\Program Files (x86)\nn\nn.exe</string>
              <layout class="QVBoxLayout" name="verticalLayout_56">
               <item>
                <layout class="QHBoxLayout" name="_8">
+                <item>
+                 <widget class="QLabel" name="label_72">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>颜色</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="labCrosshairShadowColor"/>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="tbSelectCrosshairShadowColor">
+                  <property name="text">
+                   <string notr="true">...</string>
+                  </property>
+                 </widget>
+                </item>
                 <item>
                  <widget class="QLabel" name="label_70">
                   <property name="sizePolicy">
@@ -2400,28 +2549,59 @@ C:\Program Files (x86)\nn\nn.exe</string>
                 </item>
                </layout>
               </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_32">
+             <property name="title">
+              <string>依附的窗口</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_59">
               <item>
-               <layout class="QHBoxLayout" name="_15">
+               <layout class="QHBoxLayout" name="horizontalLayout_22">
                 <item>
-                 <widget class="QLabel" name="label_72">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
+                 <widget class="QLabel" name="label_69">
                   <property name="text">
-                   <string>颜色</string>
+                   <string>窗口标题</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLabel" name="labCrosshairShadowColor"/>
+                 <widget class="QLineEdit" name="leCrosshairAttachWindowTitle"/>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_21">
+                <item>
+                 <widget class="CursorSelectorButton" name="tbSelectCrosshairAttachWindowTitle">
+                  <property name="icon">
+                   <iconset resource="resource.qrc">
+                    <normaloff>:/image/ic_select_window.bmp</normaloff>:/image/ic_select_window.bmp</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>32</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                 </widget>
                 </item>
                 <item>
-                 <widget class="QToolButton" name="tbSelectCrosshairShadowColor">
+                 <widget class="QLabel" name="label_78">
                   <property name="text">
-                   <string notr="true">...</string>
+                   <string>按住此按钮并将其拖动到目标窗口上，然后松开鼠标来选择窗口</string>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QToolButton" name="tbResetCrosshairAttachWindowTitle">
+                  <property name="text">
+                   <string>恢复默认</string>
                   </property>
                  </widget>
                 </item>
@@ -2429,6 +2609,33 @@ C:\Program Files (x86)\nn\nn.exe</string>
               </item>
              </layout>
             </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_17">
+             <item>
+              <widget class="QLabel" name="label_75">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>一个准星制作网址</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_74">
+               <property name="text">
+                <string notr="true">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://crosshair.themeta.gg/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://crosshair.themeta.gg/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="openExternalLinks">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <spacer name="verticalSpacer_7">
@@ -2884,6 +3091,11 @@ C:\Program Files (x86)\nn\nn.exe</string>
    <extends>QTableWidget</extends>
    <header>hotkey/KeySequenceTableWidget.h</header>
   </customwidget>
+  <customwidget>
+   <class>CursorSelectorButton</class>
+   <extends>QToolButton</extends>
+   <header location="global">CursorSelectorButton.h</header>
+  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>lwPage</tabstop>
@@ -2897,11 +3109,9 @@ C:\Program Files (x86)\nn\nn.exe</string>
   <tabstop>cbDisplayInfoFuncEnable</tabstop>
   <tabstop>fcbDisplayInfoFont</tabstop>
   <tabstop>sbDisplayInfoTextSize</tabstop>
-  <tabstop>tbSelectDisplayInfoTextColor</tabstop>
   <tabstop>sbDisplayInfoTextShadowBlurRadius</tabstop>
   <tabstop>sbDisplayInfoTextShadowOffsetX</tabstop>
   <tabstop>sbDisplayInfoTextShadowOffsetY</tabstop>
-  <tabstop>tbSelectDisplayInfoTextShadowColor</tabstop>
   <tabstop>cbDisplayInfoTextHAlign</tabstop>
   <tabstop>cbDisplayInfoTextVAlign</tabstop>
   <tabstop>tabWidget_4</tabstop>

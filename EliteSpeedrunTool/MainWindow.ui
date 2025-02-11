@@ -366,7 +366,7 @@
                </font>
               </property>
               <property name="text">
-               <string>注意：禁用网卡存在延迟，请勿用于时间敏感的操作！</string>
+               <string>注意：禁用网卡存在延迟，请勿用于时间敏感的操作，否则可能会留红失败！</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>

@@ -17,23 +17,37 @@ MemoryUtil* MemoryUtil::instance()
     return utilInstance;
 }
 
-HWND MemoryUtil::getWindowHwnd()
+HWND MemoryUtil::getGtaWindowHwnd()
 {
-    return FindWindow(NULL, L"Grand Theft Auto V");
+    return getWindowHwnd("Grand Theft Auto V");
 }
 
-DWORD MemoryUtil::getPid()
+HWND MemoryUtil::getWindowHwnd(QString className, QString title)
 {
-    HWND hWindow = getWindowHwnd();
-    if (!hWindow) {
+    return FindWindow(className.isEmpty() ? nullptr : className.toStdWString().c_str(), title.toStdWString().c_str());
+}
+
+HWND MemoryUtil::getWindowHwnd(QString title)
+{
+    return getWindowHwnd("", title);
+}
+
+DWORD MemoryUtil::getGtaPid()
+{
+    return getPid(getGtaWindowHwnd());
+}
+
+DWORD MemoryUtil::getPid(HWND hwnd)
+{
+    if (!hwnd) {
         return 0;
     }
     DWORD pid = 0;
-    GetWindowThreadProcessId(hWindow, &pid);
+    GetWindowThreadProcessId(hwnd, &pid);
     return pid;
 }
 
-HANDLE MemoryUtil::getProcessHandle(DWORD* pid, DWORD dwDesiredAccess)
+HANDLE MemoryUtil::getGtaProcessHandle(DWORD dwDesiredAccess)
 {
-    return OpenProcess(dwDesiredAccess, FALSE, getPid());
+    return OpenProcess(dwDesiredAccess, FALSE, getGtaPid());
 }

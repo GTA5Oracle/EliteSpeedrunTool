@@ -13,11 +13,17 @@ public:
 
     static MemoryUtil* instance();
 
-    HWND getWindowHwnd();
+    HWND getGtaWindowHwnd();
 
-    DWORD getPid();
+    HWND getWindowHwnd(QString className, QString title);
 
-    HANDLE getProcessHandle(DWORD* pid, DWORD dwDesiredAccess);
+    HWND getWindowHwnd(QString title);
+
+    DWORD getGtaPid();
+
+    DWORD getPid(HWND hwnd);
+
+    HANDLE getGtaProcessHandle(DWORD dwDesiredAccess);
 
 private:
     static MemoryUtil* utilInstance;

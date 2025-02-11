@@ -26,7 +26,7 @@ RegionSelectorDialog::RegionSelectorDialog(QRect rect, QWidget* parent)
     setWindowFlags(Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setWindowState(Qt::WindowFullScreen | Qt::WindowActive);
 
-    HWND windowHwnd = memoryUtil->getWindowHwnd();
+    HWND windowHwnd = memoryUtil->getGtaWindowHwnd();
     if (windowHwnd) {
         ShowWindow(windowHwnd, SW_SHOWMINIMIZED);
     }

@@ -60,6 +60,13 @@ protected:
         QAbstractButton* clearButton,
         std::function<void(const QString&)> onUpdateHotkey);
 
+    void initColorWidgets(
+        const QColor& color,
+        QLabel* label,
+        QAbstractButton* selectButton,
+        QAbstractButton* clearButton,
+        std::function<void(const QColor&)> onUpdateColor);
+
     QString getSoundFile(QString dir = QString());
 
     int currentSubFunctionIndex = 0;

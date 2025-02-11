@@ -17,10 +17,12 @@ find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
 find_package(Qt6 REQUIRED COMPONENTS HttpServer)
 find_package(Qt6 REQUIRED COMPONENTS StateMachine)
 find_package(Qt6 REQUIRED COMPONENTS Svg)
+find_package(Qt6 REQUIRED COMPONENTS SvgWidgets)
 
 set(PROJECT_SOURCES
         main.cpp
         MainWindow.cpp MainWindow.h MainWindow.ui
+        MainFeatures.h MainFeatures.cpp
         GlobalData.h GlobalData.cpp
         SettingDialog.h SettingDialog.cpp SettingDialog.ui
         UpdateDialog.h UpdateDialog.cpp UpdateDialog.ui
@@ -40,12 +42,15 @@ set(PROJECT_SOURCES
         displayinfo/DisplayInfoSubFunction.h displayinfo/DisplayInfoSubFunction.cpp
         displayinfo/RtssUtil.h displayinfo/RtssUtil.cpp
         displayinfo/CrosshairDialog.h displayinfo/CrosshairDialog.cpp displayinfo/CrosshairDialog.ui
+        displayinfo/CrosshairGraphicsView.h displayinfo/CrosshairGraphicsView.cpp
+        ImageUtil.h ImageUtil.cpp
         DiscordUtil.h DiscordUtil.cpp
         TimeUtil.h TimeUtil.cpp
         SuspendUtil.h SuspendUtil.cpp
         NumberUtil.h NumberUtil.cpp
         SubFuncsData.h SubFuncsData.cpp
         UiAccessUtil.h UiAccessUtil.cpp
+        CursorSelectorButton.h CursorSelectorButton.cpp
         hotkey/HotkeyRedirector.h hotkey/HotkeyRedirector.cpp hotkey/HotkeyRedirector.ui
         hotkey/HotkeyUtil.h hotkey/HotkeyUtil.cpp
         hotkey/KeySequenceTableWidget.h hotkey/KeySequenceTableWidget.cpp
@@ -96,6 +101,7 @@ target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::Widgets)
 target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::HttpServer)
 target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::StateMachine)
 target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::Svg)
+target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::SvgWidgets)
 
 set_target_properties(EliteSpeedrunTool PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER https://github.com/SkyD666

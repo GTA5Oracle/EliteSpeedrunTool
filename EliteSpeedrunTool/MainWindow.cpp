@@ -4,7 +4,7 @@
 #include "DiscordUtil.h"
 #include "GlobalData.h"
 #include "LogUtil.h"
-#include "MemoryUtil.h"
+#include "MainFeatures.h"
 #include "SettingDialog.h"
 #include "SubFuncsData.h"
 #include "SuspendUtil.h"
@@ -27,6 +27,7 @@
 #include <QDesktopServices>
 #include <QDir>
 #include <QFile>
+#include <QFileDialog>
 #include <QMessageBox>
 #include <QPalette>
 #include <QState>
@@ -79,6 +80,8 @@ MainWindow::MainWindow(QWidget* parent)
     initAct3Headshot();
 
     initCrosshair();
+
+    initExcludeFromCapture();
 
     initMusic();
 
@@ -190,6 +193,7 @@ void MainWindow::registerHotkeyPair(
 void MainWindow::removeAllHotkeys()
 {
     removeHotkey(topMostWindowHotkey);
+    removeHotkey(crosshairShowHotkey);
     removeHotkey(startFirewallHotkey);
     removeHotkey(stopFirewallHotkey);
     removeHotkey(disableNetworkAdapterHotkey);
@@ -231,6 +235,12 @@ void MainWindow::setHotkey()
         globalData->topMostWindowHotkey(),
         topMostWindowHotkey,
         [this]() { topMostWindow(!ui.actionTopMost->isChecked(), true); });
+
+    // Crosshair show
+    registerHotkey(
+        globalData->crosshairShowHotkey(),
+        crosshairShowHotkey,
+        [this]() { globalData->setCrosshairShow(!globalData->crosshairShow()); });
 
     // 防火墙
     registerHotkeyPair(
@@ -310,7 +320,7 @@ void MainWindow::setHotkey()
     registerHotkey(
         globalData->closeGameImmediatelyHotkey(),
         closeGameImmediatelyHotkey,
-        [this]() { closeGameImmediately(); });
+        [this]() { mainFeatures->terminateGta(); });
 
     // 末日将至爆头识别
     registerHotkeyPair(
@@ -655,7 +665,7 @@ void MainWindow::initCloseGameImmediately()
         ui.labCloseGameImmediatelyHotkey->setText(globalData->closeGameImmediatelyHotkey());
     });
     connect(ui.btnCloseGameImmediately, &QAbstractButton::clicked, this, [this]() {
-        closeGameImmediately();
+        mainFeatures->terminateGta();
     });
 }
 
@@ -877,22 +887,6 @@ void MainWindow::initTimerStateMachine()
     timerStateMachine.start();
 }
 
-void MainWindow::closeGameImmediately()
-{
-    DWORD p;
-    const auto game = memoryUtil->getProcessHandle(&p, PROCESS_TERMINATE);
-    if (!TerminateProcess(game, 1)) {
-        // Return 0, execute TerminateProcess fails
-        WinExec("taskkill /f /t /im GTA5.exe", SW_HIDE);
-        qWarning("Execute TerminateProcess fails, using taskkill command to terminate GTA5.exe");
-    } else {
-        qInfo("Execute TerminateProcess API succeeds");
-    }
-    CloseHandle(game);
-    CloseGameEvent event;
-    eventBus->send(&event);
-}
-
 void MainWindow::topMostWindow(bool isTop, bool fromHotkey)
 {
     ui.actionTopMost->setChecked(isTop);
@@ -909,6 +903,17 @@ void MainWindow::topMostWindow(bool isTop, bool fromHotkey)
     }
 }
 
+void MainWindow::initExcludeFromCapture()
+{
+    connect(globalData, &GlobalData::excludeFromCaptureChanged, this, [this]() {
+        for (QWidget* widget : QApplication::topLevelWidgets()) {
+            mainFeatures->applyWindowDisplayAffinity(widget);
+            qInfo() << "Re-applied SetWindowDisplayAffinity to:" << widget->windowTitle();
+        }
+    });
+    qApp->installEventFilter(this);
+}
+
 void MainWindow::initMusic()
 {
     BASS_Init(-1, 44100, 0, reinterpret_cast<HWND>(winId()), nullptr);
@@ -919,7 +924,7 @@ void MainWindow::initMusic()
             BASS_MusicFree(music);
             music = 0;
         } else {
-            QFile xmFile = QDir("./sound").absolutePath() + QDir::separator() + "nice music.it";
+            QFile xmFile = QDir("./sound").absolutePath() + QDir::separator() + "halftime.xm";
             music = BASS_MusicLoad(FALSE, xmFile.fileName().replace("/", "\\").toLocal8Bit().toStdString().c_str(),
                 0, 0, BASS_MUSIC_POSRESET | BASS_SAMPLE_LOOP | BASS_SAMPLE_FLOAT, 1);
             if (music) {
@@ -980,4 +985,13 @@ void MainWindow::closeSystemTray()
     systemTray = nullptr;
     systemTrayMenu = nullptr;
     setVisible(true);
+}
+
+bool MainWindow::eventFilter(QObject* watched, QEvent* event)
+{
+    if (event->type() == QEvent::Show) {
+        QWidget* widget = qobject_cast<QWidget*>(watched);
+        mainFeatures->applyWindowDisplayAffinity(widget);
+    }
+    return QObject::eventFilter(watched, event);
 }
