@@ -18,6 +18,7 @@ find_package(Qt6 REQUIRED COMPONENTS HttpServer)
 find_package(Qt6 REQUIRED COMPONENTS StateMachine)
 find_package(Qt6 REQUIRED COMPONENTS Svg)
 find_package(Qt6 REQUIRED COMPONENTS SvgWidgets)
+find_package(Qt6 REQUIRED COMPONENTS Concurrent)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -102,6 +103,7 @@ target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::HttpServer)
 target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::StateMachine)
 target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::Svg)
 target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::SvgWidgets)
+target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::Concurrent)
 
 set_target_properties(EliteSpeedrunTool PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER https://github.com/SkyD666
