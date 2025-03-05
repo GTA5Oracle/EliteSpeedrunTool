@@ -15,8 +15,9 @@
     </message>
     <message>
         <location filename="AcknowledgementDialog.cpp" line="+14"/>
-        <source>特别感谢 ACT3 帮会和 CEHT 帮会对本工具的宣传和支持。特别感谢 CZ9946 和 Adstargod 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</source>
-        <translation>Special thanks to World Save Act Elite and CEHT for promoting and supporting this tool. A big thanks to CZ29946 and Adstargod, who provided significant assistance in the development of this tool! Special thanks to Alice2333 for technical support!</translation>
+        <source>特别感谢 ACT3 帮会和 CEHT 帮会对本工具的宣传和支持。特别感谢 CZ9946 和 AdstarGod 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</source>
+        <oldsource>特别感谢 ACT3 帮会和 CEHT 帮会对本工具的宣传和支持。特别感谢 CZ9946 和 Adstargod 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</oldsource>
+        <translation>Special thanks to World Save Act Elite and CEHT for promoting and supporting this tool. A big thanks to CZ29946 and AdstarGod, who provided significant assistance in the development of this tool! Special thanks to Alice2333 for technical support!</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -820,7 +821,7 @@ AdstarGod Firewall, easy to use
         <translation>Failed to obtain UIAccess permission. Cannot display content over fullscreen games!</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>精英速通工具</source>
         <oldsource>末日三速通工具</oldsource>
         <translation>Elite Speedrun Tool</translation>
@@ -931,7 +932,7 @@ AdstarGod Firewall, easy to use
         <translation>Settings</translation>
     </message>
     <message>
-        <location line="+133"/>
+        <location line="+140"/>
         <source>windowsvista 样式不支持深色模式，其他样式支持深色模式跟随系统</source>
         <translation>windowsvista style does not support dark mode, while other styles support dark mode following the system</translation>
     </message>
@@ -1056,7 +1057,7 @@ AdstarGod Firewall, easy to use
         <translation>Content</translation>
     </message>
     <message>
-        <location line="-114"/>
+        <location line="-121"/>
         <source>最小化到托盘</source>
         <translation>Minimize to the system tray</translation>
     </message>
@@ -1064,6 +1065,12 @@ AdstarGod Firewall, easy to use
         <location line="+7"/>
         <source>启动时自动检查更新</source>
         <translation>Automatically check for update on application startup</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>随 Windows 用户登录自动启动</source>
+        <oldsource>跟随系统启动</oldsource>
+        <translation>Auto-start on Windows login</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -1573,7 +1580,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="SettingDialog.cpp" line="+159"/>
+        <location filename="SettingDialog.cpp" line="+166"/>
         <source>未指定</source>
         <translation>Unspecified</translation>
     </message>

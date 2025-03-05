@@ -373,10 +373,9 @@ signals:
     void crosshairShowHotkeyChanged();
     void crosshairColorChanged();
     void crosshairOpacityChanged();
+    void crosshairAttachWindowTitleChanged();
 
     void excludeFromCaptureChanged();
-
-    void crosshairAttachWindowTitleChanged();
 
 private:
     bool mMinimizeToTray = false;

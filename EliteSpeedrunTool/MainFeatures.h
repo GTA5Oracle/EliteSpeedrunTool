@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QCoreApplication>
 #include <QObject>
 #include <windows.h>
 
@@ -18,11 +19,16 @@ public:
 
     static MainFeatures* instance();
 
+    bool isRunOnLogon();
+    void setRunOnLogon(bool enable);
+
     void terminateGta();
 
     void applyWindowDisplayAffinity(QWidget* widget);
 
 private:
+    QString runOnLogonTaskName = QCoreApplication::applicationName() + " On Logon";
+    QString runOnLogonValue = "\\\"" + QCoreApplication::applicationFilePath().replace("/", "\\") + "\\\"" + " -minimized";
     PNtTerminateProcess NtTerminateProcess;
     PEndTask EndTask;
     bool ntTerminateProcess(DWORD pid);

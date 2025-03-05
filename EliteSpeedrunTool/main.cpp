@@ -33,9 +33,10 @@ int main(int argc, char* argv[])
     QApplication::setQuitOnLastWindowClosed(false);
     QApplication::setWindowIcon(QIcon("://image/ic_icon.png"));
     QApplication::setOrganizationName("SkyD666");
-    QApplication::setApplicationName(QObject::tr("精英速通工具"));
-    QApplication::setApplicationVersion("11.6.1.70");
-    qputenv("ApplicationVersionCode", "20250214");
+    QApplication::setApplicationName("Elite Speedrun Tool");
+    QApplication::setApplicationDisplayName(QObject::tr("精英速通工具"));
+    QApplication::setApplicationVersion("11.7.1.70");
+    qputenv("ApplicationVersionCode", "20250305");
 
     qApp->setStyle(globalData->styleName());
 
@@ -45,8 +46,12 @@ int main(int argc, char* argv[])
 
     CmdObserver o;
     eventBus->addObserver(&o);
-
     MainWindow w;
-    w.show();
+    if (a.arguments().contains("-minimized")) {
+        w.showMinimized();
+    } else {
+        w.show();
+    }
+
     return a.exec();
 }

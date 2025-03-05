@@ -31,6 +31,39 @@ MainFeatures* MainFeatures::instance()
     return mainFeaturesInstance;
 }
 
+bool MainFeatures::isRunOnLogon()
+{
+    QProcess process;
+    process.start("schtasks", { "/query", "/tn", runOnLogonTaskName });
+    if (!process.waitForStarted()) {
+        qDebug() << "Failed to start process";
+        return false;
+    }
+    process.waitForReadyRead();
+    if (!process.waitForFinished()) {
+        qDebug() << "Failed to finish process:" << process.readAllStandardOutput();
+        return false;
+    }
+    QString output = process.readAllStandardOutput();
+    qInfo() << output;
+    return output.contains(runOnLogonTaskName);
+}
+
+void MainFeatures::setRunOnLogon(bool enable)
+{
+    QProcess process;
+    if (enable) {
+        auto command = "schtasks /create /tn \""
+            + runOnLogonTaskName + "\" /tr " + "\""
+            + runOnLogonValue + "\"" + " /sc ONLOGON /RL HIGHEST /F";
+        WinExec(command.toLocal8Bit().toStdString().c_str(), SW_HIDE);
+    } else {
+        auto command = "schtasks /delete /tn \"" + runOnLogonTaskName + "\" /F";
+        WinExec(command.toLocal8Bit().toStdString().c_str(), SW_HIDE);
+    }
+    qDebug() << "AutoStart with Admin set to:" << enable;
+}
+
 void MainFeatures::terminateGta()
 {
     const HWND hwnd = memoryUtil->getGtaWindowHwnd();
@@ -52,6 +85,7 @@ void MainFeatures::terminateGta()
 
     if (!result) {
         WinExec("taskkill /f /t /im GTA5.exe", SW_HIDE);
+        WinExec("taskkill /f /t /im GTA5_Enhanced.exe", SW_HIDE);
         qWarning("Using taskkill command to terminate GTA5.exe");
     }
     CloseGameEvent event;

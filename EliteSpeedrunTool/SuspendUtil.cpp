@@ -37,6 +37,7 @@ void SuspendUtil::suspendProcess()
         acceptEula();
     }
     WinExec(".\\external\\PSTools\\pssuspend.exe GTA5.exe", SW_HIDE);
+    WinExec(".\\external\\PSTools\\pssuspend.exe GTA5_Enhanced.exe", SW_HIDE);
 }
 
 void SuspendUtil::resumeProcess()
@@ -45,6 +46,7 @@ void SuspendUtil::resumeProcess()
         acceptEula();
     }
     WinExec(".\\external\\PSTools\\pssuspend.exe -r GTA5.exe", SW_HIDE);
+    WinExec(".\\external\\PSTools\\pssuspend.exe -r GTA5_Enhanced.exe", SW_HIDE);
 }
 
 void SuspendUtil::suspendAndResumeProcess(long long durationMs, std::function<void(void)> onResumed)

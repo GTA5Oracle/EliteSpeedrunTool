@@ -2,6 +2,7 @@
 #include "GlobalData.h"
 #include "ImageUtil.h"
 #include "LanguageUtil.h"
+#include "MainFeatures.h"
 #include "event/CmdEventHelper.h"
 #include "event/cmd/CmdSequenceWizard.h"
 #include "net/NetworkAdapterUtil.h"
@@ -63,6 +64,12 @@ void SettingDialog::initGeneralSettings()
     ui.cbMinimizeToTray->setChecked(globalData->minimizeToTray());
     connect(ui.cbMinimizeToTray, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->setMinimizeToTray(state == Qt::Checked);
+    });
+
+    // Run on logon
+    ui.cbRunOnLogon->setChecked(mainFeatures->isRunOnLogon());
+    connect(ui.cbRunOnLogon, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
+        mainFeatures->setRunOnLogon(state == Qt::Checked);
     });
 
     // Auto check update

@@ -46,7 +46,7 @@
       <enum>QFrame::Shadow::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>8</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -72,8 +72,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>246</width>
-            <height>241</height>
+            <width>529</width>
+            <height>498</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -88,6 +88,13 @@
             <widget class="QCheckBox" name="cbAutoCheckUpdate">
              <property name="text">
               <string>启动时自动检查更新</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbRunOnLogon">
+             <property name="text">
+              <string>随 Windows 用户登录自动启动</string>
              </property>
             </widget>
            </item>
@@ -2191,8 +2198,8 @@ C:\Program Files (x86)\nn\nn.exe</string>
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-105</y>
-            <width>519</width>
+            <y>0</y>
+            <width>246</width>
             <height>603</height>
            </rect>
           </property>
