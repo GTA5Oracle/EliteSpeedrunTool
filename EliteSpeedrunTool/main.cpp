@@ -5,6 +5,7 @@
 #include "UiAccessUtil.h"
 #include "event/EventBus.h"
 #include "event/observer/CmdObserver.h"
+#include "windows.h"
 
 #include <QApplication>
 #include <QIcon>
@@ -19,6 +20,8 @@ int main(int argc, char* argv[])
     qInstallMessageHandler(myMessageHandler);
 
     QApplication a(argc, argv);
+
+    SetCurrentDirectoryW(a.applicationDirPath().toStdWString().c_str());
 
 #ifndef QT_DEBUG
     if (ERROR_SUCCESS != uiAccessUtil->prepareForUIAccess()) {
@@ -35,8 +38,8 @@ int main(int argc, char* argv[])
     QApplication::setOrganizationName("SkyD666");
     QApplication::setApplicationName("Elite Speedrun Tool");
     QApplication::setApplicationDisplayName(QObject::tr("精英速通工具"));
-    QApplication::setApplicationVersion("11.7.1.70");
-    qputenv("ApplicationVersionCode", "20250305");
+    QApplication::setApplicationVersion("11.8.1.70");
+    qputenv("ApplicationVersionCode", "20250307");
 
     qApp->setStyle(globalData->styleName());
 

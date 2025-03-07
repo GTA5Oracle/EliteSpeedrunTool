@@ -147,6 +147,10 @@ void HotkeyUtil::keyDown(DWORD key)
                 hotkeySeqMap->sendInput();
                 SetForegroundWindow(gtaHwnd);
                 hotkeyRedirector->hide();
+                SetParent(hwnd, nullptr);
+                if (globalData->debugMode()) {
+                    qDebug() << "Hotkey mapped";
+                }
                 return;
             } else {
                 qInfo() << "keyDown: This hotkey is not registered in the system!";

@@ -816,7 +816,7 @@ AdstarGod Firewall, easy to use
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="+25"/>
+        <location filename="main.cpp" line="+28"/>
         <source>获取 UIAccess 权限失败，无法在全屏的游戏上显示内容！</source>
         <translation>Failed to obtain UIAccess permission. Cannot display content over fullscreen games!</translation>
     </message>
