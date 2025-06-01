@@ -1,9 +1,8 @@
 #include "NetworkAdapterUtil.h"
 #include <QDebug>
-#include <Wbemidl.h>
+#include <QtConcurrent>
 #include <cfgmgr32.h>
 #include <devguid.h>
-#include <setupapi.h>
 
 Q_GLOBAL_STATIC(NetworkAdapterUtil, networkAdapterUtilInstance)
 
@@ -111,45 +110,16 @@ bool NetworkAdapterUtil::setNetworkAdaptersEnabled(QList<QString> deviceIds, boo
         return false;
     }
 
-    SP_DEVINFO_DATA deviceInfoData;
-    deviceInfoData.cbSize = sizeof(SP_DEVINFO_DATA);
     DWORD deviceIndex = 0;
     bool success = true;
-
+    QList<QFuture<bool>> futures = {};
     for (const auto& id : deviceIds) {
-        if (!SetupDiOpenDeviceInfoA(deviceInfoSet, id.toStdString().c_str(), nullptr, 0, &deviceInfoData)) {
-            qCritical() << "Failed to open device with instance ID: " << id;
-            SetupDiDestroyDeviceInfoList(deviceInfoSet);
-            success = false;
-            break;
-        }
-
-        // 准备禁用设备的属性
-        SP_PROPCHANGE_PARAMS propChangeParams;
-        propChangeParams.ClassInstallHeader.cbSize = sizeof(SP_CLASSINSTALL_HEADER);
-        propChangeParams.ClassInstallHeader.InstallFunction = DIF_PROPERTYCHANGE;
-        propChangeParams.StateChange = enabled ? DICS_ENABLE : DICS_DISABLE;
-        propChangeParams.Scope = DICS_FLAG_GLOBAL;
-        propChangeParams.HwProfile = 0;
-
-        // 设置禁用参数
-        if (!SetupDiSetClassInstallParams(deviceInfoSet, &deviceInfoData,
-                (SP_CLASSINSTALL_HEADER*)&propChangeParams, sizeof(propChangeParams))) {
-            qCritical() << "Failed to set class install parameters.";
-            SetupDiDestroyDeviceInfoList(deviceInfoSet);
-            success = false;
-            break;
-        }
-
-        // 调用类安装程序执行禁用操作
-        if (!SetupDiCallClassInstaller(DIF_PROPERTYCHANGE, deviceInfoSet, &deviceInfoData)) {
-            qCritical() << "Failed to disable device with instance ID: " << id;
-            SetupDiDestroyDeviceInfoList(deviceInfoSet);
-            success = false;
-            break;
-        }
+        futures += QtConcurrent::run(&NetworkAdapterUtil::setSingleNetworkAdapterEnabled, this, deviceInfoSet, id, enabled);
     }
 
+    for (auto& future : futures) {
+        success &= future.result();
+    }
     // 清理设备信息集合
     SetupDiDestroyDeviceInfoList(deviceInfoSet);
     return success;
@@ -202,4 +172,40 @@ void NetworkAdapterUtil::initNetworkAdapterGuid()
 
     // 清理资源
     SetupDiDestroyDeviceInfoList(hDevInfo);
+}
+
+bool NetworkAdapterUtil::setSingleNetworkAdapterEnabled(HDEVINFO deviceInfoSet, QString deviceId, bool enabled)
+{
+    SP_DEVINFO_DATA deviceInfoData;
+    deviceInfoData.cbSize = sizeof(SP_DEVINFO_DATA);
+    if (!SetupDiOpenDeviceInfoA(deviceInfoSet, deviceId.toStdString().c_str(), nullptr, 0, &deviceInfoData)) {
+        qCritical() << "Failed to open device with instance ID: " << deviceId;
+        SetupDiDestroyDeviceInfoList(deviceInfoSet);
+        return false;
+    }
+
+    // 准备禁用设备的属性
+    SP_PROPCHANGE_PARAMS propChangeParams;
+    propChangeParams.ClassInstallHeader.cbSize = sizeof(SP_CLASSINSTALL_HEADER);
+    propChangeParams.ClassInstallHeader.InstallFunction = DIF_PROPERTYCHANGE;
+    propChangeParams.StateChange = enabled ? DICS_ENABLE : DICS_DISABLE;
+    propChangeParams.Scope = DICS_FLAG_GLOBAL;
+    propChangeParams.HwProfile = 0;
+
+    // 设置禁用参数
+    if (!SetupDiSetClassInstallParams(deviceInfoSet, &deviceInfoData,
+            (SP_CLASSINSTALL_HEADER*)&propChangeParams, sizeof(propChangeParams))) {
+        qCritical() << "Failed to set class install parameters.";
+        SetupDiDestroyDeviceInfoList(deviceInfoSet);
+        return false;
+    }
+
+    // 调用类安装程序执行禁用操作
+    if (!SetupDiCallClassInstaller(DIF_PROPERTYCHANGE, deviceInfoSet, &deviceInfoData)) {
+        qCritical() << "Failed to disable device with instance ID: " << deviceId;
+        SetupDiDestroyDeviceInfoList(deviceInfoSet);
+        return false;
+    }
+
+    return true;
 }

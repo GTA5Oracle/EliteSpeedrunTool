@@ -5,7 +5,6 @@
 #include "UiAccessUtil.h"
 #include "event/EventBus.h"
 #include "event/observer/CmdObserver.h"
-#include "windows.h"
 
 #include <QApplication>
 #include <QIcon>
@@ -38,8 +37,8 @@ int main(int argc, char* argv[])
     QApplication::setOrganizationName("SkyD666");
     QApplication::setApplicationName("Elite Speedrun Tool");
     QApplication::setApplicationDisplayName(QObject::tr("精英速通工具"));
-    QApplication::setApplicationVersion("11.8.1.70");
-    qputenv("ApplicationVersionCode", "20250307");
+    QApplication::setApplicationVersion("11.9.1.70");
+    qputenv("ApplicationVersionCode", "20250601");
 
     qApp->setStyle(globalData->styleName());
 

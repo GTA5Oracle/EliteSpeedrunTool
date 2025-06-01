@@ -68,6 +68,7 @@ void MainFeatures::terminateGta()
 {
     const HWND hwnd = memoryUtil->getGtaWindowHwnd();
     const DWORD gamePid = memoryUtil->getPid(hwnd);
+    const QString gameProcessName = memoryUtil->getProcessName(gamePid);
 
     QFuture<bool> futures[] = {
         QtConcurrent::run(&MainFeatures::ntTerminateProcess, this, gamePid),
@@ -90,6 +91,15 @@ void MainFeatures::terminateGta()
     }
     CloseGameEvent event;
     eventBus->send(&event);
+    if (!gameProcessName.isEmpty()) {
+        if (gameProcessName.contains("Enhanced", Qt::CaseInsensitive)) {
+            CloseEnhancedGameEvent event;
+            eventBus->send(&event);
+        } else {
+            CloseLegacyGameEvent event;
+            eventBus->send(&event);
+        }
+    }
 }
 
 void MainFeatures::applyWindowDisplayAffinity(QWidget* widget)

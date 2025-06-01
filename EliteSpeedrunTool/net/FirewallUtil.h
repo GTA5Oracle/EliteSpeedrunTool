@@ -1,12 +1,16 @@
 #pragma once
 
+#include "GlobalData.h"
+#include "net/FirewallRule.h"
+#include <QApplication>
 #include <QList>
 #include <netfw.h>
 #include <windows.h>
 
 #define firewallUtil (FirewallUtil::instance())
 
-class FirewallUtil {
+class FirewallUtil : QObject {
+    Q_OBJECT
 public:
     FirewallUtil();
 
@@ -15,6 +19,7 @@ public:
     bool firewallIsEnabled(long& enabledTypes);
 
     QList<INetFwRule*> getNetFwRule();
+    bool deleteNetFwRuleByGroup();
 
     bool setNetFwRuleEnabled(bool enabled);
 
@@ -24,17 +29,24 @@ public:
     bool getIsEnabled();
 
 private:
+    void initRuleListListener();
+
     HRESULT initINetFwPolicy2(INetFwPolicy2** ppNetFwPolicy2);
 
-    INetFwRule* getNetFwRule(NET_FW_RULE_DIRECTION direction);
-    INetFwRule* getCachedNetFwRule(NET_FW_RULE_DIRECTION direction);
+    INetFwRule* getNetFwRule(FirewallRule* rule);
+    INetFwRule* getCachedNetFwRule(FirewallRule* rule);
 
-    bool setNetFwRuleEnabled(bool enabled, NET_FW_RULE_DIRECTION direction);
+    QString getRuleName(FirewallRule* rule);
+
+    BSTR getBstrRuleNames(FirewallRule* rule);
 
 private:
     bool inited = false;
 
     bool isEnabled = false;
+
+    FirewallRule defaultRule = FirewallRule("", globalData->mDefaultFirewallDirection, globalData->mDefaultFirewallProtocol);
+    BSTR bstrDefaultRuleName = nullptr;
 
     HRESULT hrComInit = S_OK;
 
@@ -44,8 +56,7 @@ private:
 
     INetFwRules* pFwRules = nullptr;
 
-    BSTR bstrRuleInName;
-    BSTR bstrRuleOutName;
+    QMap<FirewallRule*, BSTR> bstrRuleNames;
 
     BSTR bstrRuleLPorts;
 

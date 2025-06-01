@@ -49,12 +49,10 @@ QHotkeyMap::QHotkeyMap(QKeySequence keySeq, QObject* parent)
     if (qModifiers & Qt::AltModifier)
         nativeModifiers << VK_MENU;
 
-    ZeroMemory(&downInput, sizeof(INPUT));
     downInput.type = INPUT_KEYBOARD;
     downInput.ki.wVk = nativeKeycode;
     downInput.ki.wScan = MapVirtualKey(nativeKeycode, MAPVK_VK_TO_VSC);
 
-    ZeroMemory(&upInput, sizeof(INPUT));
     upInput.type = INPUT_KEYBOARD;
     upInput.ki.wVk = nativeKeycode;
     upInput.ki.wScan = MapVirtualKey(nativeKeycode, MAPVK_VK_TO_VSC);
@@ -77,6 +75,8 @@ void QHotkeyMap::sendInput()
 }
 
 // -------------------------------
+HHOOK HotkeyUtil::keyboardHook = nullptr;
+
 HotkeyUtil::HotkeyUtil(QWidget* parent)
     : QWidget { parent }
 {
@@ -90,6 +90,13 @@ HotkeyUtil::HotkeyUtil(QWidget* parent)
 
     hotkeyRedirector->show();
     hotkeyRedirector->hide();
+
+    initLowLevelKeyboardHook();
+
+    // connect(&pgup, &QHotkey::activated, this, [this]() {
+    //     pgupMap.sendInput();
+    // });
+    // registerHotkey(&pgup);
 }
 
 HotkeyUtil* HotkeyUtil::instance()
@@ -176,7 +183,7 @@ void HotkeyUtil::keyDown(DWORD key)
             hotkeySeq->emitSignal();
         } else {
             qInfo() << "This key already pressed, just skip";
-            break;
+            continue;
         }
     }
 }
@@ -234,6 +241,48 @@ void HotkeyUtil::initHotkeyMaps()
     }
 }
 
+void HotkeyUtil::installKeyboardHook()
+{
+    if (!keyboardHook) {
+        keyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, lowLevelKeyboardProc, GetModuleHandle(nullptr), 0);
+        if (!keyboardHook) {
+            qCritical("Failed to install hook!");
+        }
+    }
+}
+
+void HotkeyUtil::uninstallKeyboardHook()
+{
+    if (keyboardHook) {
+        UnhookWindowsHookEx(keyboardHook);
+        keyboardHook = nullptr;
+    }
+}
+
+LRESULT HotkeyUtil::lowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
+{
+    if (nCode == HC_ACTION) {
+        KBDLLHOOKSTRUCT* pKeyInfo = (KBDLLHOOKSTRUCT*)lParam;
+        if (pKeyInfo->vkCode == VK_PRIOR) {
+            // Check Extended
+            if (!(pKeyInfo->flags & LLKHF_EXTENDED)) {
+                INPUT input = { 0 };
+                input.type = INPUT_KEYBOARD;
+                input.ki.wVk = VK_PRIOR;
+                input.ki.wScan = MapVirtualKeyA(VK_PRIOR, MAPVK_VK_TO_VSC);
+                input.ki.dwFlags = KEYEVENTF_EXTENDEDKEY;
+                if (wParam == WM_KEYUP) {
+                    input.ki.dwFlags |= KEYEVENTF_KEYUP;
+                }
+                SendInput(1, &input, sizeof(INPUT));
+                // Block
+                return 1;
+            }
+        }
+    }
+    return CallNextHookEx(keyboardHook, nCode, wParam, lParam);
+}
+
 void HotkeyUtil::setHotkeyMapEnabled(bool newHotkeyMapEnabled)
 {
     hotkeyMapEnabled = newHotkeyMapEnabled;
@@ -248,6 +297,37 @@ bool HotkeyUtil::isRegisteredInSystem(QKeyCombination key)
         return false;
     } else {
         return true;
+    }
+}
+
+void HotkeyUtil::initLowLevelKeyboardHook()
+{
+    connect(qApp, &QCoreApplication::aboutToQuit, this, [this]() {
+        uninstallKeyboardHook();
+    });
+
+    connect(&reinstallKeyboardHookTimer, &QTimer::timeout, this, [this]() {
+        uninstallKeyboardHook();
+        installKeyboardHook();
+    });
+
+    connect(globalData, &GlobalData::pgUpExtendedChanged, this, [this]() {
+        if (globalData->pgUpExtended()) {
+            installKeyboardHook();
+            if (!reinstallKeyboardHookTimer.isActive()) {
+                reinstallKeyboardHookTimer.start(10000);
+            }
+        } else {
+            if (reinstallKeyboardHookTimer.isActive()) {
+                reinstallKeyboardHookTimer.stop();
+            }
+            uninstallKeyboardHook();
+        }
+    });
+
+    if (globalData->pgUpExtended()) {
+        installKeyboardHook();
+        reinstallKeyboardHookTimer.start(10000);
     }
 }
 
@@ -272,7 +352,9 @@ void HotkeyUtil::processRawInput(LPARAM lParam)
     // Parse RAWINPUT
     if (inputBuffer.header.dwType == RIM_TYPEKEYBOARD) {
         RAWKEYBOARD keyboard = inputBuffer.data.keyboard;
-        if (keyboard.Flags & RI_KEY_BREAK) { // Key Down / Key Up
+        bool isKeyUp = keyboard.Flags & RI_KEY_BREAK;
+
+        if (isKeyUp) {
             keyUp(keyboard.VKey);
         } else {
             keyDown(keyboard.VKey);

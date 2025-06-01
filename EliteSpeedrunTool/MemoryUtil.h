@@ -25,6 +25,10 @@ public:
 
     HANDLE getGtaProcessHandle(DWORD dwDesiredAccess);
 
+    QString getProcessName(DWORD pid);
+
+    bool isEnhanced();
+
 private:
     static MemoryUtil* utilInstance;
 };

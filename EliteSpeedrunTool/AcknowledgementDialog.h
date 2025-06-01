@@ -41,6 +41,7 @@ private:
         "colourpen907",
         "-oll006-",
         "___Ady-sxr___",
+        "安琪拉",
     };
 
     QList<QString> sponsors = {
@@ -72,5 +73,9 @@ private:
         "laosepi1996",
         "dqyxsagain",
         "0528",
+        "柴柴游戏君",
+        "Henry_Li",
+        "因帅被罚五十块",
+        "千棘元婴修士",
     };
 };

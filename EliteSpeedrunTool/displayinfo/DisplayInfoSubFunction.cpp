@@ -35,6 +35,9 @@ QString toString(DisplayInfoSubFunction f)
     case Act3Headshot:
         return "Act3Headshot";
         break;
+    case AutoTimer:
+        return "AutoTimer";
+        break;
     default:
         return "";
     }
@@ -51,6 +54,9 @@ QString defaultRtssOsdText(DisplayInfoSubFunction f)
         break;
     case Act3Headshot:
         return "<P=0,130><C0=FFFF00><S0=170><C0><S0>%1<S><C>";
+        break;
+    case AutoTimer:
+        return "<P=0,100><C0=FFFF00><S0=170><S1=-100><C0><S0>%1:%2.<S><S1>%3<S><C>";
         break;
     default:
         return "%1";

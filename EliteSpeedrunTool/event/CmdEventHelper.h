@@ -24,6 +24,8 @@ private:
     QMap<QString, QString> eventNameMap = {
         qMakePair(QMetaType::fromType<StartEvent>().metaObject()->className(), tr("启动")),
         qMakePair(QMetaType::fromType<QuitEvent>().metaObject()->className(), tr("退出")),
-        qMakePair(QMetaType::fromType<CloseGameEvent>().metaObject()->className(), tr("结束游戏")),
+        qMakePair(QMetaType::fromType<CloseEnhancedGameEvent>().metaObject()->className(), tr("结束增强版游戏")),
+        qMakePair(QMetaType::fromType<CloseLegacyGameEvent>().metaObject()->className(), tr("结束传承版游戏")),
+        qMakePair(QMetaType::fromType<CloseGameEvent>().metaObject()->className(), tr("结束游戏（已废弃）")),
     };
 };

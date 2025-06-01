@@ -14,6 +14,14 @@ class CloseGameEvent : public Event {
     Q_OBJECT
 };
 
+class CloseLegacyGameEvent : public Event {
+    Q_OBJECT
+};
+
+class CloseEnhancedGameEvent : public Event {
+    Q_OBJECT
+};
+
 class FirewallEvent : public Event {
     Q_OBJECT
 public:

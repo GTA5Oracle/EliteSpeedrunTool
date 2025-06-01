@@ -25,8 +25,10 @@ DisplayInfoDialog::DisplayInfoDialog(QWidget* parent)
     items = {
         qMakePair(displayInfoSubFunctions[DisplayInfoSubFunction::Firewall], ui->labFirewall),
         qMakePair(displayInfoSubFunctions[DisplayInfoSubFunction::Timer], ui->labTimer),
+        // qMakePair(displayInfoSubFunctions[DisplayInfoSubFunction::AutoTimer], ui->labAutoTimer),
         qMakePair(displayInfoSubFunctions[DisplayInfoSubFunction::Act3Headshot], ui->labAct3Headshot),
     };
+    ui->labAutoTimer->setVisible(false);
 
     setTouchable();
     setChildrenTransparentForMouseEvents();
@@ -180,6 +182,8 @@ int DisplayInfoDialog::widgetCount()
 
 void DisplayInfoDialog::setFirewall(QVariant v)
 {
+    ui->labFirewall->setVisible(globalData->displayInfoSubFunctions()[DisplayInfoSubFunction::Firewall]->display()
+        && (v.toBool() || globalData->firewallAlwaysDisplay()));
     ui->labFirewall->setText(tr("防火墙%1").arg(v.toBool() ? tr("开") : tr("关")));
 }
 
@@ -196,6 +200,21 @@ void DisplayInfoDialog::setTime(QVariant v)
                               .arg(s, 2, 10, QLatin1Char('0'))
                               .arg(QString::number(qMax(5, textSize - 10)))
                               .arg(ms, 2, 10, QLatin1Char('0')));
+}
+
+void DisplayInfoDialog::setAutoTime(QVariant v)
+{
+    auto deltaTime = v.toULongLong();
+    int m = deltaTime / 1000 / 60;
+    int s = (deltaTime / 1000) % 60;
+    int ms = (deltaTime % 1000) / 10;
+    auto textSize = globalData->displayInfoSubFunctions()[DisplayInfoSubFunction::AutoTimer]->textSize();
+    ui->labAutoTimer->setText(timePattern
+                                  .arg(QString::number(textSize))
+                                  .arg(m, 2, 10, QLatin1Char('0'))
+                                  .arg(s, 2, 10, QLatin1Char('0'))
+                                  .arg(QString::number(qMax(5, textSize - 10)))
+                                  .arg(ms, 2, 10, QLatin1Char('0')));
 }
 
 void DisplayInfoDialog::setAct3Headshot(QVariant v)
@@ -281,6 +300,12 @@ void DisplayInfoDialog::initGlobalDataConnects()
     });
     connect(globalData, &GlobalData::displayInfoBackgroundChanged, this, [this]() {
         setDialogBackground();
+    });
+
+    // ==========================
+    connect(globalData, &GlobalData::firewallAlwaysDisplayChanged, this, [this]() {
+        ui->labFirewall->setVisible(globalData->displayInfoSubFunctions()[DisplayInfoSubFunction::Firewall]->display()
+            && (subFuncsData->value(DisplayInfoSubFunction::Firewall).toBool() || globalData->firewallAlwaysDisplay()));
     });
 }
 

@@ -22,6 +22,7 @@ void EventBus::send(Event* event)
     for (auto o = observers.cbegin(), end = observers.cend(); o != end; o++) {
         (*o)->onEvent(event);
     }
+    emit onEvent(event);
 }
 
 void EventBus::addObserver(EventObserver* observer)

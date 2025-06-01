@@ -5,6 +5,7 @@
 #include "MainFeatures.h"
 #include "event/CmdEventHelper.h"
 #include "event/cmd/CmdSequenceWizard.h"
+#include "net/FirewallUtil.h"
 #include "net/NetworkAdapterUtil.h"
 #include <QColorDialog>
 #include <QDesktopServices>
@@ -35,6 +36,7 @@ SettingDialog::SettingDialog(QWidget* parent)
     }
     connect(ui.lwPage, &QListWidget::currentRowChanged, ui.stackedWidget, &QStackedWidget::setCurrentIndex);
 
+    initSpinBoxComboBoxWheelEvent();
     initGeneralSettings();
     initFirewallSettings();
     initNetworkAdaptersSettings();
@@ -56,6 +58,26 @@ SettingDialog::SettingDialog(QWidget* parent)
 
 SettingDialog::~SettingDialog()
 {
+}
+
+bool SettingDialog::eventFilter(QObject* watched, QEvent* event)
+{
+    if (watched->inherits("QAbstractSpinBox") || watched->inherits("QComboBox")) {
+        if (event->type() == QEvent::Wheel) {
+            return true;
+        }
+    }
+    return QDialog::eventFilter(watched, event);
+}
+
+void SettingDialog::initSpinBoxComboBoxWheelEvent()
+{
+    for (auto* sp : findChildren<QAbstractSpinBox*>()) {
+        sp->installEventFilter(this);
+    }
+    for (auto* com : findChildren<QComboBox*>()) {
+        com->installEventFilter(this);
+    }
 }
 
 void SettingDialog::initGeneralSettings()
@@ -225,49 +247,63 @@ void SettingDialog::initFirewallSettings()
         ui.tbFirewallSelectErrorSound,
         [](const QString& fileName) { globalData->setFirewallErrorSound(fileName); });
 
-    // 防火墙针对的exe程序
-    ui.leFirewallAppPath->setText(globalData->firewallAppPath());
-    connect(ui.tbSelectFirewallApp, &QAbstractButton::clicked, this, [=]() {
-        QString fileName = QFileDialog::getOpenFileName(this, tr("选择程序"),
-            globalData->firewallAppPath(), tr("应用程序 (*.exe)"));
+    QMenu* menu = new QMenu(this);
+    QAction* actionSelectExe = menu->addAction(tr("选择程序..."));
+    connect(actionSelectExe, &QAction::triggered, this, [this]() {
+        QString fileName = QFileDialog::getOpenFileName(this, tr("选择程序"), "", tr("应用程序 (*.exe)"));
         if (!fileName.isEmpty()) {
-            ui.leFirewallAppPath->setText(fileName);
-            globalData->setFirewallAppPath(fileName);
+            auto rule = new FirewallRule(fileName, globalData->mDefaultFirewallDirection, globalData->mDefaultFirewallProtocol);
+            ui.twFirewallAppPath->addNewRow(rule);
+            globalData->setFirewallRuleList(QList(globalData->firewallRuleList() << rule));
         }
     });
-    connect(ui.leFirewallAppPath, &QLineEdit::textChanged, this, [=](const QString& text) {
-        globalData->setFirewallAppPath(text);
+    QAction* actionEmpty = menu->addAction(tr("添加路径留空规则"));
+    connect(actionEmpty, &QAction::triggered, this, [this]() {
+        auto rule = new FirewallRule("", globalData->mDefaultFirewallDirection, globalData->mDefaultFirewallProtocol);
+        ui.twFirewallAppPath->addNewRow(rule);
+        globalData->setFirewallRuleList(QList(globalData->firewallRuleList() << rule));
     });
+    ui.tbSelectFirewallApp->setMenu(menu);
+    ui.tbSelectFirewallApp->setPopupMode(QToolButton::ToolButtonPopupMode::InstantPopup);
 
-    // 防火墙方向
-    {
-        QList<QPair<int, QString>> firewallDirections = {
-            std::pair(0, tr("入站+出站")),
-            std::pair(NET_FW_RULE_DIR_IN, tr("入站")),
-            std::pair(NET_FW_RULE_DIR_OUT, tr("出站")),
-        };
-        int currentIndex = 0, i = 0;
-        for (auto& direction : firewallDirections) {
-            ui.cbFirewallDirection->addItem(direction.second, direction.first);
-            if (direction.first == globalData->firewallDirection()) {
-                currentIndex = i;
-            }
-            i++;
-        }
-        connect(ui.cbFirewallDirection, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [=](int index) {
-                globalData->setFirewallDirection(ui.cbFirewallDirection->itemData(index).toInt());
-            });
-        ui.cbFirewallDirection->setCurrentIndex(currentIndex);
+    for (auto& rule : globalData->firewallRuleList()) {
+        ui.twFirewallAppPath->addNewRow(rule);
     }
+    connect(ui.twFirewallAppPath, &FirewallPathTableWidget::onDelete, this, [](FirewallRule* rule) {
+        auto newList = QList(globalData->firewallRuleList());
+        for (int i = newList.size() - 1; i >= 0; --i) {
+            if (newList[i] == rule) {
+                delete rule;
+                newList.removeAt(i);
+                break;
+            }
+        }
+        globalData->setFirewallRuleList(newList);
+    });
+    connect(ui.twFirewallAppPath, &FirewallPathTableWidget::onChanged, this, [](FirewallRule* oldRule, FirewallRule* newRule) {
+        auto newList = QList(globalData->firewallRuleList());
+        for (int i = newList.size() - 1; i >= 0; --i) {
+            if (newList[i] == oldRule) {
+                delete oldRule;
+                newList.removeAt(i);
+                break;
+            }
+        }
+        globalData->setFirewallRuleList(newList << newRule);
+    });
+    ui.tbSelectFirewallApp->setEnabled(!firewallUtil->getIsEnabled());
+    ui.twFirewallAppPath->setEnabled(!firewallUtil->getIsEnabled());
+    ui.labFirewallRuleEnabledWarning->setVisible(firewallUtil->getIsEnabled());
 
     // 防火墙规则协议
-    ui.sbFirewallProtocol->setValue(globalData->firewallProtocol());
-    connect(ui.sbFirewallProtocol, &QSpinBox::valueChanged, this, [=](int value) {
-        globalData->setFirewallProtocol(value);
-    });
     connect(ui.tbFirewallProtocolWiki, &QAbstractButton::clicked, this, [=]() {
         QDesktopServices::openUrl(QUrl("https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml"));
+    });
+
+    // Firewall rules' state always display
+    ui.cbFirewallAlwaysDisplay->setChecked(globalData->firewallAlwaysDisplay());
+    connect(ui.cbFirewallAlwaysDisplay, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
+        globalData->setFirewallAlwaysDisplay(state == Qt::Checked);
     });
 }
 
@@ -532,6 +568,7 @@ void SettingDialog::initDisplayInfoSettings()
     for (auto f : globalData->funcs()) {
         ui.cbDisplayInfoFunction->addItem(DisplayInfoSubFunctionUtil::toDisplayString(f), f);
     }
+    ui.cbDisplayInfoFunction->removeItem(2); // Remove auto timer
     connect(ui.cbDisplayInfoFunction, QOverload<int>::of(&QComboBox::currentIndexChanged),
         this, [=](int index) {
             currentSubFunctionIndex = index;
@@ -569,6 +606,7 @@ void SettingDialog::initRtssSettings()
     for (auto f : globalData->funcs()) {
         ui.cbRtssSubFunction->addItem(DisplayInfoSubFunctionUtil::toDisplayString(f), f);
     }
+    ui.cbRtssSubFunction->removeItem(2); // Remove auto timer
     connect(ui.cbRtssSubFunction, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {
         currentRtssSubFunctionIndex = index;
         currentRtssSubFunction = ui.cbRtssSubFunction->itemData(index).value<DisplayInfoSubFunction>();

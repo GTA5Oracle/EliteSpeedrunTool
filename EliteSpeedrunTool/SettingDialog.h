@@ -11,6 +11,8 @@ public:
     explicit SettingDialog(QWidget* parent = nullptr);
     ~SettingDialog();
 
+    bool eventFilter(QObject* watched, QEvent* event);
+
     QString pageName[14] = {
         tr("常规"),
         tr("信息展示"),
@@ -45,6 +47,8 @@ public:
     };
 
 protected:
+    void initSpinBoxComboBoxWheelEvent();
+
     void initGeneralSettings();
 
     void initSoundWidgets(

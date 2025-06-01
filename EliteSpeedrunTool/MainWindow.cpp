@@ -14,10 +14,12 @@
 #include "act3headshot/RpRecognizeUtil.h"
 #include "displayInfo/CrosshairDialog.h"
 #include "displayinfo/RtssUtil.h"
+#include "event/Event.h"
 #include "event/EventBus.h"
 #include "net/FirewallUtil.h"
 #include "net/HttpServerUtil.h"
 #include "net/NetworkAdapterUtil.h"
+#include "pcsettings/AutoTimer.h"
 #include <MMSystem.h>
 #include <QBoxLayout>
 #include <QClipboard>
@@ -32,7 +34,6 @@
 #include <QPalette>
 #include <QState>
 #include <QUrl>
-#include <event/Event.h>
 
 const QString MainWindow::hotkeyStatePattern = "🧱%1, %2  📶%3, %4  ⏱️%5, %6, %7  👤%8  ❌%9";
 
@@ -42,6 +43,7 @@ MainWindow::MainWindow(QWidget* parent)
     ui.setupUi(this);
 
     connect(qApp, &QCoreApplication::aboutToQuit, this, [=]() {
+        firewallUtil->setNetFwRuleEnabled(false);
         QuitEvent quitEvent;
         eventBus->send(&quitEvent);
         HttpServerController::instance()->stop();
@@ -80,6 +82,9 @@ MainWindow::MainWindow(QWidget* parent)
     initAct3Headshot();
 
     initCrosshair();
+
+    // initAutoTimer();
+    ui.tabWidget->setTabVisible(2, false);
 
     initExcludeFromCapture();
 
@@ -540,7 +545,7 @@ void MainWindow::initFirewall()
             eventBus->send(&event);
             subFuncsData->insert(DisplayInfoSubFunction::Firewall, checked);
 
-            ui.btnStartFirewall->setText(checked ? tr("已开启") : tr("已关闭"));
+            ui.btnStartFirewall->setText(checked ? tr("已启用") : tr("已禁用"));
             QPalette palette = labFirewallState.palette();
             palette.setColor(QPalette::Window, checked ? Qt::green : Qt::red);
             labFirewallState.setPalette(palette);
@@ -650,11 +655,12 @@ void MainWindow::initSuspendProcess()
     connect(globalData, &GlobalData::suspendAndResumeHotkeyChanged, this, [this]() {
         ui.labSuspendProcessHotkey->setText(globalData->suspendAndResumeHotkey());
     });
+    connect(suspendUtil, &SuspendUtil::onResume, this, [this]() {
+        ui.btnSuspendProcess->setChecked(false);
+    });
     connect(ui.btnSuspendProcess, &QAbstractButton::clicked, this, [this]() {
-        ui.btnSuspendProcess->setEnabled(false);
-        suspendUtil->suspendAndResumeProcess(globalData->suspendAndResumeDuration(), [this]() {
-            ui.btnSuspendProcess->setEnabled(true);
-        });
+        ui.btnSuspendProcess->setChecked(true);
+        suspendUtil->suspendAndResumeProcess(globalData->suspendAndResumeDuration());
     });
 }
 
@@ -687,7 +693,7 @@ void MainWindow::showDisplayInfo()
             //            HttpServerController::instance()->sendNewData(QTime::currentTime().second());
         }
     });
-    topMostTimer->start(10000);
+    // topMostTimer->start(60000);
 }
 
 void MainWindow::hideDisplayInfo()
@@ -710,6 +716,24 @@ void MainWindow::initCrosshair()
     };
     connect(globalData, &GlobalData::crosshairShowChanged, this, callback);
     callback();
+}
+
+void MainWindow::initAutoTimer()
+{
+    connect(ui.btnStartAutoTimer, &QAbstractButton::toggled, this, [this](bool checked) {
+        ui.btnStartAutoTimer->setText(checked ? tr("停止计时") : tr("开始计时"));
+        if (checked) {
+            autoTimer->start();
+        } else {
+            autoTimer->stop();
+        }
+    });
+    connect(autoTimer, &AutoTimer::onUpdate, this, [this](long long time) {
+        unsigned int m, s, ms;
+        QString t = getFormattedTime(time, &m, &s, &ms);
+        ui.labAutoTimer->setText(t);
+        subFuncsData->insert(DisplayInfoSubFunction::AutoTimer, time);
+    });
 }
 
 void MainWindow::startTimer(bool isContinue)
@@ -924,7 +948,7 @@ void MainWindow::initMusic()
             BASS_MusicFree(music);
             music = 0;
         } else {
-            QFile xmFile = QDir("./sound").absolutePath() + QDir::separator() + "halftime.xm";
+            QFile xmFile = QDir("./sound").absolutePath() + QDir::separator() + "Toilet story 4 u.xm";
             music = BASS_MusicLoad(FALSE, xmFile.fileName().replace("/", "\\").toLocal8Bit().toStdString().c_str(),
                 0, 0, BASS_MUSIC_POSRESET | BASS_SAMPLE_LOOP | BASS_SAMPLE_FLOAT, 1);
             if (music) {

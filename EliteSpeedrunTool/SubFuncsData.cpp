@@ -7,6 +7,7 @@ SubFuncsData::SubFuncsData()
 {
     map = {
         qMakePair(DisplayInfoSubFunction::Timer, 0ull),
+        qMakePair(DisplayInfoSubFunction::AutoTimer, 0ull),
         qMakePair(DisplayInfoSubFunction::Firewall, false),
         qMakePair(DisplayInfoSubFunction::Act3Headshot, 0),
     };

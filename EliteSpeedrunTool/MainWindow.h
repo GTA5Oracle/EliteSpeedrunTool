@@ -65,6 +65,8 @@ protected:
 
     void initCrosshair();
 
+    void initAutoTimer();
+
     void startTimer(bool isContinue = false);
 
     void pauseTimer();
@@ -129,6 +131,8 @@ private:
     QHotkey* act3HeadshotStopHotkey = nullptr;
 
     QHotkey* closeGameImmediatelyHotkey = nullptr;
+
+    QHotkey pgup = QHotkey(QKeySequence(Qt::Key_PageUp), true, this);
 
     QLabel labCurrentHotkey = QLabel(this);
     QLabel labFirewallState = QLabel(this);

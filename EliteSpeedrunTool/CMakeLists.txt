@@ -39,6 +39,8 @@ set(PROJECT_SOURCES
         net/FirewallUtil.h net/FirewallUtil.cpp
         net/HttpServerUtil.h net/HttpServerUtil.cpp
         net/NetworkAdapterUtil.h net/NetworkAdapterUtil.cpp
+        net/FirewallPathTableWidget.h net/FirewallPathTableWidget.cpp
+        net/FirewallRule.h
         displayinfo/DisplayInfoDialog.h displayinfo/DisplayInfoDialog.cpp displayinfo/DisplayInfoDialog.ui
         displayinfo/DisplayInfoSubFunction.h displayinfo/DisplayInfoSubFunction.cpp
         displayinfo/RtssUtil.h displayinfo/RtssUtil.cpp
@@ -63,6 +65,8 @@ set(PROJECT_SOURCES
         event/cmd/DelayCmdWizard.h event/cmd/DelayCmdWizard.cpp
         event/cmd/ShutdownCmdWizard.h event/cmd/ShutdownCmdWizard.cpp
         event/cmd/RunExeCmdWizard.h event/cmd/RunExeCmdWizard.cpp
+        pcsettings/PcSettingsUtil.h pcsettings/PcSettingsUtil.cpp
+        pcsettings/AutoTimer.h pcsettings/AutoTimer.cpp
         resource.qrc
 )
 
@@ -123,6 +127,7 @@ endif()
 
 target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/WinMM.Lib)
 target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/setupapi.lib)
+target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/wbemuuid.lib)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../DiscordGameSDK ${CMAKE_CURRENT_BINARY_DIR}/DiscordGameSDK)
 include_directories(../DiscordGameSDK)

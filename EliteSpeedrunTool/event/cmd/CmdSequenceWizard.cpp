@@ -200,8 +200,11 @@ void CmdListPage::initAddCmdMenu()
             QString text = QInputDialog::getText(nullptr, "", "请输入一行命令", QLineEdit::Normal, "", &ok);
             return ok ? qMakePair(text, "") : qMakePair("", "");
         }),
-        qMakePair(tr("通过 Steam 启动 GTA5"), []() { return qMakePair("start \"steam://rungameid/271590\";", tr("通过 Steam 启动 GTA5")); }),
-        qMakePair(tr("通过 Epic 启动 GTA5"), []() { return qMakePair("start \"com.epicgames.launcher://apps/0584d2013f0149a791e7b9bad0eec102%3A6e563a2c0f5f46e3b4e88b5f4ed50cca%3A9d2d0eb64d5c44529cece33fe2a46482?action=launch&silent=true\";", tr("通过 Epic 启动 GTA5")); }),
+        qMakePair(tr("通过 Steam 启动 GTA5 增强版"), []() { return qMakePair("start \"steam://rungameid/3240220\";", tr("通过 Steam 启动 GTA5 增强版")); }),
+        qMakePair(tr("通过 Steam 启动 GTA5 传承版"), []() { return qMakePair("start \"steam://rungameid/271590\";", tr("通过 Steam 启动 GTA5 传承版")); }),
+        qMakePair(tr("通过 Epic 启动 GTA5 增强版"), []() { return qMakePair("start \"com.epicgames.launcher://apps/b0cd075465c44f87be3b505ac04a2e46%3A122e5e90b7b8424d930be8bc1a7e05fb%3A8769e24080ea413b8ebca3f1b8c50951?action=launch&silent=true\";", tr("通过 Epic 启动 GTA5 增强版")); }),
+        qMakePair(tr("通过 Epic 启动 GTA5 传承版"), []() { return qMakePair("start \"com.epicgames.launcher://apps/0584d2013f0149a791e7b9bad0eec102%3A6e563a2c0f5f46e3b4e88b5f4ed50cca%3A9d2d0eb64d5c44529cece33fe2a46482?action=launch&silent=true\";", tr("通过 Epic 启动 GTA5 传承版")); }),
+        qMakePair(tr("结束 Social Club"), []() { return qMakePair("Stop-Process -Name \"SocialClubHelper\" -Force;", tr("结束 Social Club")); }),
         qMakePair(tr("启动 MSI Afterburner"), []() { return qMakePair("start \"${env:ProgramFiles(x86)}/MSI Afterburner/MSIAfterburner.exe\";", tr("启动 MSI Afterburner")); }),
         qMakePair(tr("延时..."), []() {
             DelayCmdWizard w;

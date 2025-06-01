@@ -33,4 +33,5 @@ public:
 private:
     QSet<EventObserver*> observers;
 signals:
+    void onEvent(Event* event);
 };

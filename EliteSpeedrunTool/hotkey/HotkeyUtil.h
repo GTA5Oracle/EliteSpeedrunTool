@@ -3,6 +3,7 @@
 #include "HotkeyRedirector.h"
 #include <QKeySequence>
 #include <QList>
+#include <QTimer>
 #include <QWidget >
 #include <dinput.h>
 #include <windows.h>
@@ -36,8 +37,8 @@ public:
     void sendInput();
 
 private:
-    INPUT downInput;
-    INPUT upInput;
+    INPUT downInput = { 0 };
+    INPUT upInput = { 0 };
 };
 
 class HotkeyUtil : public QWidget {
@@ -65,11 +66,18 @@ public:
 
     bool isRegisteredInSystem(QKeyCombination key);
 
+    void initLowLevelKeyboardHook();
+
 protected:
     bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
     void closeEvent(QCloseEvent* event) override;
 
     void initHotkeyMaps();
+
+    void installKeyboardHook();
+    void uninstallKeyboardHook();
+    static HHOOK keyboardHook;
+    static LRESULT CALLBACK lowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
 
 private:
     short modifiers;
@@ -82,4 +90,6 @@ private:
     bool isModifier(DWORD key);
 
     HotkeyRedirector* hotkeyRedirector = new HotkeyRedirector(nullptr);
+
+    QTimer reinstallKeyboardHookTimer = QTimer(this);
 };

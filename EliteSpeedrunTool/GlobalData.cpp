@@ -141,6 +141,7 @@ void GlobalData::readSettings()
     setMinimizeToTray(settings.value("MinimizeToTray", mMinimizeToTray).toBool());
     setTopMostWindowHotkey(settings.value("TopMostWindowHotkey", mTopMostWindowHotkey).toString());
     setExcludeFromCapture(settings.value("ExcludeFromCapture", mExcludeFromCapture).toBool());
+    setPgUpExtended(settings.value("PgUpExtended", mPgUpExtended).toBool());
     settings.endGroup();
 
     settings.beginGroup("DisplayInfo");
@@ -194,9 +195,8 @@ void GlobalData::readSettings()
     setFirewallStopSound(settings.value("FirewallStopSound", mFirewallStopSound).toString());
     setFirewallErrorSound(settings.value("FirewallErrorSound", mFirewallErrorSound).toString());
     setFirewallPlaySound(settings.value("FirewallPlaySound", mFirewallPlaySound).toBool());
-    setFirewallAppPath(settings.value("FirewallAppPath", mFirewallAppPath).toString());
-    setFirewallDirection(settings.value("FirewallDirection", mFirewallDirection).toInt());
-    setFirewallProtocol(settings.value("FirewallProtocol", mFirewallProtocol).toInt());
+    setFirewallAlwaysDisplay(settings.value("FirewallAlwaysDisplay", mFirewallAlwaysDisplay).toBool());
+    readFirewallRuleList(settings);
     settings.endGroup();
 
     settings.beginGroup("NetworkAdapter");
@@ -278,6 +278,7 @@ void GlobalData::writeSettings()
     settings.setValue("MinimizeToTray", mMinimizeToTray);
     settings.setValue("TopMostWindowHotkey", mTopMostWindowHotkey);
     settings.setValue("ExcludeFromCapture", mExcludeFromCapture);
+    settings.setValue("PgUpExtended", mPgUpExtended);
     settings.endGroup();
 
     settings.beginGroup("DisplayInfo");
@@ -324,9 +325,8 @@ void GlobalData::writeSettings()
     settings.setValue("FirewallStopSound", mFirewallStopSound);
     settings.setValue("FirewallErrorSound", mFirewallErrorSound);
     settings.setValue("FirewallPlaySound", mFirewallPlaySound);
-    settings.setValue("FirewallAppPath", mFirewallAppPath);
-    settings.setValue("FirewallDirection", mFirewallDirection);
-    settings.setValue("FirewallProtocol", mFirewallProtocol);
+    settings.setValue("FirewallAlwaysDisplay", mFirewallAlwaysDisplay);
+    writeFirewallRuleList(settings);
     settings.endGroup();
 
     settings.beginGroup("NetworkAdapter");
@@ -448,6 +448,56 @@ void GlobalData::writeSubFuncSettingsMap(QSettings& settings)
         settings.remove("");
         settings.endGroup();
     }
+}
+
+void GlobalData::readFirewallRuleList(QSettings& settings)
+{
+    if (settings.contains("FirewallAppPath")) {
+        auto appPath = settings.value("FirewallAppPath").toString();
+        auto direction = settings.value("FirewallDirection", mDefaultFirewallDirection).toInt();
+        auto protocol = settings.value("FirewallProtocol", mDefaultFirewallProtocol).toInt();
+        if (direction == 0) {
+            mFirewallRuleList.append(new FirewallRule(appPath, NET_FW_RULE_DIR_IN, protocol));
+            mFirewallRuleList.append(new FirewallRule(appPath, NET_FW_RULE_DIR_OUT, protocol));
+        } else {
+            mFirewallRuleList.append(new FirewallRule(appPath, direction, protocol));
+        }
+        settings.remove("FirewallAppPath");
+        settings.remove("FirewallDirection");
+        settings.remove("FirewallProtocol");
+    }
+
+    int size = settings.beginReadArray("FirewallRuleList");
+    for (int i = 0; i < size; ++i) {
+        settings.setArrayIndex(i);
+        if (settings.contains("Path")) {
+            auto direction = settings.value("Direction", mDefaultFirewallDirection).toInt();
+            if (direction == -1) {
+                mFirewallRuleList
+                    << new FirewallRule(settings.value("Path").toString(), NET_FW_RULE_DIR_OUT,
+                           settings.value("Protocol", mDefaultFirewallProtocol).toInt())
+                    << new FirewallRule(settings.value("Path").toString(), NET_FW_RULE_DIR_IN,
+                           settings.value("Protocol", mDefaultFirewallProtocol).toInt());
+            } else {
+                mFirewallRuleList << new FirewallRule(settings.value("Path").toString(), direction,
+                    settings.value("Protocol", mDefaultFirewallProtocol).toInt());
+            }
+        }
+    }
+    settings.endArray();
+    setFirewallRuleList(mFirewallRuleList);
+}
+
+void GlobalData::writeFirewallRuleList(QSettings& settings)
+{
+    settings.beginWriteArray("FirewallRuleList");
+    for (int i = 0; i < mFirewallRuleList.size(); ++i) {
+        settings.setArrayIndex(i);
+        settings.setValue("Path", mFirewallRuleList[i]->path);
+        settings.setValue("Direction", mFirewallRuleList[i]->direction);
+        settings.setValue("Protocol", mFirewallRuleList[i]->protocol);
+    }
+    settings.endArray();
 }
 
 // ================================================================
@@ -681,32 +731,6 @@ void GlobalData::setFirewallPlaySound(bool newFirewallPlaySound)
         return;
     mFirewallPlaySound = newFirewallPlaySound;
     emit firewallPlaySoundChanged();
-}
-
-const QString& GlobalData::firewallAppPath() const
-{
-    return mFirewallAppPath;
-}
-
-void GlobalData::setFirewallAppPath(const QString& newFirewallAppPath)
-{
-    if (mFirewallAppPath == newFirewallAppPath)
-        return;
-    mFirewallAppPath = newFirewallAppPath;
-    emit firewallAppPathChanged();
-}
-
-int GlobalData::firewallDirection() const
-{
-    return mFirewallDirection;
-}
-
-void GlobalData::setFirewallDirection(int newFirewallDirection)
-{
-    if (mFirewallDirection == newFirewallDirection)
-        return;
-    mFirewallDirection = newFirewallDirection;
-    emit firewallDirectionChanged();
 }
 
 int GlobalData::missionDataUpdateInterval() const
@@ -1174,19 +1198,6 @@ void GlobalData::setTopMostWindowHotkey(const QString& newShowToolHotkey)
     emit topMostWindowHotkeyChanged();
 }
 
-int GlobalData::firewallProtocol() const
-{
-    return mFirewallProtocol;
-}
-
-void GlobalData::setFirewallProtocol(int newFirewallProtocol)
-{
-    if (mFirewallProtocol == newFirewallProtocol || newFirewallProtocol > 255 || newFirewallProtocol < -1)
-        return;
-    mFirewallProtocol = newFirewallProtocol;
-    emit firewallProtocolChanged();
-}
-
 QList<QString> GlobalData::hotkeyMaps() const
 {
     return mHotkeyMaps;
@@ -1367,4 +1378,43 @@ void GlobalData::setCrosshairAttachWindowTitle(const QString& newCrosshairAttach
         return;
     mCrosshairAttachWindowTitle = newCrosshairAttachWindowTitle;
     emit crosshairAttachWindowTitleChanged();
+}
+
+QList<FirewallRule*> GlobalData::firewallRuleList() const
+{
+    return mFirewallRuleList;
+}
+
+void GlobalData::setFirewallRuleList(const QList<FirewallRule*>& newFirewallRuleList)
+{
+    if (mFirewallRuleList == newFirewallRuleList)
+        return;
+    mFirewallRuleList = newFirewallRuleList;
+    emit firewallRuleListChanged();
+}
+
+bool GlobalData::firewallAlwaysDisplay() const
+{
+    return mFirewallAlwaysDisplay;
+}
+
+void GlobalData::setFirewallAlwaysDisplay(bool newFirewallAlwaysDisplay)
+{
+    if (mFirewallAlwaysDisplay == newFirewallAlwaysDisplay)
+        return;
+    mFirewallAlwaysDisplay = newFirewallAlwaysDisplay;
+    emit firewallAlwaysDisplayChanged();
+}
+
+bool GlobalData::pgUpExtended() const
+{
+    return mPgUpExtended;
+}
+
+void GlobalData::setPgUpExtended(bool newPgUpExtended)
+{
+    if (mPgUpExtended == newPgUpExtended)
+        return;
+    mPgUpExtended = newPgUpExtended;
+    emit pgUpExtendedChanged();
 }

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QObject>
+#include <Wbemidl.h>
+#include <setupapi.h>
 #include <windows.h>
 
 #define networkAdapterUtil (NetworkAdapterUtil::instance())
@@ -30,6 +32,9 @@ public:
 
 private:
     void initNetworkAdapterGuid();
+
+    bool setSingleNetworkAdapterEnabled(HDEVINFO deviceInfoSet, QString deviceId, bool enabled);
+
     GUID networkAdapterGuid;
 
 signals:

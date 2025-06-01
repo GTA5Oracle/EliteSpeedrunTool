@@ -20,6 +20,10 @@ RtssUtil::RtssUtil(QObject* parent)
             static_cast<bool (RtssUtil::*)(void)>(&RtssUtil::updateDisplayInfo));
     }
 
+    connect(globalData, &GlobalData::firewallAlwaysDisplayChanged, this, [this]() {
+        updateDisplayInfo();
+    });
+
     updateDisplayInfo();
 
     initOverlay();
@@ -247,8 +251,24 @@ QString RtssUtil::getTimeString(QVariant v)
         .arg(ms, 2, 10, QLatin1Char('0'));
 }
 
+QString RtssUtil::getAutoTimeString(QVariant v)
+{
+    unsigned long long deltaTime = v.toULongLong();
+    int m = deltaTime / 1000 / 60;
+    int s = (deltaTime / 1000) % 60;
+    int ms = (deltaTime % 1000) / 10;
+    return globalData->displayInfoSubFunctions()[DisplayInfoSubFunction::AutoTimer]
+        ->rtssOsdText()
+        .arg(m, 2, 10, QLatin1Char('0'))
+        .arg(s, 2, 10, QLatin1Char('0'))
+        .arg(ms, 2, 10, QLatin1Char('0'));
+}
+
 QString RtssUtil::getFirewallString(QVariant v)
 {
+    if (!v.toBool() && !globalData->firewallAlwaysDisplay()) {
+        return "";
+    }
     return globalData->displayInfoSubFunctions()[DisplayInfoSubFunction::Firewall]
         ->rtssOsdText()
         .arg(v.toBool() ? "On" : "Off");

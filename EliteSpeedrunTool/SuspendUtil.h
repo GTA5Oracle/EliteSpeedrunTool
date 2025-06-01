@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QTimer>
 #include <windows.h>
 
 #define suspendUtil (SuspendUtil::instance())
@@ -20,8 +21,15 @@ public:
 
     void resumeProcess();
 
-    void suspendAndResumeProcess(long long durationMs, std::function<void(void)> onResumed);
+    void suspendAndResumeProcess(long long durationMs);
+
+private:
+    QTimer timer;
+    bool isSuspending = false;
+
+    void onTimeout();
 
 signals:
     void onAcceptedChanged();
+    void onResume();
 };

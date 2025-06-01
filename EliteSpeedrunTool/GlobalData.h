@@ -1,6 +1,7 @@
 #pragma once
 
 #include "displayinfo/DisplayInfoSubFunction.h"
+#include "net/FirewallRule.h"
 #include <QColor>
 #include <QMetaType>
 #include <QPoint>
@@ -58,6 +59,9 @@ private:
     // 读取/写入信息展示设置
     void readSubFuncSettingsMap(QSettings& settings);
     void writeSubFuncSettingsMap(QSettings& settings);
+
+    void readFirewallRuleList(QSettings& settings);
+    void writeFirewallRuleList(QSettings& settings);
 
     // =====================================================
 public:
@@ -282,6 +286,9 @@ public:
     QString crosshairAttachWindowTitle() const;
     void setCrosshairAttachWindowTitle(const QString& newCrosshairAttachWindowTitle);
 
+    QList<FirewallRule*> firewallRuleList() const;
+    void setFirewallRuleList(const QList<FirewallRule*>& newFirewallRuleList);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -377,6 +384,22 @@ signals:
 
     void excludeFromCaptureChanged();
 
+    void firewallRuleListChanged();
+
+    void firewallAlwaysDisplayChanged();
+
+    void pgUpExtendedChanged();
+
+public:
+    const int mDefaultFirewallDirection = NET_FW_RULE_DIR_OUT;
+    const int mDefaultFirewallProtocol = 6;
+
+    bool firewallAlwaysDisplay() const;
+    void setFirewallAlwaysDisplay(bool newFirewallAlwaysDisplay);
+
+    bool pgUpExtended() const;
+    void setPgUpExtended(bool newPgUpExtended);
+
 private:
     bool mMinimizeToTray = false;
     QString mTopMostWindowHotkey = "";
@@ -386,11 +409,13 @@ private:
     bool mAutoCheckUpdate = true;
     QString mVersion = "0.0";
     QString mIgnoredNewVersion = "";
+    bool mPgUpExtended = true;
 
     // 信息展示
     QList<DisplayInfoSubFunction> mFuncs = {
         DisplayInfoSubFunction::Firewall,
         DisplayInfoSubFunction::Timer,
+        DisplayInfoSubFunction::AutoTimer,
         DisplayInfoSubFunction::Act3Headshot,
     };
     QDisplayInfoSubFuncsMap mDisplayInfoSubFunctions;
@@ -431,9 +456,8 @@ private:
     QString mFirewallStopSound = "./sound/ding.wav";
     QString mFirewallErrorSound = "./sound/error.wav";
     bool mFirewallPlaySound = true;
-    QString mFirewallAppPath = "";
-    int mFirewallDirection = NET_FW_RULE_DIR_OUT;
-    int mFirewallProtocol = -1;
+    QList<FirewallRule*> mFirewallRuleList = {};
+    bool mFirewallAlwaysDisplay = true;
 
     // 网络适配器
     QList<QString> mSelectedNetworkAdapters = {};
@@ -519,8 +543,6 @@ private:
     Q_PROPERTY(QString firewallStopSound READ firewallStopSound WRITE setFirewallStopSound NOTIFY firewallStopSoundChanged)
     Q_PROPERTY(QString firewallErrorSound READ firewallErrorSound WRITE setFirewallErrorSound NOTIFY firewallErrorSoundChanged)
     Q_PROPERTY(bool firewallPlaySound READ firewallPlaySound WRITE setFirewallPlaySound NOTIFY firewallPlaySoundChanged)
-    Q_PROPERTY(QString firewallAppPath READ firewallAppPath WRITE setFirewallAppPath NOTIFY firewallAppPathChanged)
-    Q_PROPERTY(int firewallDirection READ firewallDirection WRITE setFirewallDirection NOTIFY firewallDirectionChanged)
     Q_PROPERTY(int missionDataUpdateInterval READ missionDataUpdateInterval WRITE setMissionDataUpdateInterval NOTIFY missionDataUpdateIntervalChanged)
     Q_PROPERTY(QString timerStartHotkey READ timerStartHotkey WRITE setTimerStartHotkey NOTIFY timerStartHotkeyChanged)
     Q_PROPERTY(QString timerPauseHotkey READ timerPauseHotkey WRITE setTimerPauseHotkey NOTIFY timerPauseHotkeyChanged)
@@ -557,7 +579,6 @@ private:
     Q_PROPERTY(int rtssCrosshairSize READ rtssCrosshairSize WRITE setRtssCrosshairSize NOTIFY rtssCrosshairSizeChanged FINAL)
     Q_PROPERTY(QColor rtssCrosshairColor READ rtssCrosshairColor WRITE setRtssCrosshairColor NOTIFY rtssCrosshairColorChanged FINAL)
     Q_PROPERTY(QString topMostWindowHotkey READ topMostWindowHotkey WRITE setTopMostWindowHotkey NOTIFY topMostWindowHotkeyChanged FINAL)
-    Q_PROPERTY(int firewallProtocol READ firewallProtocol WRITE setFirewallProtocol NOTIFY firewallProtocolChanged FINAL)
     Q_PROPERTY(QList<QString> hotkeyMaps READ hotkeyMaps WRITE setHotkeyMaps NOTIFY hotkeyMapsChanged FINAL)
     Q_PROPERTY(QMap<QString, QString> eventCmdMap READ eventCmdMap WRITE setEventCmdMap NOTIFY eventCmdMapChanged FINAL)
     Q_PROPERTY(QPoint crosshairOffset READ crosshairOffset WRITE setCrosshairOffset NOTIFY crosshairOffsetChanged FINAL)
@@ -572,4 +593,7 @@ private:
     Q_PROPERTY(QColor crosshairColor READ crosshairColor WRITE setCrosshairColor NOTIFY crosshairColorChanged FINAL)
     Q_PROPERTY(double crosshairOpacity READ crosshairOpacity WRITE setCrosshairOpacity NOTIFY crosshairOpacityChanged FINAL)
     Q_PROPERTY(QString crosshairAttachWindowTitle READ crosshairAttachWindowTitle WRITE setCrosshairAttachWindowTitle NOTIFY crosshairAttachWindowTitleChanged FINAL)
+    Q_PROPERTY(QList<FirewallRule*> firewallRuleList READ firewallRuleList WRITE setFirewallRuleList NOTIFY firewallRuleListChanged FINAL)
+    Q_PROPERTY(bool firewallAlwaysDisplay READ firewallAlwaysDisplay WRITE setFirewallAlwaysDisplay NOTIFY firewallAlwaysDisplayChanged FINAL)
+    Q_PROPERTY(bool pgUpExtended READ pgUpExtended WRITE setPgUpExtended NOTIFY pgUpExtendedChanged FINAL)
 };

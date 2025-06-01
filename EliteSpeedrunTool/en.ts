@@ -15,9 +15,9 @@
     </message>
     <message>
         <location filename="AcknowledgementDialog.cpp" line="+14"/>
-        <source>特别感谢 ACT3 帮会和 CEHT 帮会对本工具的宣传和支持。特别感谢 CZ9946 和 AdstarGod 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</source>
-        <oldsource>特别感谢 ACT3 帮会和 CEHT 帮会对本工具的宣传和支持。特别感谢 CZ9946 和 Adstargod 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</oldsource>
-        <translation>Special thanks to World Save Act Elite and CEHT for promoting and supporting this tool. A big thanks to CZ29946 and AdstarGod, who provided significant assistance in the development of this tool! Special thanks to Alice2333 for technical support!</translation>
+        <source>特别感谢 ACT3、CEHT、EXT3 帮会（按照首字母顺序排序）对本工具的宣传和支持。特别感谢 CZ9946 和 AdstarGod 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</source>
+        <oldsource>特别感谢 ACT3 帮会和 CEHT 帮会对本工具的宣传和支持。特别感谢 CZ9946 和 AdstarGod 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</oldsource>
+        <translation>Special thanks to ACT3, CEHT and EXT3 (Alphabetical order) for promoting and supporting this tool. A big thanks to CZ29946 and AdstarGod, who provided significant assistance in the development of this tool! Special thanks to Alice2333 for technical support!</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -55,8 +55,19 @@
     </message>
     <message>
         <location line="+1"/>
-        <source>结束游戏</source>
-        <translation>Terminate game</translation>
+        <source>结束增强版游戏</source>
+        <oldsource>结束游戏</oldsource>
+        <translation>Terminate enhanced game</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>结束传承版游戏</source>
+        <translation>Terminate legacy game</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>结束游戏（已废弃）</source>
+        <translation>Terminate game (Deprecated)</translation>
     </message>
 </context>
 <context>
@@ -88,13 +99,30 @@
     </message>
     <message>
         <location line="+5"/>
-        <source>通过 Steam 启动 GTA5</source>
-        <translation>Launch GTA5 through Steam</translation>
+        <source>通过 Steam 启动 GTA5 增强版</source>
+        <oldsource>通过 Steam 启动 GTA5</oldsource>
+        <translation>Launch GTA5 Enhanced through Steam</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>通过 Epic 启动 GTA5 增强版</source>
+        <oldsource>通过 Epic 启动 GTA5</oldsource>
+        <translation>Launch GTA5 Enhanced through Epic</translation>
+    </message>
+    <message>
+        <location line="-1"/>
+        <source>通过 Steam 启动 GTA5 传承版</source>
+        <translation>Launch GTA5 Legacy through Steam</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>通过 Epic 启动 GTA5 传承版</source>
+        <translation>Launch GTA5 Legacy through Epic</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>通过 Epic 启动 GTA5</source>
-        <translation>Launch GTA5 through Epic</translation>
+        <source>结束 Social Club</source>
+        <translation>Stop Social Club Process</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -122,7 +150,7 @@
         <translation>Cancel existing shutdown plan</translation>
     </message>
     <message>
-        <location line="-144"/>
+        <location line="-147"/>
         <source>下方列表显示了要执行的命令序列，系统将从上往下依次执行命令，请点击下方按钮来添加每行命令。</source>
         <oldsource>下方列表显示了要执行的命令序列，系统将从上往下依次执行命令，请点击下方按钮来添加每条命令。</oldsource>
         <translation>The list below shows the command sequence to be executed. Click the button below to add each command.</translation>
@@ -310,7 +338,7 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
         <translation>Display Info</translation>
     </message>
     <message>
-        <location filename="displayinfo/DisplayInfoDialog.cpp" line="+183"/>
+        <location filename="displayinfo/DisplayInfoDialog.cpp" line="+187"/>
         <source>防火墙%1</source>
         <oldsource>防火墙：%1</oldsource>
         <translation>Firewall %1</translation>
@@ -327,9 +355,42 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
     </message>
 </context>
 <context>
+    <name>FirewallPathTableWidget</name>
+    <message>
+        <location filename="net/FirewallPathTableWidget.cpp" line="+15"/>
+        <source>可执行程序路径</source>
+        <translation>EXE path</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>操作</source>
+        <translation>Opers</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>方向</source>
+        <translation>Direction</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>协议</source>
+        <translation>Protocol</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>出站</source>
+        <translation>Outbound</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>入站</source>
+        <translation>Inbound</translation>
+    </message>
+</context>
+<context>
     <name>InsertModePage</name>
     <message>
-        <location filename="event/cmd/CmdSequenceWizard.cpp" line="+239"/>
+        <location filename="event/cmd/CmdSequenceWizard.cpp" line="+242"/>
         <source>是否使用新命令覆盖已有的命令？</source>
         <translation>Overwrite existing commands with new commands?</translation>
     </message>
@@ -352,7 +413,7 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
 <context>
     <name>IntroPage</name>
     <message>
-        <location line="-216"/>
+        <location line="-219"/>
         <source>介绍</source>
         <translation>Introduction</translation>
     </message>
@@ -398,12 +459,12 @@ Answer: Yes, you can. You can develop your own WebSocket client to receive real-
         <translation>Net</translation>
     </message>
     <message>
-        <location line="+211"/>
+        <location line="+316"/>
         <source>播放提示音</source>
         <translation>Play sound</translation>
     </message>
     <message>
-        <location line="-131"/>
+        <location line="-236"/>
         <source>代言人：AdstarGod
 星神断网，好用没烦恼
 😋</source>
@@ -415,19 +476,20 @@ AdstarGod Firewall, easy to use
 😋</translation>
     </message>
     <message>
-        <location line="+155"/>
+        <location line="+168"/>
         <source>Windows 防火墙未启用，无法使用断网功能！</source>
         <translation>Windows Firewall is not enabled, and the network disconnection feature cannot be used!</translation>
     </message>
     <message>
-        <location line="+188"/>
-        <location filename="MainWindow.cpp" line="+838"/>
+        <location line="+226"/>
+        <location line="+75"/>
+        <location filename="MainWindow.cpp" line="+862"/>
         <location line="+22"/>
         <source>点击启动</source>
-        <translation>Start counting</translation>
+        <translation>Start to start</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="-62"/>
         <location filename="MainWindow.cpp" line="-20"/>
         <location line="+16"/>
         <location line="+20"/>
@@ -435,7 +497,7 @@ AdstarGod Firewall, easy to use
         <translation>Click to pause</translation>
     </message>
     <message>
-        <location line="+146"/>
+        <location line="+227"/>
         <source>立即结束游戏</source>
         <translation>Terminate the game</translation>
     </message>
@@ -480,7 +542,7 @@ AdstarGod Firewall, easy to use
         <translation>Alipay...</translation>
     </message>
     <message>
-        <location line="-921"/>
+        <location line="-1053"/>
         <source>代言人</source>
         <translation>Spokesperson</translation>
     </message>
@@ -490,33 +552,33 @@ AdstarGod Firewall, easy to use
         <translation>Firewall status</translation>
     </message>
     <message>
-        <location line="+6"/>
+        <location line="+40"/>
         <source>域</source>
         <translation>Domain</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="-26"/>
         <source>专用</source>
         <translation>Private</translation>
     </message>
     <message>
-        <location line="+17"/>
+        <location line="+13"/>
         <source>公用</source>
         <translation>Public</translation>
     </message>
     <message>
-        <location line="+60"/>
+        <location line="+178"/>
         <source>注意：公用网络防火墙未开启，请先测试断网是否有效</source>
         <oldsource>注意：公共网络防火墙未开启，请先测试断网是否有效</oldsource>
         <translation>Note: The public type firewall is not turned on, please test whether the disconnection is effective</translation>
     </message>
     <message>
-        <location line="+168"/>
+        <location line="+114"/>
         <source>计时</source>
-        <translation>Manual timing</translation>
+        <translation>Manual timer</translation>
     </message>
     <message>
-        <location line="+189"/>
+        <location line="+270"/>
         <source>结束游戏</source>
         <translation>Terminate game</translation>
     </message>
@@ -564,28 +626,28 @@ AdstarGod Firewall, easy to use
         <translation>About Qt...</translation>
     </message>
     <message>
-        <location line="-838"/>
+        <location line="-970"/>
         <source>防火墙</source>
         <translation>Firewall</translation>
     </message>
     <message>
-        <location line="+196"/>
+        <location line="+176"/>
         <source>警告</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+54"/>
         <source>打开系统设置...</source>
         <oldsource>打开系统设置</oldsource>
         <translation>Open system settings...</translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="-72"/>
         <source>刷新</source>
         <translation>Refresh</translation>
     </message>
     <message>
-        <location line="+36"/>
+        <location line="+161"/>
         <source>网络适配器</source>
         <translation>Net adapter</translation>
     </message>
@@ -602,6 +664,11 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+106"/>
+        <source>自动计时</source>
+        <translation>Autotimer</translation>
+    </message>
+    <message>
+        <location line="+65"/>
         <source>卡单</source>
         <translation>Suspend</translation>
     </message>
@@ -617,11 +684,16 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+16"/>
+        <source>卡单过程中再次按下，可立即恢复。</source>
+        <translation>Press again during the suspend to resume immediately.</translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>卡单人战局</source>
         <translation>Suspend the game process</translation>
     </message>
     <message>
-        <location line="+93"/>
+        <location line="+96"/>
         <source>主力模式</source>
         <translation>Host mode</translation>
     </message>
@@ -663,7 +735,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+30"/>
-        <location filename="MainWindow.cpp" line="-472"/>
+        <location filename="MainWindow.cpp" line="-491"/>
         <source>复制地址</source>
         <translation>Copy link</translation>
     </message>
@@ -715,14 +787,14 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location filename="MainWindow.cpp" line="+123"/>
-        <location line="+16"/>
         <source>已关闭</source>
         <translation>Stopped</translation>
     </message>
     <message>
-        <location line="+0"/>
-        <source>已开启</source>
-        <translation>Running</translation>
+        <location line="+16"/>
+        <source>已启用</source>
+        <oldsource>已开启</oldsource>
+        <translation>Enabled</translation>
     </message>
     <message>
         <location line="-136"/>
@@ -757,12 +829,23 @@ AdstarGod Firewall, easy to use
         <translation>Enabled</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-45"/>
+        <location line="+45"/>
         <source>已禁用</source>
         <translation>Disabled</translation>
     </message>
     <message>
-        <location line="+280"/>
+        <location line="+131"/>
+        <source>停止计时</source>
+        <translation>Stop</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>开始计时</source>
+        <translation>Start</translation>
+    </message>
+    <message>
+        <location line="+168"/>
         <source>点击归零</source>
         <translation>Click to Zero</translation>
     </message>
@@ -777,12 +860,12 @@ AdstarGod Firewall, easy to use
         <translation>Click to continue</translation>
     </message>
     <message>
-        <location line="-402"/>
+        <location line="-421"/>
         <source>支付宝收款二维码 谢谢喵！</source>
         <translation>Alipay payment QR code. Thank you!</translation>
     </message>
     <message>
-        <location filename="MainWindow.h" line="+163"/>
+        <location filename="MainWindow.h" line="+167"/>
         <source>加入 Telegram 群组一起划水~</source>
         <translation>Join Telegram group~</translation>
     </message>
@@ -816,7 +899,7 @@ AdstarGod Firewall, easy to use
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="+28"/>
+        <location filename="main.cpp" line="+27"/>
         <source>获取 UIAccess 权限失败，无法在全屏的游戏上显示内容！</source>
         <translation>Failed to obtain UIAccess permission. Cannot display content over fullscreen games!</translation>
     </message>
@@ -932,66 +1015,35 @@ AdstarGod Firewall, easy to use
         <translation>Settings</translation>
     </message>
     <message>
-        <location line="+140"/>
+        <location line="+166"/>
         <source>windowsvista 样式不支持深色模式，其他样式支持深色模式跟随系统</source>
         <translation>windowsvista style does not support dark mode, while other styles support dark mode following the system</translation>
     </message>
     <message>
-        <location line="+1012"/>
-        <location line="+61"/>
-        <location line="+455"/>
+        <location line="+1594"/>
         <source>启动</source>
         <translation>Enable</translation>
     </message>
     <message>
-        <location line="-501"/>
-        <location line="+75"/>
-        <location line="+441"/>
+        <location line="+15"/>
         <source>停止</source>
         <translation>Disable</translation>
     </message>
     <message>
-        <location line="-498"/>
-        <location line="+367"/>
+        <location line="-542"/>
+        <location line="+411"/>
         <location line="+462"/>
         <source>音效</source>
         <translation>Sound</translation>
     </message>
     <message>
-        <location line="-736"/>
-        <source>默认值为出站，设置将在下次启动防火墙时生效</source>
-        <oldsource>默认值为出站，设置将在下次启动防火墙时生效。</oldsource>
-        <translation>The default value is outbound. The settings will take effect the next time the firewall is started</translation>
-    </message>
-    <message>
-        <location line="+60"/>
-        <source>断网范围</source>
-        <translation>Firewall scope</translation>
-    </message>
-    <message>
-        <location line="+28"/>
+        <location line="-624"/>
         <source>说明</source>
         <translation>Tips</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <source>填写要断网程序的路径，留空表示断全部。设置将在下次启动防火墙时生效。</source>
-        <oldsource>填写要断网程序的路径，留空表示断全部。设置将在下次启动防火墙后生效。</oldsource>
-        <translation>Enter the path of the program you want to disconnect, leave it blank to disconnect all. The settings will take effect after the next firewall startup.</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>加速器 (UU 用户必看)</source>
-        <translation>Game network agent</translation>
-    </message>
-    <message>
-        <location line="-124"/>
-        <source>防火墙规则方向</source>
-        <translation>Firewall rule direction</translation>
-    </message>
-    <message>
-        <location line="-129"/>
-        <location line="+367"/>
+        <location line="-294"/>
+        <location line="+411"/>
         <location line="+149"/>
         <location line="+192"/>
         <location line="+121"/>
@@ -1011,7 +1063,7 @@ AdstarGod Firewall, easy to use
         <translation>Refresh data interval</translation>
     </message>
     <message>
-        <location line="-1196"/>
+        <location line="-1262"/>
         <source>窗口</source>
         <translation>Window</translation>
     </message>
@@ -1040,24 +1092,24 @@ AdstarGod Firewall, easy to use
         <location line="+42"/>
         <location line="+277"/>
         <location line="+369"/>
-        <location line="+1363"/>
+        <location line="+1429"/>
         <location line="+84"/>
         <source>颜色</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location line="-1791"/>
-        <location line="+1742"/>
+        <location line="-1857"/>
+        <location line="+1808"/>
         <source>透明度</source>
         <translation>Alpha</translation>
     </message>
     <message>
-        <location line="-2230"/>
+        <location line="-2296"/>
         <source>内容</source>
         <translation>Content</translation>
     </message>
     <message>
-        <location line="-121"/>
+        <location line="-147"/>
         <source>最小化到托盘</source>
         <translation>Minimize to the system tray</translation>
     </message>
@@ -1078,7 +1130,17 @@ AdstarGod Firewall, easy to use
         <translation>Prevent other apps from capturing or recording tool&apos;s windows</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+47"/>
+        <source>修复部分键盘 Page Up 无效的问题</source>
+        <translation>Fix Page Up not working on some keyboards</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>此问题常出现在与小键盘数字 9 位置重合的 Page Up 键上。</source>
+        <translation>The issue often occurs when the Page Up key shares the same position as the numeric keypad 9.</translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>外观样式</source>
         <oldsource>样式</oldsource>
         <translation>Style</translation>
@@ -1112,13 +1174,13 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+51"/>
-        <location line="+2093"/>
+        <location line="+2159"/>
         <source>阴影</source>
         <oldsource>文字阴影</oldsource>
         <translation>Shadow</translation>
     </message>
     <message>
-        <location line="-1991"/>
+        <location line="-2057"/>
         <source>文字对齐</source>
         <translation>Text alignment</translation>
     </message>
@@ -1156,7 +1218,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+57"/>
-        <location filename="SettingDialog.h" line="+23"/>
+        <location filename="SettingDialog.h" line="+25"/>
         <source>准星</source>
         <oldsource>游戏准星</oldsource>
         <translation>Crosshair</translation>
@@ -1183,18 +1245,18 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+24"/>
-        <location line="+1287"/>
+        <location line="+1353"/>
         <source>大小</source>
         <translation>Size</translation>
     </message>
     <message>
-        <location line="-1244"/>
-        <location line="+1670"/>
+        <location line="-1310"/>
+        <location line="+1736"/>
         <source>提示</source>
         <translation>Tips</translation>
     </message>
     <message>
-        <location line="-1664"/>
+        <location line="-1730"/>
         <source>由于 RTSS 限制，此功能不支持自动居中显示，需要用户手动调整准星位置。
 
 使用流程：
@@ -1223,7 +1285,50 @@ Usage:
         <translation>Firewall rules</translation>
     </message>
     <message>
-        <location line="+371"/>
+        <location line="+22"/>
+        <source>基本</source>
+        <translation>Base</translation>
+    </message>
+    <message>
+        <location line="+60"/>
+        <location line="+75"/>
+        <source>停用</source>
+        <translation>Disable</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>防火墙状态显示</source>
+        <translation>Firewall status display</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>防火墙状态常驻</source>
+        <oldsource>防火墙状态在屏幕上常驻</oldsource>
+        <translation>Firewall status permanent</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>勾选后，防火墙规则是否启用将常驻显示；反之，将仅在防火墙规则启用时显示。</source>
+        <translation>When checked, the firewall rules status will be displayed permanently; otherwise, it will be displayed only when the firewall rules are enabled.</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>高级</source>
+        <translation>Advanced</translation>
+    </message>
+    <message>
+        <location line="+66"/>
+        <source>注意：防火墙已开启，无法修改此页设置</source>
+        <translation>Note: Firewall rules are enabled and cannot modify the settings on this page</translation>
+    </message>
+    <message>
+        <location line="+46"/>
+        <source>添加规则</source>
+        <oldsource>添加规则...</oldsource>
+        <translation>Add a rule</translation>
+    </message>
+    <message>
+        <location line="+97"/>
         <source>注意：禁用网卡存在延迟，请勿用于时间敏感的操作，否则可能会留红失败！</source>
         <translation>Note: Disabling net adapters may have a delay, don&apos;t use it for time-sensitive operations!</translation>
     </message>
@@ -1326,13 +1431,13 @@ Usage:
         <translation>The tool uses PowerShell to execute commands. Leaving it blank means no command will be executed</translation>
     </message>
     <message>
-        <location line="-2460"/>
-        <location line="+2093"/>
+        <location line="-2526"/>
+        <location line="+2159"/>
         <source>模糊半径</source>
         <translation>Blur radius</translation>
     </message>
     <message>
-        <location line="-2395"/>
+        <location line="-2487"/>
         <source>置顶窗口快捷键</source>
         <oldsource>置顶工具快捷键</oldsource>
         <translation>Top most hotkey</translation>
@@ -1343,13 +1448,13 @@ Usage:
         <translation>First press to top the tool window, press again to un-top it</translation>
     </message>
     <message>
-        <location line="+305"/>
-        <location line="+2093"/>
+        <location line="+331"/>
+        <location line="+2159"/>
         <source>偏移</source>
         <translation>Offset</translation>
     </message>
     <message>
-        <location line="-2027"/>
+        <location line="-2093"/>
         <source>水平</source>
         <translation>Horizontal</translation>
     </message>
@@ -1369,57 +1474,23 @@ Usage:
         <translation>Reset OSD text format</translation>
     </message>
     <message>
-        <location line="+399"/>
-        <source>操作失败</source>
-        <oldsource>操作失败音效</oldsource>
-        <translation>Operation failed</translation>
+        <location line="+421"/>
+        <source>失败</source>
+        <oldsource>操作失败</oldsource>
+        <translation>Failed</translation>
     </message>
     <message>
-        <location line="+42"/>
-        <source>协议号</source>
-        <translation>Protocol number</translation>
-    </message>
-    <message>
-        <location line="+28"/>
+        <location line="+155"/>
         <source>所有协议...</source>
         <translation>All protocols...</translation>
     </message>
     <message>
-        <location line="+27"/>
-        <source>若您不了解断网原理，请留空！</source>
-        <translation>If you don&apos;t understand the principle, please leave it empty!</translation>
-    </message>
-    <message>
-        <location line="+26"/>
+        <location line="+58"/>
         <source>若您想断整个系统的网络，则留空（建议）；若您只想断 GTA 的网络，请选择 GTA5.exe 文件；若您想断加速器的网络，请选择加速器的应用程序文件。</source>
         <translation>If you want to disconnect the entire system&apos;s network, leave it empty (recommended); if you only want to disconnect GTA&apos;s network, choose the GTA5.exe file; if you want to disconnect the network agent&apos;s network, choose the network agent&apos;s application file.</translation>
     </message>
     <message>
-        <location line="+27"/>
-        <source>使用 UU 加速器的用户请填写 GTA5.exe 的完整路径，然后在 UU 内使用“路由模式”进行加速。
-GTA5.exe 的完整路径例如：
-F:\Epic Games\GTAV\GTA5.exe
-
-其他加速器用户可直接填写加速器可执行 EXE 文件的路径。
-加速器可执行 EXE 文件的路径例如：
-C:\Program Files (x86)\nn\nn.exe</source>
-        <oldsource>使用 UU 加速器的用户请填写 GTA5.exe 的完整路径，然后在 UU 内使用“路由模式”进行加速。
-GTA5.exe 的完整路径例如：
-F:\Epic Games\GTAV\GTA5.exe
-
-其他加速器用户可以直接填写加速器可执行 EXE 文件的路径。
-加速器可执行 EXE 文件的路径例如：
-C:\Program Files (x86)\nn\nn.exe</oldsource>
-        <translation>If you are using UU network agent, please fill in the full path of GTA5.exe, and then use the &quot;Route Mode&quot; in UU.
-The full path of GTA5.exe is for example:
-F:\Epic Games\GTAV\GTA5.exe
-
-Other network agent users can directly fill in the path of the game network agent executable EXE file.
-The path to the game network agent executable EXE file is for example:
-C:\Program Files (x86)\nn\nn.exe</translation>
-    </message>
-    <message>
-        <location line="+41"/>
+        <location line="+22"/>
         <source>禁用网络适配器</source>
         <oldsource>禁用网卡</oldsource>
         <translation>Disable net adapters</translation>
@@ -1437,7 +1508,9 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Disable</translation>
     </message>
     <message>
-        <location line="-53"/>
+        <location line="-461"/>
+        <location line="+61"/>
+        <location line="+347"/>
         <location line="+68"/>
         <source>启用</source>
         <translation>Enable</translation>
@@ -1451,15 +1524,20 @@ C:\Program Files (x86)\nn\nn.exe</translation>
     <message>
         <location line="-102"/>
         <source>手动计时</source>
-        <translation>Manual timing</translation>
+        <translation>Manual timer</translation>
     </message>
     <message>
-        <location line="-338"/>
+        <location line="-300"/>
         <source>所有协议为 -1，TCP 为 6，UDP 为 17</source>
         <translation>All protocols are -1, TCP is 6, UDP is 17</translation>
     </message>
     <message>
-        <location line="+453"/>
+        <location line="+52"/>
+        <source>填写要断网程序的路径，列表无条目或路径留空均表示断全部。完全重复的项仅会生效一个。设置将在下次启动防火墙时生效。</source>
+        <translation>Enter the path of programs to block. Empty list or path means block all. Duplicate entries take effect only once. Changes apply on next firewall rules enable.</translation>
+    </message>
+    <message>
+        <location line="+363"/>
         <source>停止策略</source>
         <translation>Stop strategy</translation>
     </message>
@@ -1568,7 +1646,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Debug mode</translation>
     </message>
     <message>
-        <location line="-2316"/>
+        <location line="-2382"/>
         <location filename="SettingDialog.h" line="-7"/>
         <source>信息展示</source>
         <oldsource>全局热键</oldsource>
@@ -1580,7 +1658,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="SettingDialog.cpp" line="+166"/>
+        <location filename="SettingDialog.cpp" line="+188"/>
         <source>未指定</source>
         <translation>Unspecified</translation>
     </message>
@@ -1595,32 +1673,28 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Select a sound</translation>
     </message>
     <message>
-        <location line="+41"/>
+        <location line="+39"/>
+        <source>选择程序...</source>
+        <translation>Select a program...</translation>
+    </message>
+    <message>
+        <location line="+2"/>
         <source>选择程序</source>
         <translation>Select a exe file</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+0"/>
         <source>应用程序 (*.exe)</source>
         <translation>Executable file (*.exe)</translation>
     </message>
     <message>
-        <location line="+13"/>
-        <source>入站+出站</source>
-        <translation>Inbound+Outbound</translation>
+        <location line="+7"/>
+        <source>添加路径留空规则</source>
+        <oldsource>添加空白规则</oldsource>
+        <translation>Add an empty path rule</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>入站</source>
-        <translation>Inbound</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>出站</source>
-        <translation>Outbound</translation>
-    </message>
-    <message>
-        <location line="+462"/>
+        <location line="+487"/>
         <source>实心圆</source>
         <translation>Solid circle</translation>
     </message>
@@ -1724,7 +1798,7 @@ C:\Program Files (x86)\nn\nn.exe</translation>
         <translation>Developer options</translation>
     </message>
     <message>
-        <location line="+92"/>
+        <location line="+94"/>
         <source>左对齐</source>
         <translation>Left alignment</translation>
     </message>

@@ -1,6 +1,8 @@
 #include "MemoryUtil.h"
 #include <QDebug>
+#include <QFileInfo>
 #include <QList>
+#include <psapi.h>
 
 MemoryUtil* MemoryUtil::utilInstance = nullptr;
 
@@ -50,4 +52,36 @@ DWORD MemoryUtil::getPid(HWND hwnd)
 HANDLE MemoryUtil::getGtaProcessHandle(DWORD dwDesiredAccess)
 {
     return OpenProcess(dwDesiredAccess, FALSE, getGtaPid());
+}
+
+QString MemoryUtil::getProcessName(DWORD pid)
+{
+    QString processName;
+
+    HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid);
+    if (hProcess == nullptr) {
+        hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);
+        if (hProcess == nullptr) {
+            return processName;
+        }
+    }
+
+    WCHAR szProcessName[MAX_PATH] = L"";
+    DWORD size = GetModuleFileNameExW(hProcess, nullptr, szProcessName, MAX_PATH);
+    if (size == 0) {
+        size = GetProcessImageFileNameW(hProcess, szProcessName, MAX_PATH);
+    }
+
+    CloseHandle(hProcess);
+
+    if (size) {
+        processName = QFileInfo(QString::fromWCharArray(szProcessName)).fileName();
+    }
+
+    return processName;
+}
+
+bool MemoryUtil::isEnhanced()
+{
+    return getProcessName(getGtaPid()).contains("Enhanced", Qt::CaseInsensitive);
 }

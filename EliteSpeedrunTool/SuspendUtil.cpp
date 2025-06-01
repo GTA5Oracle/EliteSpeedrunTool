@@ -2,7 +2,6 @@
 #include <QDebug>
 #include <QProcess>
 #include <QSettings>
-#include <QTimer>
 #include <windows.h>
 
 typedef LONG(NTAPI* NtSuspendProcess)(IN HANDLE ProcessHandle);
@@ -12,6 +11,7 @@ Q_GLOBAL_STATIC(SuspendUtil, suspendUtilInstance)
 SuspendUtil::SuspendUtil(QObject* parent)
     : QObject { parent }
 {
+    connect(&timer, &QTimer::timeout, this, &SuspendUtil::onTimeout);
 }
 
 SuspendUtil* SuspendUtil::instance()
@@ -49,17 +49,25 @@ void SuspendUtil::resumeProcess()
     WinExec(".\\external\\PSTools\\pssuspend.exe -r GTA5_Enhanced.exe", SW_HIDE);
 }
 
-void SuspendUtil::suspendAndResumeProcess(long long durationMs, std::function<void(void)> onResumed)
+void SuspendUtil::suspendAndResumeProcess(long long durationMs)
 {
-    static bool isSuspending = false;
     if (isSuspending) {
+        if (timer.isActive()) {
+            timer.stop();
+        }
+        onTimeout();
         return;
     }
     isSuspending = true;
     suspendProcess();
-    QTimer::singleShot(durationMs, [onResumed]() {
+    timer.start(durationMs);
+}
+
+void SuspendUtil::onTimeout()
+{
+    if (isSuspending) {
         isSuspending = false;
-        suspendUtil->resumeProcess();
-        onResumed();
-    });
+        resumeProcess();
+        emit onResume();
+    }
 }
