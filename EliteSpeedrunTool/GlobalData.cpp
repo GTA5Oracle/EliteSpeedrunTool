@@ -196,6 +196,7 @@ void GlobalData::readSettings()
     setFirewallErrorSound(settings.value("FirewallErrorSound", mFirewallErrorSound).toString());
     setFirewallPlaySound(settings.value("FirewallPlaySound", mFirewallPlaySound).toBool());
     setFirewallAlwaysDisplay(settings.value("FirewallAlwaysDisplay", mFirewallAlwaysDisplay).toBool());
+    setUseWfp(settings.value("UseWfp", mUseWfp).toBool());
     readFirewallRuleList(settings);
     settings.endGroup();
 
@@ -326,6 +327,7 @@ void GlobalData::writeSettings()
     settings.setValue("FirewallErrorSound", mFirewallErrorSound);
     settings.setValue("FirewallPlaySound", mFirewallPlaySound);
     settings.setValue("FirewallAlwaysDisplay", mFirewallAlwaysDisplay);
+    settings.setValue("UseWfp", mUseWfp);
     writeFirewallRuleList(settings);
     settings.endGroup();
 
@@ -1417,4 +1419,17 @@ void GlobalData::setPgUpExtended(bool newPgUpExtended)
         return;
     mPgUpExtended = newPgUpExtended;
     emit pgUpExtendedChanged();
+}
+
+bool GlobalData::useWfp() const
+{
+    return mUseWfp;
+}
+
+void GlobalData::setUseWfp(bool newUseWfp)
+{
+    if (mUseWfp == newUseWfp)
+        return;
+    mUseWfp = newUseWfp;
+    emit useWfpChanged();
 }

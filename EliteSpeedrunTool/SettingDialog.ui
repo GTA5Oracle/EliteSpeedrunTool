@@ -46,7 +46,7 @@
       <enum>QFrame::Shadow::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -72,8 +72,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>529</width>
-            <height>498</height>
+            <width>246</width>
+            <height>345</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_23">
@@ -1191,8 +1191,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>119</width>
-                    <height>325</height>
+                    <width>521</width>
+                    <height>452</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -1352,6 +1352,39 @@
                     </widget>
                    </item>
                    <item>
+                    <widget class="QGroupBox" name="groupBox_33">
+                     <property name="title">
+                      <string>防火墙类型</string>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_27">
+                      <item>
+                       <widget class="QRadioButton" name="rbFirewallWfp">
+                        <property name="text">
+                         <string notr="true">Windows Filtering Platform (WFP)</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QRadioButton" name="rbFirewallWdf">
+                        <property name="text">
+                         <string notr="true">Windows Defender Firewall (WDF)</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="label_79">
+                        <property name="text">
+                         <string>两种类型均会应用本页面“高级”选项卡中的配置。WDF 需要开启系统防火墙。</string>
+                        </property>
+                        <property name="wordWrap">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
                     <spacer name="spacer_7">
                      <property name="orientation">
                       <enum>Qt::Orientation::Vertical</enum>
@@ -1397,8 +1430,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>156</width>
-                    <height>514</height>
+                    <width>521</width>
+                    <height>452</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_61">
@@ -1568,8 +1601,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>119</width>
-                <height>452</height>
+                <width>525</width>
+                <height>475</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_41">
@@ -1943,7 +1976,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
+            <width>96</width>
             <height>170</height>
            </rect>
           </property>
@@ -2216,7 +2249,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
+            <width>94</width>
             <height>70</height>
            </rect>
           </property>
@@ -3088,7 +3121,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
+            <width>88</width>
             <height>67</height>
            </rect>
           </property>
@@ -3149,7 +3182,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
+            <width>88</width>
             <height>34</height>
            </rect>
           </property>

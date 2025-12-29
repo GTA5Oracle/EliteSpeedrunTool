@@ -52,6 +52,7 @@ protected:
 
     void initFirewall();
     void initNetworkAdapters();
+    void refreshFirewallUi();
 
     void initAct3Headshot();
 
@@ -151,6 +152,8 @@ private:
     DWORD pid = 0;
 
     HANDLE gtaHandle = NULL;
+
+    bool currentUseWfp = false;
 
     QString license = "<h3>" + QApplication::applicationDisplayName()
         + " v" + QApplication::applicationVersion() + "</h3>"

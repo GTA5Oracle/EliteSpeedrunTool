@@ -5,6 +5,7 @@
 #include "UiAccessUtil.h"
 #include "event/EventBus.h"
 #include "event/observer/CmdObserver.h"
+#include "net/wfp/WfpController.h"
 
 #include <QApplication>
 #include <QIcon>
@@ -37,13 +38,19 @@ int main(int argc, char* argv[])
     QApplication::setOrganizationName("SkyD666");
     QApplication::setApplicationName("Elite Speedrun Tool");
     QApplication::setApplicationDisplayName(QObject::tr("精英速通工具"));
-    QApplication::setApplicationVersion("11.9.1.70");
-    qputenv("ApplicationVersionCode", "20250601");
+    QApplication::setApplicationVersion("12.0.1.72");
+    qputenv("ApplicationVersionCode", "20251229");
 
     qApp->setStyle(globalData->styleName());
 
     if (QApplication::applicationVersion() != globalData->version()) {
         QMessageBox::warning(nullptr, QString(), QObject::tr("*** 应用版本变更，请认真检查各项配置（热键、外观、提示音等）是否需要重新设置！***"));
+    }
+
+    auto wfpControllerInitResult = wfpController->initialize();
+    if (!wfpControllerInitResult.success) {
+        qCritical() << "wfpController init failed:" << wfpControllerInitResult.errorMessage;
+        QMessageBox::warning(nullptr, QString(), QObject::tr("WFP 初始化失败：%1").arg(wfpControllerInitResult.errorMessage));
     }
 
     CmdObserver o;

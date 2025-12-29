@@ -2,8 +2,10 @@
 #include "GlobalData.h"
 #include "MemoryUtil.h"
 #include "event/Event.h"
+#include "net/wfp/WfpController.h"
 #include <QWidget>
 #include <QtConcurrent>
+#include <fwptypes.h>
 #include <ntdef.h>
 #include <windows.h>
 
@@ -115,6 +117,31 @@ void MainFeatures::applyWindowDisplayAffinity(QWidget* widget)
             SetWindowDisplayAffinity(hwnd, affinity);
         }
     }
+}
+
+void MainFeatures::enableWfpRules()
+{
+    auto rules = globalData->firewallRuleList();
+    if (rules.isEmpty()) {
+        wfpController->createGlobalBlockRule(QString("%1 Global Rule").arg(qApp->applicationName()));
+    } else {
+        for (auto rule : rules) {
+            QWfpController::RuleCondition condition;
+            condition.processPath = rule->path;
+            condition.protocol = QWfpController::Protocol(rule->protocol);
+            if (rule->direction == NET_FW_RULE_DIR_IN) {
+                condition.direction = FWP_DIRECTION_INBOUND;
+            } else if (rule->direction == NET_FW_RULE_DIR_OUT) {
+                condition.direction = FWP_DIRECTION_OUTBOUND;
+            }
+            wfpController->createRule(condition, QString("%1 Rules").arg(qApp->applicationName()));
+        }
+    }
+}
+
+void MainFeatures::disableWfpRules()
+{
+    wfpController->cleanupAllRules();
 }
 
 bool MainFeatures::ntTerminateProcess(DWORD pid)

@@ -27,6 +27,4 @@ private:
     QFileSystemWatcher profilesDirWatcher;
     QFileSystemWatcher pcSettingsWatcher;
     QString newestPcSettings;
-
-    void MemoryUtil();
 };

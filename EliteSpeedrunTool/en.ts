@@ -15,9 +15,9 @@
     </message>
     <message>
         <location filename="AcknowledgementDialog.cpp" line="+14"/>
-        <source>特别感谢 ACT3、CEHT、EXT3 帮会（按照首字母顺序排序）对本工具的宣传和支持。特别感谢 CZ9946 和 AdstarGod 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</source>
-        <oldsource>特别感谢 ACT3 帮会和 CEHT 帮会对本工具的宣传和支持。特别感谢 CZ9946 和 AdstarGod 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</oldsource>
-        <translation>Special thanks to ACT3, CEHT and EXT3 (Alphabetical order) for promoting and supporting this tool. A big thanks to CZ29946 and AdstarGod, who provided significant assistance in the development of this tool! Special thanks to Alice2333 for technical support!</translation>
+        <source>特别感谢 ACT3、CEHT、EXT3 帮会（按照首字母顺序排序）对本工具的宣传和支持。特别感谢 CZ9946 、AdstarGod 和安琪拉，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</source>
+        <oldsource>特别感谢 ACT3、CEHT、EXT3 帮会（按照首字母顺序排序）对本工具的宣传和支持。特别感谢 CZ9946 和 AdstarGod 两位大佬，他们对本工具的研发提供了大量的帮助！特别感谢 Alice2333 对本工具的开发提供技术支持！</oldsource>
+        <translation>Special thanks to ACT3, CEHT and EXT3 (Alphabetical order) for promoting and supporting this tool. A big thanks to CZ29946, AdstarGod and MageAngela, who provided significant assistance in the development of this tool! Special thanks to Alice2333 for technical support!</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -483,7 +483,7 @@ AdstarGod Firewall, easy to use
     <message>
         <location line="+226"/>
         <location line="+75"/>
-        <location filename="MainWindow.cpp" line="+862"/>
+        <location filename="MainWindow.cpp" line="+892"/>
         <location line="+22"/>
         <source>点击启动</source>
         <translation>Start to start</translation>
@@ -735,7 +735,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+30"/>
-        <location filename="MainWindow.cpp" line="-491"/>
+        <location filename="MainWindow.cpp" line="-521"/>
         <source>复制地址</source>
         <translation>Copy link</translation>
     </message>
@@ -791,13 +791,13 @@ AdstarGod Firewall, easy to use
         <translation>Stopped</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+31"/>
         <source>已启用</source>
         <oldsource>已开启</oldsource>
         <translation>Enabled</translation>
     </message>
     <message>
-        <location line="-136"/>
+        <location line="-151"/>
         <source>服务器未运行</source>
         <translation>Server is not running</translation>
     </message>
@@ -818,7 +818,7 @@ AdstarGod Firewall, easy to use
         <translation>Server address has been copied!</translation>
     </message>
     <message>
-        <location line="+146"/>
+        <location line="+164"/>
         <source>请先在设置页面选择网络适配器！</source>
         <translation>Please select net adapters on the settings page first!</translation>
     </message>
@@ -829,13 +829,13 @@ AdstarGod Firewall, easy to use
         <translation>Enabled</translation>
     </message>
     <message>
-        <location line="-45"/>
-        <location line="+45"/>
+        <location line="-48"/>
+        <location line="+48"/>
         <source>已禁用</source>
         <translation>Disabled</translation>
     </message>
     <message>
-        <location line="+131"/>
+        <location line="+143"/>
         <source>停止计时</source>
         <translation>Stop</translation>
     </message>
@@ -860,12 +860,12 @@ AdstarGod Firewall, easy to use
         <translation>Click to continue</translation>
     </message>
     <message>
-        <location line="-421"/>
+        <location line="-451"/>
         <source>支付宝收款二维码 谢谢喵！</source>
         <translation>Alipay payment QR code. Thank you!</translation>
     </message>
     <message>
-        <location filename="MainWindow.h" line="+167"/>
+        <location filename="MainWindow.h" line="+170"/>
         <source>加入 Telegram 群组一起划水~</source>
         <translation>Join Telegram group~</translation>
     </message>
@@ -899,7 +899,7 @@ AdstarGod Firewall, easy to use
 <context>
     <name>QObject</name>
     <message>
-        <location filename="main.cpp" line="+27"/>
+        <location filename="main.cpp" line="+28"/>
         <source>获取 UIAccess 权限失败，无法在全屏的游戏上显示内容！</source>
         <translation>Failed to obtain UIAccess permission. Cannot display content over fullscreen games!</translation>
     </message>
@@ -913,6 +913,11 @@ AdstarGod Firewall, easy to use
         <location line="+7"/>
         <source>*** 应用版本变更，请认真检查各项配置（热键、外观、提示音等）是否需要重新设置！***</source>
         <translation>*** The application version has changed, please check carefully if the configurations (hotkeys, appearance, sounds, etc.) need to be reset! ***</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>WFP 初始化失败：%1</source>
+        <translation>WFP initialization failed: %1</translation>
     </message>
     <message>
         <location filename="displayinfo/DisplayInfoSubFunction.cpp" line="+13"/>
@@ -1020,7 +1025,7 @@ AdstarGod Firewall, easy to use
         <translation>windowsvista style does not support dark mode, while other styles support dark mode following the system</translation>
     </message>
     <message>
-        <location line="+1594"/>
+        <location line="+1627"/>
         <source>启动</source>
         <translation>Enable</translation>
     </message>
@@ -1030,8 +1035,8 @@ AdstarGod Firewall, easy to use
         <translation>Disable</translation>
     </message>
     <message>
-        <location line="-542"/>
-        <location line="+411"/>
+        <location line="-575"/>
+        <location line="+444"/>
         <location line="+462"/>
         <source>音效</source>
         <translation>Sound</translation>
@@ -1042,8 +1047,8 @@ AdstarGod Firewall, easy to use
         <translation>Tips</translation>
     </message>
     <message>
-        <location line="-294"/>
-        <location line="+411"/>
+        <location line="-327"/>
+        <location line="+444"/>
         <location line="+149"/>
         <location line="+192"/>
         <location line="+121"/>
@@ -1063,7 +1068,7 @@ AdstarGod Firewall, easy to use
         <translation>Refresh data interval</translation>
     </message>
     <message>
-        <location line="-1262"/>
+        <location line="-1295"/>
         <source>窗口</source>
         <translation>Window</translation>
     </message>
@@ -1092,19 +1097,19 @@ AdstarGod Firewall, easy to use
         <location line="+42"/>
         <location line="+277"/>
         <location line="+369"/>
-        <location line="+1429"/>
+        <location line="+1462"/>
         <location line="+84"/>
         <source>颜色</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location line="-1857"/>
-        <location line="+1808"/>
+        <location line="-1890"/>
+        <location line="+1841"/>
         <source>透明度</source>
         <translation>Alpha</translation>
     </message>
     <message>
-        <location line="-2296"/>
+        <location line="-2329"/>
         <source>内容</source>
         <translation>Content</translation>
     </message>
@@ -1174,13 +1179,13 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+51"/>
-        <location line="+2159"/>
+        <location line="+2192"/>
         <source>阴影</source>
         <oldsource>文字阴影</oldsource>
         <translation>Shadow</translation>
     </message>
     <message>
-        <location line="-2057"/>
+        <location line="-2090"/>
         <source>文字对齐</source>
         <translation>Text alignment</translation>
     </message>
@@ -1245,18 +1250,18 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+24"/>
-        <location line="+1353"/>
+        <location line="+1386"/>
         <source>大小</source>
         <translation>Size</translation>
     </message>
     <message>
-        <location line="-1310"/>
-        <location line="+1736"/>
+        <location line="-1343"/>
+        <location line="+1769"/>
         <source>提示</source>
         <translation>Tips</translation>
     </message>
     <message>
-        <location line="-1730"/>
+        <location line="-1763"/>
         <source>由于 RTSS 限制，此功能不支持自动居中显示，需要用户手动调整准星位置。
 
 使用流程：
@@ -1312,7 +1317,12 @@ Usage:
         <translation>When checked, the firewall rules status will be displayed permanently; otherwise, it will be displayed only when the firewall rules are enabled.</translation>
     </message>
     <message>
-        <location line="+31"/>
+        <location line="+13"/>
+        <source>防火墙类型</source>
+        <translation>Firewall type</translation>
+    </message>
+    <message>
+        <location line="+51"/>
         <source>高级</source>
         <translation>Advanced</translation>
     </message>
@@ -1431,13 +1441,13 @@ Usage:
         <translation>The tool uses PowerShell to execute commands. Leaving it blank means no command will be executed</translation>
     </message>
     <message>
-        <location line="-2526"/>
-        <location line="+2159"/>
+        <location line="-2559"/>
+        <location line="+2192"/>
         <source>模糊半径</source>
         <translation>Blur radius</translation>
     </message>
     <message>
-        <location line="-2487"/>
+        <location line="-2520"/>
         <source>置顶窗口快捷键</source>
         <oldsource>置顶工具快捷键</oldsource>
         <translation>Top most hotkey</translation>
@@ -1449,12 +1459,12 @@ Usage:
     </message>
     <message>
         <location line="+331"/>
-        <location line="+2159"/>
+        <location line="+2192"/>
         <source>偏移</source>
         <translation>Offset</translation>
     </message>
     <message>
-        <location line="-2093"/>
+        <location line="-2126"/>
         <source>水平</source>
         <translation>Horizontal</translation>
     </message>
@@ -1480,7 +1490,7 @@ Usage:
         <translation>Failed</translation>
     </message>
     <message>
-        <location line="+155"/>
+        <location line="+188"/>
         <source>所有协议...</source>
         <translation>All protocols...</translation>
     </message>
@@ -1508,9 +1518,9 @@ Usage:
         <translation>Disable</translation>
     </message>
     <message>
-        <location line="-461"/>
+        <location line="-494"/>
         <location line="+61"/>
-        <location line="+347"/>
+        <location line="+380"/>
         <location line="+68"/>
         <source>启用</source>
         <translation>Enable</translation>
@@ -1527,7 +1537,12 @@ Usage:
         <translation>Manual timer</translation>
     </message>
     <message>
-        <location line="-300"/>
+        <location line="-412"/>
+        <source>两种类型均会应用本页面“高级”选项卡中的配置。WDF 需要开启系统防火墙。</source>
+        <translation>Both types will apply the configurations from the &quot;Advanced&quot; tab on this page. WDF requires the system firewall to be enabled.</translation>
+    </message>
+    <message>
+        <location line="+112"/>
         <source>所有协议为 -1，TCP 为 6，UDP 为 17</source>
         <translation>All protocols are -1, TCP is 6, UDP is 17</translation>
     </message>
@@ -1646,7 +1661,7 @@ Usage:
         <translation>Debug mode</translation>
     </message>
     <message>
-        <location line="-2382"/>
+        <location line="-2415"/>
         <location filename="SettingDialog.h" line="-7"/>
         <source>信息展示</source>
         <oldsource>全局热键</oldsource>
@@ -1694,7 +1709,7 @@ Usage:
         <translation>Add an empty path rule</translation>
     </message>
     <message>
-        <location line="+487"/>
+        <location line="+498"/>
         <source>实心圆</source>
         <translation>Solid circle</translation>
     </message>

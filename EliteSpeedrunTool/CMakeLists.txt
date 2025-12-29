@@ -41,6 +41,7 @@ set(PROJECT_SOURCES
         net/NetworkAdapterUtil.h net/NetworkAdapterUtil.cpp
         net/FirewallPathTableWidget.h net/FirewallPathTableWidget.cpp
         net/FirewallRule.h
+        net/wfp/WfpController.h net/wfp/WfpController.cpp
         displayinfo/DisplayInfoDialog.h displayinfo/DisplayInfoDialog.cpp displayinfo/DisplayInfoDialog.ui
         displayinfo/DisplayInfoSubFunction.h displayinfo/DisplayInfoSubFunction.cpp
         displayinfo/RtssUtil.h displayinfo/RtssUtil.cpp
@@ -128,6 +129,9 @@ endif()
 target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/WinMM.Lib)
 target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/setupapi.lib)
 target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/wbemuuid.lib)
+target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/fwpuclnt.lib)
+target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/WS2_32.Lib)
+target_link_libraries(EliteSpeedrunTool PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib/RpcRT4.Lib)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../DiscordGameSDK ${CMAKE_CURRENT_BINARY_DIR}/DiscordGameSDK)
 include_directories(../DiscordGameSDK)

@@ -289,6 +289,15 @@ public:
     QList<FirewallRule*> firewallRuleList() const;
     void setFirewallRuleList(const QList<FirewallRule*>& newFirewallRuleList);
 
+    bool firewallAlwaysDisplay() const;
+    void setFirewallAlwaysDisplay(bool newFirewallAlwaysDisplay);
+
+    bool pgUpExtended() const;
+    void setPgUpExtended(bool newPgUpExtended);
+
+    bool useWfp() const;
+    void setUseWfp(bool newUseWfp);
+
 signals:
     void minimizeToTrayChanged();
     void styleNameChanged();
@@ -390,15 +399,11 @@ signals:
 
     void pgUpExtendedChanged();
 
+    void useWfpChanged();
+
 public:
     const int mDefaultFirewallDirection = NET_FW_RULE_DIR_OUT;
     const int mDefaultFirewallProtocol = 6;
-
-    bool firewallAlwaysDisplay() const;
-    void setFirewallAlwaysDisplay(bool newFirewallAlwaysDisplay);
-
-    bool pgUpExtended() const;
-    void setPgUpExtended(bool newPgUpExtended);
 
 private:
     bool mMinimizeToTray = false;
@@ -458,6 +463,7 @@ private:
     bool mFirewallPlaySound = true;
     QList<FirewallRule*> mFirewallRuleList = {};
     bool mFirewallAlwaysDisplay = true;
+    bool mUseWfp = false;
 
     // 网络适配器
     QList<QString> mSelectedNetworkAdapters = {};
@@ -596,4 +602,5 @@ private:
     Q_PROPERTY(QList<FirewallRule*> firewallRuleList READ firewallRuleList WRITE setFirewallRuleList NOTIFY firewallRuleListChanged FINAL)
     Q_PROPERTY(bool firewallAlwaysDisplay READ firewallAlwaysDisplay WRITE setFirewallAlwaysDisplay NOTIFY firewallAlwaysDisplayChanged FINAL)
     Q_PROPERTY(bool pgUpExtended READ pgUpExtended WRITE setPgUpExtended NOTIFY pgUpExtendedChanged FINAL)
+    Q_PROPERTY(bool useWfp READ useWfp WRITE setUseWfp NOTIFY useWfpChanged FINAL)
 };

@@ -26,6 +26,9 @@ public:
 
     void applyWindowDisplayAffinity(QWidget* widget);
 
+    void enableWfpRules();
+    void disableWfpRules();
+
 private:
     QString runOnLogonTaskName = QCoreApplication::applicationName() + " On Logon";
     QString runOnLogonValue = "\\\"" + QCoreApplication::applicationFilePath().replace("/", "\\") + "\\\"" + " -minimized";

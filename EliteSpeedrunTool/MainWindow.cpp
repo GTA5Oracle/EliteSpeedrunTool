@@ -535,11 +535,26 @@ void MainWindow::initFirewall()
     QPalette palette = labFirewallState.palette();
     palette.setColor(QPalette::Window, Qt::red);
     labFirewallState.setPalette(palette);
+    currentUseWfp = globalData->useWfp();
     connect(ui.btnStartFirewall, &QAbstractButton::toggled, this, [this](bool checked) {
-        if (checked == firewallUtil->getIsEnabled()) {
-            return;
+        if (checked) {
+            currentUseWfp = globalData->useWfp();
         }
-        bool succeed = firewallUtil->setNetFwRuleEnabled(checked);
+        bool succeed = false;
+        if (currentUseWfp) {
+            succeed = true;
+            if (checked) {
+                mainFeatures->enableWfpRules();
+            } else {
+                mainFeatures->disableWfpRules();
+            }
+        } else {
+            if (checked == firewallUtil->getIsEnabled()) {
+                return;
+            }
+            succeed = firewallUtil->setNetFwRuleEnabled(checked);
+        }
+
         if (succeed) {
             auto event = FirewallEvent(checked);
             eventBus->send(&event);
@@ -561,6 +576,9 @@ void MainWindow::initFirewall()
             ui.btnStartFirewall->setChecked(!checked);
         }
     });
+
+    refreshFirewallUi();
+    connect(globalData, &GlobalData::useWfpChanged, this, &MainWindow::refreshFirewallUi);
 
     ui.btnStartFirewall->setFocus();
 }
@@ -595,6 +613,21 @@ void MainWindow::initNetworkAdapters()
         auto sound = checked ? globalData->networkAdaptersDisableSound() : globalData->networkAdaptersEnableSound();
         PlaySound(sound.toStdWString().c_str(), nullptr, SND_FILENAME | SND_ASYNC);
     });
+}
+
+void MainWindow::refreshFirewallUi()
+{
+    if (globalData->useWfp()) {
+        ui.gbFirewallState->hide();
+        ui.groupBoxFirewallState->hide();
+        ui.labFirewallPublicTypeDisabled->hide();
+        ui.btnStartFirewall->setEnabled(true);
+        ui.btnStartFirewall->setDisabled(false);
+        ui.btnStartFirewall->setCheckable(true);
+    } else {
+        ui.gbFirewallState->show();
+        ui.pbFirewallRefreshState->click();
+    }
 }
 
 void MainWindow::initAct3Headshot()
@@ -948,7 +981,7 @@ void MainWindow::initMusic()
             BASS_MusicFree(music);
             music = 0;
         } else {
-            QFile xmFile = QDir("./sound").absolutePath() + QDir::separator() + "Toilet story 4 u.xm";
+            QFile xmFile(QDir("./sound").filePath("Rock The Sky.xm"));
             music = BASS_MusicLoad(FALSE, xmFile.fileName().replace("/", "\\").toLocal8Bit().toStdString().c_str(),
                 0, 0, BASS_MUSIC_POSRESET | BASS_SAMPLE_LOOP | BASS_SAMPLE_FLOAT, 1);
             if (music) {

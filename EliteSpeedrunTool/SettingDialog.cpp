@@ -305,6 +305,17 @@ void SettingDialog::initFirewallSettings()
     connect(ui.cbFirewallAlwaysDisplay, &QCheckBox::checkStateChanged, this, [=](Qt::CheckState state) {
         globalData->setFirewallAlwaysDisplay(state == Qt::Checked);
     });
+
+    // Firewall type
+    auto useWfp = globalData->useWfp();
+    ui.rbFirewallWdf->setChecked(!useWfp);
+    ui.rbFirewallWfp->setChecked(useWfp);
+    connect(ui.rbFirewallWdf, &QAbstractButton::toggled, this, [this](bool checked) {
+        globalData->setUseWfp(false);
+    });
+    connect(ui.rbFirewallWfp, &QAbstractButton::toggled, this, [this](bool checked) {
+        globalData->setUseWfp(true);
+    });
 }
 
 void SettingDialog::initNetworkAdaptersSettings()
