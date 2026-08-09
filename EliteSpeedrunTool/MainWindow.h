@@ -58,6 +58,10 @@ protected:
 
     void initSuspendProcess();
 
+    void initPcSettings();
+
+    void cleanPcSettings();
+
     void initCloseGameImmediately();
 
     void showDisplayInfo();
@@ -132,6 +136,8 @@ private:
     QHotkey* act3HeadshotStopHotkey = nullptr;
 
     QHotkey* closeGameImmediatelyHotkey = nullptr;
+
+    QHotkey* pcSettingsHotkey = nullptr;
 
     QHotkey pgup = QHotkey(QKeySequence(Qt::Key_PageUp), true, this);
 

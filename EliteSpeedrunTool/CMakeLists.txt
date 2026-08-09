@@ -98,10 +98,40 @@ else()
     endif()
 endif()
 
-file(GLOB TS_FILES "${PROJECT_SOURCE_DIR}/*.ts")
+file(GLOB TS_FILES CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/*.ts")
 
-qt_add_lupdate(EliteSpeedrunTool TS_FILES en.ts OPTIONS "-no-obsolete")
-install(FILES ${qm_files} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
+qt_add_lupdate(
+    SOURCE_TARGETS EliteSpeedrunTool
+    TS_FILES ${TS_FILES}
+    LUPDATE_TARGET EliteSpeedrunTool_lupdate
+    OPTIONS "-no-obsolete"
+)
+
+set(TRANSLATIONS_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/translations")
+set(QM_FILES)
+set(LRELEASE_COMMANDS)
+foreach(TS_FILE IN LISTS TS_FILES)
+    get_filename_component(TRANSLATION_NAME "${TS_FILE}" NAME_WE)
+    set(QM_FILE "${TRANSLATIONS_OUTPUT_DIRECTORY}/${TRANSLATION_NAME}.qm")
+    list(APPEND QM_FILES "${QM_FILE}")
+    list(APPEND LRELEASE_COMMANDS
+        COMMAND $<TARGET_FILE:Qt6::lrelease> "${TS_FILE}" -qm "${QM_FILE}"
+    )
+endforeach()
+
+# lupdate is always run first, then lrelease runs in the same build so the runtime
+# translation never lags one build behind the source translation.
+add_custom_target(EliteSpeedrunTool_translations ALL
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${TRANSLATIONS_OUTPUT_DIRECTORY}"
+    ${LRELEASE_COMMANDS}
+    DEPENDS EliteSpeedrunTool_lupdate
+    BYPRODUCTS ${QM_FILES}
+    COMMENT "Updating and compiling translations"
+    VERBATIM
+)
+add_dependencies(EliteSpeedrunTool EliteSpeedrunTool_translations)
+
+install(FILES ${QM_FILES} DESTINATION translations)
 
 target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::Widgets)
 target_link_libraries(EliteSpeedrunTool PRIVATE Qt6::HttpServer)

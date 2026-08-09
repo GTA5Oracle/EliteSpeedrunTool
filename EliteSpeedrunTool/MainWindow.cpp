@@ -20,6 +20,7 @@
 #include "net/HttpServerUtil.h"
 #include "net/NetworkAdapterUtil.h"
 #include "pcsettings/AutoTimer.h"
+#include "pcsettings/PcSettingsUtil.h"
 #include <MMSystem.h>
 #include <QBoxLayout>
 #include <QClipboard>
@@ -33,6 +34,7 @@
 #include <QMessageBox>
 #include <QPalette>
 #include <QState>
+#include <QStringList>
 #include <QUrl>
 
 const QString MainWindow::hotkeyStatePattern = "🧱%1, %2  📶%3, %4  ⏱️%5, %6, %7  👤%8  ❌%9";
@@ -74,6 +76,8 @@ MainWindow::MainWindow(QWidget* parent)
     initTimerStateMachine();
 
     initSuspendProcess();
+
+    initPcSettings();
 
     initCloseGameImmediately();
 
@@ -209,6 +213,7 @@ void MainWindow::removeAllHotkeys()
     removeHotkey(act3HeadshotStartHotkey);
     removeHotkey(act3HeadshotStopHotkey);
     removeHotkey(suspendAndResumeHotkey);
+    removeHotkey(pcSettingsHotkey);
     removeHotkey(closeGameImmediatelyHotkey);
 }
 
@@ -233,7 +238,8 @@ void MainWindow::setHotkey()
         globalData->timerPauseHotkey(),
         globalData->timerStopHotkey(),
         globalData->suspendAndResumeHotkey(),
-        globalData->closeGameImmediatelyHotkey()));
+        globalData->closeGameImmediatelyHotkey())
+                                + QStringLiteral("  🧹%1").arg(globalData->pcSettingsHotkey()));
 
     // 置顶工具
     registerHotkey(
@@ -320,6 +326,12 @@ void MainWindow::setHotkey()
         globalData->suspendAndResumeHotkey(),
         suspendAndResumeHotkey,
         [this]() { ui.btnSuspendProcess->click(); });
+
+    // PcSettings
+    registerHotkey(
+        globalData->pcSettingsHotkey(),
+        pcSettingsHotkey,
+        [this]() { cleanPcSettings(); });
 
     // 快速结束游戏
     registerHotkey(
@@ -465,8 +477,8 @@ void MainWindow::initMenu()
         QDesktopServices::openUrl(QUrl("https://github.com/GTA5Oracle/EliteSpeedrunTool"));
     });
 
-    connect(ui.actionAiFaDian, &QAction::triggered, this, []() {
-        QDesktopServices::openUrl(QUrl("https://afdian.com/a/SkyD666"));
+    connect(ui.actionGitHubSponsor, &QAction::triggered, this, []() {
+        QDesktopServices::openUrl(QUrl("https://github.com/sponsors/SkyD666"));
     });
     connect(ui.actionBuyMeACoffee, &QAction::triggered, this, []() {
         QDesktopServices::openUrl(QUrl("https://www.buymeacoffee.com/SkyD666"));
@@ -706,6 +718,35 @@ void MainWindow::initCloseGameImmediately()
     connect(ui.btnCloseGameImmediately, &QAbstractButton::clicked, this, [this]() {
         mainFeatures->terminateGta();
     });
+}
+
+void MainWindow::initPcSettings()
+{
+    ui.labPcSettingsHotkey->setText(globalData->pcSettingsHotkey());
+    connect(globalData, &GlobalData::pcSettingsHotkeyChanged, this, [this]() {
+        ui.labPcSettingsHotkey->setText(globalData->pcSettingsHotkey());
+    });
+    connect(ui.btnCleanPcSettings, &QAbstractButton::clicked, this, &MainWindow::cleanPcSettings);
+}
+
+void MainWindow::cleanPcSettings()
+{
+    const auto result = pcSettingsUtil->cleanPcSettings(globalData->pcSettingsEditionScope());
+    PlaySound(globalData->pcSettingsCleanSound().toStdWString().c_str(), nullptr, SND_FILENAME | SND_ASYNC);
+    const QString summary = tr("PcSettings：找到 %1 个文件，已清洗 %2 个，无需修改 %3 个，失败 %4 个")
+                                .arg(result.filesFound)
+                                .arg(result.filesModified)
+                                .arg(result.filesUnchanged)
+                                .arg(result.failures.size());
+    ui.statusbar->showMessage(summary, 10000);
+
+    if (!result.failures.isEmpty()) {
+        QStringList details;
+        for (const auto& failure : result.failures) {
+            details.append(QStringLiteral("%1\n%2").arg(failure.filePath, failure.reason));
+        }
+        QMessageBox::critical(this, tr("PcSettings 清洗失败"), summary + QStringLiteral("\n\n") + details.join(QStringLiteral("\n\n")));
+    }
 }
 
 void MainWindow::showDisplayInfo()

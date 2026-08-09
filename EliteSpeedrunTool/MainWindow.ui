@@ -716,6 +716,54 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tabPcSettings">
+       <attribute name="title">
+        <string notr="true">PcSettings</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayoutPcSettings">
+        <item>
+         <widget class="QLabel" name="labPcSettingsHotkey">
+          <property name="font">
+           <font>
+            <pointsize>16</pointsize>
+           </font>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>该功能算法来自&lt;a href=&quot;https://www.mageangela.cn/&quot;&gt;安琪拉&lt;/a&gt;</string>
+          </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnCleanPcSettings">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>清洗 PcSettings</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="tabCloseGameImmediately">
        <attribute name="title">
         <string>结束游戏</string>
@@ -1015,7 +1063,7 @@
      <string>赞助(&amp;S)</string>
     </property>
     <addaction name="actionAliPay"/>
-    <addaction name="actionAiFaDian"/>
+    <addaction name="actionGitHubSponsor"/>
     <addaction name="actionBuyMeACoffee"/>
    </widget>
    <addaction name="menuTool"/>
@@ -1153,9 +1201,9 @@
     <string>支付宝...</string>
    </property>
   </action>
-  <action name="actionAiFaDian">
+  <action name="actionGitHubSponsor">
    <property name="text">
-    <string>爱发电...</string>
+    <string>GitHub Sponsor（信用卡）</string>
    </property>
   </action>
   <action name="actionBuyMeACoffee">

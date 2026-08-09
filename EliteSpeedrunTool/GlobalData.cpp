@@ -242,6 +242,13 @@ void GlobalData::readSettings()
     setCloseGameImmediatelyHotkey(settings.value("CloseGameImmediatelyHotkey", mCloseGameImmediatelyHotkey).toString());
     settings.endGroup();
 
+    settings.beginGroup("PcSettings");
+    setPcSettingsHotkey(settings.value("Hotkey", mPcSettingsHotkey).toString());
+    setPcSettingsEditionScope(PcSettingsEditionScopeUtil::fromString(
+        settings.value("EditionScope", PcSettingsEditionScopeUtil::toString(mPcSettingsEditionScope)).toString()));
+    setPcSettingsCleanSound(settings.value("CleanSound", mPcSettingsCleanSound).toString());
+    settings.endGroup();
+
     settings.beginGroup("HotkeyMap");
     setHotkeyMaps(settings.value("HotkeyMaps", mHotkeyMaps).value<QList<QString>>());
     settings.endGroup();
@@ -369,6 +376,12 @@ void GlobalData::writeSettings()
 
     settings.beginGroup("CloseGame");
     settings.setValue("CloseGameImmediatelyHotkey", mCloseGameImmediatelyHotkey);
+    settings.endGroup();
+
+    settings.beginGroup("PcSettings");
+    settings.setValue("Hotkey", mPcSettingsHotkey);
+    settings.setValue("EditionScope", PcSettingsEditionScopeUtil::toString(mPcSettingsEditionScope));
+    settings.setValue("CleanSound", mPcSettingsCleanSound);
     settings.endGroup();
 
     settings.beginGroup("HotkeyMap");
@@ -881,6 +894,45 @@ void GlobalData::setCloseGameImmediatelyHotkey(const QString& newCloseGameImmedi
         return;
     mCloseGameImmediatelyHotkey = newCloseGameImmediatelyHotkey;
     emit closeGameImmediatelyHotkeyChanged();
+}
+
+const QString& GlobalData::pcSettingsHotkey() const
+{
+    return mPcSettingsHotkey;
+}
+
+void GlobalData::setPcSettingsHotkey(const QString& newPcSettingsHotkey)
+{
+    if (mPcSettingsHotkey == newPcSettingsHotkey)
+        return;
+    mPcSettingsHotkey = newPcSettingsHotkey;
+    emit pcSettingsHotkeyChanged();
+}
+
+PcSettingsEditionScope GlobalData::pcSettingsEditionScope() const
+{
+    return mPcSettingsEditionScope;
+}
+
+void GlobalData::setPcSettingsEditionScope(PcSettingsEditionScope newPcSettingsEditionScope)
+{
+    if (mPcSettingsEditionScope == newPcSettingsEditionScope)
+        return;
+    mPcSettingsEditionScope = newPcSettingsEditionScope;
+    emit pcSettingsEditionScopeChanged();
+}
+
+const QString& GlobalData::pcSettingsCleanSound() const
+{
+    return mPcSettingsCleanSound;
+}
+
+void GlobalData::setPcSettingsCleanSound(const QString& newPcSettingsCleanSound)
+{
+    if (mPcSettingsCleanSound == newPcSettingsCleanSound)
+        return;
+    mPcSettingsCleanSound = newPcSettingsCleanSound;
+    emit pcSettingsCleanSoundChanged();
 }
 
 int GlobalData::autoTimerUpdateInterval() const

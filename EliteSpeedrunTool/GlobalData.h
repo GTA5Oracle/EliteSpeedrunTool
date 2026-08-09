@@ -2,6 +2,7 @@
 
 #include "displayinfo/DisplayInfoSubFunction.h"
 #include "net/FirewallRule.h"
+#include "pcsettings/PcSettingsUtil.h"
 #include <QColor>
 #include <QMetaType>
 #include <QPoint>
@@ -12,6 +13,11 @@
 #include <icftypes.h>
 
 #define globalData (GlobalData::instance())
+
+namespace PcSettingsDefaults {
+inline const QString hotkey = QStringLiteral("Ctrl+Shift+`");
+inline const QString cleanSound = QStringLiteral("./sound/clearbin.wav");
+}
 
 typedef QMap<DisplayInfoSubFunction, DisplayInfoSubFunctionItem*> QDisplayInfoSubFuncsMap;
 
@@ -160,6 +166,15 @@ public:
 
     const QString& closeGameImmediatelyHotkey() const;
     void setCloseGameImmediatelyHotkey(const QString& newCloseGameImmediatelyHotkey);
+
+    const QString& pcSettingsHotkey() const;
+    void setPcSettingsHotkey(const QString& newPcSettingsHotkey);
+
+    PcSettingsEditionScope pcSettingsEditionScope() const;
+    void setPcSettingsEditionScope(PcSettingsEditionScope newPcSettingsEditionScope);
+
+    const QString& pcSettingsCleanSound() const;
+    void setPcSettingsCleanSound(const QString& newPcSettingsCleanSound);
 
     int autoTimerUpdateInterval() const;
     void setAutoTimerUpdateInterval(int newAutoTimerUpdateInterval);
@@ -340,6 +355,10 @@ signals:
 
     void closeGameImmediatelyHotkeyChanged();
 
+    void pcSettingsHotkeyChanged();
+    void pcSettingsEditionScopeChanged();
+    void pcSettingsCleanSoundChanged();
+
     void missionDataNameChanged();
 
     void debugModeChanged();
@@ -517,6 +536,11 @@ private:
     // 结束游戏
     QString mCloseGameImmediatelyHotkey = "Ctrl+`";
 
+    // PcSettings
+    QString mPcSettingsHotkey = PcSettingsDefaults::hotkey;
+    PcSettingsEditionScope mPcSettingsEditionScope = PcSettingsEditionScope::Both;
+    QString mPcSettingsCleanSound = PcSettingsDefaults::cleanSound;
+
     // 快捷键映射
     QList<QString> mHotkeyMaps = {};
 
@@ -561,6 +585,9 @@ private:
     Q_PROPERTY(int serverWebsocketPort READ serverWebsocketPort WRITE setServerWebsocketPort NOTIFY serverWebsocketPortChanged)
     Q_PROPERTY(bool discordShowRichPresence READ discordShowRichPresence WRITE setDiscordShowRichPresence NOTIFY discordShowRichPresenceChanged)
     Q_PROPERTY(QString closeGameImmediatelyHotkey READ closeGameImmediatelyHotkey WRITE setCloseGameImmediatelyHotkey NOTIFY closeGameImmediatelyHotkeyChanged)
+    Q_PROPERTY(QString pcSettingsHotkey READ pcSettingsHotkey WRITE setPcSettingsHotkey NOTIFY pcSettingsHotkeyChanged)
+    Q_PROPERTY(PcSettingsEditionScope pcSettingsEditionScope READ pcSettingsEditionScope WRITE setPcSettingsEditionScope NOTIFY pcSettingsEditionScopeChanged)
+    Q_PROPERTY(QString pcSettingsCleanSound READ pcSettingsCleanSound WRITE setPcSettingsCleanSound NOTIFY pcSettingsCleanSoundChanged)
     Q_PROPERTY(int autoTimerUpdateInterval READ autoTimerUpdateInterval WRITE setAutoTimerUpdateInterval NOTIFY autoTimerUpdateIntervalChanged)
     Q_PROPERTY(MissionDataNameUtil::MissionDataName missionDataName READ missionDataName WRITE setMissionDataName NOTIFY missionDataNameChanged FINAL)
     Q_PROPERTY(bool debugMode READ debugMode WRITE setDebugMode NOTIFY debugModeChanged FINAL)

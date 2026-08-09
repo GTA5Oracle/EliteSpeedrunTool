@@ -169,7 +169,7 @@
     <message>
         <location filename="displayinfo/CrosshairDialog.ui" line="+14"/>
         <source>Crosshair</source>
-        <translation>准星</translation>
+        <translation>Crosshair</translation>
     </message>
 </context>
 <context>
@@ -483,7 +483,7 @@ AdstarGod Firewall, easy to use
     <message>
         <location line="+226"/>
         <location line="+75"/>
-        <location filename="MainWindow.cpp" line="+892"/>
+        <location filename="MainWindow.cpp" line="+936"/>
         <location line="+22"/>
         <source>点击启动</source>
         <translation>Start to start</translation>
@@ -497,7 +497,7 @@ AdstarGod Firewall, easy to use
         <translation>Click to pause</translation>
     </message>
     <message>
-        <location line="+227"/>
+        <location line="+275"/>
         <source>立即结束游戏</source>
         <translation>Terminate the game</translation>
     </message>
@@ -527,14 +527,9 @@ AdstarGod Firewall, easy to use
         <translation>Multi-platform display</translation>
     </message>
     <message>
-        <location line="+165"/>
-        <source>爱发电...</source>
-        <translation>Ai Fa Dian...</translation>
-    </message>
-    <message>
-        <location line="+5"/>
+        <location line="+170"/>
         <source>Buy Me A Coffee...</source>
-        <translation></translation>
+        <translation>Buy Me a Coffee...</translation>
     </message>
     <message>
         <location line="-10"/>
@@ -542,7 +537,7 @@ AdstarGod Firewall, easy to use
         <translation>Alipay...</translation>
     </message>
     <message>
-        <location line="-1053"/>
+        <location line="-1101"/>
         <source>代言人</source>
         <translation>Spokesperson</translation>
     </message>
@@ -578,7 +573,7 @@ AdstarGod Firewall, easy to use
         <translation>Manual timer</translation>
     </message>
     <message>
-        <location line="+270"/>
+        <location line="+318"/>
         <source>结束游戏</source>
         <translation>Terminate game</translation>
     </message>
@@ -626,7 +621,7 @@ AdstarGod Firewall, easy to use
         <translation>About Qt...</translation>
     </message>
     <message>
-        <location line="-970"/>
+        <location line="-1018"/>
         <source>防火墙</source>
         <translation>Firewall</translation>
     </message>
@@ -693,7 +688,17 @@ AdstarGod Firewall, easy to use
         <translation>Suspend the game process</translation>
     </message>
     <message>
-        <location line="+96"/>
+        <location line="+51"/>
+        <source>清洗 PcSettings</source>
+        <translation>Clean PcSettings</translation>
+    </message>
+    <message>
+        <location line="-16"/>
+        <source>该功能算法来自&lt;a href=&quot;https://www.mageangela.cn/&quot;&gt;安琪拉&lt;/a&gt;</source>
+        <translation>This algorithm comes from &lt;a href=&quot;https://www.mageangela.cn/&quot;&gt;Angela&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location line="+109"/>
         <source>主力模式</source>
         <translation>Host mode</translation>
     </message>
@@ -721,7 +726,7 @@ AdstarGod Firewall, easy to use
     <message>
         <location line="+3"/>
         <source>Ctrl+P</source>
-        <translation></translation>
+        <translation>Ctrl+P</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -735,7 +740,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+30"/>
-        <location filename="MainWindow.cpp" line="-521"/>
+        <location filename="MainWindow.cpp" line="-553"/>
         <source>复制地址</source>
         <translation>Copy link</translation>
     </message>
@@ -761,7 +766,12 @@ AdstarGod Firewall, easy to use
         <translation>&amp;Display...</translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+24"/>
+        <source>GitHub Sponsor（信用卡）</source>
+        <translation>GitHub Sponsors (Credit Card)</translation>
+    </message>
+    <message>
+        <location line="+18"/>
         <source>置顶窗口</source>
         <translation>Top most</translation>
     </message>
@@ -802,12 +812,12 @@ AdstarGod Firewall, easy to use
         <translation>Server is not running</translation>
     </message>
     <message>
-        <location line="-107"/>
+        <location line="-113"/>
         <source>暂停计时器快捷键与启动/停止计时器快捷键相同，暂停计时器快捷键将会无效！</source>
         <translation>The pause timer hotkey is the same as the start/stop timer hotkey, so the pause timer hotkey will be invalid!</translation>
     </message>
     <message>
-        <location line="+118"/>
+        <location line="+124"/>
         <location line="+10"/>
         <source>获取服务器地址失败！</source>
         <translation>Failed to get the server address!</translation>
@@ -835,7 +845,17 @@ AdstarGod Firewall, easy to use
         <translation>Disabled</translation>
     </message>
     <message>
-        <location line="+143"/>
+        <location line="+113"/>
+        <source>PcSettings：找到 %1 个文件，已清洗 %2 个，无需修改 %3 个，失败 %4 个</source>
+        <translation>PcSettings: %1 file(s) found; %2 cleaned; %3 unchanged; %4 failed</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>PcSettings 清洗失败</source>
+        <translation>PcSettings Cleanup Failed</translation>
+    </message>
+    <message>
+        <location line="+50"/>
         <source>停止计时</source>
         <translation>Stop</translation>
     </message>
@@ -860,12 +880,12 @@ AdstarGod Firewall, easy to use
         <translation>Click to continue</translation>
     </message>
     <message>
-        <location line="-451"/>
+        <location line="-483"/>
         <source>支付宝收款二维码 谢谢喵！</source>
         <translation>Alipay payment QR code. Thank you!</translation>
     </message>
     <message>
-        <location filename="MainWindow.h" line="+170"/>
+        <location filename="MainWindow.h" line="+176"/>
         <source>加入 Telegram 群组一起划水~</source>
         <translation>Join Telegram group~</translation>
     </message>
@@ -894,6 +914,34 @@ AdstarGod Firewall, easy to use
         <source>加入 QQ 群：827680900</source>
         <oldsource>加入 QQ 群：431228020</oldsource>
         <translation>Join QQ Group: 827680900</translation>
+    </message>
+</context>
+<context>
+    <name>PcSettingsUtil</name>
+    <message>
+        <location filename="pcsettings/PcSettingsUtil.cpp" line="+168"/>
+        <source>无法读取文件：%1</source>
+        <translation>Unable to open file: %1</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>读取文件失败：%1</source>
+        <translation>Failed to read file: %1</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>文件长度不是 8 字节的倍数</source>
+        <translation>File size is not a multiple of 8 bytes</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>备份失败：%1</source>
+        <translation>Failed to create backup: %1</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>写入清洗结果失败：%1</source>
+        <translation>Failed to write cleaned file: %1</translation>
     </message>
 </context>
 <context>
@@ -1038,11 +1086,12 @@ AdstarGod Firewall, easy to use
         <location line="-575"/>
         <location line="+444"/>
         <location line="+462"/>
+        <location line="+180"/>
         <source>音效</source>
         <translation>Sound</translation>
     </message>
     <message>
-        <location line="-624"/>
+        <location line="-804"/>
         <source>说明</source>
         <translation>Tips</translation>
     </message>
@@ -1052,13 +1101,14 @@ AdstarGod Firewall, easy to use
         <location line="+149"/>
         <location line="+192"/>
         <location line="+121"/>
-        <location line="+152"/>
+        <location line="+188"/>
+        <location line="+122"/>
         <source>快捷键</source>
         <oldsource>计时器快捷键</oldsource>
         <translation>Hotkeys</translation>
     </message>
     <message>
-        <location line="-423"/>
+        <location line="-581"/>
         <source>暂停/恢复</source>
         <translation>Pause/resume</translation>
     </message>
@@ -1097,19 +1147,19 @@ AdstarGod Firewall, easy to use
         <location line="+42"/>
         <location line="+277"/>
         <location line="+369"/>
-        <location line="+1462"/>
+        <location line="+1620"/>
         <location line="+84"/>
         <source>颜色</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location line="-1890"/>
-        <location line="+1841"/>
+        <location line="-2048"/>
+        <location line="+1999"/>
         <source>透明度</source>
         <translation>Alpha</translation>
     </message>
     <message>
-        <location line="-2329"/>
+        <location line="-2487"/>
         <source>内容</source>
         <translation>Content</translation>
     </message>
@@ -1179,13 +1229,13 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+51"/>
-        <location line="+2192"/>
+        <location line="+2350"/>
         <source>阴影</source>
         <oldsource>文字阴影</oldsource>
         <translation>Shadow</translation>
     </message>
     <message>
-        <location line="-2090"/>
+        <location line="-2248"/>
         <source>文字对齐</source>
         <translation>Text alignment</translation>
     </message>
@@ -1223,7 +1273,7 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+57"/>
-        <location filename="SettingDialog.h" line="+25"/>
+        <location filename="SettingDialog.h" line="+26"/>
         <source>准星</source>
         <oldsource>游戏准星</oldsource>
         <translation>Crosshair</translation>
@@ -1250,18 +1300,18 @@ AdstarGod Firewall, easy to use
     </message>
     <message>
         <location line="+24"/>
-        <location line="+1386"/>
+        <location line="+1544"/>
         <source>大小</source>
         <translation>Size</translation>
     </message>
     <message>
-        <location line="-1343"/>
-        <location line="+1769"/>
+        <location line="-1501"/>
+        <location line="+1927"/>
         <source>提示</source>
         <translation>Tips</translation>
     </message>
     <message>
-        <location line="-1763"/>
+        <location line="-1921"/>
         <source>由于 RTSS 限制，此功能不支持自动居中显示，需要用户手动调整准星位置。
 
 使用流程：
@@ -1343,7 +1393,44 @@ Usage:
         <translation>Note: Disabling net adapters may have a delay, don&apos;t use it for time-sensitive operations!</translation>
     </message>
     <message>
-        <location line="+725"/>
+        <location line="+643"/>
+        <source>清理</source>
+        <translation>Cleanup</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>处理版本</source>
+        <translation>Game Versions to Process</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>传承版和增强版</source>
+        <oldsource>标准版和增强版</oldsource>
+        <translation>Legacy and Enhanced</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>仅传承版</source>
+        <oldsource>仅标准版</oldsource>
+        <translation>Legacy Only</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>仅增强版</source>
+        <translation>Enhanced Only</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>清空</source>
+        <translation>Clear</translation>
+    </message>
+    <message>
+        <location line="+27"/>
+        <source>清理完成后</source>
+        <translation>After cleanup</translation>
+    </message>
+    <message>
+        <location line="+161"/>
         <source>显示隐藏快捷键</source>
         <translation>Show/Hide hotkey</translation>
     </message>
@@ -1403,7 +1490,8 @@ Usage:
         <translation>Window title</translation>
     </message>
     <message>
-        <location line="+38"/>
+        <location line="-533"/>
+        <location line="+571"/>
         <source>恢复默认</source>
         <translation>Reset</translation>
     </message>
@@ -1441,13 +1529,13 @@ Usage:
         <translation>The tool uses PowerShell to execute commands. Leaving it blank means no command will be executed</translation>
     </message>
     <message>
-        <location line="-2559"/>
-        <location line="+2192"/>
+        <location line="-2717"/>
+        <location line="+2350"/>
         <source>模糊半径</source>
         <translation>Blur radius</translation>
     </message>
     <message>
-        <location line="-2520"/>
+        <location line="-2678"/>
         <source>置顶窗口快捷键</source>
         <oldsource>置顶工具快捷键</oldsource>
         <translation>Top most hotkey</translation>
@@ -1459,12 +1547,12 @@ Usage:
     </message>
     <message>
         <location line="+331"/>
-        <location line="+2192"/>
+        <location line="+2350"/>
         <source>偏移</source>
         <translation>Offset</translation>
     </message>
     <message>
-        <location line="-2126"/>
+        <location line="-2284"/>
         <source>水平</source>
         <translation>Horizontal</translation>
     </message>
@@ -1569,12 +1657,13 @@ Usage:
     </message>
     <message>
         <location line="+73"/>
-        <location line="+273"/>
+        <location line="+306"/>
+        <location line="+125"/>
         <source>执行</source>
         <translation>Execute</translation>
     </message>
     <message>
-        <location line="-255"/>
+        <location line="-413"/>
         <source>间隔</source>
         <translation>Interval</translation>
     </message>
@@ -1598,7 +1687,7 @@ Usage:
         <translation>After orbital cannon (Reset)</translation>
     </message>
     <message>
-        <location line="+133"/>
+        <location line="+291"/>
         <source>显示准星（仅当所依附的窗口位于前台时才会显示）</source>
         <oldsource>显示准星（仅当 GTA 窗口位于前台时才会显示）</oldsource>
         <translation>Show crosshair (only when the attached window is in the foreground)</translation>
@@ -1661,19 +1750,19 @@ Usage:
         <translation>Debug mode</translation>
     </message>
     <message>
-        <location line="-2415"/>
-        <location filename="SettingDialog.h" line="-7"/>
+        <location line="-2573"/>
+        <location filename="SettingDialog.h" line="-8"/>
         <source>信息展示</source>
         <oldsource>全局热键</oldsource>
         <translation>Display info</translation>
     </message>
     <message>
-        <location filename="SettingDialog.h" line="+11"/>
+        <location filename="SettingDialog.h" line="+12"/>
         <source>语言</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="SettingDialog.cpp" line="+188"/>
+        <location filename="SettingDialog.cpp" line="+189"/>
         <source>未指定</source>
         <translation>Unspecified</translation>
     </message>
@@ -1709,7 +1798,7 @@ Usage:
         <translation>Add an empty path rule</translation>
     </message>
     <message>
-        <location line="+498"/>
+        <location line="+548"/>
         <source>实心圆</source>
         <translation>Solid circle</translation>
     </message>
@@ -1761,7 +1850,7 @@ Usage:
         <translation>Image</translation>
     </message>
     <message>
-        <location filename="SettingDialog.h" line="-9"/>
+        <location filename="SettingDialog.h" line="-10"/>
         <source>断网</source>
         <translation>Net</translation>
     </message>
@@ -1776,7 +1865,7 @@ Usage:
         <translation>General</translation>
     </message>
     <message>
-        <location line="+11"/>
+        <location line="+12"/>
         <source>社交</source>
         <translation>Social</translation>
     </message>
@@ -1786,7 +1875,7 @@ Usage:
         <translation>Terminate game</translation>
     </message>
     <message>
-        <location line="-2"/>
+        <location line="-3"/>
         <source>卡单</source>
         <translation>Suspend game</translation>
     </message>
@@ -1797,7 +1886,7 @@ Usage:
         <translation>ACT3 Hs</translation>
     </message>
     <message>
-        <location line="+3"/>
+        <location line="+4"/>
         <source>快捷键穿透</source>
         <oldsource>快捷键映射</oldsource>
         <translation>Hotkey map</translation>
@@ -1813,7 +1902,7 @@ Usage:
         <translation>Developer options</translation>
     </message>
     <message>
-        <location line="+94"/>
+        <location line="+97"/>
         <source>左对齐</source>
         <translation>Left alignment</translation>
     </message>

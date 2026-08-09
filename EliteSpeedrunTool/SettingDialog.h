@@ -13,7 +13,7 @@ public:
 
     bool eventFilter(QObject* watched, QEvent* event);
 
-    QString pageName[14] = {
+    QString pageName[15] = {
         tr("常规"),
         tr("信息展示"),
         "RTSS",
@@ -21,6 +21,7 @@ public:
         tr("计时器"),
         tr("卡单"),
         tr("末日将至爆头"),
+        "PcSettings",
         tr("结束游戏"),
         tr("准星"),
         tr("快捷键穿透"),
@@ -29,7 +30,7 @@ public:
         tr("语言"),
         tr("开发者选项"),
     };
-    QString pageIcon[14] = {
+    QString pageIcon[15] = {
         "://image/ic_setting.ico",
         "://image/ic_lighton.ico",
         "://image/ic_monitor_blue_grad.ico",
@@ -37,6 +38,7 @@ public:
         "://image/ic_clock.ico",
         "://image/ic_user.ico",
         "://image/ic_file_eye.ico",
+        "://image/ic_clean_drive.ico",
         "://image/ic_plug.ico",
         "://image/ic_crosshair.ico",
         "://image/ic_keyboard_toggle.ico",
@@ -95,6 +97,8 @@ protected:
     void initAct3Headshot();
 
     void initSuspendProcess();
+
+    void initPcSettingsPage();
 
     void initCloseGameImmediatelySettings();
 

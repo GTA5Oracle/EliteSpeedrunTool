@@ -38,8 +38,8 @@ int main(int argc, char* argv[])
     QApplication::setOrganizationName("SkyD666");
     QApplication::setApplicationName("Elite Speedrun Tool");
     QApplication::setApplicationDisplayName(QObject::tr("精英速通工具"));
-    QApplication::setApplicationVersion("12.0.1.72");
-    qputenv("ApplicationVersionCode", "20251229");
+    QApplication::setApplicationVersion("12.1.1.73");
+    qputenv("ApplicationVersionCode", "20260809");
 
     qApp->setStyle(globalData->styleName());
 

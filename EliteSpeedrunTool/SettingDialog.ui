@@ -46,7 +46,7 @@
       <enum>QFrame::Shadow::Sunken</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>7</number>
      </property>
      <widget class="QWidget" name="pageGeneral">
       <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -1191,8 +1191,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>521</width>
-                    <height>452</height>
+                    <width>196</width>
+                    <height>405</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -1430,8 +1430,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>521</width>
-                    <height>452</height>
+                    <width>156</width>
+                    <height>514</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_61">
@@ -1601,8 +1601,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>525</width>
-                <height>475</height>
+                <width>119</width>
+                <height>452</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_41">
@@ -2208,6 +2208,164 @@
            </item>
            <item>
             <spacer name="verticalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Orientation::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>1</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="pagePcSettings">
+      <layout class="QVBoxLayout" name="verticalLayoutPcSettings">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QScrollArea" name="scrollAreaPcSettings">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContentsPcSettings">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>529</width>
+            <height>498</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayoutPcSettingsContents">
+           <item>
+            <widget class="QGroupBox" name="groupBox_34">
+             <property name="title">
+              <string>清理</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_47">
+              <item>
+               <widget class="QGroupBox" name="groupBoxPcSettingsEdition">
+                <property name="title">
+                 <string>处理版本</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayoutPcSettingsEdition">
+                 <item>
+                  <widget class="QRadioButton" name="rbPcSettingsBoth">
+                   <property name="text">
+                    <string>传承版和增强版</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="rbPcSettingsLegacy">
+                   <property name="text">
+                    <string>仅传承版</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="rbPcSettingsEnhanced">
+                   <property name="text">
+                    <string>仅增强版</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="groupBoxPcSettingsHotkey">
+                <property name="title">
+                 <string>快捷键</string>
+                </property>
+                <layout class="QGridLayout" name="gridLayoutPcSettingsHotkey">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="labelPcSettingsExecute">
+                   <property name="text">
+                    <string>执行</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QKeySequenceEdit" name="keySeqPcSettings"/>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QToolButton" name="tbClearPcSettingsHotkeyEdit">
+                   <property name="toolTip">
+                    <string>清空</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="resource.qrc">
+                     <normaloff>:/image/ic_cancel.ico</normaloff>:/image/ic_cancel.ico</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QToolButton" name="tbResetPcSettingsHotkeyEdit">
+                   <property name="text">
+                    <string>恢复默认</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="groupBoxPcSettingsSound">
+                <property name="title">
+                 <string>音效</string>
+                </property>
+                <layout class="QGridLayout" name="gridLayoutPcSettingsSound">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="labelPcSettingsCleanSound">
+                   <property name="text">
+                    <string>清理完成后</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLineEdit" name="lePcSettingsCleanSoundPath"/>
+                 </item>
+                 <item row="0" column="2">
+                  <widget class="QToolButton" name="tbPcSettingsPlayCleanSound">
+                   <property name="icon">
+                    <iconset resource="resource.qrc">
+                     <normaloff>:/image/ic_sound.ico</normaloff>:/image/ic_sound.ico</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="3">
+                  <widget class="QToolButton" name="tbPcSettingsSelectCleanSound">
+                   <property name="text">
+                    <string notr="true">...</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacerPcSettings">
              <property name="orientation">
               <enum>Qt::Orientation::Vertical</enum>
              </property>
@@ -3315,6 +3473,15 @@
   <tabstop>tbAct3HeadshotPlayStopSound</tabstop>
   <tabstop>tbAct3HeadshotStopSound</tabstop>
   <tabstop>scrollArea_9</tabstop>
+  <tabstop>rbPcSettingsBoth</tabstop>
+  <tabstop>rbPcSettingsLegacy</tabstop>
+  <tabstop>rbPcSettingsEnhanced</tabstop>
+  <tabstop>keySeqPcSettings</tabstop>
+  <tabstop>tbClearPcSettingsHotkeyEdit</tabstop>
+  <tabstop>tbResetPcSettingsHotkeyEdit</tabstop>
+  <tabstop>lePcSettingsCleanSoundPath</tabstop>
+  <tabstop>tbPcSettingsPlayCleanSound</tabstop>
+  <tabstop>tbPcSettingsSelectCleanSound</tabstop>
   <tabstop>keySeqCloseGameImmediately</tabstop>
   <tabstop>tbClearCloseGameImmediatelyHotkeyEdit</tabstop>
   <tabstop>scrollArea_8</tabstop>

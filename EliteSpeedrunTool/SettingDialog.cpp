@@ -43,6 +43,7 @@ SettingDialog::SettingDialog(QWidget* parent)
     initTimerSettings();
     initAct3Headshot();
     initSuspendProcess();
+    initPcSettingsPage();
     initCloseGameImmediatelySettings();
     initCrosshairSettings();
     initHotkeyMapSettings();
@@ -721,6 +722,56 @@ void SettingDialog::initCloseGameImmediatelySettings()
         ui.keySeqCloseGameImmediately,
         ui.tbClearCloseGameImmediatelyHotkeyEdit,
         [](const QString& hotkey) { globalData->setCloseGameImmediatelyHotkey(hotkey); });
+}
+
+void SettingDialog::initPcSettingsPage()
+{
+    initHotkeyWidgets(
+        globalData->pcSettingsHotkey(),
+        ui.keySeqPcSettings,
+        ui.tbClearPcSettingsHotkeyEdit,
+        [](const QString& hotkey) { globalData->setPcSettingsHotkey(hotkey); });
+
+    connect(ui.tbResetPcSettingsHotkeyEdit, &QAbstractButton::clicked, this, [this]() {
+        ui.keySeqPcSettings->setKeySequence(QKeySequence(PcSettingsDefaults::hotkey));
+        globalData->setPcSettingsHotkey(PcSettingsDefaults::hotkey);
+    });
+
+    switch (globalData->pcSettingsEditionScope()) {
+    case PcSettingsEditionScope::Legacy:
+        ui.rbPcSettingsLegacy->setChecked(true);
+        break;
+    case PcSettingsEditionScope::Enhanced:
+        ui.rbPcSettingsEnhanced->setChecked(true);
+        break;
+    case PcSettingsEditionScope::Both:
+    default:
+        ui.rbPcSettingsBoth->setChecked(true);
+        break;
+    }
+
+    connect(ui.rbPcSettingsLegacy, &QAbstractButton::toggled, this, [](bool checked) {
+        if (checked) {
+            globalData->setPcSettingsEditionScope(PcSettingsEditionScope::Legacy);
+        }
+    });
+    connect(ui.rbPcSettingsEnhanced, &QAbstractButton::toggled, this, [](bool checked) {
+        if (checked) {
+            globalData->setPcSettingsEditionScope(PcSettingsEditionScope::Enhanced);
+        }
+    });
+    connect(ui.rbPcSettingsBoth, &QAbstractButton::toggled, this, [](bool checked) {
+        if (checked) {
+            globalData->setPcSettingsEditionScope(PcSettingsEditionScope::Both);
+        }
+    });
+
+    initSoundWidgets(
+        globalData->pcSettingsCleanSound(),
+        ui.lePcSettingsCleanSoundPath,
+        ui.tbPcSettingsPlayCleanSound,
+        ui.tbPcSettingsSelectCleanSound,
+        [](const QString& fileName) { globalData->setPcSettingsCleanSound(fileName); });
 }
 
 void SettingDialog::initCrosshairSettings()
